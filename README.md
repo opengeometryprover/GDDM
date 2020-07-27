@@ -2,12 +2,12 @@
 
 Open Library of Geometry Automatic Theorem Provers
 
-Organization
-  OpenGeometryProver
+---
 
-People (as of 2020)
-- PQ
-- NB
-- ZK
-- PJ
- 
+**Organization**: OpenGeometryProver
+
+**People** (as of July/2020):
+- Pedro Quaresma
+- Nuno Baeta
+- Zoltán Kovács
+- Predrag Janičić
