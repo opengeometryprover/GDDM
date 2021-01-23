@@ -11,5 +11,5 @@ CoqAM is an independent project.  Its author is Julien Narboux.
 
 ## References
 
-[1] Julien Narboux; *A Decision Procedure for Geometry in Coq*; in *Theorem Proving in Higher Order Logics - 17th International Conference, TPHOLS 2004*; Lecture Notes in Computer Science 3223, p. 225-240; Springer, 2004.
+[1] Julien Narboux; *A Decision Procedure for Geometry in Coq*; in *Theorem Proving in Higher Order Logics - 17th International Conference, TPHOLS 2004*; Lecture Notes in Computer Science 3223, p. 225-240; Springer, 2004.  
 [2] Shang-Ching Chou, Xiao-Shan Gao, Jing-Zhong Zhang; *Machine Proofs in Geometry*; World Scientific, 1994.
