@@ -2,7 +2,7 @@
 
 This prover formalizes the area method as described in [2], in the [Coq](https://coq.inria.fr/) proof assistant.
 
-CoqAM is an independent project.  Its author is Julien Narboux.
+CoqAM is an independent project.  Its author is [Julien Narboux](https://github.com/jnarboux).
 
 ## Links
 
