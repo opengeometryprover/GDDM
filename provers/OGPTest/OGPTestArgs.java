@@ -28,22 +28,37 @@ public class OGPTestArgs {
 	    while (i <= args.length - 1) {
 		if (args[i].equals("-t")
 		    || args[i].startsWith("--timeout")) {
+		    // Option -t, --timeout
 		    if (args[i].equals("-t")) {
 			if (i == args.length - 1) {
 			    errorMsg(5, "");
 			} else {
 			    try {
 				timeout = Integer.parseUnsignedInt(args[++i]);
-			    } catch(NumberFormatException e) {
+			    } catch (NumberFormatException e) {
+				errorMsg(6, "");
+			    }
+			}
+		    } else {
+			if (!args[i].startsWith("--timeout=")) {
+			    errorMsg(7, "");
+			} else if (args[i].length() == "--timeout=".length()) {
+			    errorMsg(5, "");
+			} else {
+			    try {
+				timeout = Integer.parseUnsignedInt(
+				    args[i].substring("--timeout=".length()));
+			    } catch (NumberFormatException e) {
 				errorMsg(6, "");
 			    }
 			}
 		    }
 		} else if (args[i].equals("-v")
 			   || args[i].startsWith("--verbose")) {
+		    // Option -v, --verbose
 		    verbose = true;
 		} else {
-		    errorMsg(7, args[i]);
+		    errorMsg(8, args[i]);
 		}
 		i++;
 	    }
@@ -100,12 +115,15 @@ public class OGPTestArgs {
 	    System.err.println("Cannot read file '" + str + "'.");
 	    break;
 	case 5:
-	    System.err.println("Timeout option is missing its integer value");
+	    System.err.println("Timeout option is missing its value");
 	    break;
 	case 6:
 	    System.err.println("Timeout must be an integer.");
 	    break;
 	case 7:
+	    System.err.println("Wrong timeout sintax");
+	    break;
+	case 8:
 	    System.err.print("Unrecognized option '" + str + "'.");
 	    System.err.println(" Use option '-h' for help.");
 	    break;

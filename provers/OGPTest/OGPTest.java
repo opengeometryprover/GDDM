@@ -3,7 +3,7 @@ import java.util.concurrent.TimeUnit;
 public class OGPTest {
 
     final static String MAJOR_VERSION = "0";
-    final static String MINOR_VERSION = "0";
+    final static String MINOR_VERSION = "1";
     final static String VERSION = MAJOR_VERSION + "." + MINOR_VERSION;
     
     public static void main(String[] args) throws InterruptedException {
@@ -33,7 +33,7 @@ public class OGPTest {
 	System.out.println("Synopsis: ogptest -h | --help");
 	System.out.println("          ogptest -V | --version");
 	System.out.print("          ogptest file [");
-	System.out.print(" [ -t number ] |");
+	System.out.print(" [ -t number | --timeout=number ] |");
 	System.out.println(" [ -v | verbose] ]");
     }
 
