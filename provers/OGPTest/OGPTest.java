@@ -44,7 +44,7 @@ public class OGPTest {
 	try {
 	    TimeUnit.SECONDS.sleep(arguments.getTimeout());
 	} catch (InterruptedException e) {
-	    e.printStackTrace(System.out);
+	    e.printStackTrace(System.err);
 	}
 	if (arguments.getVerbose()) {
 	    System.out.println("");
