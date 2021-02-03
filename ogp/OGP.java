@@ -31,11 +31,13 @@ public class OGP {
 		    File conjErr = new File(fileN + "_FOF.err");
 		    ArrayList<String> command = new ArrayList<String>();
 		    command.add("ogptest");
+		    command.add(args[0]);
 		    if (args.length > 1) {
 			for  (int i = 2; i <= args.length; i++) {
 			    command.add(args[i - 1]);
 			}
 		    }
+		    System.out.println("[DBG] " + command);
 		    Process proc = new ProcessBuilder(command)
 			.redirectOutput(conjOut)
 			.redirectError(conjErr)
