@@ -1,13 +1,13 @@
 import java.io.File;
 
-public class OpenGeometryProverArgs {
+public class OGPArgs {
 
     private String file;
     private boolean help = false;
     private boolean provers = false;
     private boolean version = false;
 
-    public OpenGeometryProverArgs(String[] args) {
+    public OGPArgs(String[] args) {
 	switch (args.length) {
 	case 0:
 	    errorMsg(1, "");
@@ -43,7 +43,7 @@ public class OpenGeometryProverArgs {
 	File theFile = new File(fileStr);
 	if (!theFile.exists()) {
 	    errorMsg(2, fileStr);
-	} else if (theFile.isFile()) {
+	} else if (!theFile.isFile()) {
 	    errorMsg(3, fileStr);
 	} else if (!theFile.canRead()) {
 	    errorMsg(4, fileStr);
