@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class OpenGeometryProver {
+public class OGP {
 
     final static int TIMEOUT = 15; // TODO: Make timeout an option
     
@@ -11,7 +11,7 @@ public class OpenGeometryProver {
     final static String VERSION = MAJOR_VERSION + "." + MINOR_VERSION;
     
     public static void main(String[] args) {
-	OpenGeometryProverArgs arguments = new OpenGeometryProverArgs(args);
+	OGPArgs arguments = new OGPArgs(args);
 	if (arguments.getHelp()) {
 	    helpMsg();
 	} else if (arguments.getVersion()) {
