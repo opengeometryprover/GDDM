@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class OGP {
 
@@ -37,30 +38,27 @@ public class OGP {
 			    command.add(args[i - 1]);
 			}
 		    }
-		    System.out.println("[DBG] " + command);
 		    Process proc = new ProcessBuilder(command)
 			.redirectOutput(conjOut)
 			.redirectError(conjErr)
 			.start();
-		} catch(IOException e) {
-		    System.err.println("ERROR: I/O");
+		} catch (IOException e) {
+		    System.err.println("[ERROR] IOException");
 		    e.printStackTrace();
 		}
 		break;
 	    case "gcl":
-		System.out.println("Calling GCLC...");
 		try {
 		    File conjOut = new File(fileN + "_GCLC.out");
 		    File conjErr = new File(fileN + "_GCLC.err");
 		    ArrayList<String> command = new ArrayList<String>();
 		    command.add("gclc");
 		    command.add(args[0]);
-		    if (args.length > 2) {
-			for  (int i = 3; i <= args.length; i++) {
+		    if (args.length > 1) {
+			for  (int i = 2; i <= args.length; i++) {
 			    command.add(args[i - 1]);
 			}
 		    }
-		    System.out.println(command);
 		    Process proc = new ProcessBuilder(command)
 			.redirectOutput(conjOut)
 			.redirectError(conjErr)
