@@ -1,3 +1,5 @@
+package ogptest;
+
 import java.io.File;
 
 public class OGPTestArgs {
