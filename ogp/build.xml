@@ -13,7 +13,7 @@
 
   <target name="dist" depends="compile">
     <mkdir dir="${jar.dir}"/>
-    <jar jarfile="${jar.dir}/ogptest.jar"
+    <jar jarfile="${jar.dir}/ogp.jar"
 	 basedir="${build.dir}">
       <manifest>
 	<attribute name="Main-class" value="ogp.OGP"/>
