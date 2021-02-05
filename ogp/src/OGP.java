@@ -1,3 +1,5 @@
+package ogp;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,6 +44,13 @@ public class OGP {
 			.redirectOutput(conjOut)
 			.redirectError(conjErr)
 			.start();
+		    if (proc.waitFor(15, TimeUnit.SECONDS)) {
+			System.out.println("O processo terminou!");
+		    } else {
+			System.out.println("O processo não terminou");
+		    }
+		} catch (InterruptedException e) {
+		    System.err.println("[ERROR] InterruptedException");
 		} catch (IOException e) {
 		    System.err.println("[ERROR] IOException");
 		    e.printStackTrace();

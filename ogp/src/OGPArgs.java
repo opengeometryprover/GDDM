@@ -1,3 +1,5 @@
+package ogp;
+
 import java.io.File;
 
 public class OGPArgs {
