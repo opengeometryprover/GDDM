@@ -1,0 +1,34 @@
+<project name="OGPTest" default="compile">
+
+  <property name="src.dir" value="src"/>
+  <property name="build.dir" value="build"/>
+  <property name="jar.dir" value="dist"/>
+
+  <target name="init">
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${jar.dir}"/>
+  </target>
+
+  <target name="compile">
+    <mkdir dir="${build.dir}"/>
+    <javac includeantruntime="false"
+	   srcdir="${src.dir}"
+	   destdir="${build.dir}"/>
+  </target>
+
+  <target name="dist" depends="compile">
+    <mkdir dir="${jar.dir}"/>
+    <jar jarfile="${jar.dir}/ogptest.jar"
+	 basedir="${build.dir}">
+      <manifest>
+	<attribute name="Main-class" value="ogptest.OGPTest"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="clean">
+    <delete dir="${build.dir}"/>
+    <delete dir="${jar.dir}"/>
+  </target>
+
+</project>
