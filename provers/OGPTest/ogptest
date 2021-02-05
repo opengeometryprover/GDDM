@@ -4,4 +4,4 @@
 # Java programs
 OGP_HOME=/usr/local/share/ogp
 
-java -cp $OGP_HOME OGPTest $*
+java -jar $OGP_HOME/ogptest.jar $*
