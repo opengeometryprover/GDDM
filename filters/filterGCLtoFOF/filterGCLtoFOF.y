@@ -140,6 +140,11 @@ command: POINT VARIABLE NUMBER NUMBER
 	      sprintf(tptpConjectures[numConj++].conjecture,"parallel(%s,%s,%s,%s)",$4,$5,$6,$7);
 	    }
 
+       | PROVE '{' SAMELENGTH VARIABLE VARIABLE VARIABLE VARIABLE '}'
+            {
+	      sprintf(tptpConjectures[numConj++].conjecture,"cong(%s,%s,%s,%s)",$4,$5,$6,$7);
+	    }
+
        | error { }
        ;
 
