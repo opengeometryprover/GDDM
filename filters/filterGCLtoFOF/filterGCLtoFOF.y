@@ -16,6 +16,7 @@ typedef char* Vars;
 Vars pointsIds[100];
 
 char* varId;
+char auxstr[10];
 
 typedef struct lines {
   Vars lineId;
@@ -97,6 +98,44 @@ command: POINT VARIABLE NUMBER NUMBER
 	      strcpy(gclLines[nlId++].pointsIds[1],$4);	      
 	      // printf("linha %s %s %s\n",$2,$3,$4);
 	    }
+       | PARALLEL VARIABLE VARIABLE VARIABLE
+            {
+	      int i,pos=-1;
+	      int conj=0;
+	      // New line (the parallel line)
+	      nLines++;
+	      // line Id
+	      gclLines[nlId].lineId=(Vars) malloc(10);
+	      strcpy(gclLines[nlId].lineId,$2);
+	      // first point of the new line
+	      gclLines[nlId].pointsIds[0]=(Vars) malloc(10);
+	      strcpy(gclLines[nlId].pointsIds[0],$3);
+	      // create a new point
+	      sprintf(auxstr, "X%d", npId+1);
+	      pointsIds[npId] = (Vars) malloc(10);
+	      strcpy(pointsIds[npId++],auxstr);
+	      // second point of the line
+	      gclLines[nlId].pointsIds[1]=(Vars) malloc(10);
+	      strcpy(gclLines[nlId++].pointsIds[1],auxstr);	  
+	      // get the points of the (old) line 
+	      for (i=0; i < nLines && pos != -1; i++) {
+		if (!strcmp($4,gclLines[i].lineId)) {
+		  pos = i;
+		}
+	      }
+	      // gclLines[pos].pointsIds[0],gclLines[pos].pointsIds[1]
+              sprintf(tptpHypotheses[numHyp++].hypothesis,"para(%s,%s,%s,%s)",gclLines[i].pointsIds[0],gclLines[i].pointsIds[1],$3,auxstr);
+	    }
+       | CIRCLE VARIABLE VARIABLE VARIABLE
+            {
+	      sprintf(auxstr, "X%d", npId+1);
+	      pointsIds[npId] = (Vars) malloc(10);
+	      strcpy(pointsIds[npId++],auxstr);
+	      sprintf(auxstr, "X%d", npId+1);
+	      pointsIds[npId] = (Vars) malloc(10);
+	      strcpy(pointsIds[npId++],auxstr);
+	      sprintf(tptpHypotheses[numHyp++].hypothesis,"circle(%s,%s,%s,%s)",$3,$4,pointsIds[npId-2],pointsIds[npId-1]);
+	     }
        | INTERSECTION VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
             {
 	      sprintf(tptpHypotheses[numHyp++].hypothesis,"coll(%s,%s,%s) & coll(%s,%s,%s)\n",$3,$4,$2,$5,$6,$2);
