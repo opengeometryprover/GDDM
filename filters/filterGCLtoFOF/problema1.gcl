@@ -1,0 +1,31 @@
+point A 10 40
+point B 50 80
+point C 100 30
+point D 30 10
+
+midpoint E A B
+midpoint F B C
+midpoint G C D
+midpoint H D A
+
+cmark_lt A
+cmark_lt B
+cmark_lt C
+cmark_lt D
+
+drawsegment A B
+drawsegment B C
+drawsegment C D
+drawsegment D A
+
+cmark_lt E
+cmark_lt F
+cmark_lt G
+cmark_lt H
+
+drawsegment E F
+drawsegment F G
+drawsegment G H
+drawsegment H E 
+
+prove { parallel E F G H }

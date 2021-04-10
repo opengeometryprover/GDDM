@@ -1,0 +1,7 @@
+Filter GeoGebra to FOF (TPTP)
+
+PHP file (usage  $php ggb2fof.php input.ggb > output.p)
+
+Still incomplete, it converts to chou2000 syntax (GDDM) but still do
+not convert to FOF syntax.
+
