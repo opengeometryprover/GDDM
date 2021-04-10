@@ -22,6 +22,7 @@ public class OGP {
 	} else if (arguments.getProvers()) {
 	    System.out.println("[TODO] -p, --provers option not yet implemented");
 	} else {
+	    // TODO: Read configuration file
 	    String fileN = args[0].substring(0, args[0].lastIndexOf('.'));
 	    String fileE = args[0].substring(args[0].lastIndexOf('.') + 1);
 	    switch (fileE) {
