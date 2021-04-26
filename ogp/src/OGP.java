@@ -91,9 +91,9 @@ public class OGP {
 	System.out.println("Synopsis: ogp -h | --help");
 	System.out.println("          ogp -p | --provers");
 	System.out.println("          ogp -V | --version");
-	System.out.println("          ogp file");
-	System.out.println("          ogp file prover");
-	System.out.println("          ogp file prover prover_options");
+	System.out.println("          ogp conjecture");
+	System.out.println("          ogp conjecture prover");
+	System.out.println("          ogp conjecture prover prover_options");
     }
 
     private static void versionMsg() {
