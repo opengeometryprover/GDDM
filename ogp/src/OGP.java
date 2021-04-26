@@ -24,7 +24,8 @@ public class OGP {
 	} else if (arguments.getProvers()) {
 	    proversList();
 	} else {
-	    System.out.println("|" + arguments.getConjectureId() + "|");
+	    System.out.println("    Conjecture id: |" + arguments.getConjectureId() + "|");
+	    System.out.println("Conjecture format: |" + arguments.getConjectureFormat() + "|");
 	    // String fileN = args[0].substring(0, args[0].lastIndexOf('.'));
 	    // String fileE = args[0].substring(args[0].lastIndexOf('.') + 1);
 	    // switch (fileE) {

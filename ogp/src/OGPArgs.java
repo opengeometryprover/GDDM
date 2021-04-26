@@ -55,9 +55,11 @@ public class OGPArgs {
 	tgtp = conjecture.startsWith("--tgtp=");
 	if (tgtp) {
 	    conjectureId = conjecture.substring(7);
+	    conjectureFormat = "";
 	    if (conjectureId.isEmpty()) {
 		errorMsg(2, "");
 	    }
+	    // TODO: Must check if conjecture exists in TGTP
 	} else {
 	    File theConjecture = new File(conjecture);
 	    if (!theConjecture.exists()) {
