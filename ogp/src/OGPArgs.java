@@ -4,7 +4,9 @@ import java.io.File;
 
 public class OGPArgs {
 
-    private String file;
+    private String conjectureId;
+    private String conjectureFormat;
+    private boolean tgtp = false;
     private boolean help = false;
     private boolean provers = false;
     private boolean version = false;
@@ -19,14 +21,22 @@ public class OGPArgs {
 	    provers = args[0].equals("-p") || args[0].equals("--provers");
 	    version = args[0].equals("-V") || args[0].equals("--version");
 	    if (!help && !provers && !version) {
-		testFile(args[0]);
+		conjectureTest(args[0]);
 	    }
 	    break;
 	}
     }
 
-    public String getFile() {
-	return this.file;
+    public String getConjectureId() {
+	return this.conjectureId;
+    }
+
+    public String getConjectureFormat() {
+	return this.conjectureFormat;
+    }
+
+    public boolean getTGTP() {
+	return this.tgtp;
     }
 
     public boolean getHelp() {
@@ -41,33 +51,44 @@ public class OGPArgs {
 	return this.version;
     }
 
-    private void testFile(String fileStr) {
-	File theFile = new File(fileStr);
-	if (!theFile.exists()) {
-	    errorMsg(2, fileStr);
-	} else if (!theFile.isFile()) {
-	    errorMsg(3, fileStr);
-	} else if (!theFile.canRead()) {
-	    errorMsg(4, fileStr);
+    private void conjectureTest(String conjecture) {
+	tgtp = conjecture.startsWith("--tgtp=");
+	if (tgtp) {
+	    conjectureId = conjecture.substring(7);
+	    if (conjectureId.isEmpty()) {
+		errorMsg(2, "");
+	    }
 	} else {
-	    file = fileStr;
+	    File theConjecture = new File(conjecture);
+	    if (!theConjecture.exists()) {
+		errorMsg(3, conjecture);
+	    } else if (!theConjecture.isFile()) {
+		errorMsg(4, conjecture);
+	    } else if (!theConjecture.canRead()) {
+		errorMsg(5, conjecture);
+	    } else {
+		conjectureId = conjecture;
+	    }
 	}
     }
 
     private static void errorMsg(int error, String str) {
-	System.err.print("[ERROR] ");
+	System.err.print("[ERROR " + error + "] ");
 	switch (error) {
 	case 1:
 	    System.err.print("Incorrect number of arguments.");
 	    System.err.println(" Use option '-h' for help.");
 	    break;
 	case 2:
-	    System.err.println("File '" + str + "' does not exist.");
+	    System.err.println("Empty TGTP conjecture.");
 	    break;
 	case 3:
-	    System.err.println("'" + str + "' is not a file.");
+	    System.err.println("File '" + str + "' does not exist.");
 	    break;
 	case 4:
+	    System.err.println("'" + str + "' is not a file.");
+	    break;
+	case 5:
 	    System.err.println("Cannot read file '" + str + "'.");
 	    break;
 	}
