@@ -6,6 +6,8 @@ public class OGPArgs {
 
     private String conjectureId;
     private String conjectureFormat;
+    private String proverId;
+    private String proverArgs;
     private boolean tgtp = false;
     private boolean help = false;
     private boolean provers = false;
@@ -33,6 +35,14 @@ public class OGPArgs {
 
     public String getConjectureFormat() {
 	return this.conjectureFormat;
+    }
+
+    public String getProverId() {
+	returb this.proverId;
+    }
+
+    public String getProverArgs() {
+	return this.proverArgs;
     }
 
     public boolean getTGTP() {
