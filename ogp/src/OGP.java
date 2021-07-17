@@ -7,8 +7,6 @@ import java.util.concurrent.TimeUnit;
 
 public class OGP {
 
-    final static int TIMEOUT = 15; // TODO: Make timeout an option
-    
     final static String MAJOR_VERSION = "0";
     final static String MINOR_VERSION = "0";
     final static String VERSION = MAJOR_VERSION + "." + MINOR_VERSION;
@@ -24,77 +22,23 @@ public class OGP {
 	} else if (arguments.getProvers()) {
 	    proversList();
 	} else {
+	    System.out.println("          Timeout: |" + arguments.getTimeout() + "|");
 	    System.out.println("    Conjecture id: |" + arguments.getConjectureId() + "|");
-	    System.out.println("Conjecture format: |" + arguments.getConjectureFormat() + "|");
-	    // String fileN = args[0].substring(0, args[0].lastIndexOf('.'));
-	    // String fileE = args[0].substring(args[0].lastIndexOf('.') + 1);
-	    // switch (fileE) {
-	    // case "coqam":
-	    // 	System.out.println("Calling CoqAM...");
-	    // 	break;
-	    // case "fof":
-	    // 	try {
-	    // 	    File conjOut = new File(fileN + "_FOF.out");
-	    // 	    File conjErr = new File(fileN + "_FOF.err");
-	    // 	    ArrayList<String> command = new ArrayList<String>();
-	    // 	    command.add("ogptest");
-	    // 	    command.add(args[0]);
-	    // 	    if (args.length > 1) {
-	    // 		for  (int i = 2; i <= args.length; i++) {
-	    // 		    command.add(args[i - 1]);
-	    // 		}
-	    // 	    }
-	    // 	    Process proc = new ProcessBuilder(command)
-	    // 		.redirectOutput(conjOut)
-	    // 		.redirectError(conjErr)
-	    // 		.start();
-	    // 	    if (proc.waitFor(15, TimeUnit.SECONDS)) {
-	    // 		System.out.println("O processo terminou!");
-	    // 	    } else {
-	    // 		System.out.println("O processo não terminou");
-	    // 	    }
-	    // 	} catch (InterruptedException e) {
-	    // 	    System.err.println("[ERROR] InterruptedException");
-	    // 	} catch (IOException e) {
-	    // 	    System.err.println("[ERROR] IOException");
-	    // 	    e.printStackTrace();
-	    // 	}
-	    // 	break;
-	    // case "gcl":
-	    // 	try {
-	    // 	    File conjOut = new File(fileN + "_GCLC.out");
-	    // 	    File conjErr = new File(fileN + "_GCLC.err");
-	    // 	    ArrayList<String> command = new ArrayList<String>();
-	    // 	    command.add("gclc");
-	    // 	    command.add(args[0]);
-	    // 	    if (args.length > 1) {
-	    // 		for  (int i = 2; i <= args.length; i++) {
-	    // 		    command.add(args[i - 1]);
-	    // 		}
-	    // 	    }
-	    // 	    Process proc = new ProcessBuilder(command)
-	    // 		.redirectOutput(conjOut)
-	    // 		.redirectError(conjErr)
-	    // 		.start();
-	    // 	} catch(IOException e) {
-	    // 	    System.err.println("ERROR: I/O");
-	    // 	    e.printStackTrace();
-	    // 	}
-	    // 	break;
-	    // default:
-	    // 	System.out.println("ERROR: Unknown extension!");
-	    // }
 	}
 	System.exit(0);
     }
 	
     private static void helpMsg() {
-	System.out.println("Synopsis: ogp -h | --help");
-	System.out.println("          ogp -p | --provers");
-	System.out.println("          ogp -V | --version");
-	System.out.println("          ogp conjecture");
-	System.out.println("          ogp conjecture prover");
-	System.out.println("          ogp conjecture prover prover_options");
+	System.out.println("Usage: ogp [OPTION] [CONJECTURE [PROVER [PROVER-OPTIONS]]");
+	System.out.println("where OPTION is one of:");
+	System.out.print("    -h | --help                     ");
+	System.out.println("prints help message (to be used alone)");
+	System.out.print("    -p | --provers                  ");
+	System.out.println("lists avaliable provers (to be used alone)");
+	System.out.print("    -V | --version                  ");
+	System.out.println("print OGP version (to be used alone)");
+	System.out.print("    -t <time> | --timeout=<time>    ");
+	System.out.println("sets timeout for an attempt (in seconds)");
     }
 
     private static void versionMsg() {
@@ -105,7 +49,7 @@ public class OGP {
     }
 
     private static void proversList() {
-	System.out.println();
+	System.out.println("TODO");
     }
     
 }

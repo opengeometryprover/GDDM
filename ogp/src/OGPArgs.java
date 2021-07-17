@@ -4,6 +4,7 @@ import java.io.File;
 
 public class OGPArgs {
 
+    private int timeout = 15;
     private String conjectureId;
     private String conjectureFormat;
     private String proverId;
@@ -16,19 +17,62 @@ public class OGPArgs {
     public OGPArgs(String[] args) {
 	switch (args.length) {
 	case 0:
+	    // No arguments
 	    errorMsg(1, "");
 	    break;
 	case 1:
+	    /*
+	     * One of:
+	     *     ogp -h | --help
+	     *     ogp -p | --provers
+	     *     ogp -V | --version
+	     *     ogp <conjecture>
+	     */
 	    help = args[0].equals("-h") || args[0].equals("--help");
 	    provers = args[0].equals("-p") || args[0].equals("--provers");
 	    version = args[0].equals("-V") || args[0].equals("--version");
 	    if (!help && !provers && !version) {
-		conjectureTest(args[0]);
+		isConjecture(args[0]);
 	    }
+	    break;
+	case 2:
+	    /*
+	     * One of:
+	     *     ogp --timeout=<time> <conjecture>
+	     *     ogp <conjecture> <prover>
+	     */
+	    break;
+	case 3:
+	    /*
+	     * One of:
+	     *     ogp -t <time> <conjecture>
+	     *     ogp --timeout=<time> <conjecture> <prover>
+	     *     ogp <conjecture> <prover> <prover-options>
+	     */
+	    break;
+	case 4:
+	    /*
+	     * One of:
+	     *     ogp -t <time> <conjecture> <prover>
+	     *     ogp --timeout=<time> <conjecture> <prover> <prover-options>
+	     *     ogp <conjecture> <prover> <prover-options>
+	     */
+	    break;
+	default:
+	    /*
+	     * One of:
+	     *     ogp -t <time> <conjecture> <prover> <prover-options>
+	     *     ogp --timeout=<time> <conjecture> <prover> <prover-options>
+	     *     ogp <conjecture> <prover> <prover-options>
+	     */
 	    break;
 	}
     }
 
+    public int getTimeout() {
+	return this.timeout;
+    }
+	    
     public String getConjectureId() {
 	return this.conjectureId;
     }
@@ -38,7 +82,7 @@ public class OGPArgs {
     }
 
     public String getProverId() {
-	returb this.proverId;
+	return this.proverId;
     }
 
     public String getProverArgs() {
@@ -61,7 +105,7 @@ public class OGPArgs {
 	return this.version;
     }
 
-    private void conjectureTest(String conjecture) {
+    private void isConjecture(String conjecture) {
 	tgtp = conjecture.startsWith("--tgtp=");
 	if (tgtp) {
 	    conjectureId = conjecture.substring(7);
@@ -69,14 +113,14 @@ public class OGPArgs {
 	    if (conjectureId.isEmpty()) {
 		errorMsg(2, "");
 	    }
-	    // TODO: Must check if conjecture exists in TGTP
+	    // TODO: Check if conjecture exists in TGTP
 	} else {
-	    File theConjecture = new File(conjecture);
-	    if (!theConjecture.exists()) {
+	    File fileConjecture = new File(conjecture);
+	    if (!fileConjecture.exists()) {
 		errorMsg(3, conjecture);
-	    } else if (!theConjecture.isFile()) {
+	    } else if (!fileConjecture.isFile()) {
 		errorMsg(4, conjecture);
-	    } else if (!theConjecture.canRead()) {
+	    } else if (!fileConjecture.canRead()) {
 		errorMsg(5, conjecture);
 	    } else {
 		conjectureId = conjecture;
