@@ -1,8 +1,5 @@
 package ogp;
 
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-
 public class OGP {
 
     public static void main(String[] args) {
