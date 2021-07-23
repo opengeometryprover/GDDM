@@ -1,24 +1,19 @@
 package ogp;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class OGP {
 
-    final static String MAJOR_VERSION = "0";
-    final static String MINOR_VERSION = "0";
-    final static String VERSION = MAJOR_VERSION + "." + MINOR_VERSION;
-    
     public static void main(String[] args) {
 	// TODO: Read configuration file
 	// File confFile = new File();
+	OGPConf configuration = new OGPConf();
 	OGPArgs arguments = new OGPArgs(args);
 	if (arguments.getHelp()) {
 	    helpMsg();
 	} else if (arguments.getVersion()) {
-	    versionMsg();
+	    versionMsg(configuration.getVersion());
 	} else if (arguments.getProvers()) {
 	    proversList();
 	} else {
@@ -41,8 +36,8 @@ public class OGP {
 	System.out.println("sets timeout for an attempt (in seconds)");
     }
 
-    private static void versionMsg() {
-	System.out.println("OpenGeometryProver " + VERSION);
+    private static void versionMsg(String version) {
+	System.out.println("OpenGeometryProver " + version);
 	System.out.println("Copyright (C) 2021 Nuno Baeta, Pedro Quaresma");
 	System.out.println("Published under GNU GPL, version 3 or later");
 	System.out.println("https://github.com/opengeometryprover/OpenGeometryProver");
