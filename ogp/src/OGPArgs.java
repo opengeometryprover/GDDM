@@ -26,7 +26,7 @@ public class OGPArgs {
 	     *     ogp -h | --help
 	     *     ogp -p | --provers
 	     *     ogp -V | --version
-	     *     ogp <conjecture>
+	     *     ogp [CONJECTURE]
 	     */
 	    help = args[0].equals("-h") || args[0].equals("--help");
 	    provers = args[0].equals("-p") || args[0].equals("--provers");
@@ -38,32 +38,32 @@ public class OGPArgs {
 	case 2:
 	    /*
 	     * One of:
-	     *     ogp --timeout=<time> <conjecture>
-	     *     ogp <conjecture> <prover>
+	     *     ogp --timeout=<time> [CONJECTURE]
+	     *     ogp [CONJECTURE] [PROVER]
 	     */
 	    break;
 	case 3:
 	    /*
 	     * One of:
-	     *     ogp -t <time> <conjecture>
-	     *     ogp --timeout=<time> <conjecture> <prover>
-	     *     ogp <conjecture> <prover> <prover-options>
+	     *     ogp -t <time> [CONJECTURE]
+	     *     ogp --timeout=<time> [CONJECTURE] [PROVER]
+	     *     ogp [CONJECTURE] [PROVER] [PROVER-OPTIONS]
 	     */
 	    break;
 	case 4:
 	    /*
 	     * One of:
-	     *     ogp -t <time> <conjecture> <prover>
-	     *     ogp --timeout=<time> <conjecture> <prover> <prover-options>
-	     *     ogp <conjecture> <prover> <prover-options>
+	     *     ogp -t <time> [CONJECTURE] [PROVER]
+	     *     ogp --timeout=<time> [CONJECTURE] [PROVER] [PROVER-OPTIONS]
+	     *     ogp [CONJECTURE] [PROVER] [PROVER-OPTIONS]
 	     */
 	    break;
 	default:
 	    /*
 	     * One of:
-	     *     ogp -t <time> <conjecture> <prover> <prover-options>
-	     *     ogp --timeout=<time> <conjecture> <prover> <prover-options>
-	     *     ogp <conjecture> <prover> <prover-options>
+	     *     ogp -t <time> [CONJECTURE] [PROVER] [PROVER-OPTIONS]
+	     *     ogp --timeout=<time> [CONJECTURE] [PROVER] [PROVER-OPTIONS]
+	     *     ogp [CONJECTURE] [PROVER] [PROVER-OPTIONS]
 	     */
 	    break;
 	}
