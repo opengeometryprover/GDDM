@@ -105,7 +105,7 @@ public class OGPArgs {
 	return this.version;
     }
 
-    private static void isConjecture(String conjecture) {
+    private void isConjecture(String conjecture) {
 	tgtp = conjecture.startsWith("--tgtp=");
 	if (tgtp) {
 	    conjectureId = conjecture.substring(7);
