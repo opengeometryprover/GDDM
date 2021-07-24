@@ -1,4 +1,4 @@
-<project name="OGP" default="compile">
+<project name="OGP" default="dist">
 
   <property name="src.dir" value="src"/>
   <property name="build.dir" value="build"/>
