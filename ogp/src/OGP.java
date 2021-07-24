@@ -3,8 +3,6 @@ package ogp;
 public class OGP {
 
     public static void main(String[] args) {
-	// TODO: Read configuration file
-	// File confFile = new File();
 	OGPConf configuration = new OGPConf();
 	OGPArgs arguments = new OGPArgs(args);
 	if (arguments.getHelp()) {
