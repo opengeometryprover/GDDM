@@ -2,32 +2,29 @@ package ogp;
 
 public class OGPProverInfo {
 
-    private String id;		// Prover's name
+    
     private String cmd;		// Command line command
     private String ext;		// Conjecture's extension
     private String toFOFCmd;	// ext2FOF command, if any
     private String toExtCmd;	// FOF2ext command, if any
     private String postProcCmd;	// Post-processing command, if any
+    private String name;	// Prover's name
     private String desc;	// Prover's description
 
-    public OGPProverInfo(String id,
-			 String cmd,
+    public OGPProverInfo(String cmd,
 			 String ext,
 			 String toFOFCmd,
 			 String toExtCmd,
 			 String postProcCmd,
+			 String name;
 			 String desc) {
-	this.id = id;
 	this.cmd = cmd;
 	this.ext = ext;
 	this.toFOFCmd = toFOFCmd;
 	this.toExtCmd = toExtCmd;
 	this.postProcCmd = postProcCmd;
+	this.name = name;
 	this.desc = desc;
-    }
-
-    public String getId() {
-	return this.id;
     }
 
     public String getCmd() {
@@ -48,6 +45,10 @@ public class OGPProverInfo {
 
     public String getPostProcCmd() {
 	return this.postProcCmd;
+    }
+
+    public String getName() {
+	return this.name;
     }
 
     public String getDesc() {
