@@ -2,7 +2,6 @@ package ogp;
 
 public class OGPProverInfo {
 
-    
     private String cmd;		// Command line command
     private String ext;		// Conjecture's extension
     private String toFOFCmd;	// ext2FOF command, if any
