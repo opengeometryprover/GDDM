@@ -15,7 +15,7 @@ public class OGPProverInfo {
 			 String toFOFCmd,
 			 String toExtCmd,
 			 String postProcCmd,
-			 String name;
+			 String name,
 			 String desc) {
 	this.cmd = cmd;
 	this.ext = ext;
