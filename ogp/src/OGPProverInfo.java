@@ -41,4 +41,32 @@ public class OGPProverInfo {
 	this.desc = desc;
     }
 
+    public String getId() {
+	return this.id;
+    }
+
+    public String getCmd() {
+	return this.cmd;
+    }
+
+    public String getExt() {
+	return this.ext;
+    }
+
+    public String getToFOFCmd() {
+	return this.toFOFCmd;
+    }
+
+    public String getToExtCmd() {
+	return this.toExtCmd;
+    }
+
+    public String getPostProcCmd() {
+	return this.postProcCmd;
+    }
+
+    public String getDesc() {
+	return this.desc;
+    }
+
 }
