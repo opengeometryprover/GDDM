@@ -10,34 +10,19 @@ public class OGPProverInfo {
     private String postProcCmd;	// Post-processing command, if any
     private String desc;	// Prover's description
 
-    public OGPProverInfo() {
-    }
-
-    public void setId(String id) {
+    public OGPProverInfo(String id,
+			 String cmd,
+			 String ext,
+			 String toFOFCmd,
+			 String toExtCmd,
+			 String postProcCmd,
+			 String desc) {
 	this.id = id;
-    }
-
-    public void setCmd(String cmd) {
 	this.cmd = cmd;
-    }
-
-    public void setExt(String ext) {
 	this.ext = ext;
-    }
-
-    public void setToFOFCmd(String toFOFCmd) {
 	this.toFOFCmd = toFOFCmd;
-    }
-
-    public void setToExtCmd(String toExtCmd) {
 	this.toExtCmd = toExtCmd;
-    }
-
-    public void setPostProcCmd(String postProcCmd) {
 	this.postProcCmd = postProcCmd;
-    }
-
-    public void setDesc(String desc) {
 	this.desc = desc;
     }
 
