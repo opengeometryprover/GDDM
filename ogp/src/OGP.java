@@ -48,37 +48,42 @@ public class OGP {
 	
 	int i = 1;
 	for (String proverId : proversSet) {
-	    System.out.println(proversInfo.get(proverId).getName());
-	    System.out.println();
+	    OGPProverInfo proverIdInfo = proversInfo.get(proverId);
+
+	    System.out.println("NAME");
+	    System.out.println("    " + proverIdInfo.getName());
 	    
-	    System.out.println(proversInfo.get(proverId).getDesc());
-	    System.out.println();
+	    System.out.println("DESCRIPTION");
+	    StringBuilder description = new StringBuilder();
+	    description.append(proverIdInfo.getDesc());
+	    int index = description.indexOf("\\n");
+	    while (index != -1) {
+		System.out.println("    " + description.substring(0, index));
+		description.delete(0, index + 2);
+		index = description.indexOf("\\n");
+	    }
+	    System.out.println("    " + description);
 	    
-	    System.out.println("OGP Id:");
+	    System.out.println("OGP ID");
 	    System.out.println("    " + proverId);
 	    
-	    System.out.println("Command:");
-	    System.out.println("    " + proversInfo.get(proverId).getCmd());
+	    System.out.println("COMMAND");
+	    System.out.println("    " + proverIdInfo.getCmd());
 	    
-	    System.out.println("Extension:");
-	    System.out.println("    " + proversInfo.get(proverId).getExt());
+	    System.out.println("EXTENSION");
+	    System.out.println("    " + proverIdInfo.getExt());
 	    
-	    System.out.println(proversInfo.get(proverId).getExt() + "2fof:");
-	    System.out.println("    "
-			       + proversInfo.get(proverId).getToFOFCmd());
+	    System.out.println(proverIdInfo.getExt().toUpperCase() + "2FOF");
+	    System.out.println("    " + proverIdInfo.getToFOFCmd());
 	    
-	    System.out.println("fof2" + proversInfo.get(proverId).getExt()
-			       + ":");
-	    System.out.println("    "
-			       + proversInfo.get(proverId).getToExtCmd());
+	    System.out.println("FOF2" + proverIdInfo.getExt().toUpperCase());
+	    System.out.println("    " + proverIdInfo.getToExtCmd());
 	    
-	    System.out.println("Post-processing:");
-	    System.out.println("    "
-			       + proversInfo.get(proverId).getPostProcCmd());
+	    System.out.println("POST-PROCESSING");
+	    System.out.println("    " + proverIdInfo.getPostProcCmd());
 	    
 	    if (i != nrProvers) {
 		i++;
-		System.out.println();
 		System.out.println();
 	    }
 	}
