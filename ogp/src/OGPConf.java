@@ -2,7 +2,9 @@ package ogp;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -18,6 +20,7 @@ public class OGPConf {
     private int nrProvers = 0;
     private Map<String, OGPProverInfo> proversInfo = new HashMap<String,
 	OGPProverInfo>();
+    private Set<String> proversExt = new HashSet<String>();
 
     public OGPConf() {
 	readConfFile(CONF_FILE);
@@ -37,12 +40,16 @@ public class OGPConf {
 	return this.nrProvers;
     }
 
-    public Set<String> getProversSet() {
-	return this.proversInfo.keySet();
-    }
-
     public Map<String, OGPProverInfo> getProversInfo() {
 	return this.proversInfo;
+    }
+
+    public Set<String> getProversExt() {
+	return this.proversExt;
+    }
+
+    public Set<String> getProversSet() {
+	return this.proversInfo.keySet();
     }
 
     private void readConfFile(String file) {
@@ -100,6 +107,7 @@ public class OGPConf {
 								 postProcCmd,
 								 name,
 								 desc));
+			proversExt.add(ext);
 			nrProvers++;
 		    }
 		}
