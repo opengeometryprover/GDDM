@@ -52,54 +52,56 @@ public class OGPConf {
 		Scanner confFileScanner = new Scanner(confFile);
 		while (confFileScanner.hasNextLine()) {
 		    String line = confFileScanner.nextLine();
+		    if (!line.startsWith("#") && !line.matches("\\s*")) {
+			// Determine OGP prover's identification
+			int begIndex = 0;
+			int endIndex = line.indexOf(":", begIndex);
+			String ogpId = line.substring(begIndex, endIndex);
+			if (ogpId.isEmpty()) {
+			    errorMsg(11, file + ": no prover identification");
+			}
+			// Determine prover's command line command
+			begIndex = ++endIndex;
+			endIndex = line.indexOf(":", begIndex);
+			String cmd = line.substring(begIndex, endIndex);
+			if (cmd.isEmpty()) {
+			    errorMsg(11, file + ": no prover command");
+			}
+			// Determine prover's conjectuture file extension
+			begIndex = ++endIndex;
+			endIndex = line.indexOf(":", begIndex);
+			String ext = line.substring(begIndex, endIndex);
+			if (ext.isEmpty()) {
+			    errorMsg(11, file + ": no prover extension");
+			}
+			// Determine prover's ext2FOF command, if any
+			begIndex = ++endIndex;
+			endIndex = line.indexOf(":", begIndex);
+			String toFOFCmd = line.substring(begIndex, endIndex);
+			// Determine prover's FOF2ext command, if any
+			begIndex = ++endIndex;
+			endIndex = line.indexOf(":", begIndex);
+			String toExtCmd = line.substring(begIndex, endIndex);
+			// Determine prover's post-processing command, if any
+			begIndex = ++endIndex;
+			endIndex = line.indexOf(":", begIndex);
+			String postProcCmd = line.substring(begIndex, endIndex);
+			// Determine prover's name, if any
+			begIndex = ++endIndex;
+			endIndex = line.indexOf(":", begIndex);
+			String name = line.substring(begIndex, endIndex);
+			// Determine prover's description, if any
+			String desc = line.substring(++endIndex);
 
-		    int beginIndex = 0;
-		    int endIndex = line.indexOf(":", beginIndex);
-		    String ogpId = line.substring(beginIndex, endIndex);
-		    if (ogpId.isEmpty()) {
-			errorMsg(11, file + ": missing prover identification");
+			proversInfo.put(ogpId, new OGPProverInfo(cmd,
+								 ext,
+								 toFOFCmd,
+								 toExtCmd,
+								 postProcCmd,
+								 name,
+								 desc));
+			nrProvers++;
 		    }
-
-		    beginIndex = ++endIndex;
-		    endIndex = line.indexOf(":", beginIndex);
-		    String cmd = line.substring(beginIndex, endIndex);
-		    if (cmd.isEmpty()) {
-			errorMsg(11, file + ": missing prover command");
-		    }
-
-		    beginIndex = ++endIndex;
-		    endIndex = line.indexOf(":", beginIndex);
-		    String ext = line.substring(beginIndex, endIndex);
-		    if (ext.isEmpty()) {
-			errorMsg(11, file + ": missing prover extension");
-		    }
-
-		    beginIndex = ++endIndex;
-		    endIndex = line.indexOf(":", beginIndex);
-		    String toFOFCmd = line.substring(beginIndex, endIndex);
-
-		    beginIndex = ++endIndex;
-		    endIndex = line.indexOf(":", beginIndex);
-		    String toExtCmd = line.substring(beginIndex, endIndex);
-
-		    beginIndex = ++endIndex;
-		    endIndex = line.indexOf(":", beginIndex);
-		    String postProcCmd = line.substring(beginIndex, endIndex);
-
-		    beginIndex = ++endIndex;
-		    endIndex = line.indexOf(":", beginIndex);
-		    String name = line.substring(beginIndex, endIndex);
-
-		    String desc = line.substring(++endIndex);
-
-		    proversInfo.put(ogpId, new OGPProverInfo(cmd,
-							     ext,
-							     toFOFCmd,
-							     toExtCmd,
-							     postProcCmd,
-							     name,
-							     desc));
-		    nrProvers++;
 		}
 		confFileScanner.close();
 	    }
