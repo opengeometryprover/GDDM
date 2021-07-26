@@ -18,7 +18,7 @@ public class OGPArgs {
 	switch (args.length) {
 	case 0:
 	    // No arguments
-	    errorMsg(1, "");
+	    errorMsg(21, "");
 	    break;
 	case 1:
 	    /*
@@ -111,17 +111,17 @@ public class OGPArgs {
 	    conjectureId = conjecture.substring(7);
 	    conjectureFormat = "";
 	    if (conjectureId.isEmpty()) {
-		errorMsg(2, "");
+		errorMsg(22, "");
 	    }
 	    // TODO: Check if conjecture exists in TGTP
 	} else {
 	    File fileConjecture = new File(conjecture);
 	    if (!fileConjecture.exists()) {
-		errorMsg(3, conjecture);
+		errorMsg(23, conjecture);
 	    } else if (!fileConjecture.isFile()) {
-		errorMsg(4, conjecture);
+		errorMsg(24, conjecture);
 	    } else if (!fileConjecture.canRead()) {
-		errorMsg(5, conjecture);
+		errorMsg(25, conjecture);
 	    } else {
 		conjectureId = conjecture;
 	    }
@@ -129,22 +129,22 @@ public class OGPArgs {
     }
 
     private static void errorMsg(int error, String str) {
-	System.err.print("[ERROR " + error + "] ");
+	System.err.print("[ERROR " + error + "] (OGPArgs) ");
 	switch (error) {
-	case 1:
+	case 21:
 	    System.err.print("Incorrect number of arguments.");
 	    System.err.println(" Use option '-h' for help.");
 	    break;
-	case 2:
+	case 22:
 	    System.err.println("Empty TGTP conjecture.");
 	    break;
-	case 3:
+	case 23:
 	    System.err.println("File '" + str + "' does not exist.");
 	    break;
-	case 4:
+	case 24:
 	    System.err.println("'" + str + "' is not a file.");
 	    break;
-	case 5:
+	case 25:
 	    System.err.println("Cannot read file '" + str + "'.");
 	    break;
 	}
