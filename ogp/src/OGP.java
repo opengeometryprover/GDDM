@@ -1,5 +1,8 @@
 package ogp;
 
+import java.util.Map;
+import java.util.Set;
+
 public class OGP {
 
     public static void main(String[] args) {
@@ -10,7 +13,7 @@ public class OGP {
 	} else if (arguments.getVersion()) {
 	    versionMsg(configuration.getVersion());
 	} else if (arguments.getProvers()) {
-	    proversList();
+	    proversList(configuration);
 	} else {
 	    System.out.println("          Timeout: |" + arguments.getTimeout() + "|");
 	    System.out.println("    Conjecture id: |" + arguments.getConjectureId() + "|");
@@ -38,8 +41,47 @@ public class OGP {
 	System.out.println("https://github.com/opengeometryprover/OpenGeometryProver");
     }
 
-    private static void proversList() {
-	System.out.println("TODO");
+    private static void proversList(OGPConf configuration) {
+	int nrProvers = configuration.getNrProvers();
+	Set<String> proversSet = configuration.getProversSet();
+	Map<String, OGPProverInfo> proversInfo = configuration.getProversInfo();
+	
+	int i = 1;
+	for (String proverId : proversSet) {
+	    System.out.println(proversInfo.get(proverId).getName());
+	    System.out.println();
+	    
+	    System.out.println(proversInfo.get(proverId).getDesc());
+	    System.out.println();
+	    
+	    System.out.println("OGP Id:");
+	    System.out.println("    " + proverId);
+	    
+	    System.out.println("Command:");
+	    System.out.println("    " + proversInfo.get(proverId).getCmd());
+	    
+	    System.out.println("Extension:");
+	    System.out.println("    " + proversInfo.get(proverId).getExt());
+	    
+	    System.out.println(proversInfo.get(proverId).getExt() + "2fof:");
+	    System.out.println("    "
+			       + proversInfo.get(proverId).getToFOFCmd());
+	    
+	    System.out.println("fof2" + proversInfo.get(proverId).getExt()
+			       + ":");
+	    System.out.println("    "
+			       + proversInfo.get(proverId).getToExtCmd());
+	    
+	    System.out.println("Post-processing:");
+	    System.out.println("    "
+			       + proversInfo.get(proverId).getPostProcCmd());
+	    
+	    if (i != nrProvers) {
+		i++;
+		System.out.println();
+		System.out.println();
+	    }
+	}
     }
     
 }
