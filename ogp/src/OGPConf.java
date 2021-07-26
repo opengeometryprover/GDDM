@@ -2,7 +2,10 @@ package ogp;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class OGPConf {
 
@@ -12,18 +15,37 @@ public class OGPConf {
 
     private final static String CONF_FILE = "/usr/local/share/ogp/ogp.conf";
 
+    private int nrProvers = 0;
+    private Map<String, OGPProverInfo> proversInfo = new HashMap<String,
+	OGPProverInfo>();
+
     public OGPConf() {
 	readConfFile(CONF_FILE);
 	readConfFile(System.getenv("HOME")
 		     + System.getProperty("file.separator")
 		     + ".ogprc");
+	if (proversInfo.size() == 0) {
+	    errorMsg(12, "");
+	}
     }
 
     public String getVersion() {
 	return this.VERSION;
     }
 
-    private static void readConfFile(String file) {
+    public int getNrProvers() {
+	return this.nrProvers;
+    }
+
+    public Set<String> getProversSet() {
+	return this.proversInfo.keySet();
+    }
+
+    public Map<String, OGPProverInfo> getProversInfo() {
+	return this.proversInfo;
+    }
+
+    private void readConfFile(String file) {
 	try {
 	    File confFile = new File(file);
 	    if (confFile.canRead() && confFile.isFile()) {
@@ -33,8 +55,8 @@ public class OGPConf {
 
 		    int beginIndex = 0;
 		    int endIndex = line.indexOf(":", beginIndex);
-		    String id = line.substring(beginIndex, endIndex);
-		    if (id.isEmpty()) {
+		    String ogpId = line.substring(beginIndex, endIndex);
+		    if (ogpId.isEmpty()) {
 			errorMsg(11, file + ": missing prover identification");
 		    }
 
@@ -64,7 +86,20 @@ public class OGPConf {
 		    endIndex = line.indexOf(":", beginIndex);
 		    String postProcCmd = line.substring(beginIndex, endIndex);
 
+		    beginIndex = ++endIndex;
+		    endIndex = line.indexOf(":", beginIndex);
+		    String name = line.substring(beginIndex, endIndex);
+
 		    String desc = line.substring(++endIndex);
+
+		    proversInfo.put(ogpId, new OGPProverInfo(cmd,
+							     ext,
+							     toFOFCmd,
+							     toExtCmd,
+							     postProcCmd,
+							     name,
+							     desc));
+		    nrProvers++;
 		}
 		confFileScanner.close();
 	    }
@@ -80,6 +115,9 @@ public class OGPConf {
 	switch (error) {
 	case 11:
 	    System.err.println("Problem with configuration file " + str);
+	    break;
+	case 12:
+	    System.err.println("OGP has no information about provers");
 	    break;
 	case 99:
 	    System.err.println("Something is really wrong :-|");
