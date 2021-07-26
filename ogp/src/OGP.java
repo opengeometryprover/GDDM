@@ -7,7 +7,7 @@ public class OGP {
 
     public static void main(String[] args) {
 	OGPConf configuration = new OGPConf();
-	OGPArgs arguments = new OGPArgs(args);
+	OGPArgs arguments = new OGPArgs(args, configuration);
 	if (arguments.getHelp()) {
 	    helpMsg();
 	} else if (arguments.getVersion()) {
