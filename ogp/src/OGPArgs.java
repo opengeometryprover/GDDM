@@ -6,7 +6,7 @@ public class OGPArgs {
 
     private int timeout = 15;
     private String conjectureId;
-    private String conjectureFormat;
+    private String conjectureExt;
     private String proverId;
     private String proverArgs;
     private boolean tgtp = false;
@@ -14,7 +14,7 @@ public class OGPArgs {
     private boolean provers = false;
     private boolean version = false;
 
-    public OGPArgs(String[] args) {
+    public OGPArgs(String[] args, OGPConf configuration) {
 	switch (args.length) {
 	case 0:
 	    // No arguments
@@ -32,7 +32,7 @@ public class OGPArgs {
 	    provers = args[0].equals("-p") || args[0].equals("--provers");
 	    version = args[0].equals("-V") || args[0].equals("--version");
 	    if (!help && !provers && !version) {
-		isConjecture(args[0]);
+		conjectureInfo(args[0], configuration);
 	    }
 	    break;
 	case 2:
@@ -77,8 +77,8 @@ public class OGPArgs {
 	return this.conjectureId;
     }
 
-    public String getConjectureFormat() {
-	return this.conjectureFormat;
+    public String getConjectureExt() {
+	return this.conjectureExt;
     }
 
     public String getProverId() {
@@ -105,11 +105,11 @@ public class OGPArgs {
 	return this.version;
     }
 
-    private void isConjecture(String conjecture) {
+    private void conjectureInfo(String conjecture, OGPConf configuration) {
 	tgtp = conjecture.startsWith("--tgtp=");
 	if (tgtp) {
 	    conjectureId = conjecture.substring(7);
-	    conjectureFormat = "";
+	    conjectureExt = "";
 	    if (conjectureId.isEmpty()) {
 		errorMsg(22, "");
 	    }
@@ -124,6 +124,14 @@ public class OGPArgs {
 		errorMsg(25, conjecture);
 	    } else {
 		conjectureId = conjecture;
+		int index = conjecture.lastIndexOf(".");
+		if (index == -1) {
+		    errorMsg(26, "");
+		}
+		conjectureExt = conjecture.substring(index + 1);
+		if (!configuration.getProversExt().contains(conjectureExt)) {
+		    errorMsg(27, conjectureExt);
+		}
 	    }
 	}
     }
@@ -146,6 +154,12 @@ public class OGPArgs {
 	    break;
 	case 25:
 	    System.err.println("Cannot read file '" + str + "'.");
+	    break;
+	case 26:
+	    System.err.println("Unable to determine the conjecture's format.");
+	    break;
+	case 27:
+	    System.err.println("Unrecognized extension '" + str + "'.");
 	    break;
 	}
 	System.exit(error);
