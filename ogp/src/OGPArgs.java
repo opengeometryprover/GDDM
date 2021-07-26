@@ -126,7 +126,7 @@ public class OGPArgs {
 		conjectureId = conjecture;
 		int index = conjecture.lastIndexOf(".");
 		if (index == -1) {
-		    errorMsg(26, "");
+		    errorMsg(26, conjecture);
 		}
 		conjectureExt = conjecture.substring(index + 1);
 		if (!configuration.getProversExt().contains(conjectureExt)) {
@@ -156,7 +156,8 @@ public class OGPArgs {
 	    System.err.println("Cannot read file '" + str + "'.");
 	    break;
 	case 26:
-	    System.err.println("Unable to determine the conjecture's format.");
+	    System.err.print("Unable to determine the conjecture's format ");
+	    System.err.println("from conjecture '" + str + "'.");
 	    break;
 	case 27:
 	    System.err.println("Unrecognized extension '" + str + "'.");
