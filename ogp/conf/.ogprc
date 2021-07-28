@@ -3,7 +3,7 @@
 # 1. Comment lines start with a #
 # 2. Blank lines are ignored
 # 3. One "usefull" line, one prover
-# 4. The syntax  is:
+# 4. The syntax of a "usefull" line is:
 #
 #    OGP_ID:COMMAND:EXTENSION:EXT2FOF:FOF2EXT:POST-PROCESSING:NAME:DESCRIPTION
 #
@@ -18,6 +18,8 @@
 #      provers
 #    - NAME : Prover's name
 #    - DESCRIPTION : Description of prover, newlines are written with \n
+#
+# 5. Given two lines with the same OGP_ID, the latter will override the former
 
 # gclcam:gclc -a:gcl:filterGCLtoFOF:-:-:GCLC:GCLC's area method.\nHomepage: http://poincare.matf.bg.ac.rs/~janicic/gclc/
 # gclcgb:gclc -g:gcl:filterGCLtoFOF:-:-:GCLC:GCLC's Gröbner bases method.\nHomepage: http://poincare.matf.bg.ac.rs/~janicic/gclc/
