@@ -116,7 +116,7 @@ public class OGPConf {
 	} catch (FileNotFoundException e) {
 	    errorMsg(99, e.toString());
 	} catch (StringIndexOutOfBoundsException e) {
-	    errorMsg(11, file + ": wrong sintax");
+	    errorMsg(11, file + ": wrong syntax");
 	}
     }
 
