@@ -53,6 +53,10 @@ public class OGPArgs {
 		}
 	    } else {
 		conjectureInfo(args[0], configuration);
+		proverId = args[1];
+		if (!configuration.isAvailableProver(proverId)) {
+		    errorMsg(28, proverId);
+		}
 	    }
 	    break;
 	case 3:
@@ -142,7 +146,7 @@ public class OGPArgs {
 		    errorMsg(26, conjecture);
 		}
 		conjectureExt = conjecture.substring(index + 1);
-		if (!configuration.proversExt().contains(conjectureExt)) {
+		if (!configuration.isAvailableExt(conjectureExt)) {
 		    errorMsg(27, conjectureExt);
 		}
 	    }
@@ -174,6 +178,9 @@ public class OGPArgs {
 	    break;
 	case 27:
 	    System.err.println("Unrecognized extension '" + msg + "'.");
+	    break;
+	case 28:
+	    System.err.println("Unrecognized prover '" + msg + "'.");
 	    break;
 	}
 	System.exit(error);

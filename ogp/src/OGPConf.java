@@ -17,6 +17,7 @@ public class OGPConf {
 
     private final static String VERSION = MAJOR_VERSION + "." + MINOR_VERSION;
     private int nrProvers = 0;
+    private Set<String> proversSet= new HashSet<String>();
 
     private Map<String, OGPProverInfo> proversInfo = new HashMap<String,
 	OGPProverInfo>();
@@ -31,6 +32,7 @@ public class OGPConf {
 	if (nrProvers == 0) {
 	    errorMsg(12, "");
 	}
+	proversSet = proversInfo.keySet();
     }
 
     public String getVersion() {
@@ -41,16 +43,20 @@ public class OGPConf {
 	return this.nrProvers;
     }
 
+    public Set<String> getProversSet() {
+	return this.proversSet;
+    }
+
     public boolean isAvailableExt(String ext) {
 	return this.proversExt.contains(ext);
     }
 
-    public OGPProverInfo proverInfo(String proverId) {
-	return this.proversInfo.get(proverId);
+    public boolean isAvailableProver(String prover) {
+	return this.proversSet.contains(prover);
     }
 
-    public Set<String> proversSet() {
-	return this.proversInfo.keySet();
+    public OGPProverInfo proverInfo(String proverId) {
+	return this.proversInfo.get(proverId);
     }
 
     private void readConfFile(String file) {
