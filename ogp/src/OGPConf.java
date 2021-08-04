@@ -49,6 +49,10 @@ public class OGPConf {
 	return this.proversExt;
     }
 
+    public OGPProverInfo getProverInfo(String proverId) {
+	return this.getProversInfo().get(proverId);
+    }
+
     public Set<String> getProversSet() {
 	return this.proversInfo.keySet();
     }

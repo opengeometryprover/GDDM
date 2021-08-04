@@ -43,13 +43,11 @@ public class OGP {
 
     private static void proversList(OGPConf configuration) {
 	int nrProvers = configuration.getNrProvers();
-	Set<String> proversSet = configuration.getProversSet();
-	Map<String, OGPProverInfo> proversInfo = configuration.getProversInfo();
-	
+		
 	int i = 1;
-	for (String proverId : proversSet) {
-	    OGPProverInfo proverIdInfo = proversInfo.get(proverId);
-
+	for (String proverId : configuration.getProversSet()) {
+	    OGPProverInfo proverIdInfo = configuration.getProverInfo(proverId);
+	    
 	    System.out.println("NAME");
 	    System.out.println("    " + proverIdInfo.getName());
 	    
