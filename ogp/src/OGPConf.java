@@ -18,7 +18,6 @@ public class OGPConf {
     private final static String VERSION = MAJOR_VERSION + "." + MINOR_VERSION;
     private int nrProvers = 0;
 
-    
     private Map<String, OGPProverInfo> proversInfo = new HashMap<String,
 	OGPProverInfo>();
     private Set<String> proversExt = new TreeSet<String>();
@@ -120,11 +119,11 @@ public class OGPConf {
 	}
     }
 
-    private static void errorMsg(int error, String str) {
+    private static void errorMsg(int error, String msg) {
 	System.err.print("[ERROR " + error + "] (OGPConf) ");
 	switch (error) {
 	case 11:
-	    System.err.println("Problem with configuration file " + str);
+	    System.err.println("Problem with configuration file " + msg);
 	    break;
 	case 12:
 	    System.err.println("OGP has no information about provers");
