@@ -142,7 +142,7 @@ public class OGPArgs {
 		    errorMsg(26, conjecture);
 		}
 		conjectureExt = conjecture.substring(index + 1);
-		if (!configuration.getProversExt().contains(conjectureExt)) {
+		if (!configuration.proversExt().contains(conjectureExt)) {
 		    errorMsg(27, conjectureExt);
 		}
 	    }

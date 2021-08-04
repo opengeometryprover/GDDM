@@ -45,8 +45,8 @@ public class OGP {
 	int nrProvers = configuration.getNrProvers();
 		
 	int i = 1;
-	for (String proverId : configuration.getProversSet()) {
-	    OGPProverInfo proverIdInfo = configuration.getProverInfo(proverId);
+	for (String proverId : configuration.proversSet()) {
+	    OGPProverInfo proverIdInfo = configuration.proverInfo(proverId);
 
 	    System.out.println("NAME");
 	    System.out.println("    " + proverIdInfo.getName());

@@ -41,15 +41,15 @@ public class OGPConf {
 	return this.nrProvers;
     }
 
-    public OGPProverInfo getProverInfo(String proverId) {
+    public OGPProverInfo proverInfo(String proverId) {
 	return this.proversInfo.get(proverId);
     }
 
-    public Set<String> getProversExt() {
+    public Set<String> proversExt() {
 	return this.proversExt;
     }
 
-    public Set<String> getProversSet() {
+    public Set<String> proversSet() {
 	return this.proversInfo.keySet();
     }
 
