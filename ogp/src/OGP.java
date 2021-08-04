@@ -47,10 +47,10 @@ public class OGP {
 	int i = 1;
 	for (String proverId : configuration.getProversSet()) {
 	    OGPProverInfo proverIdInfo = configuration.getProverInfo(proverId);
-	    
+
 	    System.out.println("NAME");
 	    System.out.println("    " + proverIdInfo.getName());
-	    
+
 	    System.out.println("DESCRIPTION");
 	    StringBuilder description = new StringBuilder();
 	    description.append(proverIdInfo.getDesc());
