@@ -41,6 +41,19 @@ public class OGPArgs {
 	     *     ogp --timeout=<time> [CONJECTURE]
 	     *     ogp [CONJECTURE] [PROVER]
 	     */
+	    if (args[0].startsWith("--timeout=")) {
+		try {
+		    timeout = Integer.parseInt(args[0].substring(10));
+		    if (timeout < 1) {
+			errorMsg(6, "");
+		    }
+		    conjectureInfo(args[1], configuration);
+		} catch (NumberFormatException e) {
+		    errorMsg(6, "");
+		}
+	    } else {
+		conjectureInfo(args[0], configuration);
+	    }
 	    break;
 	case 3:
 	    /*
