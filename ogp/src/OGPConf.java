@@ -41,12 +41,12 @@ public class OGPConf {
 	return this.nrProvers;
     }
 
-    public OGPProverInfo proverInfo(String proverId) {
-	return this.proversInfo.get(proverId);
+    public boolean isAvailableExt(String ext) {
+	return this.proversExt.contains(ext);
     }
 
-    public Set<String> proversExt() {
-	return this.proversExt;
+    public OGPProverInfo proverInfo(String proverId) {
+	return this.proversInfo.get(proverId);
     }
 
     public Set<String> proversSet() {
@@ -101,6 +101,7 @@ public class OGPConf {
 			// Determine prover's description, if any
 			String desc = line.substring(++endIndex);
 
+			// Update provers information
 			proversInfo.put(ogpId, new OGPProverInfo(cmd,
 								 ext,
 								 toFOFCmd,
@@ -108,6 +109,8 @@ public class OGPConf {
 								 postProcCmd,
 								 name,
 								 desc));
+			// Update extensions set
+			proversExt.add(ext);
 		    }
 		}
 		confFileScanner.close();
