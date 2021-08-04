@@ -130,7 +130,7 @@ public class OGPConf {
 	    break;
 	case 99:
 	    System.err.println("Something is really wrong :-|");
-	    System.err.println(str);
+	    System.err.println(msg);
 	    break;
 	}
 	System.exit(error);
