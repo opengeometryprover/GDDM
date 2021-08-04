@@ -149,7 +149,7 @@ public class OGPArgs {
 	}
     }
 
-    private static void errorMsg(int error, String str) {
+    private static void errorMsg(int error, String msg) {
 	System.err.print("[ERROR " + error + "] (OGPArgs) ");
 	switch (error) {
 	case 21:
@@ -160,20 +160,20 @@ public class OGPArgs {
 	    System.err.println("Empty TGTP conjecture.");
 	    break;
 	case 23:
-	    System.err.println("File '" + str + "' does not exist.");
+	    System.err.println("File '" + msg + "' does not exist.");
 	    break;
 	case 24:
-	    System.err.println("'" + str + "' is not a file.");
+	    System.err.println("'" + msg + "' is not a file.");
 	    break;
 	case 25:
-	    System.err.println("Cannot read file '" + str + "'.");
+	    System.err.println("Cannot read file '" + msg + "'.");
 	    break;
 	case 26:
 	    System.err.print("Unable to determine the conjecture's format ");
-	    System.err.println("from conjecture '" + str + "'.");
+	    System.err.println("from conjecture '" + msg + "'.");
 	    break;
 	case 27:
-	    System.err.println("Unrecognized extension '" + str + "'.");
+	    System.err.println("Unrecognized extension '" + msg + "'.");
 	    break;
 	}
 	System.exit(error);
