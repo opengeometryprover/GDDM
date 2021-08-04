@@ -13,11 +13,12 @@ public class OGPConf {
 
     private final static String MAJOR_VERSION = "0";
     private final static String MINOR_VERSION = "0";
-    private final static String VERSION = MAJOR_VERSION + "." + MINOR_VERSION;
-
     private final static String CONF_FILE = "/usr/local/share/ogp/ogp.conf";
 
+    private final static String VERSION = MAJOR_VERSION + "." + MINOR_VERSION;
     private int nrProvers = 0;
+
+    
     private Map<String, OGPProverInfo> proversInfo = new HashMap<String,
 	OGPProverInfo>();
     private Set<String> proversExt = new TreeSet<String>();
@@ -41,16 +42,12 @@ public class OGPConf {
 	return this.nrProvers;
     }
 
-    public Map<String, OGPProverInfo> getProversInfo() {
-	return this.proversInfo;
+    public OGPProverInfo getProverInfo(String proverId) {
+	return this.proversInfo.get(proverId);
     }
 
     public Set<String> getProversExt() {
 	return this.proversExt;
-    }
-
-    public OGPProverInfo getProverInfo(String proverId) {
-	return this.getProversInfo().get(proverId);
     }
 
     public Set<String> getProversSet() {
@@ -112,8 +109,6 @@ public class OGPConf {
 								 postProcCmd,
 								 name,
 								 desc));
-			proversExt.add(ext);
-			nrProvers++;
 		    }
 		}
 		confFileScanner.close();
