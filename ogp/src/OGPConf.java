@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class OGPConf {
 
@@ -20,7 +20,7 @@ public class OGPConf {
 
     private Map<String, OGPProverInfo> proversInfo = new HashMap<String,
 	OGPProverInfo>();
-    private Set<String> proversExt = new TreeSet<String>();
+    private Set<String> proversExt = new HashSet<String>();
 
     public OGPConf() {
 	readConfFile(CONF_FILE);
