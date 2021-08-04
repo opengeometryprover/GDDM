@@ -20,14 +20,15 @@ public class OGPConf {
     private int nrProvers = 0;
     private Map<String, OGPProverInfo> proversInfo = new HashMap<String,
 	OGPProverInfo>();
-    private Set<String> proversExt = new HashSet<String>();
+    private Set<String> proversExt = new TreeSet<String>();
 
     public OGPConf() {
 	readConfFile(CONF_FILE);
 	readConfFile(System.getenv("HOME")
 		     + System.getProperty("file.separator")
 		     + ".ogprc");
-	if (proversInfo.size() == 0) {
+	nrProvers = proversInfo.
+	if (nrProvers == 0) {
 	    errorMsg(12, "");
 	}
     }
