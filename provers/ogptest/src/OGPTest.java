@@ -44,12 +44,14 @@ public class OGPTest {
     }
 
     private static void helpMsg() {
-	System.out.println("Usage: ogptest [OPTION] [FILE TIMEOUT]");
+	System.out.println("Usage: ogptest [OPTION] [CONJECTURE]");
 	System.out.println("where OPTION is one of:");
 	System.out.print("    -h | --help                     ");
 	System.out.println("prints help message (to be used alone)");
 	System.out.print("    -V | --version                  ");
 	System.out.println("print OGP version (to be used alone)");
+	System.out.print("    -t <time> | --timeout=<time>    ");
+	System.out.println("sets timeout (in seconds)");
     }
 
     private static void versionMsg(String version) {	
