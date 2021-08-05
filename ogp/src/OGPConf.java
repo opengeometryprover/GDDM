@@ -149,10 +149,10 @@ public class OGPConf {
 	System.err.print("[OGP ERROR " + error + " (OGPConf)] ");
 	switch (error) {
 	case 101:
-	    System.err.println("Problem with configuration file " + msg);
+	    System.err.println("Problem with configuration file " + msg + ".");
 	    break;
 	case 102:
-	    System.err.println("OGP has no information about provers");
+	    System.err.println("OGP has no information about provers.");
 	    break;
 	case 999:
 	    System.err.println("Something is really wrong :-|");
