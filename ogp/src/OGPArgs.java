@@ -21,17 +21,14 @@ public class OGPArgs {
 	    errorMsg(201, "");
 	    break;
 	case 1:
-	    /*
-	     * One of:
-	     *     ogp -h | --help
-	     *     ogp -p | --provers
-	     *     ogp -V | --version
-	     *     ogp [CONJECTURE]
-	     */
+	    // ogp -h | --help
 	    help = args[0].equals("-h") || args[0].equals("--help");
+	    // ogp -p | --provers
 	    provers = args[0].equals("-p") || args[0].equals("--provers");
+	    // ogp -V | --version
 	    version = args[0].equals("-V") || args[0].equals("--version");
 	    if (!help && !provers && !version) {
+		// ogp [CONJECTURE]
 		theConjecture(args[0], configuration);
 		theProverId(configuration.proverForExt(conjectureExt),
 			    configuration);
@@ -39,18 +36,15 @@ public class OGPArgs {
 	    }
 	    break;
 	case 2:
-	    /*
-	     * One of:
-	     *     ogp --timeout=<time> [CONJECTURE]
-	     *     ogp [CONJECTURE] [PROVER]
-	     */
 	    if (args[0].startsWith("--timeout=")) {
+		// ogp --timeout=<time> [CONJECTURE]
 		theTimeout(args[0].substring(10));
 		theConjecture(args[1], configuration);
 		theProverId(configuration.proverForExt(conjectureExt),
 			    configuration);
 		theProverArgs(args, 0);
 	    } else {
+		// ogp [CONJECTURE] [PROVER]
 		theConjecture(args[0], configuration);
 		theProverId(args[1], configuration);
 		theProverArgs(args, 0);
@@ -58,25 +52,22 @@ public class OGPArgs {
 	    }
 	    break;
 	case 3:
-	    /*
-	     * One of:
-	     *     ogp -t <time> [CONJECTURE]
-	     *     ogp --timeout=<time> [CONJECTURE] [PROVER]
-	     *     ogp [CONJECTURE] [PROVER] [PROVER-OPTIONS]
-	     */
 	    if (args[0].equals("-t")) {
+		// ogp -t <time> [CONJECTURE]
 		theTimeout(args[1]);
 		theConjecture(args[2], configuration);
 		theProverId(configuration.proverForExt(conjectureExt),
 			    configuration);
 		theProverArgs(args, 0);
 	    } else if (args[0].startsWith("--timeout=")) {
+		// ogp --timeout=<time> [CONJECTURE] [PROVER]
 		theTimeout(args[0].substring(10));
 		theConjecture(args[1], configuration);
 		theProverId(args[2], configuration);
 		theProverArgs(args, 0);
 		canProverProve(configuration);
 	    } else {
+		// ogp [CONJECTURE] [PROVER] [PROVER-OPTIONS]
 		theConjecture(args[0], configuration);
 		theProverId(args[1], configuration);
 		theProverArgs(args, 2);
@@ -84,25 +75,22 @@ public class OGPArgs {
 	    }
 	    break;
 	case 4:
-	    /*
-	     * One of:
-	     *     ogp -t <time> [CONJECTURE] [PROVER]
-	     *     ogp --timeout=<time> [CONJECTURE] [PROVER] [PROVER-OPTIONS]
-	     *     ogp [CONJECTURE] [PROVER] [PROVER-OPTIONS]
-	     */
 	    if (args[0].equals("-t")) {
+		// ogp -t <time> [CONJECTURE] [PROVER]
 		theTimeout(args[1]);
 		theConjecture(args[2], configuration);
 		theProverId(args[3], configuration);
 		theProverArgs(args, 0);
 		canProverProve(configuration);
 	    } else if (args[0].startsWith("--timeout=")) {
+		// ogp --timeout=<time> [CONJECTURE] [PROVER] [PROVER-OPTIONS]
 		theTimeout(args[0].substring(10));
 		theConjecture(args[1], configuration);
 		theProverId(args[2], configuration);
 		theProverArgs(args, 3);
 		canProverProve(configuration);
 	    } else {
+		// ogp [CONJECTURE] [PROVER] [PROVER-OPTIONS]
 		theConjecture(args[0], configuration);
 		theProverId(args[1], configuration);
 		theProverArgs(args, 2);
@@ -110,12 +98,27 @@ public class OGPArgs {
 	    }
 	    break;
 	default:
-	    /*
-	     * One of:
-	     *     ogp -t <time> [CONJECTURE] [PROVER] [PROVER-OPTIONS]
-	     *     ogp --timeout=<time> [CONJECTURE] [PROVER] [PROVER-OPTIONS]
-	     *     ogp [CONJECTURE] [PROVER] [PROVER-OPTIONS]
-	     */
+	    if (args[0].equals("-t")) {
+		// ogp -t <time> [CONJECTURE] [PROVER] [PROVER-OPTIONS]
+		theTimeout(args[1]);
+		theConjecture(args[2], configuration);
+		theProverId(args[3], configuration);
+		theProverArgs(args, 4);
+		canProverProve(configuration);
+	    } else if (args[0].startsWith("--timeout=")) {
+		// ogp --timeout=<time> [CONJECTURE] [PROVER] [PROVER-OPTIONS]
+		theTimeout(args[0].substring(10));
+		theConjecture(args[1], configuration);
+		theProverId(args[2], configuration);
+		theProverArgs(args, 3);
+		canProverProve(configuration);
+	    } else {
+		// ogp [CONJECTURE] [PROVER] [PROVER-OPTIONS]
+		theConjecture(args[0], configuration);
+		theProverId(args[1], configuration);
+		theProverArgs(args, 2);
+		canProverProve(configuration);
+	    }
 	    break;
 	}
     }
