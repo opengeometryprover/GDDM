@@ -1,11 +1,8 @@
 package ogptest;
 
-// import java.io.FileNotFoundException;;
-// import java.util.concurrent.TimeUnit;
-// import java.util.Scanner;
-
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.concurrent.TimeUnit;
 import java.util.Scanner;
 
 public class OGPTest {
@@ -26,17 +23,18 @@ public class OGPTest {
 
     private static void prove(OGPTestArgs arguments) {
 	try {
-	    System.out.println("File: " + arguments.getFile());
+	    System.out.println("FILE: " + arguments.getFile());
+	    System.out.println();
 	    File theFile = new File(arguments.getFile());
 	    Scanner theFileScanner = new Scanner(theFile);
 	    while (theFileScanner.hasNextLine()) {
-		System.out.println("    " + theFileScanner.nextLine());
+		System.out.println(theFileScanner.nextLine());
 	    }
 	    System.out.println();
 	} catch (FileNotFoundException e) {
 	    errorMsg(999, e.toString());
 	}
-	System.out.print("Timeout: " + arguments.getTimeout() + "...");
+	System.out.print("TIMEOUT: " + arguments.getTimeout() + "...");
 	System.out.println(" Done!!!");
     }
 
