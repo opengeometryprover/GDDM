@@ -230,7 +230,7 @@ public class OGPArgs {
     }
 
     private static void errorMsg(int error, String msg) {
-	System.err.print("[OGP ERROR " + error + " (OGPArgs)] ");
+	System.err.print("[OGP ERROR " + error + "] (OGPArgs) ");
 	switch (error) {
 	case 201:
 	    System.err.print("Incorrect number of arguments.");
