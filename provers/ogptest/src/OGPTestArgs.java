@@ -5,7 +5,7 @@ import java.io.File;
 public class OGPTestArgs {
 
     private String file;
-    private int timeout = 5;
+    private int timeout;
     private boolean help = false;
     private boolean version = false;
 
