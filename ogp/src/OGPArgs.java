@@ -32,10 +32,10 @@ public class OGPArgs {
 	    provers = args[0].equals("-p") || args[0].equals("--provers");
 	    version = args[0].equals("-V") || args[0].equals("--version");
 	    if (!help && !provers && !version) {
-		conjectureInfo(args[0], configuration);
-		proverIdInfo(configuration.proverForExt(conjectureExt),
-			     configuration);
-		proverArgs = "";
+		theConjecture(args[0], configuration);
+		theProverId(configuration.proverForExt(conjectureExt),
+			    configuration);
+		theProverArgs(args, 0);
 	    }
 	    break;
 	case 2:
@@ -46,14 +46,14 @@ public class OGPArgs {
 	     */
 	    if (args[0].startsWith("--timeout=")) {
 		theTimeout(args[0].substring(10));
-		conjectureInfo(args[1], configuration);
-		proverIdInfo(configuration.proverForExt(conjectureExt),
-			     configuration);
-		proverArgs = "";
+		theConjecture(args[1], configuration);
+		theProverId(configuration.proverForExt(conjectureExt),
+			    configuration);
+		theProverArgs(args, 0);
 	    } else {
-		conjectureInfo(args[0], configuration);
-		proverIdInfo(args[1], configuration);
-		proverArgs = "";
+		theConjecture(args[0], configuration);
+		theProverId(args[1], configuration);
+		theProverArgs(args, 0);
 		canProverProve(configuration);
 	    }
 	    break;
@@ -66,20 +66,19 @@ public class OGPArgs {
 	     */
 	    if (args[0].equals("-t")) {
 		theTimeout(args[1]);
-		conjectureInfo(args[2], configuration);
-		proverIdInfo(configuration.proverForExt(conjectureExt),
-			     configuration);
-		proverArgs = "";
+		theConjecture(args[2], configuration);
+		theProverId(configuration.proverForExt(conjectureExt),
+			    configuration);
+		theProverArgs(args, 0);
 	    } else if (args[0].startsWith("--timeout=")) {
 		theTimeout(args[0].substring(10));
-		conjectureInfo(args[1], configuration);
-		proverIdInfo(args[2], configuration);
-		proverArgs = "";
+		theConjecture(args[1], configuration);
+		theProverId(args[2], configuration);
+		theProverArgs(args, 0);
 		canProverProve(configuration);
 	    } else {
-		System.out.println("-----> ESTOU AQUI!!!!!");
-		conjectureInfo(args[0], configuration);
-		proverIdInfo(args[1], configuration);
+		theConjecture(args[0], configuration);
+		theProverId(args[1], configuration);
 		theProverArgs(args, 2);
 		canProverProve(configuration);
 	    }
@@ -91,6 +90,24 @@ public class OGPArgs {
 	     *     ogp --timeout=<time> [CONJECTURE] [PROVER] [PROVER-OPTIONS]
 	     *     ogp [CONJECTURE] [PROVER] [PROVER-OPTIONS]
 	     */
+	    if (args[0].equals("-t")) {
+		theTimeout(args[1]);
+		theConjecture(args[2], configuration);
+		theProverId(args[3], configuration);
+		theProverArgs(args, 0);
+		canProverProve(configuration);
+	    } else if (args[0].startsWith("--timeout=")) {
+		theTimeout(args[0].substring(10));
+		theConjecture(args[1], configuration);
+		theProverId(args[2], configuration);
+		theProverArgs(args, 3);
+		canProverProve(configuration);
+	    } else {
+		theConjecture(args[0], configuration);
+		theProverId(args[1], configuration);
+		theProverArgs(args, 2);
+		canProverProve(configuration);
+	    }
 	    break;
 	default:
 	    /*
@@ -148,7 +165,7 @@ public class OGPArgs {
 	}
     }
 
-    private void conjectureInfo(String conjecture, OGPConf configuration) {
+    private void theConjecture(String conjecture, OGPConf configuration) {
 	tgtp = conjecture.startsWith("--tgtp=");
 	if (tgtp) {
 	    conjectureId = conjecture.substring(7);
@@ -179,22 +196,22 @@ public class OGPArgs {
 	}
     }
 
-    private void proverIdInfo(String prover, OGPConf configuration) {
-	proverId = prover;
-	if (!configuration.isProverAvailable(proverId)) {
-	    errorMsg(208, proverId);
-	}
-    }
-
     private void theProverArgs(String[] args, int position) {
 	if (position == 0) {
 	    proverArgs = "";
 	} else {
 	    StringBuilder theArgs = new StringBuilder(args[position]);
 	    for (int i = position + 1; i < args.length; i++) {
-		theArgs.append(args[i]);
+		theArgs.append(" " + args[i]);
 	    }
 	    proverArgs = theArgs.toString();
+	}
+    }
+
+    private void theProverId(String prover, OGPConf configuration) {
+	proverId = prover;
+	if (!configuration.isProverAvailable(proverId)) {
+	    errorMsg(208, proverId);
 	}
     }
 
