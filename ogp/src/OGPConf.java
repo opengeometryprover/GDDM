@@ -2,12 +2,11 @@ package ogp;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class OGPConf {
 
@@ -17,11 +16,11 @@ public class OGPConf {
 
     private final static String VERSION = MAJOR_VERSION + "." + MINOR_VERSION;
     private int nrProvers = 0;
-    private Set<String> proversSet= new HashSet<String>();
+    private SortedSet<String> proversSet= new TreeSet<String>();
 
+    private Map<String, String> extProver = new HashMap<String, String>();
     private Map<String, OGPProverInfo> proversInfo = new HashMap<String,
 	OGPProverInfo>();
-    private Set<String> proversExt = new HashSet<String>();
 
     public OGPConf() {
 	readConfFile(CONF_FILE);
@@ -32,7 +31,7 @@ public class OGPConf {
 	if (nrProvers == 0) {
 	    errorMsg(12, "");
 	}
-	proversSet = proversInfo.keySet();
+	proversSet.addAll(proversInfo.keySet());
     }
 
     public String getVersion() {
@@ -43,20 +42,36 @@ public class OGPConf {
 	return this.nrProvers;
     }
 
-    public Set<String> getProversSet() {
+    public SortedSet<String> getProversSet() {
 	return this.proversSet;
     }
 
-    public boolean isAvailableExt(String ext) {
-	return this.proversExt.contains(ext);
+    public String extForProver(String prover) {
+	return proverInfo(prover).getExt();
     }
 
-    public boolean isAvailableProver(String prover) {
+    public boolean isAvailableExt(String ext) {
+	return this.extProver.containsKey(ext);
+    }
+
+    public boolean isProverAvailable(String prover) {
 	return this.proversSet.contains(prover);
     }
 
-    public OGPProverInfo proverInfo(String proverId) {
-	return this.proversInfo.get(proverId);
+    public String proverForExt(String ext) {
+	return extProver.get(ext);
+    }
+
+    public OGPProverInfo proverInfo(String prover) {
+	return this.proversInfo.get(prover);
+    }
+
+    public boolean toExtCmdIsEmpty(String prover) {
+	return proverInfo(prover).getToExtCmd().isEmpty();
+    }
+
+    public boolean toFOFCmdIsEmpty(String prover) {
+	return proverInfo(prover).getToFOFCmd().isEmpty();
     }
 
     private void readConfFile(String file) {
@@ -115,8 +130,10 @@ public class OGPConf {
 								 postProcCmd,
 								 name,
 								 desc));
-			// Update extensions set
-			proversExt.add(ext);
+			// Update extension/prover relation
+			if (!extProver.containsKey(ext)) {
+			    extProver.put(ext, ogpId);
+			}
 		    }
 		}
 		confFileScanner.close();

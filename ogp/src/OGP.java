@@ -15,8 +15,11 @@ public class OGP {
 	} else if (arguments.getProvers()) {
 	    proversList(configuration);
 	} else {
-	    System.out.println("          Timeout: |" + arguments.getTimeout() + "|");
-	    System.out.println("    Conjecture id: |" + arguments.getConjectureId() + "|");
+	    System.out.println("           Timeout: " + arguments.getTimeout());
+	    System.out.println("     Conjecture Id: " + arguments.getConjectureId());
+	    System.out.println("    Conjecture Ext: " + arguments.getConjectureExt());
+	    System.out.println("         Prover Id: " + arguments.getProverId());
+	    System.out.println("       Prover Args: " + arguments.getProverArgs());
 	}
 	System.exit(0);
     }

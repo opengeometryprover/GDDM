@@ -33,6 +33,9 @@ public class OGPArgs {
 	    version = args[0].equals("-V") || args[0].equals("--version");
 	    if (!help && !provers && !version) {
 		conjectureInfo(args[0], configuration);
+		proverIdInfo(configuration.proverForExt(conjectureExt),
+			     configuration);
+		proverArgs = "";
 	    }
 	    break;
 	case 2:
@@ -48,16 +51,17 @@ public class OGPArgs {
 			errorMsg(6, "");
 		    }
 		    conjectureInfo(args[1], configuration);
+		    proverIdInfo(configuration.proverForExt(conjectureExt),
+				 configuration);
 		} catch (NumberFormatException e) {
 		    errorMsg(6, "");
 		}
 	    } else {
 		conjectureInfo(args[0], configuration);
-		proverId = args[1];
-		if (!configuration.isAvailableProver(proverId)) {
-		    errorMsg(28, proverId);
-		}
+		proverIdInfo(args[1], configuration);
+		proverCanProve(configuration);
 	    }
+	    proverArgs = "";
 	    break;
 	case 3:
 	    /*
@@ -153,6 +157,22 @@ public class OGPArgs {
 	}
     }
 
+    private void proverCanProve(OGPConf configuration) {
+	if (!conjectureExt.equals(configuration.extForProver(proverId))
+	    && (configuration.toFOFCmdIsEmpty(configuration
+					      .proverForExt(conjectureExt))
+		|| configuration.toExtCmdIsEmpty(proverId))) {
+	    errorMsg(29, "");
+	}
+    }
+
+    private void proverIdInfo(String prover, OGPConf configuration) {
+	proverId = prover;
+	if (!configuration.isProverAvailable(proverId)) {
+	    errorMsg(28, proverId);
+	}
+    }
+
     private static void errorMsg(int error, String msg) {
 	System.err.print("[ERROR " + error + "] (OGPArgs) ");
 	switch (error) {
@@ -181,6 +201,9 @@ public class OGPArgs {
 	    break;
 	case 28:
 	    System.err.println("Unrecognized prover '" + msg + "'.");
+	    break;
+	case 29:
+	    System.err.println("Unable to use prover on conjecture");
 	    break;
 	}
 	System.exit(error);
