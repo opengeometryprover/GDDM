@@ -45,23 +45,17 @@ public class OGPArgs {
 	     *     ogp [CONJECTURE] [PROVER]
 	     */
 	    if (args[0].startsWith("--timeout=")) {
-		try {
-		    timeout = Integer.parseInt(args[0].substring(10));
-		    if (timeout < 1) {
-			errorMsg(210, "");
-		    }
-		    conjectureInfo(args[1], configuration);
-		    proverIdInfo(configuration.proverForExt(conjectureExt),
-				 configuration);
-		} catch (NumberFormatException e) {
-		    errorMsg(210, "");
-		}
+		theTimeout(args[0].substring(10));
+		conjectureInfo(args[1], configuration);
+		proverIdInfo(configuration.proverForExt(conjectureExt),
+			     configuration);
+		proverArgs = "";
 	    } else {
 		conjectureInfo(args[0], configuration);
 		proverIdInfo(args[1], configuration);
+		proverArgs = "";
 		canProverProve(configuration);
 	    }
-	    proverArgs = "";
 	    break;
 	case 3:
 	    /*
@@ -71,20 +65,23 @@ public class OGPArgs {
 	     *     ogp [CONJECTURE] [PROVER] [PROVER-OPTIONS]
 	     */
 	    if (args[0].equals("-t")) {
-		try {
-		    timeout = Integer.parseInt(args[1]);
-		    if (timeout < 1) {
-			errorMsg(210, "");
-		    }
-		    conjectureInfo(args[2], configuration);
-		    proverIdInfo(configuration.proverForExt(conjectureExt),
-				 configuration);
-		    proverArgs = "";
-		} catch (NumberFormatException e) {
-		    errorMsg(210, "");
-		}
+		theTimeout(args[1]);
+		conjectureInfo(args[2], configuration);
+		proverIdInfo(configuration.proverForExt(conjectureExt),
+			     configuration);
+		proverArgs = "";
+	    } else if (args[0].startsWith("--timeout=")) {
+		theTimeout(args[0].substring(10));
+		conjectureInfo(args[1], configuration);
+		proverIdInfo(args[2], configuration);
+		proverArgs = "";
+		canProverProve(configuration);
 	    } else {
-		//
+		System.out.println("-----> ESTOU AQUI!!!!!");
+		conjectureInfo(args[0], configuration);
+		proverIdInfo(args[1], configuration);
+		theProverArgs(args, 2);
+		canProverProve(configuration);
 	    }
 	    break;
 	case 4:
@@ -186,6 +183,29 @@ public class OGPArgs {
 	proverId = prover;
 	if (!configuration.isProverAvailable(proverId)) {
 	    errorMsg(208, proverId);
+	}
+    }
+
+    private void theProverArgs(String[] args, int position) {
+	if (position == 0) {
+	    proverArgs = "";
+	} else {
+	    StringBuilder theArgs = new StringBuilder(args[position]);
+	    for (int i = position + 1; i < args.length; i++) {
+		theArgs.append(args[i]);
+	    }
+	    proverArgs = theArgs.toString();
+	}
+    }
+
+    private void theTimeout(String time) {
+	try {
+	    timeout = Integer.parseInt(time);
+	    if (timeout < 1) {
+		errorMsg(210, "");
+	    }
+	} catch (NumberFormatException e) {
+	    errorMsg(210, "");
 	}
     }
 
