@@ -59,7 +59,7 @@ public class OGPArgs {
 	    } else {
 		conjectureInfo(args[0], configuration);
 		proverIdInfo(args[1], configuration);
-		proverCanProve(configuration);
+		canProverProve(configuration);
 	    }
 	    proverArgs = "";
 	    break;
@@ -126,6 +126,15 @@ public class OGPArgs {
 	return this.version;
     }
 
+    private void canProverProve(OGPConf configuration) {
+	if (!conjectureExt.equals(configuration.extForProver(proverId))
+	    && (configuration.isToFOFCmdEmpty(configuration
+					      .proverForExt(conjectureExt))
+		|| configuration.isToExtCmdEmpty(proverId))) {
+	    errorMsg(29, "");
+	}
+    }
+
     private void conjectureInfo(String conjecture, OGPConf configuration) {
 	tgtp = conjecture.startsWith("--tgtp=");
 	if (tgtp) {
@@ -150,19 +159,10 @@ public class OGPArgs {
 		    errorMsg(26, conjecture);
 		}
 		conjectureExt = conjecture.substring(index + 1);
-		if (!configuration.isAvailableExt(conjectureExt)) {
+		if (!configuration.isExtAvailable(conjectureExt)) {
 		    errorMsg(27, conjectureExt);
 		}
 	    }
-	}
-    }
-
-    private void proverCanProve(OGPConf configuration) {
-	if (!conjectureExt.equals(configuration.extForProver(proverId))
-	    && (configuration.toFOFCmdIsEmpty(configuration
-					      .proverForExt(conjectureExt))
-		|| configuration.toExtCmdIsEmpty(proverId))) {
-	    errorMsg(29, "");
 	}
     }
 

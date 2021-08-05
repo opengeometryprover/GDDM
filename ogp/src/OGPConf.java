@@ -50,12 +50,20 @@ public class OGPConf {
 	return proverInfo(prover).getExt();
     }
 
-    public boolean isAvailableExt(String ext) {
+    public boolean isExtAvailable(String ext) {
 	return this.extProver.containsKey(ext);
     }
 
     public boolean isProverAvailable(String prover) {
 	return this.proversSet.contains(prover);
+    }
+
+    public boolean isToExtCmdEmpty(String prover) {
+	return proverInfo(prover).getToExtCmd().isEmpty();
+    }
+
+    public boolean isToFOFCmdEmpty(String prover) {
+	return proverInfo(prover).getToFOFCmd().isEmpty();
     }
 
     public String proverForExt(String ext) {
@@ -64,14 +72,6 @@ public class OGPConf {
 
     public OGPProverInfo proverInfo(String prover) {
 	return this.proversInfo.get(prover);
-    }
-
-    public boolean toExtCmdIsEmpty(String prover) {
-	return proverInfo(prover).getToExtCmd().isEmpty();
-    }
-
-    public boolean toFOFCmdIsEmpty(String prover) {
-	return proverInfo(prover).getToFOFCmd().isEmpty();
     }
 
     private void readConfFile(String file) {
