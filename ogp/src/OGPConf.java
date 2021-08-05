@@ -29,7 +29,7 @@ public class OGPConf {
 		     + ".ogprc");
 	nrProvers = proversInfo.size();
 	if (nrProvers == 0) {
-	    errorMsg(12, "");
+	    errorMsg(102, "");
 	}
 	proversSet.addAll(proversInfo.keySet());
     }
@@ -87,21 +87,21 @@ public class OGPConf {
 			int endIndex = line.indexOf(":", begIndex);
 			String ogpId = line.substring(begIndex, endIndex);
 			if (ogpId.isEmpty()) {
-			    errorMsg(11, file + ": no prover identification");
+			    errorMsg(101, file + ": no prover identification");
 			}
 			// Determine prover's command line command
 			begIndex = ++endIndex;
 			endIndex = line.indexOf(":", begIndex);
 			String cmd = line.substring(begIndex, endIndex);
 			if (cmd.isEmpty()) {
-			    errorMsg(11, file + ": no prover command");
+			    errorMsg(101, file + ": no prover command");
 			}
 			// Determine prover's conjectuture file extension
 			begIndex = ++endIndex;
 			endIndex = line.indexOf(":", begIndex);
 			String ext = line.substring(begIndex, endIndex);
 			if (ext.isEmpty()) {
-			    errorMsg(11, file + ": no prover extension");
+			    errorMsg(101, file + ": no prover extension");
 			}
 			// Determine prover's ext2FOF command, if any
 			begIndex = ++endIndex;
@@ -139,22 +139,22 @@ public class OGPConf {
 		confFileScanner.close();
 	    }
 	} catch (FileNotFoundException e) {
-	    errorMsg(99, e.toString());
+	    errorMsg(999, e.toString());
 	} catch (StringIndexOutOfBoundsException e) {
-	    errorMsg(11, file + ": wrong syntax");
+	    errorMsg(101, file + ": wrong syntax");
 	}
     }
 
     private static void errorMsg(int error, String msg) {
 	System.err.print("[ERROR " + error + "] (OGPConf) ");
 	switch (error) {
-	case 11:
+	case 101:
 	    System.err.println("Problem with configuration file " + msg);
 	    break;
-	case 12:
+	case 102:
 	    System.err.println("OGP has no information about provers");
 	    break;
-	case 99:
+	case 999:
 	    System.err.println("Something is really wrong :-|");
 	    System.err.println(msg);
 	    break;
