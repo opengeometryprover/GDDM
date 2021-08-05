@@ -1,4 +1,4 @@
-<project name="OGPTest" default="compile">
+<project name="OGPTest" default="dist">
 
   <property name="src.dir" value="src"/>
   <property name="build.dir" value="build"/>
