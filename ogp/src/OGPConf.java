@@ -146,7 +146,7 @@ public class OGPConf {
     }
 
     private static void errorMsg(int error, String msg) {
-	System.err.print("[OGP ERROR " + error + "] (OGPConf) ");
+	System.err.print("[OGP ERROR " + error + "] (Class OGPConf) ");
 	switch (error) {
 	case 101:
 	    System.err.println("Problem with configuration file " + msg + ".");
