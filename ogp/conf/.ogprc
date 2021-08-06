@@ -21,6 +21,6 @@
 #
 # 5. Given two lines with the same OGP_ID, the latter will override the former
 
-# gclcam:gclc -a:gcl:filterGCLtoFOF:-:-:GCLC:GCLC's area method.\nHomepage: http://poincare.matf.bg.ac.rs/~janicic/gclc/
-# gclcgb:gclc -g:gcl:filterGCLtoFOF:-:-:GCLC:GCLC's Gröbner bases method.\nHomepage: http://poincare.matf.bg.ac.rs/~janicic/gclc/
-# gclcwu:gclc -w:gcl:filterGCLtoFOF:-:-:GCLC:GCLC's Wu's method.\nHomepage: http://poincare.matf.bg.ac.rs/~janicic/gclc/
+# gclcam:gclc -a:gcl:filterGCLtoFOF:::GCLC:GCLC's area method.\nHomepage: http://poincare.matf.bg.ac.rs/~janicic/gclc/
+# gclcgb:gclc -g:gcl:filterGCLtoFOF:::GCLC:GCLC's Gröbner bases method.\nHomepage: http://poincare.matf.bg.ac.rs/~janicic/gclc/
+# gclcwu:gclc -w:gcl:filterGCLtoFOF:::GCLC:GCLC's Wu's method.\nHomepage: http://poincare.matf.bg.ac.rs/~janicic/gclc/
