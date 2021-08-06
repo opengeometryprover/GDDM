@@ -177,6 +177,8 @@ public class OGPArgs {
 		errorMsg(202, "");
 	    }
 	    // TODO: Check if conjecture exists in TGTP
+	    System.out.println("[OGP] Obtaining conjcture from TGTP not yet implemented.");
+	    System.exit(0);
 	} else {
 	    File fileConjecture = new File(conjecture);
 	    if (!fileConjecture.exists()) {
