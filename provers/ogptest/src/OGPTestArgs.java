@@ -76,7 +76,7 @@ public class OGPTestArgs {
     }
 
     private static void errorMsg(int error, String msg) {
-	System.err.print("[OGPTest ERROR " + error + "] (Class OGPTestArgs) ");
+	System.err.print("[OGPTest ERROR " + error + "] (OGPTestArgs) ");
 	switch (error) {
 	case 201:
 	    System.err.println("File '" + msg + "' does not exist.");
