@@ -4,8 +4,8 @@ import java.io.File;
 
 public class OGPTestArgs {
 
-    private String file;
-    private int timeout;
+    private String conjectureFile;
+    private int timeout = 5;
     private boolean help = false;
     private boolean version = false;
 
@@ -16,33 +16,31 @@ public class OGPTestArgs {
 	    // ogptest -V | --version
 	    version = args[0].equals("-V") || args[0].equals("--version");
 	    if (!help && !version) {
-		errorMsg(202, args[0]);
+		// ogptest [CONJECTURE]
+		theConjectureFile(args[0]);
 	    }
 	} else if (args.length == 2) {
-	    // ogptest [FILE TIMEOUT]
-	    file = args[0];
-	    File theFile = new File(file);
-	    if (!theFile.exists()) {
-		errorMsg(203, file);
-	    } else if (!theFile.isFile()) {
-		errorMsg(204, file);
-	    } else if (!theFile.canRead()) {
-		errorMsg(205, file);
-	    } else {
-		try {
-		    timeout = Integer.parseUnsignedInt(args[1]);
-		} catch (NumberFormatException e) {
-		    errorMsg(206, "");
-		}
+	    // ogptest --timeout=<time> [CONJECTURE]
+	    if (!args[0].startsWith("--timeout=")) {
+		errorMsg(204, "");
 	    }
+	    theTimeout(args[0].substring(10));
+	    theConjectureFile(args[1]);
+	} else if (args.length == 3) {
+	    // ogp -t <time> [CONJECTURE]
+	    if (!args[0].equals("-t")) {
+		errorMsg(204, "");
+	    }
+	    theTimeout(args[1]);
+	    theConjectureFile(args[2]);
 	} else {
 	    // Incorrect number of arguments
-	    errorMsg(201, "");
+	    errorMsg(206, "");
 	}
     }
 
     public String getFile() {
-	return this.file;
+	return this.conjectureFile;
     }
 
     public int getTimeout() {
@@ -57,27 +55,48 @@ public class OGPTestArgs {
 	return this.version;
     }
 
+    private void theConjectureFile(String file) {
+	File theFile = new File(file);
+	if (!theFile.exists()) {
+	    errorMsg(201, file);
+	} else if (!theFile.isFile()) {
+	    errorMsg(202, file);
+	} else if (!theFile.canRead()) {
+	    errorMsg(203, file);
+	}
+	conjectureFile = file;
+    }
+
+    private void theTimeout(String time) {
+	try {
+	    timeout = Integer.parseUnsignedInt(time);
+	} catch (NumberFormatException e) {
+	    errorMsg(205, "");
+	}
+    }
+
     private static void errorMsg(int error, String msg) {
-	System.err.print("[OGPTest ERROR " + error + "] (OGPTestArgs) ");
+	System.err.print("[OGPTest ERROR " + error + "] (Class OGPTestArgs) ");
 	switch (error) {
 	case 201:
-	    System.err.print("Incorrect number of arguments.");
-	    System.err.println(" Use option '-h' for help.");
-	    break;
-	case 202:
-	    System.err.println("Unknown option " + msg + ".");
-	    break;
-	case 203:
 	    System.err.println("File '" + msg + "' does not exist.");
 	    break;
-	case 204:
+	case 202:
 	    System.err.println("'" + msg + "' is not a file.");
 	    break;
-	case 205:
+	case 203:
 	    System.err.println("Cannot read file '" + msg + "'.");
 	    break;
+	case 204:
+	    System.err.print("Incorrect syntax.");
+	    System.err.println(" Use option '-h' for help.");
+	    break;
+	case 205:
+	    System.err.println("Timeout must be a non-negative integer.");
+	    break;
 	case 206:
-	    System.err.println("Timeout must be a positive integer.");
+	    System.err.print("Incorrect number of arguments.");
+	    System.err.println(" Use option '-h' for help.");
 	    break;
 	}
 	System.exit(error);
