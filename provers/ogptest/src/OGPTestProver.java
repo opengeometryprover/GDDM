@@ -18,6 +18,7 @@ public class OGPTestProver {
 		System.out.println(theFileScanner.nextLine());
 	    }
 	    System.out.println();
+	    theFileScanner.close();
 	    // Timeout
 	    System.out.print("TIMEOUT: " + arguments.getTimeout() + "...");
 	    TimeUnit.SECONDS.sleep(arguments.getTimeout());
