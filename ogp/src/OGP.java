@@ -1,5 +1,8 @@
 package ogp;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,6 +23,7 @@ public class OGP {
 	    System.out.println("    Conjecture Ext: " + arguments.getConjectureExt());
 	    System.out.println("         Prover Id: " + arguments.getProverId());
 	    System.out.println("       Prover Args: " + arguments.getProverArgs());
+	    prove(arguments);
 	}
 	System.exit(0);
     }
@@ -37,16 +41,32 @@ public class OGP {
 	System.out.println("sets timeout for an attempt (in seconds)");
     }
 
-    private static void versionMsg(String version) {
-	System.out.println("OpenGeometryProver " + version);
-	System.out.println("Copyright (C) 2021 Nuno Baeta, Pedro Quaresma");
-	System.out.println("Published under GNU GPL, version 3 or later");
-	System.out.println("https://github.com/opengeometryprover/OpenGeometryProver");
+    private static void prove(OGPArgs arguments) {
+	String conjectureId = arguments.getConjectureId();
+	String conjN = arguments.getConjectureId()
+	    .substring(0, arguments.getConjectureId().lastIndexOf('.'));
+	String conjE = arguments.getConjectureExt();
+	File conjOut = new File(conjN + "_" + conjE + ".out");
+	File conjErr = new File(conjN + "_" + conjE + ".err");
+	ArrayList<String> command = new ArrayList<String>();
+	command.add("timeout");
+	command.add(String.valueOf(arguments.getTimeout()));
+	command.add(arguments.getProverId());
+	command.add(arguments.getConjectureId());
+	command.add(arguments.getProverArgs());
+	try {
+	    Process proc = new ProcessBuilder(command)
+		.redirectOutput(conjOut)
+		.redirectError(conjErr)
+		.start();
+	} catch (IOException e) {
+	    System.err.println("[ERROR] IOEception");
+	    e.printStackTrace();
+	}
     }
 
     private static void proversList(OGPConf configuration) {
-	int nrProvers = configuration.getNrProvers();
-		
+	int nrProvers = configuration.getNrProvers();		
 	int i = 1;
 	for (String proverId : configuration.getProversSet()) {
 	    OGPProverInfo proverIdInfo = configuration.proverInfo(proverId);
@@ -89,5 +109,11 @@ public class OGP {
 	    }
 	}
     }
-    
+
+    private static void versionMsg(String version) {
+	System.out.println("OpenGeometryProver " + version);
+	System.out.println("Copyright (C) 2021 Nuno Baeta, Pedro Quaresma");
+	System.out.println("Published under GNU GPL, version 3 or later");
+	System.out.println("https://github.com/opengeometryprover/OpenGeometryProver");
+    }
 }
