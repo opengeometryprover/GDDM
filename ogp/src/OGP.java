@@ -8,6 +8,8 @@ import java.util.Set;
 
 public class OGP {
 
+    private final static int ERR_UNABLE_REDIR_IO = 100;
+    
     public static void main(String[] args) {
 	OGPConf configuration = new OGPConf();
 	OGPArgs arguments = new OGPArgs(args, configuration);
@@ -60,8 +62,7 @@ public class OGP {
 		.redirectError(conjErr)
 		.start();
 	} catch (IOException e) {
-	    System.err.println("[ERROR] IOEception");
-	    e.printStackTrace();
+	    errorMsg(ERR_UNABLE_REDIR_IO, e.toString());
 	}
     }
 
@@ -116,4 +117,15 @@ public class OGP {
 	System.out.println("Published under GNU GPL, version 3 or later");
 	System.out.println("https://github.com/opengeometryprover/OpenGeometryProver");
     }
+
+    private static void errorMsg(int error, String msg) {
+	System.err.println("[OGP ERROR " + error + "] (OGP) ");
+	switch (error) {
+	case ERR_UNABLE_REDIR_IO:
+	    System.err.println("Unable to redirect I/O.");
+	    System.err.println(msg);
+	}
+	System.exit(error);
+    }
+
 }
