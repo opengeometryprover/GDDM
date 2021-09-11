@@ -144,6 +144,10 @@ public class OGPArgs {
 	return this.proverArgs;
     }
 
+    public String getToFOFCmd() {
+	return this.toFOFCmd;
+    }
+
     public boolean getTGTP() {
 	return this.tgtp;
     }
