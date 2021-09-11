@@ -1,6 +1,7 @@
 package ogp;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -8,7 +9,7 @@ import java.util.Set;
 
 public class OGP {
 
-    private final static int ERR_UNABLE_REDIR_IO = 100;
+    private final static int ERR_IO_PROB = 100;
     
     public static void main(String[] args) {
 	OGPConf configuration = new OGPConf();
@@ -20,11 +21,6 @@ public class OGP {
 	} else if (arguments.getProvers()) {
 	    proversList(configuration);
 	} else {
-	    System.out.println("           Timeout: " + arguments.getTimeout());
-	    System.out.println("     Conjecture Id: " + arguments.getConjectureId());
-	    System.out.println("    Conjecture Ext: " + arguments.getConjectureExt());
-	    System.out.println("         Prover Id: " + arguments.getProverId());
-	    System.out.println("       Prover Args: " + arguments.getProverArgs());
 	    prove(arguments);
 	}
 	System.exit(0);
@@ -57,12 +53,24 @@ public class OGP {
 	command.add(arguments.getConjectureId());
 	command.add(arguments.getProverArgs());
 	try {
+	    long startTime = System.nanoTime();
 	    Process proc = new ProcessBuilder(command)
 		.redirectOutput(conjOut)
 		.redirectError(conjErr)
 		.start();
+	    long stopTime = System.nanoTime();
+	    FileWriter conjTime = new FileWriter(conjN + "_" + conjE + ".time");
+	    long time = stopTime - startTime;
+	    System.out.println(time);
+	    System.out.println(arguments.getTimeout()*Math.pow(10, 9));
+	    if (time > arguments.getTimeout()*Math.pow(10, 9)) {
+		conjTime.write("Time out!\n");
+	    } else {
+		conjTime.write(String.valueOf(time*Math.pow(10, -9)) + "\n");
+	    }
+	    conjTime.close();
 	} catch (IOException e) {
-	    errorMsg(ERR_UNABLE_REDIR_IO, e.toString());
+	    errorMsg(ERR_IO_PROB, e.toString());
 	}
     }
 
@@ -121,7 +129,7 @@ public class OGP {
     private static void errorMsg(int error, String msg) {
 	System.err.println("[OGP ERROR " + error + "] (OGP) ");
 	switch (error) {
-	case ERR_UNABLE_REDIR_IO:
+	case ERR_IO_PROB:
 	    System.err.println("Unable to redirect I/O.");
 	    System.err.println(msg);
 	}
