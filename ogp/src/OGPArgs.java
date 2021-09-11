@@ -5,10 +5,11 @@ import java.io.File;
 public class OGPArgs {
 
     private int timeout = 60;
-    private String conjectureId;
-    private String conjectureExt;
+    private String conjName;
+    private String conjExt;
     private String proverId;
     private String proverArgs;
+    private String toFOFCmd;
     private boolean tgtp = false;
     private boolean help = false;
     private boolean provers = false;
@@ -30,7 +31,7 @@ public class OGPArgs {
 	    if (!help && !provers && !version) {
 		// ogp [CONJECTURE]
 		theConjecture(args[0], configuration);
-		theProverId(configuration.proverForExt(conjectureExt),
+		theProverId(configuration.proverForExt(conjExt),
 			    configuration);
 		theProverArgs(args, 0);
 	    }
@@ -40,7 +41,7 @@ public class OGPArgs {
 		// ogp --timeout=<time> [CONJECTURE]
 		theTimeout(args[0].substring(10));
 		theConjecture(args[1], configuration);
-		theProverId(configuration.proverForExt(conjectureExt),
+		theProverId(configuration.proverForExt(conjExt),
 			    configuration);
 		theProverArgs(args, 0);
 	    } else {
@@ -56,7 +57,7 @@ public class OGPArgs {
 		// ogp -t <time> [CONJECTURE]
 		theTimeout(args[1]);
 		theConjecture(args[2], configuration);
-		theProverId(configuration.proverForExt(conjectureExt),
+		theProverId(configuration.proverForExt(conjExt),
 			    configuration);
 		theProverArgs(args, 0);
 	    } else if (args[0].startsWith("--timeout=")) {
@@ -127,12 +128,12 @@ public class OGPArgs {
 	return this.timeout;
     }
 	    
-    public String getConjectureId() {
-	return this.conjectureId;
+    public String getConjName() {
+	return this.conjName;
     }
-
-    public String getConjectureExt() {
-	return this.conjectureExt;
+    
+    public String getConjExt() {
+	return this.conjExt;
     }
 
     public String getProverId() {
@@ -160,20 +161,19 @@ public class OGPArgs {
     }
 
     private void canProverProve(OGPConf configuration) {
-	if (!conjectureExt.equals(configuration.extForProver(proverId))
-	    && (configuration.isToFOFCmdEmpty(configuration
-					      .proverForExt(conjectureExt))
-		|| configuration.isToExtCmdEmpty(proverId))) {
-	    errorMsg(209, "");
+	if (!conjExt.equals(configuration.proverExt(proverId))) {
+	    toFOFCmd = configuration
+		.proverInfo(configuration.proverForExt(conjExt)).getToFOFCmd();
+	    if (toFOFCmd.isEmpty()) {
+		errorMsg(209, "");
+	    }
 	}
     }
 
     private void theConjecture(String conjecture, OGPConf configuration) {
 	tgtp = conjecture.startsWith("--tgtp=");
 	if (tgtp) {
-	    conjectureId = conjecture.substring(7);
-	    conjectureExt = "";
-	    if (conjectureId.isEmpty()) {
+	    if (conjecture.substring(7).isEmpty()) {
 		errorMsg(202, "");
 	    }
 	    // TODO: Check if conjecture exists in TGTP
@@ -188,15 +188,16 @@ public class OGPArgs {
 	    } else if (!fileConjecture.canRead()) {
 		errorMsg(205, conjecture);
 	    } else {
-		conjectureId = conjecture;
 		int index = conjecture.lastIndexOf(".");
 		if (index == -1) {
 		    errorMsg(206, conjecture);
 		}
-		conjectureExt = conjecture.substring(index + 1);
-		if (!configuration.isExtAvailable(conjectureExt)) {
-		    errorMsg(207, conjectureExt);
-		}
+		conjName = conjecture.substring(0, conjecture.lastIndexOf('.'));
+		conjExt = conjecture.substring(index + 1);
+		// Possibly wrong...
+		// if (!configuration.isExtAvailable(conjExt)) {
+		//     errorMsg(207, conjExt);
+		// }
 	    }
 	}
     }
@@ -214,9 +215,10 @@ public class OGPArgs {
     }
 
     private void theProverId(String prover, OGPConf configuration) {
-	proverId = prover;
-	if (!configuration.isProverAvailable(proverId)) {
-	    errorMsg(208, proverId);
+	if (!configuration.isProverAvailable(prover)) {
+	    errorMsg(208, prover);
+	} else {
+	    proverId = prover;
 	}
     }
 
@@ -254,9 +256,10 @@ public class OGPArgs {
 	    System.err.print("Unable to determine the conjecture's format ");
 	    System.err.println("from conjecture '" + msg + "'.");
 	    break;
-	case 207:
-	    System.err.println("Unrecognized extension '" + msg + "'.");
-	    break;
+	// See "Possibly wrong..." comment in theConjecture() method.
+	// case 207:
+	//     System.err.println("Unrecognized extension '" + msg + "'.");
+	//     break;
 	case 208:
 	    System.err.println("Unrecognized prover '" + msg + "'.");
 	    break;

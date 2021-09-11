@@ -45,24 +45,12 @@ public class OGPConf {
 	return this.proversSet;
     }
 
-    public String extForProver(String prover) {
-	return proverInfo(prover).getExt();
-    }
-
-    public boolean isExtAvailable(String ext) {
-	return this.extProver.containsKey(ext);
-    }
-
     public boolean isProverAvailable(String prover) {
-	return this.proversSet.contains(prover);
+    	return this.proversSet.contains(prover);
     }
 
-    public boolean isToExtCmdEmpty(String prover) {
-	return proverInfo(prover).getToExtCmd().isEmpty();
-    }
-
-    public boolean isToFOFCmdEmpty(String prover) {
-	return proverInfo(prover).getToFOFCmd().isEmpty();
+    public String proverExt(String prover) {
+	return proverInfo(prover).getExt();
     }
 
     public String proverForExt(String ext) {

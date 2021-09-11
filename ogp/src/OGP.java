@@ -9,7 +9,9 @@ import java.util.Set;
 
 public class OGP {
 
-    private final static int ERR_IO_PROB = 100;
+    // Error messages identification
+    private final static int ERR_INTR = 100;
+    private final static int ERR_IO_PROB = 101;
     
     public static void main(String[] args) {
 	OGPConf configuration = new OGPConf();
@@ -21,7 +23,7 @@ public class OGP {
 	} else if (arguments.getProvers()) {
 	    proversList(configuration);
 	} else {
-	    prove(arguments);
+	    prove(configuration, arguments);
 	}
 	System.exit(0);
     }
@@ -39,18 +41,33 @@ public class OGP {
 	System.out.println("sets timeout for an attempt (in seconds)");
     }
 
-    private static void prove(OGPArgs arguments) {
-	String conjectureId = arguments.getConjectureId();
-	String conjN = arguments.getConjectureId()
-	    .substring(0, arguments.getConjectureId().lastIndexOf('.'));
-	String conjE = arguments.getConjectureExt();
-	File conjOut = new File(conjN + "_" + conjE + ".out");
-	File conjErr = new File(conjN + "_" + conjE + ".err");
+    private static void prove(OGPConf configuration, OGPArgs arguments) {
+	String conjN = arguments.getConjName();
+	String conjE = arguments.getConjExt();
+	String conjNE = conjN + "_" + conjE;
+	// Preprocessing
+	// System.out.println(conjN + "_" + conjE + " = " + conjNE);
+	// System.out.println(configuration.proverExt(arguments.getProverId()));
+	if (!conjE.equals(configuration.proverExt(arguments.getProverId()))) {
+	    try {
+		Process proc = new ProcessBuilder("espera.sh").start();
+		System.out.println(">>>>> prove: Conversão iniciada");
+		proc.waitFor();
+		System.out.println(">>>>> prove: Conversão terminada");
+	    } catch (InterruptedException e) {
+		errorMsg(ERR_INTR, e.toString());
+	    } catch (IOException e) {
+		errorMsg(ERR_IO_PROB, e.toString());
+	    }
+	}
+	// Proof
+	File conjOut = new File(conjNE + ".out");
+	File conjErr = new File(conjNE + ".err");
 	ArrayList<String> command = new ArrayList<String>();
 	command.add("timeout");
 	command.add(String.valueOf(arguments.getTimeout()));
 	command.add(arguments.getProverId());
-	command.add(arguments.getConjectureId());
+	command.add(arguments.getConjName() + "." + arguments.getConjExt());
 	command.add(arguments.getProverArgs());
 	try {
 	    long startTime = System.nanoTime();
@@ -59,8 +76,8 @@ public class OGP {
 		.redirectError(conjErr)
 		.start();
 	    long stopTime = System.nanoTime();
-	    FileWriter conjTime = new FileWriter(conjN + "_" + conjE + ".time");
 	    long time = stopTime - startTime;
+	    FileWriter conjTime = new FileWriter(conjNE + ".time");
 	    if (time > arguments.getTimeout()*Math.pow(10, 9)) {
 		conjTime.write("Time out!\n");
 	    } else {
@@ -70,6 +87,7 @@ public class OGP {
 	} catch (IOException e) {
 	    errorMsg(ERR_IO_PROB, e.toString());
 	}
+	// Postprocessing
     }
 
     private static void proversList(OGPConf configuration) {
@@ -127,6 +145,9 @@ public class OGP {
     private static void errorMsg(int error, String msg) {
 	System.err.println("[OGP ERROR " + error + "] (OGP) ");
 	switch (error) {
+	case ERR_INTR:
+	    System.err.println("Process interrupted.");
+	    System.err.println(msg);
 	case ERR_IO_PROB:
 	    System.err.println("Unable to redirect I/O.");
 	    System.err.println(msg);
