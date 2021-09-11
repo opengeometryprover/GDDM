@@ -61,8 +61,6 @@ public class OGP {
 	    long stopTime = System.nanoTime();
 	    FileWriter conjTime = new FileWriter(conjN + "_" + conjE + ".time");
 	    long time = stopTime - startTime;
-	    System.out.println(time);
-	    System.out.println(arguments.getTimeout()*Math.pow(10, 9));
 	    if (time > arguments.getTimeout()*Math.pow(10, 9)) {
 		conjTime.write("Time out!\n");
 	    } else {
