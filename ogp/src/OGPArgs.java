@@ -4,7 +4,7 @@ import java.io.File;
 
 public class OGPArgs {
 
-    private int timeout = 15;
+    private int timeout = 60;
     private String conjectureId;
     private String conjectureExt;
     private String proverId;
