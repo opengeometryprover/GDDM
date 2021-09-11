@@ -17,7 +17,6 @@ public class OGPConf {
     private final static String VERSION = MAJOR_VERSION + "." + MINOR_VERSION;
     private int nrProvers = 0;
     private SortedSet<String> proversSet = new TreeSet<String>();
-
     private Map<String, String> extProver = new HashMap<String, String>();
     private Map<String, OGPProverInfo> proversInfo = new HashMap<String,
 	OGPProverInfo>();
