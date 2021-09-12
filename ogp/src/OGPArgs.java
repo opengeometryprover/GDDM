@@ -19,7 +19,7 @@ public class OGPArgs {
 	switch (args.length) {
 	case 0:
 	    // No arguments
-	    errorMsg(201, "");
+	    errorMsg(301, "");
 	    break;
 	case 1:
 	    // ogp -h | --help
@@ -169,7 +169,7 @@ public class OGPArgs {
 	    toFOFCmd = configuration
 		.proverInfo(configuration.proverForExt(conjExt)).getToFOFCmd();
 	    if (toFOFCmd.isEmpty()) {
-		errorMsg(209, "");
+		errorMsg(309, "");
 	    }
 	}
     }
@@ -178,7 +178,7 @@ public class OGPArgs {
 	tgtp = conjecture.startsWith("--tgtp=");
 	if (tgtp) {
 	    if (conjecture.substring(7).isEmpty()) {
-		errorMsg(202, "");
+		errorMsg(302, "");
 	    }
 	    // TODO: Check if conjecture exists in TGTP
 	    System.out.println("[OGP] Obtaining conjcture from TGTP not yet implemented.");
@@ -186,21 +186,21 @@ public class OGPArgs {
 	} else {
 	    File fileConjecture = new File(conjecture);
 	    if (!fileConjecture.exists()) {
-		errorMsg(203, conjecture);
+		errorMsg(303, conjecture);
 	    } else if (!fileConjecture.isFile()) {
-		errorMsg(204, conjecture);
+		errorMsg(304, conjecture);
 	    } else if (!fileConjecture.canRead()) {
-		errorMsg(205, conjecture);
+		errorMsg(305, conjecture);
 	    } else {
 		int index = conjecture.lastIndexOf(".");
 		if (index == -1) {
-		    errorMsg(206, conjecture);
+		    errorMsg(306, conjecture);
 		}
 		conjName = conjecture.substring(0, conjecture.lastIndexOf('.'));
 		conjExt = conjecture.substring(index + 1);
 		// Possibly wrong...
 		// if (!configuration.isExtAvailable(conjExt)) {
-		//     errorMsg(207, conjExt);
+		//     errorMsg(307, conjExt);
 		// }
 	    }
 	}
@@ -220,7 +220,7 @@ public class OGPArgs {
 
     private void theProverId(String prover, OGPConf configuration) {
 	if (!configuration.isProverAvailable(prover)) {
-	    errorMsg(208, prover);
+	    errorMsg(308, prover);
 	} else {
 	    proverId = prover;
 	}
@@ -230,47 +230,47 @@ public class OGPArgs {
 	try {
 	    timeout = Integer.parseInt(time);
 	    if (timeout < 1) {
-		errorMsg(210, "");
+		errorMsg(310, "");
 	    }
 	} catch (NumberFormatException e) {
-	    errorMsg(210, "");
+	    errorMsg(310, "");
 	}
     }
 
     private static void errorMsg(int error, String msg) {
 	System.err.print("[OGP ERROR " + error + "] (OGPArgs) ");
 	switch (error) {
-	case 201:
+	case 301:
 	    System.err.print("Incorrect number of arguments.");
 	    System.err.println(" Use option '-h' for help.");
 	    break;
-	case 202:
+	case 302:
 	    System.err.println("Empty TGTP conjecture.");
 	    break;
-	case 203:
+	case 303:
 	    System.err.println("File '" + msg + "' does not exist.");
 	    break;
-	case 204:
+	case 304:
 	    System.err.println("'" + msg + "' is not a file.");
 	    break;
-	case 205:
+	case 305:
 	    System.err.println("Cannot read file '" + msg + "'.");
 	    break;
-	case 206:
+	case 306:
 	    System.err.print("Unable to determine the conjecture's format ");
 	    System.err.println("from conjecture '" + msg + "'.");
 	    break;
 	// See "Possibly wrong..." comment in theConjecture() method.
-	// case 207:
+	// case 307:
 	//     System.err.println("Unrecognized extension '" + msg + "'.");
 	//     break;
-	case 208:
+	case 308:
 	    System.err.println("Unrecognized prover '" + msg + "'.");
 	    break;
-	case 209:
+	case 309:
 	    System.err.println("Unable to use prover on conjecture");
 	    break;
-	case 210:
+	case 310:
 	    System.err.println("Timeout must be a positive integer.");
 	    break;
 	}
