@@ -10,8 +10,8 @@ import java.util.Set;
 public class OGP {
 
     // Error messages identification
-    private final static int ERR_INTR = 100;
-    private final static int ERR_IO_PROB = 101;
+    private final static int ERR_INTR = 101;
+    private final static int ERR_IO_PROB = 102;
     
     public static void main(String[] args) {
 	OGPConf configuration = new OGPConf();

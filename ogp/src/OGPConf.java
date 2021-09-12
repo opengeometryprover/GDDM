@@ -28,7 +28,7 @@ public class OGPConf {
 		     + ".ogprc");
 	nrProvers = proversInfo.size();
 	if (nrProvers == 0) {
-	    errorMsg(102, "");
+	    errorMsg(202, "");
 	}
 	proversSet.addAll(proversInfo.keySet());
     }
@@ -74,21 +74,21 @@ public class OGPConf {
 			int endIndex = line.indexOf(":", begIndex);
 			String ogpId = line.substring(begIndex, endIndex);
 			if (ogpId.isEmpty()) {
-			    errorMsg(101, file + ": no prover identification");
+			    errorMsg(201, file + ": no prover identification");
 			}
 			// Determine prover's command line command
 			begIndex = ++endIndex;
 			endIndex = line.indexOf(":", begIndex);
 			String cmd = line.substring(begIndex, endIndex);
 			if (cmd.isEmpty()) {
-			    errorMsg(101, file + ": no prover command");
+			    errorMsg(201, file + ": no prover command");
 			}
 			// Determine prover's conjectuture file extension
 			begIndex = ++endIndex;
 			endIndex = line.indexOf(":", begIndex);
 			String ext = line.substring(begIndex, endIndex);
 			if (ext.isEmpty()) {
-			    errorMsg(101, file + ": no prover extension");
+			    errorMsg(201, file + ": no prover extension");
 			}
 			// Determine prover's ext2FOF command, if any
 			begIndex = ++endIndex;
@@ -126,22 +126,22 @@ public class OGPConf {
 		confFileScanner.close();
 	    }
 	} catch (FileNotFoundException e) {
-	    errorMsg(999, e.toString());
+	    errorMsg(299, e.toString());
 	} catch (StringIndexOutOfBoundsException e) {
-	    errorMsg(101, file + ": wrong syntax");
+	    errorMsg(201, file + ": wrong syntax");
 	}
     }
 
     private static void errorMsg(int error, String msg) {
 	System.err.print("[OGP ERROR " + error + "] (OGPConf) ");
 	switch (error) {
-	case 101:
+	case 201:
 	    System.err.println("Problem with configuration file " + msg + ".");
 	    break;
-	case 102:
+	case 202:
 	    System.err.println("OGP has no information about provers.");
 	    break;
-	case 999:
+	case 299:
 	    System.err.println("Something is really wrong :-|");
 	    System.err.println(msg);
 	    break;
