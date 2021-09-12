@@ -46,14 +46,13 @@ public class OGP {
 	String conjE = arguments.getConjExt();
 	String conjNE = conjN + "_" + conjE;
 	// Preprocessing
-	// System.out.println(conjN + "_" + conjE + " = " + conjNE);
-	// System.out.println(configuration.proverExt(arguments.getProverId()));
 	if (!conjE.equals(configuration.proverExt(arguments.getProverId()))) {
+	    ArrayList<String> command = new ArrayList<String>();
+	    command.add(arguments.getToFOFCmd());
+	    command.add(arguments.getConjName() + "." + arguments.getConjExt());
 	    try {
-		Process proc = new ProcessBuilder("espera.sh").start();
-		System.out.println(">>>>> prove: Conversão iniciada");
+		Process proc = new ProcessBuilder(command).start();
 		proc.waitFor();
-		System.out.println(">>>>> prove: Conversão terminada");
 	    } catch (InterruptedException e) {
 		errorMsg(ERR_INTR, e.toString());
 	    } catch (IOException e) {
