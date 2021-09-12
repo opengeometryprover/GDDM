@@ -42,51 +42,64 @@ public class OGP {
     }
 
     private static void prove(OGPConf configuration, OGPArgs arguments) {
-	String conjN = arguments.getConjName();
-	String conjE = arguments.getConjExt();
-	String conjNE = conjN + "_" + conjE;
-	// Preprocessing
-	if (!conjE.equals(configuration.proverExt(arguments.getProverId()))) {
-	    ArrayList<String> command = new ArrayList<String>();
-	    command.add(arguments.getToFOFCmd());
-	    command.add(arguments.getConjName() + "." + arguments.getConjExt());
-	    try {
-		Process proc = new ProcessBuilder(command).start();
-		proc.waitFor();
-	    } catch (InterruptedException e) {
-		errorMsg(ERR_INTR, e.toString());
-	    } catch (IOException e) {
-		errorMsg(ERR_IO_PROB, e.toString());
-	    }
-	}
-	// Proof
-	File conjOut = new File(conjNE + ".out");
-	File conjErr = new File(conjNE + ".err");
-	ArrayList<String> command = new ArrayList<String>();
-	command.add("timeout");
-	command.add(String.valueOf(arguments.getTimeout()));
-	command.add(arguments.getProverId());
-	command.add(arguments.getConjName() + "." + arguments.getConjExt());
-	command.add(arguments.getProverArgs());
 	try {
+	    String conjN = arguments.getConjName();
+	    String conjE = arguments.getConjExt();
+	    String conjId = conjN + "." + conjE;
+	    String conj = conjId + "_" + arguments.getProverId();
+
+	    ArrayList<String> cmd = new ArrayList<String>();
+	    
+	    // Preprocessing
+	    if (!conjE.equals(configuration
+			      .proverExt(arguments.getProverId()))) {
+		cmd.clear();
+		cmd.add(arguments.getToFOFCmd());
+		cmd.add(conjId);
+		Process procPreProc = new ProcessBuilder(cmd).start();
+		procPreProc.waitFor();
+	    }
+
+	    // Proof
+	    File conjOut = new File(conj + ".out");
+	    File conjErr = new File(conj + ".err");
+	    cmd.clear();
+	    cmd.add("timeout");
+	    cmd.add(String.valueOf(arguments.getTimeout()));
+	    cmd.add(arguments.getProverId());
+	    cmd.add(arguments.getConjName() + "." + arguments.getConjExt());
+	    cmd.add(arguments.getProverArgs());
 	    long startTime = System.nanoTime();
-	    Process proc = new ProcessBuilder(command)
+	    Process procProof = new ProcessBuilder(cmd)
 		.redirectOutput(conjOut)
 		.redirectError(conjErr)
 		.start();
+	    procProof.waitFor();
 	    long stopTime = System.nanoTime();
 	    long time = stopTime - startTime;
-	    FileWriter conjTime = new FileWriter(conjNE + ".time");
+	    FileWriter conjTime = new FileWriter(conj + ".time");
 	    if (time > arguments.getTimeout()*Math.pow(10, 9)) {
 		conjTime.write("Time out!\n");
 	    } else {
 		conjTime.write(String.valueOf(time*Math.pow(10, -9)) + "\n");
 	    }
 	    conjTime.close();
+
+	    // Postprocessing
+	    if (!arguments.getProverId().startsWith("ogp")) {
+		cmd.clear();
+		cmd.add(configuration.proverInfo(arguments.getProverId())
+			    .getPostProcCmd());
+		cmd.add(conjId);
+		cmd.add(conj);
+		Process procPostProc = new ProcessBuilder(cmd).start();
+		procPostProc.waitFor();
+	    }
+	} catch (InterruptedException e) {
+	    errorMsg(ERR_INTR, e.toString());
 	} catch (IOException e) {
 	    errorMsg(ERR_IO_PROB, e.toString());
 	}
-	// Postprocessing
     }
 
     private static void proversList(OGPConf configuration) {
@@ -145,10 +158,10 @@ public class OGP {
 	System.err.println("[OGP ERROR " + error + "] (OGP) ");
 	switch (error) {
 	case ERR_INTR:
-	    System.err.println("Process interrupted.");
+	    System.err.println("Interrupted exception caught.");
 	    System.err.println(msg);
 	case ERR_IO_PROB:
-	    System.err.println("Unable to redirect I/O.");
+	    System.err.println("I/O exception caught.");
 	    System.err.println(msg);
 	}
 	System.exit(error);
