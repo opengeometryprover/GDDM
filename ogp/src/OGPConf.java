@@ -25,7 +25,7 @@ public class OGPConf {
 	readConfFile(CONF_FILE);
 	readConfFile(System.getenv("HOME")
 		     + System.getProperty("file.separator")
-		     + ".ogprc");
+		     + ".ogp.conf");
 	nrProvers = proversInfo.size();
 	if (nrProvers == 0) {
 	    errorMsg(202, "");
