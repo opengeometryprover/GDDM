@@ -92,18 +92,18 @@ public class OGP {
 		conjTime.write("Time out!\n");
 	    } else {
 		conjTime.write(String.valueOf(time*Math.pow(10, -9)) + "\n");
+
+		// Postprocessing
+		if (!arguments.getProverId().startsWith("ogp")) {
+		    cmd.clear();
+		    cmd.add(configuration.proverInfo(arguments.getProverId())
+			    .getPostProcCmd());
+		    cmd.add(conj);
+		    Process procPostProc = new ProcessBuilder(cmd).start();
+		    procPostProc.waitFor();
+		}
 	    }
 	    conjTime.close();
-
-	    // Postprocessing
-	    if (!arguments.getProverId().startsWith("ogp")) {
-		cmd.clear();
-		cmd.add(configuration.proverInfo(arguments.getProverId())
-			    .getPostProcCmd());
-		cmd.add(conj);
-		Process procPostProc = new ProcessBuilder(cmd).start();
-		procPostProc.waitFor();
-	    }
 	} catch (InterruptedException e) {
 	    errorMsg(ERR_INTR, e.toString());
 	} catch (IOException e) {
