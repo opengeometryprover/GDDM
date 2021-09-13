@@ -192,7 +192,7 @@ command: POINT VARIABLE NUMBER NUMBER
 
 int main (int argc,char *argv[]) {
 
-  char conjectureName[20], fileTPTP[20];
+  char conjectureName[50], fileTPTP[50];
 
     
   if (argc < 2) {
