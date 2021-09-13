@@ -55,7 +55,9 @@ public class OGP {
 			      .proverExt(arguments.getProverId()))) {
 		cmd.clear();
 		cmd.add(arguments.getToFOFCmd());
-		cmd.add(conjId);
+		// cmd.add(conjId);
+		// cmd.add(">");
+		// cmd.add(conjN + "." + configuration.proverExt(arguments.getProverId()));
 		Process procPreProc = new ProcessBuilder(cmd).start();
 		procPreProc.waitFor();
 	    }
@@ -66,9 +68,17 @@ public class OGP {
 	    cmd.clear();
 	    cmd.add("timeout");
 	    cmd.add(String.valueOf(arguments.getTimeout()));
-	    cmd.add(arguments.getProverId());
-	    cmd.add(arguments.getConjName() + "." + arguments.getConjExt());
-	    cmd.add(arguments.getProverArgs());
+	    cmd.add(configuration.proverInfo(arguments.getProverId()).getCmd());
+	    if (!conjE.equals(configuration
+			      .proverExt(arguments.getProverId()))) {
+		cmd.add(conjN + "."
+			+ configuration.proverExt(arguments.getProverId()));
+	    } else {
+		cmd.add(conjId);
+	    }
+	    if (!arguments.getProverArgs().isEmpty()) {
+		cmd.add(arguments.getProverArgs());
+	    }
 	    long startTime = System.nanoTime();
 	    Process procProof = new ProcessBuilder(cmd)
 		.redirectOutput(conjOut)
@@ -90,7 +100,6 @@ public class OGP {
 		cmd.clear();
 		cmd.add(configuration.proverInfo(arguments.getProverId())
 			    .getPostProcCmd());
-		cmd.add(conjId);
 		cmd.add(conj);
 		Process procPostProc = new ProcessBuilder(cmd).start();
 		procPostProc.waitFor();
