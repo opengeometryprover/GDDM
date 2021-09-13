@@ -1,10 +1,10 @@
 #!/bin/sh
 
-if grep -q 'Termination reason: Refutation' "$1"
+if grep -q 'Termination reason: Refutation' "$1".out
 then
-    echo Proved > "$2".result
+    echo Proved > "$1".result
 else
-    echo Unkown > "$2".result
+    echo Unkown > "$1".result
 fi
 
 exit 0
