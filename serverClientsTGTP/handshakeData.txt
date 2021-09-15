@@ -1,0 +1,10 @@
+Handshake information
+
+*) WGL Client NMSBaeta - Nuno Baeta (nmsbaeta@gmail.com)
+"7fb5da0e1f752a59889c2ec09c0b366b280325fa53ee5f17227deb082123cd63662b97ce6e7b839f286645e06ab2e249ac98b8f2f064d548f327712797f83814"
+
+*) WGL Client for the GeoTiles group - Pedro Quaresma (pedro@mat.uc.pt)
+"0d6e24af4394debc447e9f85273b40fc44c17b8508a1fdda428bcdc1eb557c466f81b0152b1a66ab8e0c04382ac8e48d49124d0fd1a7a114fef1ad159bd58c65"
+
+*) Client for a new test - clientFenixTGTP - Pedro Quaresma (phfqa@sapo.pt)
+"dc2dd195a757ef8d203c8d7503d8a56087e9fd1f10bc3fc5d37b8e82868d00d6b98e9278f080449157c20bc4be9461215538583d3d18c968ebddd9c5394f662a"
