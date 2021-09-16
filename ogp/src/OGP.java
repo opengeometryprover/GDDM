@@ -90,8 +90,10 @@ public class OGP {
 	    FileWriter conjTime = new FileWriter(conj + ".time");
 	    if (time > arguments.getTimeout()*Math.pow(10, 9)) {
 		conjTime.write("Time out!\n");
+		conjTime.close();
 	    } else {
 		conjTime.write(String.valueOf(time*Math.pow(10, -9)) + "\n");
+		conjTime.close();
 
 		// Postprocessing
 		if (!arguments.getProverId().startsWith("ogp")) {
@@ -103,7 +105,6 @@ public class OGP {
 		    procPostProc.waitFor();
 		}
 	    }
-	    conjTime.close();
 	} catch (InterruptedException e) {
 	    errorMsg(ERR_INTR, e.toString());
 	} catch (IOException e) {
