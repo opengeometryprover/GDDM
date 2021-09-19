@@ -1,0 +1,41 @@
+===// Client to the TGTP server //===
+
+*) Compile
+
+$> make
+
+It requires the BOOST library (property_tree)
+
+*) No instalation required
+
+*) Use (the "gentzen.mat.uc.pt" is an experimental server, it will be
+ updated to a diferente server later on) 
+
+$> client gentzen.mat.uc.pt 2093 <query>
+
+where <query> should be, the SQL part of the WHERE clause
+
+-) look for a conjecture name, notice the ' '
+
+--) look for the simple word (e.g. 'teoName LIKE "%ceva%"')
+
+--) a simple (one line only) string (e.g. 'teoName  LIKE "%ceva%theorem%"'
+
+-) a query and filters (e.g. 'teoName LIKE "%ceva%" AND proverId=2')
+
+2 | GCLC Area Method             | 9.00
+4 | COQareaMethod                | 1.0  
+5 | GCLC Wu Method               | 9.00 
+6 | GCLC Groebner Basis Method   | 9.00 
+7 | GDDM-TPTP-FOF                | 1   
+
+
+for more information about this last option contact the autors
+
+*) More information
+
+See the code "client.cpp" for more information about the information
+received from the server. 
+
+
+Pedro Quaresma (pedro@mat.uc.pt)
