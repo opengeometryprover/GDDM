@@ -9,7 +9,7 @@ It requires the BOOST library (property_tree)
 *) No instalation required
 
 *) Use (the "gentzen.mat.uc.pt" is an experimental server, it will be
- updated to a diferente server later on) 
+ updated to a different server later on) 
 
 $> client gentzen.mat.uc.pt 2093 <query>
 
