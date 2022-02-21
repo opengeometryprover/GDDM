@@ -5,4 +5,4 @@
 Authors:
 
 - Nuno Baeta ([GitHub](https://github.com/nmsbaeta));
-- [Pedro Quaresma]([GitHub](https://github.com/GeoTiles) | [Homepage](http://www.mat.uc.pt/~pedro/)).
+- Pedro Quaresma ([GitHub](https://github.com/GeoTiles) | [Homepage](http://www.mat.uc.pt/~pedro/)).
