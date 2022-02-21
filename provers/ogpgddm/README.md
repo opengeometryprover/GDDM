@@ -1,5 +1,8 @@
-# OGPTest
+# OGP Geometry Deductive Database Method (GDDM)
 
-This is a fake prover.  Its sole purpose is testing.
+...
 
-Its author is [Nuno Baeta](https://github.com/nmsbaeta).
+Authors:
+
+- Nuno Baeta ([GitHub](https://github.com/nmsbaeta));
+- [Pedro Quaresma]([GitHub](https://github.com/GeoTiles) | [Homepage](http://www.mat.uc.pt/~pedro/)).
