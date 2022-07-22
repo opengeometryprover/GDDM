@@ -1,5 +1,9 @@
 # Open Geometry Prover Provers
 
+The available native provers are:
+
+- `ogpgddm` : OGP Geometry Deductive Database Method.
+
 The avaliable independet provers are:
 
 - `coqam` : Area method formalized in the Coq proof assistant;
