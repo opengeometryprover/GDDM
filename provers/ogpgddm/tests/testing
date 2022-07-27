@@ -1,0 +1,163 @@
+#!/bin/sh
+
+# Runs GDDM on a conjecture.  Just to help testing.
+
+
+GDDM=../src/ogpgddm
+DIRJGEX=jgex
+DIRRULES=rules
+DIRTHEOREMS=theorems
+DIRTPTP=tptp
+
+
+synopsis () {
+    echo "SYNOPSYS"
+    echo
+    echo "  testing option conjecture"
+    echo "  testing option"
+    echo
+    echo "Options"
+    echo
+    echo "  --jgex  Use a JGEX examples."
+    echo "  --rule  Use an implemented rules."
+    echo "  --theorem  Use a known theorem."
+    echo "  --tptp  Use a TPTP problem."
+    echo "  --list  List the available conjectures.  To be used alone."
+    echo
+    echo "Examples"
+    echo
+    echo "  testing --jgex 01"
+    echo "  testing --rule 10"
+    echo "  testing --theorem pappus"
+    echo "  testing --tptp 547+1"
+    echo "  testing --list"
+}
+
+
+error () {
+    case $1 in
+	1)
+	    echo "[ERROR] Incorrect number of arguments."
+	    echo
+	    synopsis
+	    ;;
+	2)
+	    echo "[ERROR] Unknown option."
+	    echo
+	    synopsis
+	    ;;
+	3)
+	    echo "[ERROR] Unavailable conjecture."
+	    echo
+	    echo "Use the option '--list' to list all available conjectures."
+    esac
+
+    exit "$1"
+}
+
+ 
+case $# in
+    1)
+	if [ "$1" = "--list" ]
+	then
+	    echo "Available conjectures"
+	    echo
+	    echo "  JGEX (identify by number):"
+	    echo
+	    ls "$DIRJGEX"
+	    echo
+	    echo "  Rules (identify by number and string up to '.'):"
+	    echo
+	    ls "$DIRRULES"
+	    echo
+	    echo "  Theorems (identify by name):"
+	    echo
+	    ls "$DIRTHEOREMS"
+	    echo
+	    echo "  TPTP problems (identify by string between 'GEO' and '.'):"
+	    echo
+	    ls "$DIRTPTP"
+	    echo
+	    echo "Examples"
+	    echo
+	    echo "  testing --jgex 01"
+	    echo "  testing --rule 10"
+	    echo "  testing --theorem pappus"
+	    echo "  testing --tptp 547+1"
+	    echo "  testing --list"
+	else
+	    error 2
+	fi      
+	;;
+    2)
+	case $1 in
+	    --jgex)
+		if [ -e "$DIRJGEX"/"$2".p ]
+		then
+		    echo
+		    echo "-----  JGEX example $1.p  -----"
+		    echo
+		    cat "$DIRJGEX"/"$2".p
+		    echo
+		    echo "-----  Theorem prover output  -----"
+		    echo
+		    $GDDM "$DIRJGEX"/"$2".p
+		else
+		    error 3
+		fi
+		;;
+	    --rule)
+		if [ -e "$DIRRULES"/d"$2".p ]
+		then
+		    echo
+		    echo "-----  Rule $1  -----"
+		    echo
+		    cat "$DIRRULES"/d"$2".p
+		    echo
+		    echo "-----  Theorem prover output  -----"
+		    echo
+		    $GDDM "$DIRRULES"/d"$2".p
+		else
+		    error 3
+		fi
+		;;
+	    --theorem)
+		if [ -e "$DIRTHEOREMS"/"$2".p ]
+		then
+		    echo
+		    echo "-----  Theorem $1.p  -----"
+		    echo
+		    cat "$DIRTHEOREMS"/"$2".p
+		    echo
+		    echo "-----  Theorem prover output  -----"
+		    echo
+		    $GDDM "$DIRTHEOREMS"/"$2".p
+		else
+		    error 3
+		fi
+		;;
+	    --tptp)
+		if [ -e "$DIRTPTP"/GEO"$2".p ]
+		then
+		    echo
+		    echo "-----  TPTP problem GEO$1.p  -----"
+		    echo
+		    cat "$DIRTPTP"/"GEO$2".p
+		    echo
+		    echo "-----  Theorem prover output  -----"
+		    echo
+		    $GDDM "$DIRTPTP"/GEO"$2".p
+		else
+		    error 3
+		fi
+		;;
+	    *)
+		error 2
+		;;
+	esac
+	;;
+    *)
+	error 1
+esac
+
+exit 0
