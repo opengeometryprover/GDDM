@@ -201,10 +201,10 @@ public:
     DBinMemory ruleD74(DBinMemory, std::string, std::string, std::string,
 		       std::string);
     DBinMemory ruleD75(DBinMemory, std::string, std::string, std::string,
+		       std::string, std::string, std::string, std::string,
 		       std::string);
 
     void testDBim(DBinMemory);
 };
 
 #endif
-
