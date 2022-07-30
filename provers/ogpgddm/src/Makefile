@@ -10,6 +10,7 @@ FLEXFLAGS =
 BISON = bison
 BISONFLAGS = -Wcounterexamples
 
+INSTALLDIR = /usr/local/bin
 
 .PHONY : clean all
 
@@ -37,3 +38,6 @@ CLEANFILES = $(BASE) *.o parser.hpp parser.cpp location.hh scanner.cpp
 
 clean:
 	rm -f $(CLEANFILES) $(BASE)
+
+install:
+	cp $(BASE) $(INSTALLDIR)
