@@ -2262,7 +2262,6 @@ DBinMemory Prover::ruleD75(DBinMemory dbim, std::string point1,
     std::string insertionCong;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
-    std::string newPoint3;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('cong')";
     lastInsertedRowId = "SELECT last_insert_rowid()";
@@ -2279,14 +2278,14 @@ DBinMemory Prover::ruleD75(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    querySecondGeoCmdA = "SELECT point3 FROM NewFact INNER JOIN Collinear ON (newFact = id) WHERE point1 = '" + point1 + "' and point2 = '" + point2 + "' and point3 <> '" + point3 + "'";
+    querySecondGeoCmdA = "SELECT point1 FROM NewFact INNER JOIN CongruentSegmenta ON (newFact = id) WHERE point1 = '" + point5 + "' and point2 = '" + point6 + "' and point3 = '" + point7 + "' and point4 = '" + point8 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
     sqlite3_step(dbim.stmt1);
 
-    querySecondGeoCmdB = "SELECT point3 FROM Facts INNER JOIN Collinear ON (oldFact=id) WHERE point1 = '" + point1 + "' and point2 = '" + point2 + "' and point3 <> '" + point3 + "'";
+    querySecondGeoCmdB = "SELECT point1 FROM Facts INNER JOIN CongruentSegments ON (oldFact=id) WHERE point1 = '" + point5 + "' and point2 = '" + point6 + "' and point3 = '" + point7 + "' and point4 = '" + point8 +"'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -2296,11 +2295,6 @@ DBinMemory Prover::ruleD75(DBinMemory dbim, std::string point1,
 	&& sqlite3_data_count(dbim.stmt2) == 0 ) {
 	correctTransaction=false;
     } else {
-	if (sqlite3_data_count(dbim.stmt1) != 0) {
-	    newPoint3 = (char*) sqlite3_column_text(dbim.stmt1, 0);
-	} else {
-	    newPoint3 = (char*) sqlite3_column_text(dbim.stmt2, 0);
-	}
 	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	    correctTransaction = false;
 	} else {
