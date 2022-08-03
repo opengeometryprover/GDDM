@@ -13,7 +13,7 @@
 
 
 #include "prover.hpp"
-#include "foftodb.hpp" // Para mostrar a BD
+#include "foftodb.hpp" // Show the BD
 
 #include <iostream>
 #include <map>
