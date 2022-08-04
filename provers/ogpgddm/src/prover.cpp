@@ -62,7 +62,7 @@ DBinMemory Prover::ruleD1(DBinMemory dbim, std::string point1,
 DBinMemory Prover::ruleD2(DBinMemory dbim, std::string point1,
 			  std::string point2,std::string point3) {
     bool correctTransaction;
-    std::string insertionColl;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('coll')";
@@ -80,10 +80,10 @@ DBinMemory Prover::ruleD2(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    insertionColl = "INSERT INTO Collinear(typeGeoCmd, point1, point2, point3, newFact) VALUES ('coll', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO Collinear(typeGeoCmd, point1, point2, point3, newFact) VALUES ('coll', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionColl.c_str(),
-				 insertionColl.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -101,7 +101,7 @@ DBinMemory Prover::ruleD2(DBinMemory dbim, std::string point1,
 DBinMemory Prover::ruleD3(DBinMemory dbim, std::string point1,
 			  std::string point2, std::string point3) {
     bool correctTransaction;
-    std::string insertionColl;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
     std::string newPoint3;
@@ -146,10 +146,10 @@ DBinMemory Prover::ruleD3(DBinMemory dbim, std::string point1,
 	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	    correctTransaction = false;
 	} else {
-	    insertionColl = "INSERT INTO Collinear(typeGeoCmd, point1, point2, point3, newFact) VALUES ('coll', '" + point3 + "', '" + newPoint3 + "', '" + point1 + "', '" + lstInsRwId + "')";
+	    insertionPred = "INSERT INTO Collinear(typeGeoCmd, point1, point2, point3, newFact) VALUES ('coll', '" + point3 + "', '" + newPoint3 + "', '" + point1 + "', '" + lstInsRwId + "')";
 
-	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionColl.c_str(),
-					 insertionColl.size(), &(dbim.stmt),
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 		correctTransaction = false;
@@ -2208,7 +2208,7 @@ DBinMemory Prover::ruleD66(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
 			   std::string point4) {
     bool correctTransaction;
-    std::string insertionColl;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('coll')";
@@ -2226,10 +2226,10 @@ DBinMemory Prover::ruleD66(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionColl = "INSERT INTO Collinear(typeGeoCmd, point1, point2, point3, newFact) VALUES ('coll', '" + point1 + "', '" + point2 + "', '" + point4 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO Collinear(typeGeoCmd, point1, point2, point3, newFact) VALUES ('coll', '" + point1 + "', '" + point2 + "', '" + point4 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionColl.c_str(),
-				 insertionColl.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -2286,7 +2286,7 @@ DBinMemory Prover::ruleD68(DBinMemory dbim, std::string point1,
 DBinMemory Prover::ruleD69(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3) {
     bool correctTransaction;
-    std::string insertionColl;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('coll')";
@@ -2304,10 +2304,10 @@ DBinMemory Prover::ruleD69(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionColl = "INSERT INTO Collinear(typeGeoCmd, point1, point2, point3, newFact) VALUES ('coll', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO Collinear(typeGeoCmd, point1, point2, point3, newFact) VALUES ('coll', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionColl.c_str(),
-				 insertionColl.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -2541,7 +2541,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
     std::string newPoint3;
     std::string lastInsertedRowId;
     std::string lstInsRwId;
-    std::string insertionColl;
+    std::string insertionPred;
     std::string insertionNewFact;
     FOFtoDB fdb;
 
