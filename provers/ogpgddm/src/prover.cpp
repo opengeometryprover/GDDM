@@ -1249,7 +1249,7 @@ DBinMemory Prover::ruleD26(DBinMemory dbim, std::string point1,
 			   std::string point6, std::string point7,
 			   std::string point8) {
     bool correctTransaction;
-    std::string insertionEqratio;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('eqratio')";
@@ -1267,10 +1267,10 @@ DBinMemory Prover::ruleD26(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionEqratio = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqratio', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + point4 + "', '" + point5 + "', '" + point6 + "', '" + point7 + "', '" + point8 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqratio', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + point4 + "', '" + point5 + "', '" + point6 + "', '" + point7 + "', '" + point8 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqratio.c_str(),
-				 insertionEqratio.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -1291,7 +1291,7 @@ DBinMemory Prover::ruleD27(DBinMemory dbim, std::string point1,
 			   std::string point6, std::string point7,
 			   std::string point8) {
     bool correctTransaction;
-    std::string insertionEqratio;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('eqratio')";
@@ -1309,10 +1309,10 @@ DBinMemory Prover::ruleD27(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionEqratio = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqratio', '" + point3 + "', '" + point4 + "', '" + point1 + "', '" + point2 + "', '" + point7 + "', '" + point8 + "', '" + point5 + "', '" + point6 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqratio', '" + point3 + "', '" + point4 + "', '" + point1 + "', '" + point2 + "', '" + point7 + "', '" + point8 + "', '" + point5 + "', '" + point6 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqratio.c_str(),
-				 insertionEqratio.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -1333,7 +1333,7 @@ DBinMemory Prover::ruleD28(DBinMemory dbim, std::string point1,
 			   std::string point6, std::string point7,
 			   std::string point8) {
     bool correctTransaction;
-    std::string insertionEqratio;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('eqratio')";
@@ -1351,10 +1351,10 @@ DBinMemory Prover::ruleD28(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionEqratio = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqratio', '" + point5 + "', '" + point6 + "', '" + point7 + "', '" + point8 + "', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqratio', '" + point5 + "', '" + point6 + "', '" + point7 + "', '" + point8 + "', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqratio.c_str(),
-				 insertionEqratio.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -1375,7 +1375,7 @@ DBinMemory Prover::ruleD29(DBinMemory dbim, std::string point1,
 			   std::string point6, std::string point7,
 			   std::string point8) {
     bool correctTransaction;
-    std::string insertionEqratio;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('eqratio')";
@@ -1393,10 +1393,10 @@ DBinMemory Prover::ruleD29(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionEqratio = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqratio', '" + point1 + "', '" + point2 + "', '" + point5 + "', '" + point6 + "', '" + point3 + "', '" + point4 + "', '" + point7 + "', '" + point8 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqratio', '" + point1 + "', '" + point2 + "', '" + point5 + "', '" + point6 + "', '" + point3 + "', '" + point4 + "', '" + point7 + "', '" + point8 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqratio.c_str(),
-				 insertionEqratio.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -1418,7 +1418,7 @@ DBinMemory Prover::ruleD30(DBinMemory dbim, std::string point1,
 			   std::string point6, std::string point7,
 			   std::string point8) {
     bool correctTransaction;
-    std::string insertionEqratio;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
     std::string newPoint5, newPoint6, newPoint7, newPoint8;
@@ -1469,10 +1469,10 @@ DBinMemory Prover::ruleD30(DBinMemory dbim, std::string point1,
 	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	    correctTransaction = false;
 	} else {
-	    insertionEqratio = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqratio', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + newPoint5 + "', '" + newPoint6 + "', '" + newPoint7 + "', '" + newPoint8 + "', '" + lstInsRwId + "')";
+	    insertionPred = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqratio', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + newPoint5 + "', '" + newPoint6 + "', '" + newPoint7 + "', '" + newPoint8 + "', '" + lstInsRwId + "')";
 
-	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqratio.c_str(),
-					 insertionEqratio.size(), &(dbim.stmt),
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 		correctTransaction = false;
@@ -2015,7 +2015,7 @@ DBinMemory Prover::ruleD59(DBinMemory dbim, std::string point1,
 			   std::string point4, std::string point5,
 			   std::string point6) {
     bool correctTransaction;
-    std::string insertionEqratio;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('eqratio')";
@@ -2033,10 +2033,10 @@ DBinMemory Prover::ruleD59(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionEqratio = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqratio', '" + point1 + "', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + point4 + "', '" + point5 + "', '" + point4 + "', '" + point6 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqratio', '" + point1 + "', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + point4 + "', '" + point5 + "', '" + point4 + "', '" + point6 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqratio.c_str(),
-				 insertionEqratio.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
