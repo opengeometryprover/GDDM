@@ -546,7 +546,7 @@ DBinMemory Prover::ruleD10(DBinMemory dbim, std::string point1,
 DBinMemory Prover::ruleD11(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3){
     bool correctTransaction;
-    std::string insertionMidp;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('midp')";
@@ -564,10 +564,10 @@ DBinMemory Prover::ruleD11(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    insertionMidp = "INSERT INTO Midpoint(typeGeoCmd, point1, point2, point3, newFact) VALUES ('midp', '" + point1 + "', '" + point3 + "', '" + point2 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO Midpoint(typeGeoCmd, point1, point2, point3, newFact) VALUES ('midp', '" + point1 + "', '" + point3 + "', '" + point2 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionMidp.c_str(),
-				 insertionMidp.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
