@@ -1694,7 +1694,7 @@ DBinMemory Prover::ruleD35(DBinMemory dbim, std::string point1,
 			   std::string point4, std::string point5,
 			   std::string point6) {
     bool correctTransaction;
-    std::string insertionContri;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('contri')";
@@ -1712,10 +1712,10 @@ DBinMemory Prover::ruleD35(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionContri = "INSERT INTO CongruentTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('contri', '" + point1 + "', '" + point3 + "', '" + point2 + "', '" + point4 + "', '" + point6 + "',  '" + point5 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO CongruentTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('contri', '" + point1 + "', '" + point3 + "', '" + point2 + "', '" + point4 + "', '" + point6 + "',  '" + point5 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionContri.c_str(),
-				 insertionContri.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -1735,7 +1735,7 @@ DBinMemory Prover::ruleD36(DBinMemory dbim, std::string point1,
 			   std::string point4, std::string point5,
 			   std::string point6) {
     bool correctTransaction;
-    std::string insertionContri;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('contri')";
@@ -1753,10 +1753,10 @@ DBinMemory Prover::ruleD36(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionContri = "INSERT INTO CongruentTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('contri', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + point5 + "', '" + point4 + "', '" + point6 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO CongruentTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('contri', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + point5 + "', '" + point4 + "', '" + point6 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionContri.c_str(),
-				 insertionContri.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -1776,7 +1776,7 @@ DBinMemory Prover::ruleD37(DBinMemory dbim, std::string point1,
 			   std::string point4, std::string point5,
 			   std::string point6) {
     bool correctTransaction;
-    std::string insertionContri;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('contri')";
@@ -1794,10 +1794,10 @@ DBinMemory Prover::ruleD37(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionContri = "INSERT INTO CongruentTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('contri', '" + point4 + "', '" + point5 + "', '" + point6 + "', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO CongruentTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('contri', '" + point4 + "', '" + point5 + "', '" + point6 + "', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionContri.c_str(),
-				 insertionContri.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -1818,7 +1818,7 @@ DBinMemory Prover::ruleD38(DBinMemory dbim, std::string point1,
 			   std::string point4, std::string point5,
 			   std::string point6) {
     bool correctTransaction;
-    std::string insertionContri;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
     std::string newPoint4, newPoint5, newPoint6;
@@ -1867,10 +1867,10 @@ DBinMemory Prover::ruleD38(DBinMemory dbim, std::string point1,
 	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	    correctTransaction = false;
 	} else {
-	    insertionContri = "INSERT INTO CongruentTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('contri', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + newPoint4 + "', '" + newPoint5 + "', '" + newPoint6 + "', '" + lstInsRwId + "')";
+	    insertionPred = "INSERT INTO CongruentTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('contri', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + newPoint4 + "', '" + newPoint5 + "', '" + newPoint6 + "', '" + lstInsRwId + "')";
 
-	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionContri.c_str(),
-					 insertionContri.size(), &(dbim.stmt),
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 		correctTransaction = false;
