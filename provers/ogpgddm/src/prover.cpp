@@ -1495,7 +1495,7 @@ DBinMemory Prover::ruleD31(DBinMemory dbim, std::string point1,
 			   std::string point4, std::string point5,
 			   std::string point6) {
     bool correctTransaction;
-    std::string insertionSimtri;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('simtri')";
@@ -1513,10 +1513,10 @@ DBinMemory Prover::ruleD31(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionSimtri = "INSERT INTO SimilarTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('simtri', '" + point1 + "', '" + point3 + "', '" + point2 + "', '" + point4 + "', '" + point6 + "',  '" + point5 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO SimilarTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('simtri', '" + point1 + "', '" + point3 + "', '" + point2 + "', '" + point4 + "', '" + point6 + "',  '" + point5 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionSimtri.c_str(),
-				 insertionSimtri.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -1536,7 +1536,7 @@ DBinMemory Prover::ruleD32(DBinMemory dbim, std::string point1,
 			   std::string point4, std::string point5,
 			   std::string point6) {
     bool correctTransaction;
-    std::string insertionSimtri;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('simtri')";
@@ -1554,10 +1554,10 @@ DBinMemory Prover::ruleD32(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionSimtri = "INSERT INTO SimilarTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('simtri', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + point5 + "', '" + point4 + "', '" + point6 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO SimilarTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('simtri', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + point5 + "', '" + point4 + "', '" + point6 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionSimtri.c_str(),
-				 insertionSimtri.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -1577,7 +1577,7 @@ DBinMemory Prover::ruleD33(DBinMemory dbim, std::string point1,
 			   std::string point4, std::string point5,
 			   std::string point6) {
     bool correctTransaction;
-    std::string insertionSimtri;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('simtri')";
@@ -1595,10 +1595,10 @@ DBinMemory Prover::ruleD33(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionSimtri = "INSERT INTO SimilarTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('simtri', '" + point4 + "', '" + point5 + "', '" + point6 + "', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO SimilarTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('simtri', '" + point4 + "', '" + point5 + "', '" + point6 + "', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionSimtri.c_str(),
-				 insertionSimtri.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -1619,7 +1619,7 @@ DBinMemory Prover::ruleD34(DBinMemory dbim, std::string point1,
 			   std::string point4, std::string point5,
 			   std::string point6) {
     bool correctTransaction;
-    std::string insertionSimtri;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
     std::string newPoint4, newPoint5, newPoint6;
@@ -1668,10 +1668,10 @@ DBinMemory Prover::ruleD34(DBinMemory dbim, std::string point1,
 	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	    correctTransaction = false;
 	} else {
-	    insertionSimtri = "INSERT INTO SimilarTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('simtri', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + newPoint4 + "', '" + newPoint5 + "', '" + newPoint6 + "', '" + lstInsRwId + "')";
+	    insertionPred = "INSERT INTO SimilarTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('simtri', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + newPoint4 + "', '" + newPoint5 + "', '" + newPoint6 + "', '" + lstInsRwId + "')";
 
-	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionSimtri.c_str(),
-					 insertionSimtri.size(), &(dbim.stmt),
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 		correctTransaction = false;
