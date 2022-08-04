@@ -24,8 +24,7 @@
 DBinMemory Prover::ruleD1(DBinMemory dbim, std::string point1,
 			  std::string point2, std::string point3) {
     bool correctTransaction;
-    std::string insertionColl;
-    std::string insertNewFact, lastInsertedRowId, lstInsRwId;
+    std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('coll')";
     lastInsertedRowId = "SELECT last_insert_rowid()";
@@ -42,10 +41,10 @@ DBinMemory Prover::ruleD1(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    insertionColl = "INSERT INTO Collinear(typeGeoCmd, point1, point2, point3, newFact) VALUES ('coll', '" + point1 + "', '" + point3 + "', '" + point2 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO Collinear(typeGeoCmd, point1, point2, point3, newFact) VALUES ('coll', '" + point1 + "', '" + point3 + "', '" + point2 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionColl.c_str(),
-				 insertionColl.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -129,7 +128,7 @@ DBinMemory Prover::ruleD3(DBinMemory dbim, std::string point1,
 				 NULL);
     sqlite3_step(dbim.stmt1);
 
-    querySecondGeoCmdB = "SELECT point3 FROM Facts INNER JOIN Collinear ON (oldFact=id) WHERE point1 = '" + point1 + "' and point2 = '" + point2 + "' and point3 <> '" + point3 + "'";
+    querySecondGeoCmdB = "SELECT point3 FROM Facts INNER JOIN Collinear ON (oldFact = id) WHERE point1 = '" + point1 + "' and point2 = '" + point2 + "' and point3 <> '" + point3 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -431,7 +430,7 @@ DBinMemory Prover::ruleD9(DBinMemory dbim, std::string point1,
 				 NULL);
     sqlite3_step(dbim.stmt1);
     
-    querySecondGeoCmdB = "SELECT point3, point4 FROM Facts INNER JOIN Perpendicular ON (oldFact=id) WHERE point1 = '" + point3 + "' and point2 = '" + point4 + "'";
+    querySecondGeoCmdB = "SELECT point3, point4 FROM Facts INNER JOIN Perpendicular ON (oldFact = id) WHERE point1 = '" + point3 + "' and point2 = '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -503,7 +502,7 @@ DBinMemory Prover::ruleD10(DBinMemory dbim, std::string point1,
 				 NULL);
     sqlite3_step(dbim.stmt1);
     
-    querySecondGeoCmdB = "SELECT point3, point4 FROM Facts INNER JOIN Perpendicular ON (oldFact=id) WHERE point1 = '" + point3 + "' and point2 = '" + point4 + "'";
+    querySecondGeoCmdB = "SELECT point3, point4 FROM Facts INNER JOIN Perpendicular ON (oldFact = id) WHERE point1 = '" + point3 + "' and point2 = '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -614,7 +613,7 @@ DBinMemory Prover::ruleD12(DBinMemory dbim, std::string point1,
 				 NULL);
     sqlite3_step(dbim.stmt1);
     
-    querySecondGeoCmdB = "SELECT point4 FROM Facts INNER JOIN CongruentSegments ON (oldFact=id) WHERE point1 = '" + point1 + "' and point2 = '" + point2 + "' and point3 = '" + point3 + "'";
+    querySecondGeoCmdB = "SELECT point4 FROM Facts INNER JOIN CongruentSegments ON (oldFact = id) WHERE point1 = '" + point1 + "' and point2 = '" + point2 + "' and point3 = '" + point3 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -2164,7 +2163,7 @@ DBinMemory Prover::ruleD63(DBinMemory dbim, std::string point1,
 				 NULL);
     sqlite3_step(dbim.stmt1);
 
-    querySecondGeoCmdB = "SELECT point2, point3 FROM Facts INNER JOIN Midpoint ON (oldFact=id) WHERE point1 = '" + point1 + "'";
+    querySecondGeoCmdB = "SELECT point2, point3 FROM Facts INNER JOIN Midpoint ON (oldFact = id) WHERE point1 = '" + point1 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -2356,7 +2355,7 @@ DBinMemory Prover::ruleD73(DBinMemory dbim, std::string point1,
 				 NULL);
     sqlite3_step(dbim.stmt1);
 
-    querySecondGeoCmdB = "SELECT point1 FROM Facts INNER JOIN Parallel ON (oldFact=id) WHERE point1 = '" + point5 + "' and point2 = '" + point6 + "' and point3 = '" + point7 + "' and point4 = '" + point8 +"'";
+    querySecondGeoCmdB = "SELECT point1 FROM Facts INNER JOIN Parallel ON (oldFact = id) WHERE point1 = '" + point5 + "' and point2 = '" + point6 + "' and point3 = '" + point7 + "' and point4 = '" + point8 +"'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -2423,7 +2422,7 @@ DBinMemory Prover::ruleD74(DBinMemory dbim, std::string point1,
 				 NULL);
     sqlite3_step(dbim.stmt1);
 
-    querySecondGeoCmdB = "SELECT point1 FROM Facts INNER JOIN Perpendicular ON (oldFact=id) WHERE point1 = '" + point5 + "' and point2 = '" + point6 + "' and point3 = '" + point7 + "' and point4 = '" + point8 +"'";
+    querySecondGeoCmdB = "SELECT point1 FROM Facts INNER JOIN Perpendicular ON (oldFact = id) WHERE point1 = '" + point5 + "' and point2 = '" + point6 + "' and point3 = '" + point7 + "' and point4 = '" + point8 +"'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -2490,7 +2489,7 @@ DBinMemory Prover::ruleD75(DBinMemory dbim, std::string point1,
 				 NULL);
     sqlite3_step(dbim.stmt1);
 
-    querySecondGeoCmdB = "SELECT point1 FROM Facts INNER JOIN CongruentSegments ON (oldFact=id) WHERE point1 = '" + point5 + "' and point2 = '" + point6 + "' and point3 = '" + point7 + "' and point4 = '" + point8 +"'";
+    querySecondGeoCmdB = "SELECT point1 FROM Facts INNER JOIN CongruentSegments ON (oldFact = id) WHERE point1 = '" + point5 + "' and point2 = '" + point6 + "' and point3 = '" + point7 + "' and point4 = '" + point8 +"'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
