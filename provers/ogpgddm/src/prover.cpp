@@ -323,7 +323,7 @@ DBinMemory Prover::ruleD7(DBinMemory dbim, std::string point1,
 			  std::string point2, std::string point3,
 			  std::string point4) {
     bool correctTransaction;
-    std::string insertionPerp;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('perp')";
@@ -341,10 +341,10 @@ DBinMemory Prover::ruleD7(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    insertionPerp = "INSERT INTO Perpendicular(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('perp', '" + point1 + "', '" + point2 + "', '" + point4 + "', '" + point3 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO Perpendicular(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('perp', '" + point1 + "', '" + point2 + "', '" + point4 + "', '" + point3 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPerp.c_str(),
-				 insertionPerp.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -363,7 +363,7 @@ DBinMemory Prover::ruleD8(DBinMemory dbim, std::string point1,
 			  std::string point2, std::string point3,
 			  std::string point4) {
     bool correctTransaction;
-    std::string insertionPerp;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('perp')";
@@ -381,10 +381,10 @@ DBinMemory Prover::ruleD8(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    insertionPerp = "INSERT INTO Perpendicular(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('perp', '" + point3 + "', '" + point4 + "', '" + point1 + "', '" + point2 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO Perpendicular(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('perp', '" + point3 + "', '" + point4 + "', '" + point1 + "', '" + point2 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPerp.c_str(),
-				 insertionPerp.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -475,7 +475,7 @@ DBinMemory Prover::ruleD10(DBinMemory dbim, std::string point1,
 			       std::string point2, std::string point3,
 			       std::string point4) {
     bool correctTransaction;
-    std::string insertionPerp;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
     std::string newPoint3, newPoint4;
@@ -522,10 +522,10 @@ DBinMemory Prover::ruleD10(DBinMemory dbim, std::string point1,
 	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	    correctTransaction = false;
 	} else {
-	    insertionPerp = "INSERT INTO Perpendicular(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('perp', '" + point1 + "', '" + point2 + "', '" + newPoint3 + "', '" + newPoint4 + "', '" + lstInsRwId + "')";
+	    insertionPred = "INSERT INTO Perpendicular(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('perp', '" + point1 + "', '" + point2 + "', '" + newPoint3 + "', '" + newPoint4 + "', '" + lstInsRwId + "')";
 
-	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPerp.c_str(),
-					 insertionPerp.size(), &(dbim.stmt),
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 		correctTransaction = false;
@@ -2396,7 +2396,7 @@ DBinMemory Prover::ruleD74(DBinMemory dbim, std::string point1,
 			   std::string point6, std::string point7,
 			   std::string point8) {
     bool correctTransaction;
-    std::string insertionPerp;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
 
@@ -2435,10 +2435,10 @@ DBinMemory Prover::ruleD74(DBinMemory dbim, std::string point1,
 	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	    correctTransaction = false;
 	} else {
-	    insertionPerp = "INSERT INTO Perpendicular(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('perp', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + lstInsRwId + "')";
+	    insertionPred = "INSERT INTO Perpendicular(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('perp', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + lstInsRwId + "')";
 
-	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPerp.c_str(),
-					 insertionPerp.size(), &(dbim.stmt),
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 		correctTransaction = false;
