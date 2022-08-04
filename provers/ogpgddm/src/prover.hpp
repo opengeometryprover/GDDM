@@ -199,6 +199,7 @@ public:
     DBinMemory ruleD73(DBinMemory, std::string, std::string, std::string,
 		       std::string);
     DBinMemory ruleD74(DBinMemory, std::string, std::string, std::string,
+		       std::string, std::string, std::string, std::string,
 		       std::string);
     DBinMemory ruleD75(DBinMemory, std::string, std::string, std::string,
 		       std::string, std::string, std::string, std::string,
