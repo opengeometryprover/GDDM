@@ -657,7 +657,7 @@ DBinMemory Prover::ruleD14(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
 			   std::string point4) {
     bool correctTransaction;
-    std::string insertionCyclic;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('cyclic')";
@@ -675,10 +675,10 @@ DBinMemory Prover::ruleD14(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionCyclic = "INSERT INTO Cyclic(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('cyclic', '" + point1 + "', '" + point2 + "', '" + point4 + "', '" + point3 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO Cyclic(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('cyclic', '" + point1 + "', '" + point2 + "', '" + point4 + "', '" + point3 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionCyclic.c_str(),
-				 insertionCyclic.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -697,7 +697,7 @@ DBinMemory Prover::ruleD15(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
 			   std::string point4) {
     bool correctTransaction;
-    std::string insertionCyclic;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('cyclic')";
@@ -715,10 +715,10 @@ DBinMemory Prover::ruleD15(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionCyclic = "INSERT INTO Cyclic(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('cyclic', '" + point1 + "', '" + point3 + "', '" + point2 + "', '" + point4 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO Cyclic(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('cyclic', '" + point1 + "', '" + point3 + "', '" + point2 + "', '" + point4 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionCyclic.c_str(),
-				 insertionCyclic.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -738,7 +738,7 @@ DBinMemory Prover::ruleD16(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
 			   std::string point4) {
     bool correctTransaction;
-    std::string insertionCyclic;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('cyclic')";
@@ -756,10 +756,10 @@ DBinMemory Prover::ruleD16(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionCyclic = "INSERT INTO Cyclic(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('cyclic', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + point4 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO Cyclic(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('cyclic', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + point4 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionCyclic.c_str(),
-				 insertionCyclic.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -778,7 +778,7 @@ DBinMemory Prover::ruleD17(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
 			   std::string point4) {
     bool correctTransaction;
-    std::string insertionCyclic;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
     std::string newPoint4;
@@ -823,10 +823,10 @@ DBinMemory Prover::ruleD17(DBinMemory dbim, std::string point1,
 	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	    correctTransaction = false;
 	} else {
-	    insertionCyclic = "INSERT INTO Cyclic(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('cyclic', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + newPoint4 + "', '" + lstInsRwId + "')";
+	    insertionPred = "INSERT INTO Cyclic(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('cyclic', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + newPoint4 + "', '" + lstInsRwId + "')";
 
-	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionCyclic.c_str(),
-					 insertionCyclic.size(), &(dbim.stmt),
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 		correctTransaction = false;
