@@ -850,7 +850,7 @@ DBinMemory Prover::ruleD18(DBinMemory dbim, std::string point1,
 			   std::string point6, std::string point7,
 			   std::string point8) {
     bool correctTransaction;
-    std::string insertionEqangle;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('eqangle')";
@@ -868,10 +868,10 @@ DBinMemory Prover::ruleD18(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionEqangle = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + point4 + "', '" + point5 + "', '" + point6 + "', '" + point7 + "', '" + point8 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point2 + "', '" + point1 + "', '" + point3 + "', '" + point4 + "', '" + point5 + "', '" + point6 + "', '" + point7 + "', '" + point8 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqangle.c_str(),
-				 insertionEqangle.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -892,7 +892,7 @@ DBinMemory Prover::ruleD19(DBinMemory dbim, std::string point1,
 			   std::string point6, std::string point7,
 			   std::string point8) {
     bool correctTransaction;
-    std::string insertionEqangle;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('eqangle')";
@@ -910,10 +910,10 @@ DBinMemory Prover::ruleD19(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionEqangle = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point3 + "', '" + point4 + "', '" + point1 + "', '" + point2 + "', '" + point7 + "', '" + point8 + "', '" + point5 + "', '" + point6 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point3 + "', '" + point4 + "', '" + point1 + "', '" + point2 + "', '" + point7 + "', '" + point8 + "', '" + point5 + "', '" + point6 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqangle.c_str(),
-				 insertionEqangle.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -934,7 +934,7 @@ DBinMemory Prover::ruleD20(DBinMemory dbim, std::string point1,
 			   std::string point6, std::string point7,
 			   std::string point8) {
     bool correctTransaction;
-    std::string insertionEqangle;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('eqangle')";
@@ -952,10 +952,10 @@ DBinMemory Prover::ruleD20(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionEqangle = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point5 + "', '" + point6 + "', '" + point7 + "', '" + point8 + "', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point5 + "', '" + point6 + "', '" + point7 + "', '" + point8 + "', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqangle.c_str(),
-				 insertionEqangle.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -976,7 +976,7 @@ DBinMemory Prover::ruleD21(DBinMemory dbim, std::string point1,
 			   std::string point6, std::string point7,
 			   std::string point8) {
     bool correctTransaction;
-    std::string insertionEqangle;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('eqangle')";
@@ -994,10 +994,10 @@ DBinMemory Prover::ruleD21(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionEqangle = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point1 + "', '" + point2 + "', '" + point5 + "', '" + point6 + "', '" + point3 + "', '" + point4 + "', '" + point7 + "', '" + point8 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point1 + "', '" + point2 + "', '" + point5 + "', '" + point6 + "', '" + point3 + "', '" + point4 + "', '" + point7 + "', '" + point8 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqangle.c_str(),
-				 insertionEqangle.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -1019,7 +1019,7 @@ DBinMemory Prover::ruleD22(DBinMemory dbim, std::string point1,
 			   std::string point6, std::string point7,
 			   std::string point8) {
     bool correctTransaction;
-    std::string insertionEqangle;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
     std::string newPoint5, newPoint6, newPoint7, newPoint8;
@@ -1070,10 +1070,10 @@ DBinMemory Prover::ruleD22(DBinMemory dbim, std::string point1,
 	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	    correctTransaction = false;
 	} else {
-	    insertionEqangle = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + newPoint5 + "', '" + newPoint6 + "', '" + newPoint7 + "', '" + newPoint8 + "', '" + lstInsRwId + "')";
+	    insertionPred = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point1 + "', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + newPoint5 + "', '" + newPoint6 + "', '" + newPoint7 + "', '" + newPoint8 + "', '" + lstInsRwId + "')";
 
-	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqangle.c_str(),
-					 insertionEqangle.size(), &(dbim.stmt),
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 		correctTransaction = false;
@@ -1934,7 +1934,7 @@ DBinMemory Prover::ruleD41(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
 			   std::string point4) {
     bool correctTransaction;
-    std::string insertionEqangle;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('eqangle')";
@@ -1952,10 +1952,10 @@ DBinMemory Prover::ruleD41(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionEqangle = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point3 + "', '" + point1 + "', '" + point3 + "', '" + point2 + "', '" + point4 + "', '" + point1 + "', '" + point4 + "', '" + point2 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point3 + "', '" + point1 + "', '" + point3 + "', '" + point2 + "', '" + point4 + "', '" + point1 + "', '" + point4 + "', '" + point2 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqangle.c_str(),
-				 insertionEqangle.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -1974,7 +1974,7 @@ DBinMemory Prover::ruleD46(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
 			   std::string point4) {
     bool correctTransaction;
-    std::string insertionEqangle;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('eqangle')";
@@ -1992,10 +1992,10 @@ DBinMemory Prover::ruleD46(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionEqangle = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point1 + "', '" + point2 + "', '" + point2 + "', '" + point4 + "', '" + point2 + "', '" + point4 + "', '" + point1 + "', '" + point4 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point1 + "', '" + point2 + "', '" + point2 + "', '" + point4 + "', '" + point2 + "', '" + point4 + "', '" + point1 + "', '" + point4 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqangle.c_str(),
-				 insertionEqangle.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
@@ -2056,7 +2056,7 @@ DBinMemory Prover::ruleD60(DBinMemory dbim, std::string point1,
 			   std::string point4, std::string point5,
 			   std::string point6) {
     bool correctTransaction;
-    std::string insertionEqangle;
+    std::string insertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
 
     insertNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('eqangle')";
@@ -2074,10 +2074,10 @@ DBinMemory Prover::ruleD60(DBinMemory dbim, std::string point1,
     sqlite3_step( dbim.stmt );
     lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
 
-    insertionEqangle = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point1 + "', '" + point2 + "', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + point5 + "', '" + point5 + "', '" + point6 + "', '" + lstInsRwId + "')";
+    insertionPred = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('eqangle', '" + point1 + "', '" + point2 + "', '" + point2 + "', '" + point3 + "', '" + point4 + "', '" + point5 + "', '" + point5 + "', '" + point6 + "', '" + lstInsRwId + "')";
 
-    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqangle.c_str(),
-				 insertionEqangle.size(), &(dbim.stmt), NULL);
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	correctTransaction = false;
     }
