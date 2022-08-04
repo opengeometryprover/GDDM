@@ -586,7 +586,7 @@ DBinMemory Prover::ruleD12(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
 			   std::string point4) {
     bool correctTransaction;
-    std::string insertionCircle;
+    std::string InsertionPred;
     std::string insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
     std::string newPoint4;
@@ -632,10 +632,10 @@ DBinMemory Prover::ruleD12(DBinMemory dbim, std::string point1,
 	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	    correctTransaction = false;
 	} else {
-	    insertionCircle = "INSERT INTO Circle(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('circle', '" + point1 + "', '" + point2 + "', '" + point4 + "', '" + newPoint4 + "', '" + lstInsRwId + "')";
+	    InsertionPred = "INSERT INTO Circle(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('circle', '" + point1 + "', '" + point2 + "', '" + point4 + "', '" + newPoint4 + "', '" + lstInsRwId + "')";
 
-	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionCircle.c_str(),
-					 insertionCircle.size(), &(dbim.stmt),
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, InsertionPred.c_str(),
+					 InsertionPred.size(), &(dbim.stmt),
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 		correctTransaction = false;
