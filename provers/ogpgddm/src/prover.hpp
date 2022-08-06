@@ -45,21 +45,21 @@ public:
      */
     bool proved(DBinMemory);
 
-    DBinMemory ruleD1(DBinMemory, std::string, std::string, std::string);
-    DBinMemory ruleD2(DBinMemory, std::string, std::string, std::string);
-    DBinMemory ruleD3(DBinMemory, std::string, std::string, std::string);
-    DBinMemory ruleD4(DBinMemory, std::string, std::string, std::string,
-		      std::string);
-    DBinMemory ruleD5(DBinMemory, std::string, std::string, std::string,
-		      std::string);
-    DBinMemory ruleD6(DBinMemory, std::string, std::string, std::string,
-		      std::string);
-    DBinMemory ruleD7(DBinMemory, std::string, std::string, std::string,
-		      std::string);
-    DBinMemory ruleD8(DBinMemory, std::string, std::string, std::string,
-		      std::string);
-    DBinMemory ruleD9(DBinMemory, std::string, std::string, std::string,
-		      std::string);
+    DBinMemory ruleD01(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD02(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD03(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD04(DBinMemory, std::string, std::string, std::string,
+		       std::string);
+    DBinMemory ruleD05(DBinMemory, std::string, std::string, std::string,
+		       std::string);
+    DBinMemory ruleD06(DBinMemory, std::string, std::string, std::string,
+		       std::string);
+    DBinMemory ruleD07(DBinMemory, std::string, std::string, std::string,
+		       std::string);
+    DBinMemory ruleD08(DBinMemory, std::string, std::string, std::string,
+		       std::string);
+    DBinMemory ruleD09(DBinMemory, std::string, std::string, std::string,
+		       std::string);
     DBinMemory ruleD10(DBinMemory,std::string, std::string, std::string,
 		       std::string);
     DBinMemory ruleD11(DBinMemory, std::string, std::string, std::string);

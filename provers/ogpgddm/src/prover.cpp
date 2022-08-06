@@ -21,8 +21,8 @@
 /*
  * Rule D1: coll(A, B, C) => coll(A, C, B)
  */
-DBinMemory Prover::ruleD1(DBinMemory dbim, std::string point1,
-			  std::string point2, std::string point3) {
+DBinMemory Prover::ruleD01(DBinMemory dbim, std::string point1,
+			   std::string point2, std::string point3) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
 
@@ -59,8 +59,8 @@ DBinMemory Prover::ruleD1(DBinMemory dbim, std::string point1,
 /*
  * Rule D2: coll(A, B, C) => coll(B, A, C)
  */
-DBinMemory Prover::ruleD2(DBinMemory dbim, std::string point1,
-			  std::string point2,std::string point3) {
+DBinMemory Prover::ruleD02(DBinMemory dbim, std::string point1,
+			   std::string point2,std::string point3) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
 
@@ -97,8 +97,8 @@ DBinMemory Prover::ruleD2(DBinMemory dbim, std::string point1,
 /*
  * Rule D3: coll(A, B, C) & coll(A, B, D) => coll(C, D, A)
  */
-DBinMemory Prover::ruleD3(DBinMemory dbim, std::string point1,
-			  std::string point2, std::string point3) {
+DBinMemory Prover::ruleD03(DBinMemory dbim, std::string point1,
+			   std::string point2, std::string point3) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
@@ -165,9 +165,9 @@ DBinMemory Prover::ruleD3(DBinMemory dbim, std::string point1,
 /*
  * Rule D4: para(A, B, C, D) => para(A, B, D, C)
  */
-DBinMemory Prover::ruleD4(DBinMemory dbim, std::string point1,
-			  std::string point2, std::string point3,
-			  std::string point4) {
+DBinMemory Prover::ruleD04(DBinMemory dbim, std::string point1,
+			   std::string point2, std::string point3,
+			   std::string point4) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
 
@@ -204,9 +204,9 @@ DBinMemory Prover::ruleD4(DBinMemory dbim, std::string point1,
 /*
  * Rule D5: para(A, B, C, D) => para(C, D, A, B)
  */
-DBinMemory Prover::ruleD5(DBinMemory dbim, std::string point1,
-			  std::string point2, std::string point3,
-			  std::string point4) {
+DBinMemory Prover::ruleD05(DBinMemory dbim, std::string point1,
+			   std::string point2, std::string point3,
+			   std::string point4) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
 
@@ -243,9 +243,9 @@ DBinMemory Prover::ruleD5(DBinMemory dbim, std::string point1,
 /*
  * Rule D6: para(A, B, C, D) & para(C, D, E, F) => para(A, B, E, F)
  */
-DBinMemory Prover::ruleD6(DBinMemory dbim, std::string point1,
-			  std::string point2, std::string point3,
-			  std::string point4) {
+DBinMemory Prover::ruleD06(DBinMemory dbim, std::string point1,
+			   std::string point2, std::string point3,
+			   std::string point4) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
@@ -314,9 +314,9 @@ DBinMemory Prover::ruleD6(DBinMemory dbim, std::string point1,
 /*
  * Rule D7: perp(A, B, C, D) => perp(A, B, D, C)
  */
-DBinMemory Prover::ruleD7(DBinMemory dbim, std::string point1,
-			  std::string point2, std::string point3,
-			  std::string point4) {
+DBinMemory Prover::ruleD07(DBinMemory dbim, std::string point1,
+			   std::string point2, std::string point3,
+			   std::string point4) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
 
@@ -353,9 +353,9 @@ DBinMemory Prover::ruleD7(DBinMemory dbim, std::string point1,
 /*
  * Rule D8: perp(A, B, C, D) => perp(C, D, A, B)
  */
-DBinMemory Prover::ruleD8(DBinMemory dbim, std::string point1,
-			  std::string point2, std::string point3,
-			  std::string point4) {
+DBinMemory Prover::ruleD08(DBinMemory dbim, std::string point1,
+			   std::string point2, std::string point3,
+			   std::string point4) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
 
@@ -392,9 +392,9 @@ DBinMemory Prover::ruleD8(DBinMemory dbim, std::string point1,
 /*
  * Rule D9: perp(A, B, C, D) & perp(C, D, E, F) => para(A, B, E, F)
  */
-DBinMemory Prover::ruleD9(DBinMemory dbim, std::string point1,
-			  std::string point2, std::string point3,
-			  std::string point4) {
+DBinMemory Prover::ruleD09(DBinMemory dbim, std::string point1,
+			   std::string point2, std::string point3,
+			   std::string point4) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
@@ -3065,15 +3065,15 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	switch (dbim.geoCmds[typeGeoCmd]) {
 	case 1:
             // Collinear
-	    dbim = ruleD1(dbim, point1, point2, point3);
-	    dbim = ruleD2(dbim, point1, point2, point3);
-	    dbim = ruleD3(dbim, point1, point2, point3);
+	    dbim = ruleD01(dbim, point1, point2, point3);
+	    dbim = ruleD02(dbim, point1, point2, point3);
+	    dbim = ruleD03(dbim, point1, point2, point3);
 	    break;
 	case 2:
             // Parallel
-	    dbim = ruleD4(dbim, point1, point2, point3, point4);
-	    dbim = ruleD5(dbim, point1, point2, point3, point4);
-	    dbim = ruleD6(dbim, point1, point2, point3, point4);
+	    dbim = ruleD04(dbim, point1, point2, point3, point4);
+	    dbim = ruleD05(dbim, point1, point2, point3, point4);
+	    dbim = ruleD06(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10(dbim, point1, point2, point3, point4);
 	    if (point1 == point3) {
 		dbim = ruleD66(dbim, point1, point2, point3, point4);
@@ -3081,9 +3081,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    break;
 	case 3:
             // Perpendicular
-	    dbim = ruleD7(dbim, point1, point2, point3, point4);
-	    dbim = ruleD8(dbim, point1, point2, point3, point4);
-	    dbim = ruleD9(dbim, point1, point2, point3, point4);
+	    dbim = ruleD07(dbim, point1, point2, point3, point4);
+	    dbim = ruleD08(dbim, point1, point2, point3, point4);
+	    dbim = ruleD09(dbim, point1, point2, point3, point4);
 	    break;
 	case 4:
             // Midpoint
