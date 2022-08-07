@@ -127,34 +127,34 @@ DBinMemory Prover::ruleD03(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    querySecondGeoCmdA = "SELECT point3 "
-	"FROM NewFact "
-	"INNER JOIN Collinear "
-	"ON (newFact = id) "
-	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2 + "'";
     // querySecondGeoCmdA = "SELECT point3 "
     // 	"FROM NewFact "
     // 	"INNER JOIN Collinear "
     // 	"ON (newFact = id) "
-    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-    // 	+ "' AND point3 <> '" + point3 + "'";
+    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2 + "'";
+    querySecondGeoCmdA = "SELECT point3 "
+	"FROM NewFact "
+	"INNER JOIN Collinear "
+	"ON (newFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	+ "' AND point3 <> '" + point3 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
     sqlite3_step(dbim.stmt1);
 
-    querySecondGeoCmdB = "SELECT point3 "
-	"FROM Facts "
-	"INNER JOIN Collinear "
-	"ON (oldFact = id) "
-	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2 + "'";
     // querySecondGeoCmdB = "SELECT point3 "
     // 	"FROM Facts "
     // 	"INNER JOIN Collinear "
     // 	"ON (oldFact = id) "
-    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-    // 	+ "' AND point3 <> '" + point3 + "'";
+    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2 + "'";
+    querySecondGeoCmdB = "SELECT point3 "
+	"FROM Facts "
+	"INNER JOIN Collinear "
+	"ON (oldFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	+ "' AND point3 <> '" + point3 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
