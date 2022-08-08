@@ -133,7 +133,6 @@ DBinMemory Prover::ruleD03(DBinMemory dbim, std::string point1,
 	"ON (newFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
 	+ "' AND point3 <> '" + point3 + "'";
-    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
@@ -146,7 +145,6 @@ DBinMemory Prover::ruleD03(DBinMemory dbim, std::string point1,
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
 	+ "' AND point3 <> '" + point3 + "'";
-    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -306,7 +304,6 @@ DBinMemory Prover::ruleD06(DBinMemory dbim, std::string point1,
 	+ "' AND NOT (point3 = '" + point1 + "' AND point4 = '" + point2
 	+ "') AND NOT (point3 = '" + point2 + "' AND point4 = '" + point1
 	+ "')";
-    // 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
@@ -321,7 +318,6 @@ DBinMemory Prover::ruleD06(DBinMemory dbim, std::string point1,
 	+ "' AND NOT (point3 = '" + point1 + "' AND point4 = '" + point2
 	+ "') AND NOT (point3 = '" + point2 + "' AND point4 = '" + point1
 	+ "')";
-    // 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -484,7 +480,6 @@ DBinMemory Prover::ruleD09(DBinMemory dbim, std::string point1,
 	+ "' AND NOT (point3 = '" + point1 + "' AND point4 = '" + point2
 	+ "') AND NOT (point3 = '" + point2 + "' AND point4 = '" + point1
 	+ "')";
-    // 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
@@ -499,7 +494,6 @@ DBinMemory Prover::ruleD09(DBinMemory dbim, std::string point1,
 	+ "' AND NOT (point3 = '" + point1 + "' AND point4 = '" + point2
 	+ "') AND NOT (point3 = '" + point2 + "' AND point4 = '" + point1
 	+ "')";
-    // 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -785,8 +779,8 @@ DBinMemory Prover::ruleD12(DBinMemory dbim, std::string point1,
 	"INNER JOIN CongruentSegments "
 	"ON (newFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point3 + "' AND point4 <> '" + point4 + "'";
-    // 	+ "' AND point3 = '" + point3 + "'";
+	+ "' AND point3 = '" + point3
+	+ "' AND point4 <> '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
@@ -798,8 +792,8 @@ DBinMemory Prover::ruleD12(DBinMemory dbim, std::string point1,
 	"INNER JOIN CongruentSegments "
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-        + "' AND point3 = '" + point3 + "' AND point4 <> '" + point4 + "'";
-    // 	+ "' AND point3 = '" + point3 + "'";
+        + "' AND point3 = '" + point3
+	+ "' AND point4 <> '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -1609,7 +1603,6 @@ DBinMemory Prover::ruleD25(DBinMemory dbim, std::string point1,
 	+ "' AND NOT (point3 = '" + point1 + "' AND point4 = '" + point2
 	+ "') AND NOT (point3 = '" + point2 + "' AND point4 = '" + point1
 	+ "')";
-	// "WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
@@ -1624,8 +1617,6 @@ DBinMemory Prover::ruleD25(DBinMemory dbim, std::string point1,
 	+ "' AND NOT (point3 = '" + point1 + "' AND point4 = '" + point2
 	+ "') AND NOT (point3 = '" + point2 + "' AND point4 = '" + point1
 	+ "')";
-	// "WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
-    
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
