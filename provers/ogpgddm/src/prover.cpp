@@ -3698,6 +3698,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD04(dbim, point1, point2, point3, point4);
 	    dbim = ruleD05(dbim, point1, point2, point3, point4);
 	    dbim = ruleD06(dbim, point1, point2, point3, point4);
+	    // dbim = ruleD10(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10para(dbim, point1, point2, point3, point4);
 	    if (point1 == point3) {
 		dbim = ruleD66(dbim, point1, point2, point3, point4);
