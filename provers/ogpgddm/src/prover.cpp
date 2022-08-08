@@ -738,7 +738,7 @@ DBinMemory Prover::ruleD10para(DBinMemory dbim, std::string point1,
 /*
  * Rule D10: para(A, B, C, D) & perp(C, D, E, F) => perp(A, B, E, F)
  *
- * Function's argument is perp(C, D) and searches for para(A, B, C, D).
+ * Function's argument is perp(C, D, E, F) and searches for para(A, B, C, D).
  */
 DBinMemory Prover::ruleD10perp(DBinMemory dbim, std::string point1,
 			       std::string point2, std::string point3,
