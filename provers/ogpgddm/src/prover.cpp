@@ -888,38 +888,36 @@ DBinMemory Prover::ruleD12(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    querySecondGeoCmdA = "SELECT point4 "
-	"FROM NewFact "
-	"INNER JOIN CongruentSegments "
-	"ON (newFact = id) "
-	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point3 + "'";
     // querySecondGeoCmdA = "SELECT point4 "
     // 	"FROM NewFact "
     // 	"INNER JOIN CongruentSegments "
     // 	"ON (newFact = id) "
     // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-    // 	+ "' AND point3 = '" + point3 + "' AND point4 NOT IN ('"
-    // 	+ point1 + "', '" + point2 + "', '" + point4 + "')";
+    // 	+ "' AND point3 = '" + point3 + "'";
+    querySecondGeoCmdA = "SELECT point4 "
+	"FROM NewFact "
+	"INNER JOIN CongruentSegments "
+	"ON (newFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	+ "' AND point3 = '" + point3 + "' AND point4 <> '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
     sqlite3_step(dbim.stmt1);
     
-    querySecondGeoCmdB = "SELECT point4 "
-	"FROM Facts "
-	"INNER JOIN CongruentSegments "
-	"ON (oldFact = id) "
-	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point3 + "'";
     // querySecondGeoCmdB = "SELECT point4 "
     // 	"FROM Facts "
     // 	"INNER JOIN CongruentSegments "
     // 	"ON (oldFact = id) "
     // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-    //     + "' AND point3 = '" + point3 + "' AND point4 NOT IN ('"
-    // 	+ point1 + "', '" + point2 + "', '" + point4 + "')";
+    // 	+ "' AND point3 = '" + point3 + "'";
+    querySecondGeoCmdB = "SELECT point4 "
+	"FROM Facts "
+	"INNER JOIN CongruentSegments "
+	"ON (oldFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+        + "' AND point3 = '" + point3 + "' AND point4 <> '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
