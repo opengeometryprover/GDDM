@@ -1890,7 +1890,23 @@ DBinMemory Prover::ruleD30(DBinMemory dbim, std::string point1,
 	"INNER JOIN EqualRatios "
 	"ON (newFact = id) "
 	"WHERE point1 = '" + point5 + "' AND point2 = '" + point6
-	+ "' AND point3 = '" + point7 + "' AND point4 = '" + point8 + "'";
+	+ "' AND point3 = '" + point7 + "' AND point4 = '" + point8
+	+ "' AND NOT (point5 = '" + point1 + "' AND point6 = '" + point2
+	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4
+	+ "') AND NOT (point5 = '" + point1 + "' AND point6 = '" + point2
+	+ "' AND point7 = '" + point4 + "' AND point8 = '" + point3
+	+ "') AND NOT (point5 = '" + point2 + "' AND point6 = '" + point1
+	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4
+	+ "') AND NOT (point5 = '" + point2 + "' AND point6 = '" + point2
+	+ "' AND point7 = '" + point4 + "' AND point8 = '" + point3
+	+ "') AND NOT (point5 = '" + point3 + "' AND point6 = '" + point4
+	+ "' AND point7 = '" + point1 + "' AND point8 = '" + point2
+	+ "') AND NOT (point5 = '" + point3 + "' AND point6 = '" + point4
+	+ "' AND point7 = '" + point2 + "' AND point8 = '" + point1
+	+ "') AND NOT (point5 = '" + point4 + "' AND point6 = '" + point3
+	+ "' AND point7 = '" + point1 + "' AND point8 = '" + point2
+	+ "') AND NOT (point5 = '" + point4 + "' AND point6 = '" + point3
+	+ "' AND point7 = '" + point2 + "' AND point8 = '" + point1 + "')";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
@@ -1902,7 +1918,23 @@ DBinMemory Prover::ruleD30(DBinMemory dbim, std::string point1,
 	"INNER JOIN EqualRatios "
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point5 + "' AND point2 = '" + point6
-	+ "' AND point3 = '" + point7 + "' AND point4 = '" + point8 + "'";
+	+ "' AND point3 = '" + point7 + "' AND point4 = '" + point8
+	+ "' AND NOT (point5 = '" + point1 + "' AND point6 = '" + point2
+	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4
+	+ "') AND NOT (point5 = '" + point1 + "' AND point6 = '" + point2
+	+ "' AND point7 = '" + point4 + "' AND point8 = '" + point3
+	+ "') AND NOT (point5 = '" + point2 + "' AND point6 = '" + point1
+	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4
+	+ "') AND NOT (point5 = '" + point2 + "' AND point6 = '" + point2
+	+ "' AND point7 = '" + point4 + "' AND point8 = '" + point3
+	+ "') AND NOT (point5 = '" + point3 + "' AND point6 = '" + point4
+	+ "' AND point7 = '" + point1 + "' AND point8 = '" + point2
+	+ "') AND NOT (point5 = '" + point3 + "' AND point6 = '" + point4
+	+ "' AND point7 = '" + point2 + "' AND point8 = '" + point1
+	+ "') AND NOT (point5 = '" + point4 + "' AND point6 = '" + point3
+	+ "' AND point7 = '" + point1 + "' AND point8 = '" + point2
+	+ "') AND NOT (point5 = '" + point4 + "' AND point6 = '" + point3
+	+ "' AND point7 = '" + point2 + "' AND point8 = '" + point1 + "')";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -2122,7 +2154,19 @@ DBinMemory Prover::ruleD34(DBinMemory dbim, std::string point1,
 	"INNER JOIN SimilarTriangles "
 	"ON (newFact = id) "
         "WHERE point1 = '" + point4 + "' AND point2 = '" + point5
-	+ "' AND point3 = '" + point6 + "'";
+	+ "' AND point3 = '" + point6
+	+ "' AND NOT (point4 = '" + point1 + "' AND point5 = '" + point2
+	+ "' AND point6 = '" + point3
+	+ "') AND NOT (point4 = '" + point1 + "' AND point5 = '" + point3
+	+ "' AND point6 = '" + point2
+	+ "') AND NOT (point4 = '" + point2 + "' AND point5 = '" + point1
+	+ "' AND point6 = '" + point3
+	+ "') AND NOT (point4 = '" + point2 + "' AND point5 = '" + point3
+	+ "' AND point6 = '" + point1
+	+ "') AND NOT (point4 = '" + point3 + "' AND point5 = '" + point1
+	+ "' AND point6 = '" + point2
+	+ "') AND NOT (point4 = '" + point3 + "' AND point5 = '" + point2
+	+ "' AND point6 = '" + point1 + "')";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
@@ -2134,7 +2178,19 @@ DBinMemory Prover::ruleD34(DBinMemory dbim, std::string point1,
 	"INNER JOIN SimilarTriangles "
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point4 + "' AND point2 = '" + point5
-	+ "' AND point3 = '" + point6 + "'";
+	+ "' AND point3 = '" + point6
+	+ "' AND NOT (point4 = '" + point1 + "' AND point5 = '" + point2
+	+ "' AND point6 = '" + point3
+	+ "') AND NOT (point4 = '" + point1 + "' AND point5 = '" + point3
+	+ "' AND point6 = '" + point2
+	+ "') AND NOT (point4 = '" + point2 + "' AND point5 = '" + point1
+	+ "' AND point6 = '" + point3
+	+ "') AND NOT (point4 = '" + point2 + "' AND point5 = '" + point3
+	+ "' AND point6 = '" + point1
+	+ "') AND NOT (point4 = '" + point3 + "' AND point5 = '" + point1
+	+ "' AND point6 = '" + point2
+	+ "') AND NOT (point4 = '" + point3 + "' AND point5 = '" + point2
+	+ "' AND point6 = '" + point1 + "')";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -2351,7 +2407,19 @@ DBinMemory Prover::ruleD38(DBinMemory dbim, std::string point1,
 	"INNER JOIN CongruentTriangles "
 	"ON (newFact = id) "
 	"WHERE point1 = '" + point4 + "' AND point2 = '" + point5
-	+ "' AND point3 = '" + point6 + "'";
+	+ "' AND point3 = '" + point6
+        + "' AND NOT (point4 = '" + point1 + "' AND point5 = '" + point2
+	+ "' AND point6 = '" + point3
+	+ "') AND NOT (point4 = '" + point1 + "' AND point5 = '" + point3
+	+ "' AND point6 = '" + point2
+	+ "') AND NOT (point4 = '" + point2 + "' AND point5 = '" + point1
+	+ "' AND point6 = '" + point3
+	+ "') AND NOT (point4 = '" + point2 + "' AND point5 = '" + point3
+	+ "' AND point6 = '" + point1
+	+ "') AND NOT (point4 = '" + point3 + "' AND point5 = '" + point1
+	+ "' AND point6 = '" + point2
+	+ "') AND NOT (point4 = '" + point3 + "' AND point5 = '" + point2
+	+ "' AND point6 = '" + point1 + "')";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
@@ -2363,7 +2431,19 @@ DBinMemory Prover::ruleD38(DBinMemory dbim, std::string point1,
 	"INNER JOIN CongruentTriangles "
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point4 + "' AND point2 = '" + point5
-	+ "' AND point3 = '" + point6 + "'";
+	+ "' AND point3 = '" + point6
+	+ "' AND NOT (point4 = '" + point1 + "' AND point5 = '" + point2
+	+ "' AND point6 = '" + point3
+	+ "') AND NOT (point4 = '" + point1 + "' AND point5 = '" + point3
+	+ "' AND point6 = '" + point2
+	+ "') AND NOT (point4 = '" + point2 + "' AND point5 = '" + point1
+	+ "' AND point6 = '" + point3
+	+ "') AND NOT (point4 = '" + point2 + "' AND point5 = '" + point3
+	+ "' AND point6 = '" + point1
+	+ "') AND NOT (point4 = '" + point3 + "' AND point5 = '" + point1
+	+ "' AND point6 = '" + point2
+	+ "') AND NOT (point4 = '" + point3 + "' AND point5 = '" + point2
+	+ "' AND point6 = '" + point1 + "')";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -3740,7 +3820,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD06(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10para(dbim, point1, point2, point3, point4);
 	    if (point1 == point3) {
-		dbim = ruleD66(dbim, point1, point2, point3, point4);
+		// dbim = ruleD66(dbim, point1, point2, point3, point4);
 	    }
 	    break;
 	case 3:
@@ -3753,9 +3833,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	case 4:
             // Midpoint
 	    dbim = ruleD11(dbim, point1, point2, point3);
-	    dbim = ruleD63(dbim, point1, point2, point3);
-	    dbim = ruleD68(dbim, point1, point2, point3);
-	    dbim = ruleD69(dbim, point1, point2, point3);
+	    // dbim = ruleD63(dbim, point1, point2, point3);
+	    // dbim = ruleD68(dbim, point1, point2, point3);
+	    // dbim = ruleD69(dbim, point1, point2, point3);
 	    break;
 	case 5:
 	    // Circle
@@ -3827,8 +3907,8 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 			   point5, point6, point7, point8);
 	    dbim = ruleD30(dbim, point1, point2, point3, point4,
 			   point5, point6, point7, point8);
-	    dbim = ruleD75(dbim, point1, point2, point3, point4,
-			   point5, point6, point7, point8);
+	    // dbim = ruleD75(dbim, point1, point2, point3, point4,
+	    // 		   point5, point6, point7, point8);
 	    break;
 	case 11:
 	    // Similar Triangles
@@ -3838,10 +3918,12 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 			   point4, point5, point6);
 	    dbim = ruleD33(dbim, point1, point2, point3,
 			   point4, point5, point6);
-	    dbim = ruleD59(dbim, point1, point2, point3,
+	    dbim = ruleD34(dbim, point1, point2, point3,
 			   point4, point5, point6);
-	    dbim = ruleD60(dbim, point1, point2, point3,
-			   point4, point5, point6);
+	    // dbim = ruleD59(dbim, point1, point2, point3,
+	    // 		   point4, point5, point6);
+	    // dbim = ruleD60(dbim, point1, point2, point3,
+	    // 		   point4, point5, point6);
 	    break;
 	default:
             // ERROR : Necessary?  I don't _thin_ so...
