@@ -80,7 +80,7 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 	    std::cout << "    Antecedent : " << i + 1 << " / ";
 	    
 	    // The SQL command
-	    insertionNewFact = "INSERT INTO NewFact(typeGeoCmd) VALUES ('"
+	    insertionNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('"
 		+ drv.typeGeoCmd[i] + "')";
 	    // Obtain value 'NewFact row id' through consultation
 	    lastInsertedRowId = "SELECT last_insert_rowid()";
@@ -109,7 +109,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 	    case 1:
                 // Collinear
 		// Insert the GeoCmd in the correct table connecting it to the new fact
-		insertionColl = "INSERT INTO Collinear(typeGeoCmd, point1, point2, point3, newFact) VALUES ('"
+		insertionColl = "INSERT INTO Collinear (typeGeoCmd, "
+		    "point1, point2, point3, "
+		    "newFact) VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -131,7 +133,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 2:
                 // Parallel
-		insertionPara = "INSERT INTO Parallel(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('"
+		insertionPara = "INSERT INTO Parallel (typeGeoCmd, "
+		    "point1, point2, point3, point4, "
+		    "newFact) VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -155,7 +159,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 3:
                 // Perpendicular
-		insertionPerp = "INSERT INTO Perpendicular(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('"
+		insertionPerp = "INSERT INTO Perpendicular (typeGeoCmd, "
+		    "point1, point2, point3, point4, "
+		    "newFact) VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -179,7 +185,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 4:
                 // Midpoint
-		insertionMidp = "INSERT INTO Midpoint(typeGeoCmd, point1, point2, point3, newFact) VALUES ('"
+		insertionMidp = "INSERT INTO Midpoint (typeGeoCmd, "
+		    "point1, point2, point3, "
+		    "newFact) VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -201,7 +209,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 5:
                 // Circle
-		insertionCircle = "INSERT INTO Circle(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('"
+		insertionCircle = "INSERT INTO Circle (typeGeoCmd, "
+		    "point1, point2, point3, point4, "
+		    "newFact) VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -225,7 +235,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 6:
 		// CongruentSegments
-		insertionCong = "INSERT INTO CongruentSegments(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('"
+		insertionCong = "INSERT INTO CongruentSegments (typeGeoCmd, "
+		    "point1, point2, point3, point4, "
+		    "newFact) VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -249,7 +261,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 7:
 		// CongruentTriangles
-		insertionContri = "INSERT INTO CongruentTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('"
+		insertionContri = "INSERT INTO CongruentTriangles (typeGeoCmd, "
+		    "point1, point2, point3, point4, point5, point6, "
+		    "newFact) VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -277,7 +291,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 8:
 		// Cyclic
-		insertionCyclic = "INSERT INTO Cyclic(typeGeoCmd, point1, point2, point3, point4, newFact) VALUES ('"
+		insertionCyclic = "INSERT INTO Cyclic (typeGeoCmd, "
+		    "point1, point2, point3, point4, "
+		    "newFact) VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -301,7 +317,10 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 9:
 		// EqualAngles
-		insertionEqangle = "INSERT INTO EqualAngles(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('"
+		insertionEqangle = "INSERT INTO EqualAngles (typeGeoCmd, "
+		    "point1, point2, point3, point4, "
+		    "point5, point6, point7, point8, "
+		    "newFact) VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -333,7 +352,10 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 10:
 		// EqualRatios
-		insertionEqratio = "INSERT INTO EqualRatios(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8, newFact) VALUES ('"
+		insertionEqratio = "INSERT INTO EqualRatios (typeGeoCmd, "
+		    "point1, point2, point3, point4, "
+		    "point5, point6, point7, point8, "
+		    "newFact) VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -365,7 +387,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 11:
 		// SimilarTriangles
-		insertionSimtri = "INSERT INTO SimilarTriangles(typeGeoCmd, point1, point2, point3, point4, point5, point6, newFact) VALUES ('"
+		insertionSimtri = "INSERT INTO SimilarTriangles (typeGeoCmd, "
+		    "point1, point2, point3, point4, point5, point6, "
+		    "newFact) VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -411,7 +435,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 	    switch (dbim.geoCmds[drv.typeGeoCmd[i]]) {
 	    case 1:
                 // Collinear
-		insertionNewConsequent = "INSERT INTO Consequent(typeGeoCmd, point1, point2, point3) VALUES ('"
+		insertionNewConsequent = "INSERT INTO Consequent (typeGeoCmd, "
+		    "point1, point2, point3"
+		    ") VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "','"
@@ -431,7 +457,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 2:
 		// Parallel
-		insertionNewConsequent = "INSERT INTO Consequent(typeGeoCmd, point1, point2, point3, point4) VALUES ('"
+		insertionNewConsequent = "INSERT INTO Consequent (typeGeoCmd, "
+		    "point1, point2, point3, point4"
+		    ") VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -453,7 +481,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 3:
                 // Perpendicular
-		insertionNewConsequent = "INSERT INTO Consequent(typeGeoCmd, point1, point2, point3, point4) VALUES ('"
+		insertionNewConsequent = "INSERT INTO Consequent (typeGeoCmd, "
+		    "point1, point2, point3, point4"
+		    ") VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -475,7 +505,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 4:
 		// Midpoint
-		insertionNewConsequent = "INSERT INTO Consequent(typeGeoCmd, point1, point2, point3) VALUES ('"
+		insertionNewConsequent = "INSERT INTO Consequent (typeGeoCmd, "
+		    "point1, point2, point3"
+		    ") VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -495,7 +527,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 5:
 		// Circle
-		insertionNewConsequent = "INSERT INTO Consequent(typeGeoCmd, point1, point2, point3, point4) VALUES ('"
+		insertionNewConsequent = "INSERT INTO Consequent (typeGeoCmd, "
+		    "point1, point2, point3, point4"
+		    ") VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -517,7 +551,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 6:
 		// CongruentSegments
-		insertionNewConsequent = "INSERT INTO Consequent(typeGeoCmd, point1, point2, point3, point4) VALUES ('"
+		insertionNewConsequent = "INSERT INTO Consequent (typeGeoCmd, "
+		    "point1, point2, point3, point4"
+		    ") VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -539,7 +575,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 7:
 		// CongruentTriangles
-		insertionNewConsequent = "INSERT INTO Consequent(typeGeoCmd, point1, point2, point3, point4, point5, point6) VALUES ('"
+		insertionNewConsequent = "INSERT INTO Consequent (typeGeoCmd, "
+		    "point1, point2, point3, point4, point5, point6"
+		    ") VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -565,7 +603,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 8:
 		// Cyclic
-		insertionNewConsequent = "INSERT INTO Consequent(typeGeoCmd, point1, point2, point3, point4) VALUES ('"
+		insertionNewConsequent = "INSERT INTO Consequent (typeGeoCmd, "
+		    "point1, point2, point3, point4"
+		    ") VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -587,7 +627,10 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 9:
 		// EqualAngles
-		insertionNewConsequent = "INSERT INTO Consequent(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8) VALUES ('"
+		insertionNewConsequent = "INSERT INTO Consequent (typeGeoCmd, "
+		    "point1, point2, point3, point4, "
+		    "point5, point6, point7, point8"
+		    ") VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -617,7 +660,10 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 10:
 		// EqualRatios
-		insertionNewConsequent = "INSERT INTO Consequent(typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8) VALUES ('"
+		insertionNewConsequent = "INSERT INTO Consequent (typeGeoCmd, "
+		    "point1, point2, point3, point4, "
+		    "point5, point6, point7, point8"
+		    ") VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -647,7 +693,9 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		break;
 	    case 11:
 		// SimilarTriangles
-		insertionNewConsequent = "INSERT INTO Consequent(typeGeoCmd, point1, point2, point3, point4, point5, point6) VALUES ('"
+		insertionNewConsequent = "INSERT INTO Consequent (typeGeoCmd, "
+		    "point1, point2, point3, point4, point5, point6"
+		    ") VALUES ('"
 		    + drv.typeGeoCmd[i] + "', '"
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
@@ -695,7 +743,8 @@ void FOFtoDB::showDB(DBinMemory dbim) {
     // Collinear facts
     std::cout << std::endl;
     std::cout << "Collinear facts" << std::endl;
-    selectDB = "SELECT typeGeoCmd, point1, point2, point3 FROM Collinear";
+    selectDB = "SELECT typeGeoCmd, point1, point2, point3 "
+	"FROM Collinear";
     dbim.rc = sqlite3_prepare_v2(dbim.db, selectDB.c_str(), selectDB.size(),
 				 &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
@@ -711,7 +760,8 @@ void FOFtoDB::showDB(DBinMemory dbim) {
     // Parallel facts
     std::cout << std::endl;
     std::cout << "Parallel facts" << std::endl;
-    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4 FROM Parallel";
+    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4 "
+	"FROM Parallel";
     dbim.rc = sqlite3_prepare_v2(dbim.db, selectDB.c_str(), selectDB.size(),
 				 &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
@@ -728,7 +778,8 @@ void FOFtoDB::showDB(DBinMemory dbim) {
     // Perpendicular facts
     std::cout << std::endl;
     std::cout << "Perpendicular facts" << std::endl;
-    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4 FROM Perpendicular";
+    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4 "
+	"FROM Perpendicular";
     dbim.rc = sqlite3_prepare_v2(dbim.db, selectDB.c_str(), selectDB.size(),
 				 &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
@@ -745,7 +796,8 @@ void FOFtoDB::showDB(DBinMemory dbim) {
     // Midpoint facts
     std::cout << std::endl;
     std::cout << "Midpoint facts" << std::endl;
-    selectDB = "SELECT typeGeoCmd, point1, point2, point3 FROM Midpoint";
+    selectDB = "SELECT typeGeoCmd, point1, point2, point3 "
+	"FROM Midpoint";
     dbim.rc = sqlite3_prepare_v2(dbim.db, selectDB.c_str(), selectDB.size(),
 				 &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
@@ -761,7 +813,8 @@ void FOFtoDB::showDB(DBinMemory dbim) {
     // Circle facts
     std::cout << std::endl;
     std::cout << "Circle facts" << std::endl;
-    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4 FROM Circle";
+    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4 "
+	"FROM Circle";
     dbim.rc = sqlite3_prepare_v2(dbim.db, selectDB.c_str(), selectDB.size(),
 				 &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
@@ -778,7 +831,8 @@ void FOFtoDB::showDB(DBinMemory dbim) {
     // Congruent Segments facts
     std::cout << std::endl;
     std::cout << "Congruent Segments facts" << std::endl;
-    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4 FROM CongruentSegments";
+    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4 "
+	"FROM CongruentSegments";
     dbim.rc = sqlite3_prepare_v2(dbim.db, selectDB.c_str(), selectDB.size(),
 				 &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
@@ -795,7 +849,9 @@ void FOFtoDB::showDB(DBinMemory dbim) {
     // Congruent Triangles facts
     std::cout << std::endl;
     std::cout << "Congruent Triangles facts" << std::endl;
-    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4, point5, point6 FROM CongruentTriangles";
+    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4, point5, "
+	"point6 "
+	"FROM CongruentTriangles";
     dbim.rc = sqlite3_prepare_v2(dbim.db, selectDB.c_str(), selectDB.size(),
 				 &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
@@ -814,7 +870,8 @@ void FOFtoDB::showDB(DBinMemory dbim) {
     // Cyclic facts
     std::cout << std::endl;
     std::cout << "Cyclic facts" << std::endl;
-    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4 FROM Cyclic";
+    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4 "
+	"FROM Cyclic";
     dbim.rc = sqlite3_prepare_v2(dbim.db, selectDB.c_str(), selectDB.size(),
 				 &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
@@ -831,7 +888,9 @@ void FOFtoDB::showDB(DBinMemory dbim) {
     // Equal Angles facts
     std::cout << std::endl;
     std::cout << "Equal Angles facts" << std::endl;
-    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8 FROM EqualAngles";
+    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4, point5, "
+	"point6, point7, point8 "
+	"FROM EqualAngles";
     dbim.rc = sqlite3_prepare_v2(dbim.db, selectDB.c_str(), selectDB.size(),
 				 &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
@@ -852,7 +911,9 @@ void FOFtoDB::showDB(DBinMemory dbim) {
     // Equal Ratios facts
     std::cout << std::endl;
     std::cout << "Equal Ratios facts" << std::endl;
-    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4, point5, point6, point7, point8 FROM EqualRatios";
+    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4, point5, "
+	"point6, point7, point8 "
+	"FROM EqualRatios";
     dbim.rc = sqlite3_prepare_v2(dbim.db, selectDB.c_str(), selectDB.size(),
 				 &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
@@ -873,7 +934,9 @@ void FOFtoDB::showDB(DBinMemory dbim) {
     // Similar Triangles facts
     std::cout << std::endl;
     std::cout << "Similar Triangles facts" << std::endl;
-    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4, point5, point6 FROM SimilarTriangles";
+    selectDB = "SELECT typeGeoCmd, point1, point2, point3, point4, point5, "
+	"point6 "
+	"FROM SimilarTriangles";
     dbim.rc = sqlite3_prepare_v2(dbim.db, selectDB.c_str(), selectDB.size(),
 				 &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
