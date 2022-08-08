@@ -127,34 +127,26 @@ DBinMemory Prover::ruleD03(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    // querySecondGeoCmdA = "SELECT point3 "
-    // 	"FROM NewFact "
-    // 	"INNER JOIN Collinear "
-    // 	"ON (newFact = id) "
-    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2 + "'";
     querySecondGeoCmdA = "SELECT point3 "
 	"FROM NewFact "
 	"INNER JOIN Collinear "
 	"ON (newFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
 	+ "' AND point3 <> '" + point3 + "'";
+    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
     sqlite3_step(dbim.stmt1);
 
-    // querySecondGeoCmdB = "SELECT point3 "
-    // 	"FROM Facts "
-    // 	"INNER JOIN Collinear "
-    // 	"ON (oldFact = id) "
-    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2 + "'";
     querySecondGeoCmdB = "SELECT point3 "
 	"FROM Facts "
 	"INNER JOIN Collinear "
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
 	+ "' AND point3 <> '" + point3 + "'";
+    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -216,7 +208,7 @@ DBinMemory Prover::ruleD04(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"Parallel (typeGeoCmd, point1, point2, point3, point4, newFact) "
@@ -259,7 +251,7 @@ DBinMemory Prover::ruleD05(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step(dbim.stmt);
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"Parallel (typeGeoCmd, point1, point2, point3, point4, newFact) "
@@ -306,11 +298,6 @@ DBinMemory Prover::ruleD06(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    // querySecondGeoCmdA = "SELECT point3, point4 "
-    // 	"FROM NewFact "
-    // 	"INNER JOIN Parallel "
-    // 	"ON (newFact = id) "
-    // 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
     querySecondGeoCmdA = "SELECT point3, point4 "
 	"FROM NewFact "
 	"INNER JOIN Parallel "
@@ -319,17 +306,13 @@ DBinMemory Prover::ruleD06(DBinMemory dbim, std::string point1,
 	+ "' AND NOT (point3 = '" + point1 + "' AND point4 = '" + point2
 	+ "') AND NOT (point3 = '" + point2 + "' AND point4 = '" + point1
 	+ "')";
+    // 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
     sqlite3_step(dbim.stmt1);
 
-    // querySecondGeoCmdB = "SELECT point3, point4 "
-    // 	"FROM Facts "
-    // 	"INNER JOIN Parallel "
-    // 	"ON (oldFact = id) "
-    // 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
     querySecondGeoCmdB = "SELECT point3, point4 "
 	"FROM Facts "
 	"INNER JOIN Parallel "
@@ -338,6 +321,7 @@ DBinMemory Prover::ruleD06(DBinMemory dbim, std::string point1,
 	+ "' AND NOT (point3 = '" + point1 + "' AND point4 = '" + point2
 	+ "') AND NOT (point3 = '" + point2 + "' AND point4 = '" + point1
 	+ "')";
+    // 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -492,11 +476,6 @@ DBinMemory Prover::ruleD09(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    // querySecondGeoCmdA = "SELECT point3, point4 "
-    // 	"FROM NewFact "
-    // 	"INNER JOIN Perpendicular "
-    // 	"ON (newFact = id) "
-    // 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
     querySecondGeoCmdA = "SELECT point3, point4 "
 	"FROM NewFact "
 	"INNER JOIN Perpendicular "
@@ -505,17 +484,13 @@ DBinMemory Prover::ruleD09(DBinMemory dbim, std::string point1,
 	+ "' AND NOT (point3 = '" + point1 + "' AND point4 = '" + point2
 	+ "') AND NOT (point3 = '" + point2 + "' AND point4 = '" + point1
 	+ "')";
+    // 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
     sqlite3_step(dbim.stmt1);
     
-    // querySecondGeoCmdB = "SELECT point3, point4 "
-    // 	"FROM Facts "
-    // 	"INNER JOIN Perpendicular "
-    // 	"ON (oldFact = id) "
-    // 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
     querySecondGeoCmdB = "SELECT point3, point4 "
 	"FROM Facts "
 	"INNER JOIN Perpendicular "
@@ -524,6 +499,7 @@ DBinMemory Prover::ruleD09(DBinMemory dbim, std::string point1,
 	+ "' AND NOT (point3 = '" + point1 + "' AND point4 = '" + point2
 	+ "') AND NOT (point3 = '" + point2 + "' AND point4 = '" + point1
 	+ "')";
+    // 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -564,90 +540,6 @@ DBinMemory Prover::ruleD09(DBinMemory dbim, std::string point1,
     }
   return dbim;
 }
-
-/*
- * Rule D10: para(A, B, C, D) & perp(C, D, E, F) => perp(A, B, E, F)
- */
-// DBinMemory Prover::ruleD10(DBinMemory dbim, std::string point1,
-// 			   std::string point2, std::string point3,
-// 			   std::string point4) {
-//     bool correctTransaction;
-//     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
-//     std::string querySecondGeoCmdA, querySecondGeoCmdB;
-//     std::string newPoint3, newPoint4;
-
-//     insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('perp')";
-//     lastInsertedRowId = "SELECT last_insert_rowid()";
-
-//     sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg)); 
-//     correctTransaction = true;
-//     dbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(),
-// 				 insertNewFact.size(), &(dbim.stmt), NULL);
-//     if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
-//      	correctTransaction = false;
-//     }
-//     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
-// 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
-//     sqlite3_step(dbim.stmt);
-//     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
-
-//     querySecondGeoCmdA = "SELECT point3, point4 "
-// 	"FROM NewFact "
-// 	"INNER JOIN Perpendicular "
-// 	"ON (newFact = id) "
-// 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
-
-//     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
-// 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
-// 				 NULL);
-//     sqlite3_step(dbim.stmt1);
-    
-//     querySecondGeoCmdB = "SELECT point3, point4 "
-// 	"FROM Facts "
-// 	"INNER JOIN Perpendicular "
-// 	"ON (oldFact = id) "
-// 	"WHERE point1 = '" + point3 + "' AND point2 = '" + point4 + "'";
-
-//     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
-// 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
-// 				 NULL);
-//     sqlite3_step(dbim.stmt2);
-//     if (sqlite3_data_count(dbim.stmt1) == 0
-// 	&& sqlite3_data_count(dbim.stmt2) == 0 ) {
-// 	correctTransaction=false;
-//     } else {
-// 	if (sqlite3_data_count(dbim.stmt1) != 0) {
-// 	    newPoint3 = (char*) sqlite3_column_text(dbim.stmt1, 0);
-// 	    newPoint4 = (char*) sqlite3_column_text(dbim.stmt1, 1);
-// 	} else {
-// 	    newPoint3 = (char*) sqlite3_column_text(dbim.stmt2, 0);
-// 	    newPoint4 = (char*) sqlite3_column_text(dbim.stmt2, 1);
-// 	}
-// 	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
-// 	    correctTransaction = false;
-// 	} else {
-// 	    insertionPred = "INSERT INTO "
-// 		"Perpendicular (typeGeoCmd, point1, point2, point3, point4, "
-// 		"newFact) "
-// 		"VALUES "
-// 		"('perp', '" + point1 + "', '" + point2 + "', '" + newPoint3
-// 		+ "', '" + newPoint4 + "', '" + lstInsRwId + "')";
-
-// 	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
-// 					 insertionPred.size(), &(dbim.stmt),
-// 					 NULL);
-// 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
-// 		correctTransaction = false;
-// 	    }
-// 	}
-//     }
-//     if (correctTransaction) {
-// 	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
-//     } else {
-// 	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
-//     }
-//   return dbim;
-// }
 
 /*
  * Rule D10: para(A, B, C, D) & perp(C, D, E, F) => perp(A, B, E, F)
@@ -888,36 +780,26 @@ DBinMemory Prover::ruleD12(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    // querySecondGeoCmdA = "SELECT point4 "
-    // 	"FROM NewFact "
-    // 	"INNER JOIN CongruentSegments "
-    // 	"ON (newFact = id) "
-    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-    // 	+ "' AND point3 = '" + point3 + "'";
     querySecondGeoCmdA = "SELECT point4 "
 	"FROM NewFact "
 	"INNER JOIN CongruentSegments "
 	"ON (newFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
 	+ "' AND point3 = '" + point3 + "' AND point4 <> '" + point4 + "'";
+    // 	+ "' AND point3 = '" + point3 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
     sqlite3_step(dbim.stmt1);
-    
-    // querySecondGeoCmdB = "SELECT point4 "
-    // 	"FROM Facts "
-    // 	"INNER JOIN CongruentSegments "
-    // 	"ON (oldFact = id) "
-    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-    // 	+ "' AND point3 = '" + point3 + "'";
+
     querySecondGeoCmdB = "SELECT point4 "
 	"FROM Facts "
 	"INNER JOIN CongruentSegments "
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
         + "' AND point3 = '" + point3 + "' AND point4 <> '" + point4 + "'";
+    // 	+ "' AND point3 = '" + point3 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -959,6 +841,157 @@ DBinMemory Prover::ruleD12(DBinMemory dbim, std::string point1,
 }
 
 /*
+ * Rule D13: cong(O, A, O, B) & cong(O, A, O, C) & cong(O, A, O, D)
+ *               => cyclic(A, B, C, D)
+ */
+DBinMemory Prover::ruleD13(DBinMemory dbim, std::string point1,
+			   std::string point2, std::string point3,
+			   std::string point4) {
+    bool correctTransaction;
+    std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
+    std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::string newPoint3, newPoint4;
+
+    insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('cyclic')";
+    lastInsertedRowId = "SELECT last_insert_rowid()";
+
+    sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg)); 
+    correctTransaction = true;
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(),
+				 insertNewFact.size(), &(dbim.stmt), NULL);
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	correctTransaction = false;
+    }
+    dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
+				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
+    sqlite3_step(dbim.stmt);
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
+
+    // querySecondGeoCmdA = "SELECT point4 "
+    // 	"FROM NewFact "
+    // 	"INNER JOIN CongruentSegments "
+    // 	"ON (newFact = id) "
+    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+    // 	+ "' AND point3 = '" + point3 + "'";
+    querySecondGeoCmdA = "SELECT point4 "
+	"FROM NewFact "
+	"INNER JOIN CongruentSegments "
+	"ON (newFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	+ "' AND point3 = '" + point3 + "' AND point4 <> '" + point4 + "'";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
+				 querySecondGeoCmdA.size(), &(dbim.stmt1),
+				 NULL);
+    sqlite3_step(dbim.stmt1);
+    
+    // querySecondGeoCmdB = "SELECT point4 "
+    // 	"FROM Facts "
+    // 	"INNER JOIN CongruentSegments "
+    // 	"ON (oldFact = id) "
+    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+    // 	+ "' AND point3 = '" + point3 + "'";
+    querySecondGeoCmdB = "SELECT point4 "
+	"FROM Facts "
+	"INNER JOIN CongruentSegments "
+	"ON (oldFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+        + "' AND point3 = '" + point3 + "' AND point4 <> '" + point4 + "'";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+				 querySecondGeoCmdB.size(), &(dbim.stmt2),
+				 NULL);
+    sqlite3_step(dbim.stmt2);
+
+    if (sqlite3_data_count(dbim.stmt1) == 0
+	&& sqlite3_data_count(dbim.stmt2) == 0 ) {
+	correctTransaction=false;
+    } else {
+	if (sqlite3_data_count(dbim.stmt1) != 0) {
+	    newPoint3 = (char*) sqlite3_column_text(dbim.stmt1, 0);
+	} else {
+	    newPoint3 = (char*) sqlite3_column_text(dbim.stmt2, 0);
+	}
+	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	    correctTransaction = false;
+	} else {
+	    // querySecondGeoCmdA = "SELECT point4 "
+	    // 	"FROM NewFact "
+	    // 	"INNER JOIN CongruentSegments "
+	    // 	"ON (newFact = id) "
+	    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	    // 	+ "' AND point3 = '" + point3 + "'";
+	    querySecondGeoCmdA = "SELECT point4 "
+		"FROM NewFact "
+		"INNER JOIN CongruentSegments "
+		"ON (newFact = id) "
+		"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+		+ "' AND point3 = '" + point3 + "' AND point4 NOT IN ('"
+		+ point4 + "', '" + newPoint3 + "')";
+
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
+					 querySecondGeoCmdA.size(),
+					 &(dbim.stmt1), NULL);
+	    sqlite3_step(dbim.stmt1);
+    
+	    // querySecondGeoCmdB = "SELECT point4 "
+	    // 	"FROM Facts "
+	    // 	"INNER JOIN CongruentSegments "
+	    // 	"ON (oldFact = id) "
+	    // 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	    // 	+ "' AND point3 = '" + point3 + "'";
+	    querySecondGeoCmdB = "SELECT point4 "
+		"FROM Facts "
+		"INNER JOIN CongruentSegments "
+		"ON (oldFact = id) "
+		"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	        + "' AND point3 = '" + point3 + "' AND point4 NOT IN ('"
+		+ point4 + "', '" + newPoint3 + "')";
+
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+					 querySecondGeoCmdB.size(),
+					 &(dbim.stmt2), NULL);
+	    sqlite3_step(dbim.stmt2);
+
+	    if (sqlite3_data_count(dbim.stmt1) == 0
+		&& sqlite3_data_count(dbim.stmt2) == 0 ) {
+		correctTransaction=false;
+	    } else {
+		if (sqlite3_data_count(dbim.stmt1) != 0) {
+		    newPoint4 = (char*) sqlite3_column_text(dbim.stmt1, 0);
+		} else {
+		    newPoint4 = (char*) sqlite3_column_text(dbim.stmt2, 0);
+		}
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		    correctTransaction = false;
+		} else {
+		    insertionPred = "INSERT INTO "
+			"Cyclic (typeGeoCmd, point1, point2, point3, point4, "
+			"newFact)"
+			"VALUES "
+			"('cyclic', '" + point2 + "', '" + point4 + "', '"
+			+ newPoint3 + "', '" + newPoint4 + "', '" + lstInsRwId
+			+ "')";
+
+		    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+						 insertionPred.size(),
+						 &(dbim.stmt), NULL);
+		    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+			correctTransaction = false;
+		    }
+		}
+	    }
+	}
+    }
+    if (correctTransaction) {
+	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
+    } else {
+	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+    }
+  return dbim;
+}
+
+/*
  * Rule D14: cyclic(A, B, C, D) => cyclic(A, B, D, C)
  */
 DBinMemory Prover::ruleD14(DBinMemory dbim, std::string point1,
@@ -980,7 +1013,7 @@ DBinMemory Prover::ruleD14(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"Cyclic (typeGeoCmd, point1, point2, point3, point4, newFact) "
@@ -1023,7 +1056,7 @@ DBinMemory Prover::ruleD15(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"Cyclic (typeGeoCmd, point1, point2, point3, point4, newFact) "
@@ -1067,7 +1100,7 @@ DBinMemory Prover::ruleD16(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"Cyclic (typeGeoCmd, point1, point2, point3, point4, newFact) "
@@ -1195,7 +1228,7 @@ DBinMemory Prover::ruleD18(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"EqualAngles (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -1242,7 +1275,7 @@ DBinMemory Prover::ruleD19(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"EqualAngles (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -1289,7 +1322,7 @@ DBinMemory Prover::ruleD20(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"EqualAngles (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -1336,7 +1369,7 @@ DBinMemory Prover::ruleD21(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"EqualAngles (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -1476,7 +1509,7 @@ DBinMemory Prover::ruleD23(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"CongruentSegments (typeGeoCmd, point1, point2, point3, point4, "
@@ -1520,7 +1553,7 @@ DBinMemory Prover::ruleD24(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"CongruentSegments (typeGeoCmd, point1, point2, point3, point4, "
@@ -1650,7 +1683,7 @@ DBinMemory Prover::ruleD26(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"EqualRatios (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -1697,7 +1730,7 @@ DBinMemory Prover::ruleD27(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"EqualRatios (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -1744,7 +1777,7 @@ DBinMemory Prover::ruleD28(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"EqualRatios (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -1791,7 +1824,7 @@ DBinMemory Prover::ruleD29(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"EqualRatios (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -1932,7 +1965,7 @@ DBinMemory Prover::ruleD31(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"SimilarTriangles (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -1978,7 +2011,7 @@ DBinMemory Prover::ruleD32(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"SimilarTriangles (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -2024,7 +2057,7 @@ DBinMemory Prover::ruleD33(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"SimilarTriangles (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -2161,7 +2194,7 @@ DBinMemory Prover::ruleD35(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"CongruentTriangles (typeGeoCmd, point1, point2, point3, point4, "
@@ -2207,7 +2240,7 @@ DBinMemory Prover::ruleD36(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"CongruentTriangles (typeGeoCmd, point1, point2, point3, point4, "
@@ -2253,7 +2286,7 @@ DBinMemory Prover::ruleD37(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"CongruentTriangles (typeGeoCmd, point1, point2, point3, point4, "
@@ -2391,7 +2424,7 @@ DBinMemory Prover::ruleD39(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"Parallel (typeGeoCmd, point1, point2, point3, point4, newFact) "
@@ -2434,7 +2467,7 @@ DBinMemory Prover::ruleD41(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"EqualAngles (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -2479,7 +2512,7 @@ DBinMemory Prover::ruleD46(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"EqualAngles (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -2525,7 +2558,7 @@ DBinMemory Prover::ruleD59(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"EqualRatios (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -2571,7 +2604,7 @@ DBinMemory Prover::ruleD60(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"EqualAngles (typeGeoCmd, point1, point2, point3, point4, point5, "
@@ -2617,7 +2650,7 @@ DBinMemory Prover::ruleD62(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"CongruentSegments (typeGeoCmd, point1, point2, point3, point4, "
@@ -2744,7 +2777,7 @@ DBinMemory Prover::ruleD66(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"Collinear (typeGeoCmd, point1, point2, point3, newFact) "
@@ -2786,7 +2819,7 @@ DBinMemory Prover::ruleD68(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"CongruentSegments (typeGeoCmd, point1, point2, point3, point4, "
@@ -2829,7 +2862,7 @@ DBinMemory Prover::ruleD69(DBinMemory dbim, std::string point1,
     dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
     sqlite3_step( dbim.stmt );
-    lstInsRwId = (char*) sqlite3_column_text( dbim.stmt, 0 );
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
     insertionPred = "INSERT INTO "
 	"Collinear (typeGeoCmd, point1, point2, point3, newFact) "
@@ -3696,7 +3729,6 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD04(dbim, point1, point2, point3, point4);
 	    dbim = ruleD05(dbim, point1, point2, point3, point4);
 	    dbim = ruleD06(dbim, point1, point2, point3, point4);
-	    // dbim = ruleD10(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10para(dbim, point1, point2, point3, point4);
 	    if (point1 == point3) {
 		dbim = ruleD66(dbim, point1, point2, point3, point4);
@@ -3728,7 +3760,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD24(dbim, point1, point2, point3, point4);
 	    dbim = ruleD25(dbim, point1, point2, point3, point4);
 	    if (point1 == point3) {	
-		dbim = ruleD46(dbim, point1, point2, point3, point4);
+		// dbim = ruleD46(dbim, point1, point2, point3, point4);
 	    }
 	    break;
 	case 7:
@@ -3746,11 +3778,12 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    break;
 	case 8:
 	    // Cyclic
+	    dbim = ruleD13(dbim, point1, point2, point3, point4);
 	    dbim = ruleD14(dbim, point1, point2, point3, point4);
 	    dbim = ruleD15(dbim, point1, point2, point3, point4);
 	    dbim = ruleD16(dbim, point1, point2, point3, point4);
 	    dbim = ruleD17(dbim, point1, point2, point3, point4);
-	    dbim = ruleD41(dbim, point1, point2, point3, point4);
+	    // dbim = ruleD41(dbim, point1, point2, point3, point4);
 	    break;
 	case 9:
 	    // Equal Angles
