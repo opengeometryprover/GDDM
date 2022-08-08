@@ -1396,7 +1396,24 @@ DBinMemory Prover::ruleD22(DBinMemory dbim, std::string point1,
 	"INNER JOIN EqualAngles "
 	"ON (newFact = id) "
 	"WHERE point1 = '" + point5 + "' AND point2 = '" + point6
-	+ "' AND point3 = '" + point7 + "' AND point4 = '" + point8 + "'";
+	+ "' AND point3 = '" + point7 + "' AND point4 = '" + point8
+	+ "' AND NOT (point5 = '" + point1 + "' AND point6 = '" + point2
+	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4
+	+ "') AND NOT (point5 = '" + point1 + "' AND point6 = '" + point2
+	+ "' AND point7 = '" + point4 + "' AND point8 = '" + point3
+	+ "') AND NOT (point5 = '" + point2 + "' AND point6 = '" + point1
+	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4
+	+ "') AND NOT (point5 = '" + point2 + "' AND point6 = '" + point2
+	+ "' AND point7 = '" + point4 + "' AND point8 = '" + point3
+	+ "') AND NOT (point5 = '" + point3 + "' AND point6 = '" + point4
+	+ "' AND point7 = '" + point1 + "' AND point8 = '" + point2
+	+ "') AND NOT (point5 = '" + point3 + "' AND point6 = '" + point4
+	+ "' AND point7 = '" + point2 + "' AND point8 = '" + point1
+	+ "') AND NOT (point5 = '" + point4 + "' AND point6 = '" + point3
+	+ "' AND point7 = '" + point1 + "' AND point8 = '" + point2
+	+ "') AND NOT (point5 = '" + point4 + "' AND point6 = '" + point3
+	+ "' AND point7 = '" + point2 + "' AND point8 = '" + point1 + "')";
+	
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
@@ -1408,7 +1425,23 @@ DBinMemory Prover::ruleD22(DBinMemory dbim, std::string point1,
 	"INNER JOIN EqualAngles "
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point5 + "' AND point2 = '" + point6
-	+ "' AND point3 = '" + point7 + "' AND point4 = '" + point8 + "'";
+	+ "' AND point3 = '" + point7 + "' AND point4 = '" + point8
+	+ "' AND NOT (point5 = '" + point1 + "' AND point6 = '" + point2
+	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4
+	+ "') AND NOT (point5 = '" + point1 + "' AND point6 = '" + point2
+	+ "' AND point7 = '" + point4 + "' AND point8 = '" + point3
+	+ "') AND NOT (point5 = '" + point2 + "' AND point6 = '" + point1
+	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4
+	+ "') AND NOT (point5 = '" + point2 + "' AND point6 = '" + point2
+	+ "' AND point7 = '" + point4 + "' AND point8 = '" + point3
+	+ "') AND NOT (point5 = '" + point3 + "' AND point6 = '" + point4
+	+ "' AND point7 = '" + point1 + "' AND point8 = '" + point2
+	+ "') AND NOT (point5 = '" + point3 + "' AND point6 = '" + point4
+	+ "' AND point7 = '" + point2 + "' AND point8 = '" + point1
+	+ "') AND NOT (point5 = '" + point4 + "' AND point6 = '" + point3
+	+ "' AND point7 = '" + point1 + "' AND point8 = '" + point2
+	+ "') AND NOT (point5 = '" + point4 + "' AND point6 = '" + point3
+	+ "' AND point7 = '" + point2 + "' AND point8 = '" + point1 + "')";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
