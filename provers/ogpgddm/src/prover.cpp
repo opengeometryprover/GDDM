@@ -1146,7 +1146,8 @@ DBinMemory Prover::ruleD17(DBinMemory dbim, std::string point1,
 	"INNER JOIN Cyclic "
 	"ON (newFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point3 + "'";
+	+ "' AND point3 = '" + point3
+	+ "' AND point4 <> '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
@@ -1156,9 +1157,10 @@ DBinMemory Prover::ruleD17(DBinMemory dbim, std::string point1,
     querySecondGeoCmdB = "SELECT point4 "
 	"FROM Facts "
 	"INNER JOIN Cyclic "
-	"ON (newFact = id) "
+	"ON (oldFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point3 + "'";
+	+ "' AND point3 = '" + point3
+	+ "' AND point4 <> '" + point4 + "'";
 
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -3756,6 +3758,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    if (point1 == point3) {
 		dbim = ruleD12(dbim, point1, point2, point3, point4);
 	    }
+	    // dbim = ruleD13(dbim, point1, point2, point3, point4);
 	    dbim = ruleD23(dbim, point1, point2, point3, point4);
 	    dbim = ruleD24(dbim, point1, point2, point3, point4);
 	    dbim = ruleD25(dbim, point1, point2, point3, point4);
@@ -3778,7 +3781,6 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    break;
 	case 8:
 	    // Cyclic
-	    dbim = ruleD13(dbim, point1, point2, point3, point4);
 	    dbim = ruleD14(dbim, point1, point2, point3, point4);
 	    dbim = ruleD15(dbim, point1, point2, point3, point4);
 	    dbim = ruleD16(dbim, point1, point2, point3, point4);
