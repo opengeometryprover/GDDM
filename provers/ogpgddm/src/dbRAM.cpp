@@ -53,20 +53,164 @@ void DBinMemory::createDBforGDDM() {
     sqlite3_step(stmt);
   
     // The CREATE TABLE statements
-    createTableNewFact = "CREATE TABLE IF NOT EXISTS 'NewFact' ('id' INTEGER NOT NULL, 'typeGeoCmd' TEXT NOT NULL, PRIMARY KEY('id' AUTOINCREMENT))";
-    createTableFacts = "CREATE TABLE IF NOT EXISTS 'Facts' ('id' INTEGER NOT NULL, 'typeGeoCmd' TEXT NOT NULL, PRIMARY KEY('id'))";
-    createTableConsequent = "CREATE TABLE IF NOT EXISTS 'Consequent' ('id' INTEGER NOT NULL, 'typeGeoCmd' TEXT NOT NULL, 'point1' TEXT, 'point2' TEXT, 'point3' TEXT, 'point4' TEXT, 'point5' TEXT, 'point6' TEXT, 'point7' TEXT, 'point8' TEXT, PRIMARY KEY('id' AUTOINCREMENT))";
-    createTableCollinear = "CREATE TABLE IF NOT EXISTS 'Collinear' ('typeGeoCmd' TEXT NOT NULL, 'point1' TEXT, 'point2' TEXT, 'point3' TEXT, 'newFact' INTEGER, 'oldFact' INTEGER, FOREIGN KEY('oldFact') REFERENCES 'Facts'('id'), FOREIGN KEY('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL, PRIMARY KEY('point1', 'point2', 'point3'))";
-    createTableParallel = "CREATE TABLE IF NOT EXISTS 'Parallel' ('typeGeoCmd' TEXT NOT NULL, 'point1' TEXT, 'point2' TEXT, 'point3' TEXT, 'point4' TEXT, 'newFact' INTEGER, 'oldFact' INTEGER,FOREIGN KEY('oldFact') REFERENCES 'Facts'('id'), FOREIGN KEY('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL, PRIMARY KEY('point1', 'point2', 'point3', 'point4'))";
-    createTablePerpendicular = "CREATE TABLE IF NOT EXISTS 'Perpendicular' ('typeGeoCmd' TEXT NOT NULL, 'point1' TEXT, 'point2' TEXT, 'point3' TEXT, 'point4' TEXT, 'newFact' INTEGER,'oldFact' INTEGER, FOREIGN KEY('oldFact') REFERENCES 'Facts'('id'), PRIMARY KEY('point1', 'point2', 'point3', 'point4'), FOREIGN KEY('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL)";
-    createTableMidpoint = "CREATE TABLE IF NOT EXISTS 'Midpoint' ('typeGeoCmd' TEXT NOT NULL, 'point1' TEXT, 'point2' TEXT, 'point3' TEXT, 'newFact' INTEGER, 'oldFact' INTEGER, FOREIGN KEY('oldFact') REFERENCES 'Facts'('id'), FOREIGN KEY('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL, PRIMARY KEY('point1', 'point2', 'point3'))";
-    createTableCircle = "CREATE TABLE IF NOT EXISTS 'Circle' ('typeGeoCmd' TEXT NOT NULL, 'point1' TEXT, 'point2' TEXT, 'point3' TEXT, 'point4' TEXT, 'newFact' INTEGER, 'oldFact' INTEGER, FOREIGN KEY('oldFact') REFERENCES 'Facts'('id'), FOREIGN KEY('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL, PRIMARY KEY('point1', 'point2', 'point3', 'point4'))";
-    createTableCongruentSegments = "CREATE TABLE IF NOT EXISTS 'CongruentSegments' ('typeGeoCmd' TEXT NOT NULL, 'point1' TEXT, 'point2' TEXT, 'point3' TEXT, 'point4' TEXT, 'newFact' INTEGER, 'oldFact' INTEGER, FOREIGN KEY('oldFact') REFERENCES 'Facts'('id'), FOREIGN KEY('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL, PRIMARY KEY('point1', 'point2', 'point3', 'point4'))";
-    createTableCongruentTriangles = "CREATE TABLE IF NOT EXISTS 'CongruentTriangles' ('typeGeoCmd' TEXT NOT NULL, 'point1' TEXT, 'point2' TEXT, 'point3' TEXT, 'point4' TEXT, 'point5' TEXT, 'point6' TEXT, 'newFact' INTEGER, 'oldFact' INTEGER, FOREIGN KEY('oldFact') REFERENCES 'Facts'('id'), FOREIGN KEY('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL, PRIMARY KEY('point1', 'point2', 'point3', 'point4', 'point5', 'point6'))";
-    createTableCyclic = "CREATE TABLE IF NOT EXISTS 'Cyclic' ('typeGeoCmd' TEXT NOT NULL, 'point1' TEXT, 'point2' TEXT, 'point3' TEXT, 'point4' TEXT, 'newFact' INTEGER, 'oldFact' INTEGER, FOREIGN KEY('oldFact') REFERENCES 'Facts'('id'), FOREIGN KEY('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL, PRIMARY KEY('point1', 'point2', 'point3', 'point4'))";
-    createTableEqualAngles = "CREATE TABLE IF NOT EXISTS 'EqualAngles' ('typeGeoCmd' TEXT NOT NULL, 'point1' TEXT, 'point2' TEXT, 'point3' TEXT, 'point4' TEXT, 'point5' TEXT, 'point6' TEXT, 'point7' TEXT, 'point8' TEXT, 'newFact' INTEGER, 'oldFact' INTEGER, FOREIGN KEY('oldFact') REFERENCES 'Facts'('id'), FOREIGN KEY('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL, PRIMARY KEY('point1', 'point2', 'point3', 'point4', 'point5', 'point6', 'point7', 'point8'))";
-    createTableEqualRatios = "CREATE TABLE IF NOT EXISTS 'EqualRatios' ('typeGeoCmd' TEXT NOT NULL, 'point1' TEXT, 'point2' TEXT, 'point3' TEXT, 'point4' TEXT, 'point5' TEXT, 'point6' TEXT, 'point7' TEXT, 'point8' TEXT, 'newFact' INTEGER, 'oldFact' INTEGER, FOREIGN KEY('oldFact') REFERENCES 'Facts'('id'), FOREIGN KEY('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL, PRIMARY KEY('point1', 'point2', 'point3', 'point4', 'point5', 'point6', 'point7', 'point8'))";
-    createTableSimilarTriangles = "CREATE TABLE IF NOT EXISTS 'SimilarTriangles' ('typeGeoCmd' TEXT NOT NULL, 'point1' TEXT, 'point2' TEXT, 'point3' TEXT, 'point4' TEXT, 'point5' TEXT, 'point6' TEXT, 'newFact' INTEGER, 'oldFact' INTEGER, FOREIGN KEY('oldFact') REFERENCES 'Facts'('id'), FOREIGN KEY('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL, PRIMARY KEY('point1', 'point2', 'point3', 'point4', 'point5', 'point6'))";
+    createTableNewFact = "CREATE TABLE IF NOT EXISTS 'NewFact' ("
+	"'id' INTEGER NOT NULL, "
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"PRIMARY KEY ('id' AUTOINCREMENT))";
+    createTableFacts = "CREATE TABLE IF NOT EXISTS 'Facts' ("
+	"'id' INTEGER NOT NULL, "
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"PRIMARY KEY ('id'))";
+    createTableConsequent = "CREATE TABLE IF NOT EXISTS 'Consequent' ("
+	"'id' INTEGER NOT NULL, "
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"'point1' TEXT, "
+	"'point2' TEXT, "
+	"'point3' TEXT, "
+	"'point4' TEXT, "
+	"'point5' TEXT, "
+	"'point6' TEXT, "
+	"'point7' TEXT, "
+	"'point8' TEXT, "
+	"PRIMARY KEY ('id' AUTOINCREMENT))";
+    createTableCollinear = "CREATE TABLE IF NOT EXISTS 'Collinear' ("
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"'point1' TEXT, "
+	"'point2' TEXT, "
+	"'point3' TEXT, "
+	"'newFact' INTEGER, "
+	"'oldFact' INTEGER, "
+	"FOREIGN KEY ('oldFact') REFERENCES 'Facts'('id'), "
+	"FOREIGN KEY ('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL,"
+	"PRIMARY KEY ('point1', 'point2', 'point3'))";
+    createTableParallel = "CREATE TABLE IF NOT EXISTS 'Parallel' ("
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"'point1' TEXT, "
+	"'point2' TEXT, "
+	"'point3' TEXT, "
+	"'point4' TEXT, "
+	"'newFact' INTEGER, "
+	"'oldFact' INTEGER, "
+	"FOREIGN KEY ('oldFact') REFERENCES 'Facts'('id'), "
+	"FOREIGN KEY ('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL,"
+	"PRIMARY KEY ('point1', 'point2', 'point3', 'point4'))";
+    createTablePerpendicular = "CREATE TABLE IF NOT EXISTS 'Perpendicular' ("
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"'point1' TEXT, "
+	"'point2' TEXT, "
+	"'point3' TEXT, "
+	"'point4' TEXT, "
+	"'newFact' INTEGER, "
+	"'oldFact' INTEGER, "
+	"FOREIGN KEY ('oldFact') REFERENCES 'Facts'('id'), "
+	"FOREIGN KEY ('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL,"
+	"PRIMARY KEY ('point1', 'point2', 'point3', 'point4'))";
+    createTableMidpoint = "CREATE TABLE IF NOT EXISTS 'Midpoint' ("
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"'point1' TEXT, "
+	"'point2' TEXT, "
+	"'point3' TEXT, "
+	"'newFact' INTEGER, "
+	"'oldFact' INTEGER, "
+	"FOREIGN KEY ('oldFact') REFERENCES 'Facts'('id'), "
+	"FOREIGN KEY ('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL,"
+	"PRIMARY KEY ('point1', 'point2', 'point3'))";
+    createTableCircle = "CREATE TABLE IF NOT EXISTS 'Circle' ("
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"'point1' TEXT, "
+	"'point2' TEXT, "
+	"'point3' TEXT, "
+	"'point4' TEXT, "
+	"'newFact' INTEGER, "
+	"'oldFact' INTEGER, "
+	"FOREIGN KEY ('oldFact') REFERENCES 'Facts'('id'), "
+	"FOREIGN KEY ('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL,"
+	"PRIMARY KEY ('point1', 'point2', 'point3', 'point4'))";
+    createTableCongruentSegments = "CREATE TABLE IF NOT EXISTS "
+	"'CongruentSegments' ("
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"'point1' TEXT, "
+	"'point2' TEXT, "
+	"'point3' TEXT, "
+	"'point4' TEXT, "
+	"'newFact' INTEGER, "
+	"'oldFact' INTEGER, "
+	"FOREIGN KEY ('oldFact') REFERENCES 'Facts'('id'), "
+	"FOREIGN KEY ('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL,"
+	"PRIMARY KEY ('point1', 'point2', 'point3', 'point4'))";
+    createTableCongruentTriangles = "CREATE TABLE IF NOT EXISTS "
+	"'CongruentTriangles' ("
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"'point1' TEXT, "
+	"'point2' TEXT, "
+	"'point3' TEXT, "
+	"'point4' TEXT, "
+	"'point5' TEXT, "
+	"'point6' TEXT, "
+	"'newFact' INTEGER, "
+	"'oldFact' INTEGER, "
+	"FOREIGN KEY ('oldFact') REFERENCES 'Facts'('id'), "
+	"FOREIGN KEY ('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL,"
+	"PRIMARY KEY ('point1', 'point2', 'point3', 'point4', 'point5', "
+	"'point6'))";
+    createTableCyclic = "CREATE TABLE IF NOT EXISTS 'Cyclic' ("
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"'point1' TEXT, "
+	"'point2' TEXT, "
+	"'point3' TEXT, "
+	"'point4' TEXT, "
+	"'newFact' INTEGER, "
+	"'oldFact' INTEGER, "
+	"FOREIGN KEY ('oldFact') REFERENCES 'Facts'('id'), "
+	"FOREIGN KEY ('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL,"
+	"PRIMARY KEY ('point1', 'point2', 'point3', 'point4'))";
+    createTableEqualAngles = "CREATE TABLE IF NOT EXISTS 'EqualAngles' ("
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"'point1' TEXT, "
+	"'point2' TEXT, "
+	"'point3' TEXT, "
+	"'point4' TEXT, "
+	"'point5' TEXT, "
+	"'point6' TEXT, "
+	"'point7' TEXT, "
+	"'point8' TEXT, "
+	"'newFact' INTEGER, "
+	"'oldFact' INTEGER, "
+	"FOREIGN KEY ('oldFact') REFERENCES 'Facts'('id'), "
+	"FOREIGN KEY ('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL,"
+	"PRIMARY KEY ('point1', 'point2', 'point3', 'point4', 'point5', "
+	"'point6', 'point7', 'point8'))";
+    createTableEqualRatios = "CREATE TABLE IF NOT EXISTS 'EqualRatios' ("
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"'point1' TEXT, "
+	"'point2' TEXT, "
+	"'point3' TEXT, "
+	"'point4' TEXT, "
+	"'point5' TEXT, "
+	"'point6' TEXT, "
+	"'point7' TEXT, "
+	"'point8' TEXT, "
+	"'newFact' INTEGER, "
+	"'oldFact' INTEGER, "
+	"FOREIGN KEY ('oldFact') REFERENCES 'Facts'('id'), "
+	"FOREIGN KEY ('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL,"
+	"PRIMARY KEY ('point1', 'point2', 'point3', 'point4', 'point5', "
+	"'point6', 'point7', 'point8'))";
+    createTableSimilarTriangles = "CREATE TABLE IF NOT EXISTS "
+	"'SimilarTriangles' ("
+	"'typeGeoCmd' TEXT NOT NULL, "
+	"'point1' TEXT, "
+	"'point2' TEXT, "
+	"'point3' TEXT, "
+	"'point4' TEXT, "
+	"'point5' TEXT, "
+	"'point6' TEXT, "
+	"'newFact' INTEGER, "
+	"'oldFact' INTEGER, "
+	"FOREIGN KEY ('oldFact') REFERENCES 'Facts'('id'), "
+	"FOREIGN KEY ('newFact') REFERENCES 'NewFact'('id') ON DELETE SET NULL,"
+	"PRIMARY KEY ('point1', 'point2', 'point3', 'point4', 'point5', "
+	"'point6'))";
     deleteFromSQLiteSequence = "DELETE FROM sqlite_sequence";
     
     // Open transactions
