@@ -652,6 +652,92 @@ DBinMemory Prover::ruleD10para(DBinMemory dbim, std::string point1,
 }
 
 /*
+ * Rule D10: para(A, B, C, D) & perp(C, D, E, F) => perp(A, B, E, F)
+ *
+ * Function's argument is perp(C, D) and searches for para(A, B, C, D).
+ */
+DBinMemory Prover::ruleD10perp(DBinMemory dbim, std::string point1,
+			       std::string point2, std::string point3,
+			       std::string point4) {
+    bool correctTransaction;
+    std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
+    std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::string newPoint1, newPoint2;
+
+    insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('perp')";
+    lastInsertedRowId = "SELECT last_insert_rowid()";
+
+    sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg)); 
+    correctTransaction = true;
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(),
+				 insertNewFact.size(), &(dbim.stmt), NULL);
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+     	correctTransaction = false;
+    }
+    dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
+				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
+    sqlite3_step(dbim.stmt);
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
+
+    querySecondGeoCmdA = "SELECT point1, point2 "
+	"FROM NewFact "
+	"INNER JOIN Parallel "
+	"ON (newFact = id) "
+	"WHERE point3 = '" + point1 + "' AND point4 = '" + point2 + "'";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
+				 querySecondGeoCmdA.size(), &(dbim.stmt1),
+				 NULL);
+    sqlite3_step(dbim.stmt1);
+    
+    querySecondGeoCmdB = "SELECT point1, point2 "
+	"FROM Facts "
+	"INNER JOIN Parallel "
+	"ON (oldFact = id) "
+	"WHERE point3 = '" + point1 + "' AND point4 = '" + point2 + "'";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+				 querySecondGeoCmdB.size(), &(dbim.stmt2),
+				 NULL);
+    sqlite3_step(dbim.stmt2);
+    if (sqlite3_data_count(dbim.stmt1) == 0
+	&& sqlite3_data_count(dbim.stmt2) == 0 ) {
+	correctTransaction=false;
+    } else {
+	if (sqlite3_data_count(dbim.stmt1) != 0) {
+	    newPoint1 = (char*) sqlite3_column_text(dbim.stmt1, 0);
+	    newPoint2 = (char*) sqlite3_column_text(dbim.stmt1, 1);
+	} else {
+	    newPoint1 = (char*) sqlite3_column_text(dbim.stmt2, 0);
+	    newPoint2 = (char*) sqlite3_column_text(dbim.stmt2, 1);
+	}
+	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	    correctTransaction = false;
+	} else {
+	    insertionPred = "INSERT INTO "
+		"Perpendicular (typeGeoCmd, point1, point2, point3, point4, "
+		"newFact) "
+		"VALUES "
+		"('perp', '" + newPoint1 + "', '" + newPoint2 + "', '"
+		+ point3 + "', '" + point4 + "', '" + lstInsRwId + "')";
+
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
+					 NULL);
+	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		correctTransaction = false;
+	    }
+	}
+    }
+    if (correctTransaction) {
+	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
+    } else {
+	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+    }
+  return dbim;
+}
+
+/*
  * Rule D11 : midp(M, B, A) => midp(M, A, B)
  */
 DBinMemory Prover::ruleD11(DBinMemory dbim, std::string point1,
@@ -3538,6 +3624,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD07(dbim, point1, point2, point3, point4);
 	    dbim = ruleD08(dbim, point1, point2, point3, point4);
 	    dbim = ruleD09(dbim, point1, point2, point3, point4);
+	    dbim = ruleD10perp(dbim, point1, point2, point3, point4);
 	    break;
 	case 4:
             // Midpoint
