@@ -567,8 +567,10 @@ DBinMemory Prover::ruleD09(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D10: para(A, B, C, D) & perp(C, D, E, F) => perp(A, B, E, F)
+ *
+ * Function's argument is para(A, B, C, D).
  */
-DBinMemory Prover::ruleD10(DBinMemory dbim, std::string point1,
+DBinMemory Prover::ruleD10para(DBinMemory dbim, std::string point1,
 			       std::string point2, std::string point3,
 			       std::string point4) {
     bool correctTransaction;
@@ -3526,7 +3528,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD04(dbim, point1, point2, point3, point4);
 	    dbim = ruleD05(dbim, point1, point2, point3, point4);
 	    dbim = ruleD06(dbim, point1, point2, point3, point4);
-	    dbim = ruleD10(dbim, point1, point2, point3, point4);
+	    dbim = ruleD10para(dbim, point1, point2, point3, point4);
 	    if (point1 == point3) {
 		dbim = ruleD66(dbim, point1, point2, point3, point4);
 	    }
