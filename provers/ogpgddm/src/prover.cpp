@@ -2625,6 +2625,170 @@ DBinMemory Prover::ruleD46(DBinMemory dbim, std::string point1,
 }
 
 /*
+ * Rule D54: cyclic(A, B, C, D) & para(A, B, C, D)
+ *               => eqangle(A, D, C, D, C, D, C, B)
+ *
+ * Function's argument is cyclic(A, B, C, D) and searches for para(A, B, C, D).
+ */
+DBinMemory Prover::ruleD54cyclic(DBinMemory dbim, std::string point1,
+				 std::string point2, std::string point3,
+				 std::string point4) {
+    bool correctTransaction;
+    std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
+    std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    
+    insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('eqangle')";
+    lastInsertedRowId = "SELECT last_insert_rowid()";
+
+    sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg));
+    correctTransaction = true;
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(),
+				 insertNewFact.size(), &(dbim.stmt), NULL);
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	correctTransaction = false;
+    }
+    dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
+				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
+    sqlite3_step(dbim.stmt);
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
+
+    querySecondGeoCmdA = "SELECT * "
+	"FROM NewFact "
+	"INNER JOIN Parallel "
+	"ON (newFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	+ "' AND point3 = '" + point3 + "' AND point4 = '" + point4 + "'";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
+				 querySecondGeoCmdA.size(), &(dbim.stmt1),
+				 NULL);
+    sqlite3_step(dbim.stmt1);
+
+    querySecondGeoCmdB = "SELECT * "
+	"FROM Facts "
+	"INNER JOIN Parallel "
+	"ON (oldFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	+ "' AND point3 = '" + point3 + "' AND point4 = '" + point4 + "'";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+				 querySecondGeoCmdB.size(), &(dbim.stmt2),
+				 NULL);
+    sqlite3_step(dbim.stmt2);
+    if (sqlite3_data_count(dbim.stmt1) == 0
+	&& sqlite3_data_count(dbim.stmt2) == 0 ) {
+	correctTransaction=false;
+    } else {
+	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	    correctTransaction = false;
+	} else {
+	    insertionPred = "INSERT INTO "
+		"EqualAngles (typeGeoCmd, point1, point2, point3, point4, "
+		"point5, point6, point7, point8, newFact) "
+		"VALUES "
+		"('eqangle', '" + point1 + "', '" + point4 + "', '" + point3
+		+ "', '" + point4 + "', '" + point3 + "', '" + point4 + "', '"
+		+ point3 + "', '" + point2 + "', '" + lstInsRwId + "')";
+
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
+					 NULL);
+	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		correctTransaction = false;
+	    }
+	}
+    }
+    if (correctTransaction) {
+	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
+    } else {
+	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+    }
+    return dbim;
+}
+
+/*
+ * Rule D54: cyclic(A, B, C, D) & para(A, B, C, D)
+ *               => eqangle(A, D, C, D, C, D, C, B)
+ *
+ * Function's argument is para(A, B, C, D) and searches for cyclic(A, B, C, D).
+ */
+DBinMemory Prover::ruleD54para(DBinMemory dbim, std::string point1,
+			       std::string point2, std::string point3,
+			       std::string point4) {
+    bool correctTransaction;
+    std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
+    std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    
+    insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('eqangle')";
+    lastInsertedRowId = "SELECT last_insert_rowid()";
+
+    sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg));
+    correctTransaction = true;
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(),
+				 insertNewFact.size(), &(dbim.stmt), NULL);
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	correctTransaction = false;
+    }
+    dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
+				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
+    sqlite3_step(dbim.stmt);
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
+
+    querySecondGeoCmdA = "SELECT * "
+	"FROM NewFact "
+	"INNER JOIN Cyclic "
+	"ON (newFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	+ "' AND point3 = '" + point3 + "' AND point4 = '" + point4 + "'";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
+				 querySecondGeoCmdA.size(), &(dbim.stmt1),
+				 NULL);
+    sqlite3_step(dbim.stmt1);
+
+    querySecondGeoCmdB = "SELECT * "
+	"FROM Facts "
+	"INNER JOIN Cyclic "
+	"ON (oldFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	+ "' AND point3 = '" + point3 + "' AND point4 = '" + point4 + "'";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+				 querySecondGeoCmdB.size(), &(dbim.stmt2),
+				 NULL);
+    sqlite3_step(dbim.stmt2);
+    if (sqlite3_data_count(dbim.stmt1) == 0
+	&& sqlite3_data_count(dbim.stmt2) == 0 ) {
+	correctTransaction=false;
+    } else {
+	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	    correctTransaction = false;
+	} else {
+	    insertionPred = "INSERT INTO "
+		"EqualAngles (typeGeoCmd, point1, point2, point3, point4, "
+		"point5, point6, point7, point8, newFact) "
+		"VALUES "
+		"('eqangle', '" + point1 + "', '" + point4 + "', '" + point3
+		+ "', '" + point4 + "', '" + point3 + "', '" + point4 + "', '"
+		+ point3 + "', '" + point2 + "', '" + lstInsRwId + "')";
+
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
+					 NULL);
+	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		correctTransaction = false;
+	    }
+	}
+    }
+    if (correctTransaction) {
+	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
+    } else {
+	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+    }
+    return dbim;
+}
+
+/*
  * Rule D59: simtri(A, B, C, P, Q; R) => eqratio(A, B, A, C, P, Q, P, R)
  */
 DBinMemory Prover::ruleD59(DBinMemory dbim, std::string point1,
@@ -3164,7 +3328,7 @@ DBinMemory Prover::ruleD70(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Midpoint "
 	"ON (newFact = id) "
-	"WHERE NOT (point1 = '" + point1 + "' AND point2 = '" + point2
+	"WHERE NOT (point1g = '" + point1 + "' AND point2 = '" + point2
 	+ "' AND point3 = '" + point3
 	+ "') AND NOT (point1 = '" + point1 + "' AND point2 = '" + point3
 	+ "' AND point3 = '" + point2 + "')";
@@ -4087,6 +4251,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD05(dbim, point1, point2, point3, point4);
 	    dbim = ruleD06(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10para(dbim, point1, point2, point3, point4);
+	    dbim = ruleD54para(dbim, point1, point2, point3, point4);
 	    if (point1 == point3)
 		dbim = ruleD66(dbim, point1, point2, point3, point4);
 	    break;
@@ -4142,6 +4307,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD16(dbim, point1, point2, point3, point4);
 	    dbim = ruleD17(dbim, point1, point2, point3, point4);
 	    dbim = ruleD41(dbim, point1, point2, point3, point4);
+	    dbim = ruleD54cyclic(dbim, point1, point2, point3, point4);
 	    break;
 	case 9:
 	    // Equal Angles
