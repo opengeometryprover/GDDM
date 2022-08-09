@@ -2636,7 +2636,7 @@ DBinMemory Prover::ruleD54cyclic(DBinMemory dbim, std::string point1,
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
-    
+
     insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('eqangle')";
     lastInsertedRowId = "SELECT last_insert_rowid()";
 
@@ -2718,7 +2718,7 @@ DBinMemory Prover::ruleD54para(DBinMemory dbim, std::string point1,
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
-    
+
     insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('eqangle')";
     lastInsertedRowId = "SELECT last_insert_rowid()";
 
@@ -3328,7 +3328,7 @@ DBinMemory Prover::ruleD70(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Midpoint "
 	"ON (newFact = id) "
-	"WHERE NOT (point1g = '" + point1 + "' AND point2 = '" + point2
+	"WHERE NOT (point1 = '" + point1 + "' AND point2 = '" + point2
 	+ "' AND point3 = '" + point3
 	+ "') AND NOT (point1 = '" + point1 + "' AND point2 = '" + point3
 	+ "' AND point3 = '" + point2 + "')";
@@ -3375,8 +3375,6 @@ DBinMemory Prover::ruleD70(DBinMemory dbim, std::string point1,
 		+ "', '" + point3 + "', '" + newPoint1 + "', '" + newPoint2
 		+ "', '" + newPoint2 + "', '" + newPoint3 + "', '" + lstInsRwId
 		+ "')";
-
-	    std::cout << "----------  " << insertionPred << std::endl;
 
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
 					 insertionPred.size(), &(dbim.stmt),
