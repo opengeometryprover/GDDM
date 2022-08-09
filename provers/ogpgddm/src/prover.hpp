@@ -60,8 +60,6 @@ public:
 		       std::string);
     DBinMemory ruleD09(DBinMemory, std::string, std::string, std::string,
 		       std::string);
-    // DBinMemory ruleD10(DBinMemory,std::string, std::string, std::string,
-    // 		       std::string);
     DBinMemory ruleD10para(DBinMemory,std::string, std::string, std::string,
 			   std::string);
     DBinMemory ruleD10perp(DBinMemory,std::string, std::string, std::string,
