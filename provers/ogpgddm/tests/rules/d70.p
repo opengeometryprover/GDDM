@@ -1,4 +1,4 @@
-fof(ruleD70, conjecture, ( ! [ A, B, C, E, F ] : (
+fof(ruleD70, conjecture, ( ! [ A, B, C, M, N ] : (
     ( midp(M, A, B)
       & midp(N, C, D) )
     =>
