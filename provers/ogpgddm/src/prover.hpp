@@ -189,7 +189,9 @@ public:
 		       std::string);
     DBinMemory ruleD66(DBinMemory, std::string, std::string, std::string,
 		       std::string);
-    DBinMemory ruleD67(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD67coll(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD67cong(DBinMemory, std::string, std::string, std::string,
+			   std::string);
     DBinMemory ruleD68(DBinMemory, std::string, std::string, std::string);
     DBinMemory ruleD69(DBinMemory, std::string, std::string, std::string);
     DBinMemory ruleD70(DBinMemory, std::string, std::string, std::string,
