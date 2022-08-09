@@ -3166,7 +3166,7 @@ DBinMemory Prover::ruleD73eqangle(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    querySecondGeoCmdA = "SELECT point1 "
+    querySecondGeoCmdA = "SELECT * "
 	"FROM NewFact "
 	"INNER JOIN Parallel "
 	"ON (newFact = id) "
@@ -3178,7 +3178,7 @@ DBinMemory Prover::ruleD73eqangle(DBinMemory dbim, std::string point1,
 				 NULL);
     sqlite3_step(dbim.stmt1);
 
-    querySecondGeoCmdB = "SELECT point1 "
+    querySecondGeoCmdB = "SELECT * "
 	"FROM Facts "
 	"INNER JOIN Parallel "
 	"ON (oldFact = id) "
@@ -3250,7 +3250,7 @@ DBinMemory Prover::ruleD74eqangle(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    querySecondGeoCmdA = "SELECT point1 "
+    querySecondGeoCmdA = "SELECT * "
 	"FROM NewFact "
 	"INNER JOIN Perpendicular "
 	"ON (newFact = id) "
@@ -3262,7 +3262,7 @@ DBinMemory Prover::ruleD74eqangle(DBinMemory dbim, std::string point1,
 				 NULL);
     sqlite3_step(dbim.stmt1);
 
-    querySecondGeoCmdB = "SELECT point1 "
+    querySecondGeoCmdB = "SELECT * "
 	"FROM Facts "
 	"INNER JOIN Perpendicular "
 	"ON (oldFact = id) "
@@ -3334,7 +3334,7 @@ DBinMemory Prover::ruleD75eqratio(DBinMemory dbim, std::string point1,
     sqlite3_step(dbim.stmt);
     lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 
-    querySecondGeoCmdA = "SELECT point1 "
+    querySecondGeoCmdA = "SELECT * "
 	"FROM NewFact "
 	"INNER JOIN CongruentSegmenta "
 	"ON (newFact = id) "
@@ -3346,7 +3346,7 @@ DBinMemory Prover::ruleD75eqratio(DBinMemory dbim, std::string point1,
 				 NULL);
     sqlite3_step(dbim.stmt1);
 
-    querySecondGeoCmdB = "SELECT point1 "
+    querySecondGeoCmdB = "SELECT * "
 	"FROM Facts "
 	"INNER JOIN CongruentSegments "
 	"ON (oldFact = id) "
@@ -4062,11 +4062,11 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    if (point3 == point7 && point4 == point8)
 		dbim = ruleD39(dbim, point1, point2, point3, point4,
 			       point5, point6, point7, point8);
-	    // dbim = ruleD73(dbim, point1, point2, point3, point4,
-	    // 		   point5, point6, point7, point8);
-	    // dbim = ruleD74(dbim, point1, point2, point3, point4,
-	    // 		   point5, point6, point7, point8);
-	    // break;
+	    dbim = ruleD73eqangle(dbim, point1, point2, point3, point4,
+				  point5, point6, point7, point8);
+	    dbim = ruleD74eqangle(dbim, point1, point2, point3, point4,
+				  point5, point6, point7, point8);
+	    break;
 	case 10:
 	    // Equal Ratios
 	    dbim = ruleD26(dbim, point1, point2, point3, point4,
@@ -4079,8 +4079,8 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 			   point5, point6, point7, point8);
 	    dbim = ruleD30(dbim, point1, point2, point3, point4,
 			   point5, point6, point7, point8);
-	    // dbim = ruleD75(dbim, point1, point2, point3, point4,
-	    // 		   point5, point6, point7, point8);
+	    dbim = ruleD75eqratio(dbim, point1, point2, point3, point4,
+				  point5, point6, point7, point8);
 	    break;
 	case 11:
 	    // Similar Triangles
