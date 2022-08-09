@@ -3138,12 +3138,15 @@ DBinMemory Prover::ruleD69(DBinMemory dbim, std::string point1,
 /*
  * Rule D73: eqangle(A, B, C, D, P, Q, U, V) & para(P, Q, U, V)
  *               => para(A, B, C, D)
+ *
+ * Function's argument is eqangle(A, B, C, D, P, Q, U, V) and searches for
+ * para(P, Q, U, V).
  */
-DBinMemory Prover::ruleD73(DBinMemory dbim, std::string point1,
-			   std::string point2, std::string point3,
-			   std::string point4, std::string point5,
-			   std::string point6, std::string point7,
-			   std::string point8) {
+DBinMemory Prover::ruleD73eqangle(DBinMemory dbim, std::string point1,
+				  std::string point2, std::string point3,
+				  std::string point4, std::string point5,
+				  std::string point6, std::string point7,
+				  std::string point8) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
@@ -3219,12 +3222,15 @@ DBinMemory Prover::ruleD73(DBinMemory dbim, std::string point1,
 /*
  * Rule D74: eqangle(A, B, C, D, P, Q, U, V) & perp(P, Q, U, V)
  *               => perp(A, B, C, D)
+ *
+ * Function's argument is eqangle(A, B, C, D, P, Q, U, V) and searches for
+ * perp(P, Q, U, V).
  */
-DBinMemory Prover::ruleD74(DBinMemory dbim, std::string point1,
-			   std::string point2, std::string point3,
-			   std::string point4, std::string point5,
-			   std::string point6, std::string point7,
-			   std::string point8) {
+DBinMemory Prover::ruleD74eqangle(DBinMemory dbim, std::string point1,
+				  std::string point2, std::string point3,
+				  std::string point4, std::string point5,
+				  std::string point6, std::string point7,
+				  std::string point8) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
@@ -3300,12 +3306,15 @@ DBinMemory Prover::ruleD74(DBinMemory dbim, std::string point1,
 /*
  * Rule D75: eqratio(A, B, C, D, P, Q, U, V) & cong(P, Q, U, V)
  *               => cong(A, B, C, D)
+ *
+ * Function's argument is eqratio(A, B, C, D, P, Q, U, V) and searches for
+ * cong(P, Q, U, V).
  */
-DBinMemory Prover::ruleD75(DBinMemory dbim, std::string point1,
-			   std::string point2, std::string point3,
-			   std::string point4, std::string point5,
-			   std::string point6, std::string point7,
-			   std::string point8) {
+DBinMemory Prover::ruleD75eqratio(DBinMemory dbim, std::string point1,
+				  std::string point2, std::string point3,
+				  std::string point4, std::string point5,
+				  std::string point6, std::string point7,
+				  std::string point8) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;

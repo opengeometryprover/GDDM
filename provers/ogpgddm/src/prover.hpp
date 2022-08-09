@@ -133,55 +133,81 @@ public:
 		       std::string, std::string, std::string, std::string,
 		       std::string);
     DBinMemory ruleD40(DBinMemory, std::string, std::string, std::string,
-		       std::string, std::string, std::string, std::string,
 		       std::string);
     DBinMemory ruleD41(DBinMemory, std::string, std::string, std::string,
 		       std::string);
     DBinMemory ruleD42(DBinMemory, std::string, std::string, std::string,
+		       std::string, std::string, std::string,std::string,
 		       std::string);
-    DBinMemory ruleD43(DBinMemory, std::string, std::string, std::string,
-		       std::string);
-    DBinMemory ruleD44(DBinMemory, std::string, std::string, std::string,
-		       std::string);
-    DBinMemory ruleD45(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD43cyclic(DBinMemory, std::string, std::string, std::string,
+			     std::string, std::string, std::string);
+    DBinMemory ruleD43eqangle(DBinMemory, std::string, std::string, std::string,
+			      std::string, std::string, std::string,
+			      std::string, std::string);
+    DBinMemory ruleD44(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD45coll(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD45midp(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD45para(DBinMemory, std::string, std::string, std::string,
+			   std::string);
     DBinMemory ruleD46(DBinMemory, std::string, std::string, std::string,
 		       std::string);
     DBinMemory ruleD47(DBinMemory, std::string, std::string, std::string,
-		       std::string);
-    DBinMemory ruleD48(DBinMemory, std::string, std::string, std::string,
 		       std::string, std::string, std::string, std::string,
 		       std::string);
-    DBinMemory ruleD49(DBinMemory, std::string, std::string, std::string,
-		       std::string);
-    DBinMemory ruleD50(DBinMemory, std::string, std::string, std::string,
-		       std::string, std::string, std::string, std::string,
-		       std::string);
-    DBinMemory ruleD51(DBinMemory, std::string, std::string, std::string);
-    DBinMemory ruleD52(DBinMemory, std::string, std::string, std::string,
-		       std::string);
-    DBinMemory ruleD53(DBinMemory, std::string, std::string, std::string,
-		       std::string);
-    DBinMemory ruleD54(DBinMemory, std::string, std::string, std::string,
-		       std::string, std::string, std::string, std::string,
-		       std::string);
-    DBinMemory ruleD55(DBinMemory, std::string, std::string, std::string,
-		       std::string);
+    DBinMemory ruleD48circle(DBinMemory, std::string, std::string, std::string,
+			     std::string);
+    DBinMemory ruleD48perp(DBinMemory, std::string, std::string, std::string,
+			   std::string);
+    DBinMemory ruleD49circle(DBinMemory, std::string, std::string, std::string,
+			     std::string);
+    DBinMemory ruleD49eqangle(DBinMemory, std::string, std::string, std::string,
+			      std::string, std::string, std::string,
+			      std::string, std::string);
+    DBinMemory ruleD50circle(DBinMemory, std::string, std::string, std::string,
+			     std::string);
+    DBinMemory ruleD50midp(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD51circle(DBinMemory, std::string, std::string, std::string,
+			     std::string);
+    DBinMemory ruleD51coll(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD51eqangle(DBinMemory, std::string, std::string, std::string,
+			      std::string, std::string, std::string,
+			      std::string, std::string);
+    DBinMemory ruleD52midp(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD52perp(DBinMemory, std::string, std::string, std::string,
+			   std::string);
+    DBinMemory ruleD53circle(DBinMemory, std::string, std::string, std::string,
+			     std::string);
+    DBinMemory ruleD53coll(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD54cyclic(DBinMemory, std::string, std::string, std::string,
+			     std::string);
+    DBinMemory ruleD54para(DBinMemory, std::string, std::string, std::string,
+			   std::string);
+    DBinMemory ruleD55midp(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD55perp(DBinMemory, std::string, std::string, std::string,
+			   std::string);
     DBinMemory ruleD56(DBinMemory, std::string, std::string, std::string,
 		       std::string);
-    DBinMemory ruleD57(DBinMemory, std::string, std::string, std::string,
-		       std::string);
+    DBinMemory ruleD57cong(DBinMemory, std::string, std::string, std::string,
+			   std::string);
+    DBinMemory ruleD57cyclic(DBinMemory, std::string, std::string, std::string,
+			     std::string);
     DBinMemory ruleD58(DBinMemory, std::string, std::string, std::string,
-		       std::string, std::string, std::string);
+		       std::string, std::string, std::string, std::string,
+		       std::string);
     DBinMemory ruleD59(DBinMemory, std::string, std::string, std::string,
 		       std::string, std::string, std::string);
     DBinMemory ruleD60(DBinMemory, std::string, std::string, std::string,
 		       std::string, std::string, std::string);
-    DBinMemory ruleD61(DBinMemory, std::string, std::string, std::string,
-		       std::string, std::string, std::string);
+    DBinMemory ruleD61cong(DBinMemory, std::string, std::string, std::string,
+			   std::string);
+    DBinMemory ruleD61simtri(DBinMemory, std::string, std::string, std::string,
+			     std::string, std::string, std::string);
     DBinMemory ruleD62(DBinMemory, std::string, std::string, std::string,
 		       std::string, std::string, std::string);
     DBinMemory ruleD63(DBinMemory, std::string, std::string, std::string);
-    DBinMemory ruleD64(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD64midp(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleD64para(DBinMemory, std::string, std::string, std::string,
+			   std::string);
     DBinMemory ruleD65coll(DBinMemory, std::string, std::string, std::string);
     DBinMemory ruleD65para(DBinMemory, std::string, std::string, std::string,
 		       std::string);
@@ -192,22 +218,28 @@ public:
 			   std::string);
     DBinMemory ruleD68(DBinMemory, std::string, std::string, std::string);
     DBinMemory ruleD69(DBinMemory, std::string, std::string, std::string);
-    DBinMemory ruleD70(DBinMemory, std::string, std::string, std::string,
-		       std::string, std::string, std::string, std::string,
-		       std::string);
+    DBinMemory ruleD70(DBinMemory, std::string, std::string, std::string);
     DBinMemory ruleD71(DBinMemory, std::string, std::string, std::string,
+		       std::string, std::string, std::string, std::string,
 		       std::string);
     DBinMemory ruleD72(DBinMemory, std::string, std::string, std::string,
-		       std::string);
-    DBinMemory ruleD73(DBinMemory, std::string, std::string, std::string,
 		       std::string, std::string, std::string, std::string,
 		       std::string);
-    DBinMemory ruleD74(DBinMemory, std::string, std::string, std::string,
-		       std::string, std::string, std::string, std::string,
-		       std::string);
-    DBinMemory ruleD75(DBinMemory, std::string, std::string, std::string,
-		       std::string, std::string, std::string, std::string,
-		       std::string);
+    DBinMemory ruleD73eqangle(DBinMemory, std::string, std::string, std::string,
+			      std::string, std::string, std::string,
+			      std::string, std::string);
+    DBinMemory ruleD73para(DBinMemory, std::string, std::string, std::string,
+			   std::string);
+    DBinMemory ruleD74eqangle(DBinMemory, std::string, std::string, std::string,
+			      std::string, std::string, std::string,
+			      std::string, std::string);
+    DBinMemory ruleD74perp(DBinMemory, std::string, std::string, std::string,
+			   std::string);
+    DBinMemory ruleD75cong(DBinMemory, std::string, std::string, std::string,
+			   std::string);
+    DBinMemory ruleD75eqratio(DBinMemory, std::string, std::string, std::string,
+			      std::string, std::string, std::string,
+			      std::string, std::string);
 
     void testDBim(DBinMemory);
 };
