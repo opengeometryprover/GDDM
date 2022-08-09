@@ -3983,9 +3983,8 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD05(dbim, point1, point2, point3, point4);
 	    dbim = ruleD06(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10para(dbim, point1, point2, point3, point4);
-	    if (point1 == point3) {
+	    if (point1 == point3)
 		dbim = ruleD66(dbim, point1, point2, point3, point4);
-	    }
 	    break;
 	case 3:
             // Perpendicular
@@ -4013,9 +4012,8 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD23(dbim, point1, point2, point3, point4);
 	    dbim = ruleD24(dbim, point1, point2, point3, point4);
 	    dbim = ruleD25(dbim, point1, point2, point3, point4);
-	    if (point1 == point3) {	
+	    if (point1 == point3)
 		dbim = ruleD46(dbim, point1, point2, point3, point4);
-	    }
 	    if (point1 == point3)
 		dbim = ruleD67cong(dbim, point1, point2, point3, point4);
 	    break;
@@ -4052,10 +4050,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 			   point5, point6, point7, point8);
 	    dbim = ruleD22(dbim, point1, point2, point3, point4,
 			   point5, point6, point7, point8);
-	    if (point3 == point7 && point4 == point8) {
+	    if (point3 == point7 && point4 == point8)
 		dbim = ruleD39(dbim, point1, point2, point3, point4,
 			       point5, point6, point7, point8);
-	    }
 	    // dbim = ruleD73(dbim, point1, point2, point3, point4,
 	    // 		   point5, point6, point7, point8);
 	    // dbim = ruleD74(dbim, point1, point2, point3, point4,
