@@ -1,0 +1,12 @@
+# Files to 'gitignore' in the Open Geometry Prover (OGP) project
+
+# Compilation
+*.hh
+*.o
+
+# Created by an OGP executable
+*.err
+*.log
+*.out
+*.result
+*.time
