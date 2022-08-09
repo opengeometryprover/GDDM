@@ -4122,10 +4122,22 @@ bool Prover::proved(DBinMemory dbim) {
     sqlite3_step(dbim.stmt);
     idConsequent = (char*) sqlite3_column_text(dbim.stmt, 0);
     typeGeoCmd = (char*) sqlite3_column_text(dbim.stmt, 1);
-    switch (dbim.geoCmds[typeGeoCmd]) {
+    switch (dbim.geoCmds[typeGeoCmd]) {fof(ruleD45midp, conjecture, ( ! [ A, B, C, E, F ] : (
+    ( midp(E, A, B)
+      & para(E, F, B, C)
+      & coll(F, A, C) )
+    =>
+    ( midp(F, A, C) )
+))). 
     case 1:
         // Collinear
-	proving = "SELECT * FROM Consequent INNER JOIN Collinear USING(typeGeoCmd) WHERE Consequent.point1 = Collinear.point1 AND Consequent.point2 = Collinear.point2 AND Consequent.point3 = Collinear.point3";
+	proving = "SELECT * "
+	    "FROM Consequent "
+	    "INNER JOIN Collinear "
+	    "USING (typeGeoCmd) "
+	    "WHERE Consequent.point1 = Collinear.point1 "
+	    "AND Consequent.point2 = Collinear.point2 "
+	    "AND Consequent.point3 = Collinear.point3";
 
 	dbim.rc = sqlite3_prepare_v2(dbim.db, proving.c_str(), proving.size(),
 				     &(dbim.stmt), NULL);
@@ -4138,7 +4150,14 @@ bool Prover::proved(DBinMemory dbim) {
 	break;
     case 2:
         // Parallel
-	proving = "SELECT * FROM Consequent INNER JOIN Parallel USING(typeGeoCmd) WHERE Consequent.point1 = Parallel.point1 AND Consequent.point2 = Parallel.point2 AND Consequent.point3 = Parallel.point3 AND Consequent.point4 = Parallel.point4";
+	proving = "SELECT * "
+	    "FROM Consequent "
+	    "INNER JOIN Parallel "
+	    "USING (typeGeoCmd) "
+	    "WHERE Consequent.point1 = Parallel.point1 "
+	    "AND Consequent.point2 = Parallel.point2 "
+	    "AND Consequent.point3 = Parallel.point3 "
+	    "AND Consequent.point4 = Parallel.point4";
 
 	dbim.rc = sqlite3_prepare_v2(dbim.db, proving.c_str(), proving.size(),
 				     &(dbim.stmt), NULL);
@@ -4152,7 +4171,14 @@ bool Prover::proved(DBinMemory dbim) {
 	break;
     case 3:
         // Perpendicular
-	proving = "SELECT * FROM Consequent INNER JOIN Perpendicular USING(typeGeoCmd) WHERE Consequent.point1 = Perpendicular.point1 AND Consequent.point2 = Perpendicular.point2 AND Consequent.point3 = Perpendicular.point3 AND Consequent.point4 = Perpendicular.point4";
+	proving = "SELECT * "
+	    "FROM Consequent "
+	    "INNER JOIN Perpendicular "
+	    "USING (typeGeoCmd) "
+	    "WHERE Consequent.point1 = Perpendicular.point1 "
+	    "AND Consequent.point2 = Perpendicular.point2 "
+	    "AND Consequent.point3 = Perpendicular.point3 "
+	    "AND Consequent.point4 = Perpendicular.point4";
 
 	dbim.rc = sqlite3_prepare_v2(dbim.db, proving.c_str(), proving.size(),
 				     &(dbim.stmt), NULL);
@@ -4165,7 +4191,13 @@ bool Prover::proved(DBinMemory dbim) {
 	break;
     case 4:
 	// Midpoint
-	proving = "SELECT * FROM Consequent INNER JOIN Midpoint USING(typeGeoCmd) WHERE Consequent.point1 = Midpoint.point1 AND Consequent.point2 = Midpoint.point2 AND Consequent.point3 = Midpoint.point3";
+	proving = "SELECT * "
+	    "FROM Consequent "
+	    "INNER JOIN Midpoint "
+	    "USING (typeGeoCmd) "
+	    "WHERE Consequent.point1 = Midpoint.point1 "
+	    "AND Consequent.point2 = Midpoint.point2 "
+	    "AND Consequent.point3 = Midpoint.point3";
 
 	dbim.rc = sqlite3_prepare_v2(dbim.db, proving.c_str(), proving.size(),
 				     &(dbim.stmt), NULL);
@@ -4178,7 +4210,14 @@ bool Prover::proved(DBinMemory dbim) {
 	break;
     case 5:
 	// Circle
-	proving = "SELECT * FROM Consequent INNER JOIN Circle USING(typeGeoCmd) WHERE Consequent.point1 = Circle.point1 AND Consequent.point2 = Circle.point2 AND Consequent.point3 = Circle.point3 AND Consequent.point4 = Circle.point4";
+	proving = "SELECT * "
+	    "FROM Consequent "
+	    "INNER JOIN Circle "
+	    "USING (typeGeoCmd) "
+	    "WHERE Consequent.point1 = Circle.point1 "
+	    "AND Consequent.point2 = Circle.point2 "
+	    "AND Consequent.point3 = Circle.point3 "
+	    "AND Consequent.point4 = Circle.point4";
 
 	dbim.rc = sqlite3_prepare_v2(dbim.db, proving.c_str(), proving.size(),
 				     &(dbim.stmt), NULL);
@@ -4191,7 +4230,14 @@ bool Prover::proved(DBinMemory dbim) {
 	break;
     case 6:
 	// Congruent Segments
-	proving = "SELECT * FROM Consequent INNER JOIN CongruentSegments USING(typeGeoCmd) WHERE Consequent.point1 = CongruentSegments.point1 AND Consequent.point2 = CongruentSegments.point2 AND Consequent.point3 = CongruentSegments.point3 AND Consequent.point4 = CongruentSegments.point4";
+	proving = "SELECT * "
+	    "FROM Consequent "
+	    "INNER JOIN CongruentSegments "
+	    "USING (typeGeoCmd) "
+	    "WHERE Consequent.point1 = CongruentSegments.point1 "
+	    "AND Consequent.point2 = CongruentSegments.point2 "
+	    "AND Consequent.point3 = CongruentSegments.point3 "
+	    "AND Consequent.point4 = CongruentSegments.point4";
 
 	dbim.rc = sqlite3_prepare_v2(dbim.db, proving.c_str(), proving.size(),
 				     &(dbim.stmt), NULL);
@@ -4204,7 +4250,16 @@ bool Prover::proved(DBinMemory dbim) {
 	break;
     case 7:
 	// Congruent Triangles
-	proving = "SELECT * FROM Consequent INNER JOIN CongruentTriangles USING(typeGeoCmd) WHERE Consequent.point1 = CongruentTriangles.point1 AND Consequent.point2 = CongruentTriangles.point2 AND Consequent.point3 = CongruentTriangles.point3 AND Consequent.point4 = CongruentTriangles.point4 AND Consequent.point5 = CongruentTriangles.point5 AND Consequent.point6 = CongruentTriangles.point6";
+	proving = "SELECT * "
+	    "FROM Consequent "
+	    "INNER JOIN CongruentTriangles "
+	    "USING (typeGeoCmd) "
+	    "WHERE Consequent.point1 = CongruentTriangles.point1 "
+	    "AND Consequent.point2 = CongruentTriangles.point2 "
+	    "AND Consequent.point3 = CongruentTriangles.point3 "
+	    "AND Consequent.point4 = CongruentTriangles.point4 "
+	    "AND Consequent.point5 = CongruentTriangles.point5 "
+	    "AND Consequent.point6 = CongruentTriangles.point6";
 
 	dbim.rc = sqlite3_prepare_v2(dbim.db, proving.c_str(), proving.size(),
 				     &(dbim.stmt), NULL);
@@ -4217,7 +4272,14 @@ bool Prover::proved(DBinMemory dbim) {
 	break;
     case 8:
 	// Cyclic
-	proving = "SELECT * FROM Consequent INNER JOIN Cyclic USING(typeGeoCmd) WHERE Consequent.point1 = Cyclic.point1 AND Consequent.point2 = Cyclic.point2 AND Consequent.point3 = Cyclic.point3 AND Consequent.point4 = Cyclic.point4";
+	proving = "SELECT * "
+	    "FROM Consequent "
+	    "INNER JOIN Cyclic "
+	    "USING (typeGeoCmd) "
+	    "WHERE Consequent.point1 = Cyclic.point1 "
+	    "AND Consequent.point2 = Cyclic.point2 "
+	    "AND Consequent.point3 = Cyclic.point3 "
+	    "AND Consequent.point4 = Cyclic.point4";
 
 	dbim.rc = sqlite3_prepare_v2(dbim.db, proving.c_str(), proving.size(),
 				     &(dbim.stmt), NULL);
@@ -4230,7 +4292,18 @@ bool Prover::proved(DBinMemory dbim) {
 	break;
     case 9:
 	// Equal Angles
-	proving = "SELECT * FROM Consequent INNER JOIN EqualAngles USING(typeGeoCmd) WHERE Consequent.point1 = EqualAngles.point1 AND Consequent.point2 = EqualAngles.point2 AND Consequent.point3 = EqualAngles.point3 AND Consequent.point4 = EqualAngles.point4 AND Consequent.point5 = EqualAngles.point5 AND Consequent.point6 = EqualAngles.point6 AND Consequent.point7 = EqualAngles.point7 AND Consequent.point8 = EqualAngles.point8";
+	proving = "SELECT * "
+	    "FROM Consequent "
+	    "INNER JOIN EqualAngles "
+	    "USING (typeGeoCmd) "
+	    "WHERE Consequent.point1 = EqualAngles.point1 "
+	    "AND Consequent.point2 = EqualAngles.point2 "
+	    "AND Consequent.point3 = EqualAngles.point3 "
+	    "AND Consequent.point4 = EqualAngles.point4 "
+	    "AND Consequent.point5 = EqualAngles.point5 "
+	    "AND Consequent.point6 = EqualAngles.point6 "
+	    "AND Consequent.point7 = EqualAngles.point7 "
+	    "AND Consequent.point8 = EqualAngles.point8";
 
 	dbim.rc = sqlite3_prepare_v2(dbim.db, proving.c_str(), proving.size(),
 				     &(dbim.stmt), NULL);
@@ -4243,7 +4316,18 @@ bool Prover::proved(DBinMemory dbim) {
 	break;
     case 10:
 	// Equal Ratios
-	proving = "SELECT * FROM Consequent INNER JOIN EqualRatios USING(typeGeoCmd) WHERE Consequent.point1 = EqualRatios.point1 AND Consequent.point2 = EqualRatios.point2 AND Consequent.point3 = EqualRatios.point3 AND Consequent.point4 = EqualRatios.point4 AND Consequent.point5 = EqualRatios.point5 AND Consequent.point6 = EqualRatios.point6 AND Consequent.point7 = EqualRatios.point7 AND Consequent.point8 = EqualRatios.point8";
+	proving = "SELECT * "
+	    "FROM Consequent "
+	    "INNER JOIN EqualRatios "
+	    "USING (typeGeoCmd) "
+	    "WHERE Consequent.point1 = EqualRatios.point1 "
+	    "AND Consequent.point2 = EqualRatios.point2 "
+	    "AND Consequent.point3 = EqualRatios.point3 "
+	    "AND Consequent.point4 = EqualRatios.point4 "
+	    "AND Consequent.point5 = EqualRatios.point5 "
+	    "AND Consequent.point6 = EqualRatios.point6 "
+	    "AND Consequent.point7 = EqualRatios.point7 "
+	    "AND Consequent.point8 = EqualRatios.point8";
 
 	dbim.rc = sqlite3_prepare_v2(dbim.db, proving.c_str(), proving.size(),
 				     &(dbim.stmt), NULL);
@@ -4256,7 +4340,16 @@ bool Prover::proved(DBinMemory dbim) {
 	break;
     case 11:
 	// Similar Triangles
-	proving = "SELECT * FROM Consequent INNER JOIN SimilarTriangles USING(typeGeoCmd) WHERE Consequent.point1 = SimilarTriangles.point1 AND Consequent.point2 = SimilarTriangles.point2 AND Consequent.point3 = SimilarTriangles.point3 AND Consequent.point4 = SimilarTriangles.point4 AND Consequent.point5 = SimilarTriangles.point5 AND Consequent.point6 = SimilarTriangles.point6";
+	proving = "SELECT * "
+	    "FROM Consequent "
+	    "INNER JOIN SimilarTriangles "
+	    "USING (typeGeoCmd) "
+	    "WHERE Consequent.point1 = SimilarTriangles.point1 "
+	    "AND Consequent.point2 = SimilarTriangles.point2 "
+	    "AND Consequent.point3 = SimilarTriangles.point3 "
+	    "AND Consequent.point4 = SimilarTriangles.point4 "
+	    "AND Consequent.point5 = SimilarTriangles.point5 "
+	    "AND Consequent.point6 = SimilarTriangles.point6";
 
 	dbim.rc = sqlite3_prepare_v2(dbim.db, proving.c_str(), proving.size(),
 				     &(dbim.stmt), NULL);
