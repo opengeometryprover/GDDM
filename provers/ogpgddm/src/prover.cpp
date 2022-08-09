@@ -4122,13 +4122,7 @@ bool Prover::proved(DBinMemory dbim) {
     sqlite3_step(dbim.stmt);
     idConsequent = (char*) sqlite3_column_text(dbim.stmt, 0);
     typeGeoCmd = (char*) sqlite3_column_text(dbim.stmt, 1);
-    switch (dbim.geoCmds[typeGeoCmd]) {fof(ruleD45midp, conjecture, ( ! [ A, B, C, E, F ] : (
-    ( midp(E, A, B)
-      & para(E, F, B, C)
-      & coll(F, A, C) )
-    =>
-    ( midp(F, A, C) )
-))). 
+    switch (dbim.geoCmds[typeGeoCmd]) {
     case 1:
         // Collinear
 	proving = "SELECT * "
@@ -4390,7 +4384,9 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	case 1:
             // Collinear
 	    // Save geometric command for the derivation of new facts
-	    fixedPointFact = "SELECT point1, point2, point3 FROM Collinear WHERE oldFact = " + idFact;
+	    fixedPointFact = "SELECT point1, point2, point3 "
+		"FROM Collinear "
+		"WHERE oldFact = " + idFact;
 
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, fixedPointFact.c_str(),
 					 fixedPointFact.size(), &(dbim.stmt1),
@@ -4408,8 +4404,9 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    break;
 	case 2:
             // Parallel
-	    // Save geometric command for the derivation of new facts
-	    fixedPointFact = "SELECT point1, point2, point3, point4 FROM Parallel WHERE oldFact = " + idFact;
+	    fixedPointFact = "SELECT point1, point2, point3, point4 "
+		"FROM Parallel "
+		"WHERE oldFact = " + idFact;
 
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, fixedPointFact.c_str(),
 					 fixedPointFact.size(), &(dbim.stmt1),
@@ -4429,8 +4426,9 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    break;
 	case 3:
             // Perpendicular
-	    // Save geometric command for the derivation of new facts
-	    fixedPointFact = "SELECT point1, point2, point3, point4 FROM Perpendicular WHERE oldFact = " + idFact;
+	    fixedPointFact = "SELECT point1, point2, point3, point4 "
+		"FROM Perpendicular "
+		"WHERE oldFact = " + idFact;
 
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, fixedPointFact.c_str(),
 					 fixedPointFact.size(), &(dbim.stmt1),
@@ -4450,8 +4448,10 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    break;
 	case 4:
             // Midpoint
-	    // Save geometric command for the derivation of new facts
-	    fixedPointFact = "SELECT point1, point2, point3 FROM Midpoint WHERE oldFact = " + idFact;
+	    fixedPointFact = "SELECT point1, point2, point3 "
+		"FROM Midpoint "
+		"WHERE oldFact = " + idFact;
+
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, fixedPointFact.c_str(),
 					 fixedPointFact.size(), &(dbim.stmt1),
 					 NULL);
@@ -4468,7 +4468,10 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    break;
 	case 5:
 	    // Circle
-	    fixedPointFact = "SELECT point1, point2, point3, point4 FROM Circle WHERE oldFact = " + idFact;
+	    fixedPointFact = "SELECT point1, point2, point3, point4 "
+		"FROM Circle "
+		"WHERE oldFact = " + idFact;
+
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, fixedPointFact.c_str(),
 					 fixedPointFact.size(), &(dbim.stmt1),
 					 NULL);
@@ -4487,7 +4490,10 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    break;
 	case 6:
 	    // Congruent Segments
-	    fixedPointFact = "SELECT point1, point2, point3, point4 FROM CongruentSegments WHERE oldFact = " + idFact;
+	    fixedPointFact = "SELECT point1, point2, point3, point4 "
+		"FROM CongruentSegments "
+		"WHERE oldFact = " + idFact;
+
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, fixedPointFact.c_str(),
 					 fixedPointFact.size(), &(dbim.stmt1),
 					 NULL);
@@ -4506,7 +4512,11 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    break;
 	case 7:
 	    // Congruent Triangles
-	    fixedPointFact = "SELECT point1, point2, point3, point4, point5, point6 FROM CongruentTriangles WHERE oldFact = " + idFact;
+	    fixedPointFact = "SELECT point1, point2, point3, "
+		"point4, point5, point6 "
+		"FROM CongruentTriangles "
+		"WHERE oldFact = " + idFact;
+
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, fixedPointFact.c_str(),
 					 fixedPointFact.size(), &(dbim.stmt1),
 					 NULL);
@@ -4529,7 +4539,10 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    break;
 	case 8:
 	    // Cyclic
-	    fixedPointFact = "SELECT point1, point2, point3, point4 FROM Cyclic WHERE oldFact = " + idFact;
+	    fixedPointFact = "SELECT point1, point2, point3, point4 "
+		"FROM Cyclic "
+		"WHERE oldFact = " + idFact;
+
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, fixedPointFact.c_str(),
 					 fixedPointFact.size(), &(dbim.stmt1),
 					 NULL);
@@ -4548,7 +4561,11 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    break;
 	case 9:
 	    // Equal Angles
-	    fixedPointFact = "SELECT point1, point2, point3, point4, point5, point6, point7, point8 FROM EqualAngles WHERE oldFact = " + idFact;
+	    fixedPointFact = "SELECT point1, point2, point3, point4, "
+		"point5, point6, point7, point8 "
+		"FROM EqualAngles "
+		"WHERE oldFact = " + idFact;
+
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, fixedPointFact.c_str(),
 					 fixedPointFact.size(), &(dbim.stmt1),
 					 NULL);
@@ -4575,7 +4592,11 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    break;
 	case 10:
 	    // Equal Ratios
-	    fixedPointFact = "SELECT point1, point2, point3, point4, point5, point6, point7, point8 FROM EqualRatios WHERE oldFact = " + idFact;
+	    fixedPointFact = "SELECT point1, point2, point3, point4, "
+		"point5, point6, point7, point8 "
+		"FROM EqualRatios "
+		"WHERE oldFact = " + idFact;
+
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, fixedPointFact.c_str(),
 					 fixedPointFact.size(), &(dbim.stmt1),
 					 NULL);
@@ -4602,7 +4623,11 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    break;
 	case 11:
 	    // Similar Triangles
-	    fixedPointFact = "SELECT point1, point2, point3, point4, point5, point6 FROM SimilarTriangles WHERE oldFact = " + idFact;
+	    fixedPointFact = "SELECT point1, point2, point3, "
+		"point4, point5, point6 "
+		"FROM SimilarTriangles "
+		"WHERE oldFact = " + idFact;
+
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, fixedPointFact.c_str(),
 					 fixedPointFact.size(), &(dbim.stmt1),
 					 NULL);
