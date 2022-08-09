@@ -10,3 +10,8 @@
 *.out
 *.result
 *.time
+
+# OGP GDDM prover
+parser.cpp
+parser.hpp
+scanner.cpp
