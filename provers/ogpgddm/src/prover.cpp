@@ -3136,6 +3136,99 @@ DBinMemory Prover::ruleD69(DBinMemory dbim, std::string point1,
 }
 
 /*
+ * Rule D70: midp(M, A, B) & midp(N, C, D) => eqratio(M, A, A, B, N, C, C, D)
+ */
+DBinMemory Prover::ruleD70(DBinMemory dbim, std::string point1,
+			   std::string point2, std::string point3) {
+    bool correctTransaction;
+    std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
+    std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::string newPoint1, newPoint2, newPoint3;
+
+    insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('eqratio')";
+    lastInsertedRowId = "SELECT last_insert_rowid()";
+
+    sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg));
+    correctTransaction = true;
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(),
+				 insertNewFact.size(), &(dbim.stmt), NULL);
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	correctTransaction = false;
+    }
+    dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
+				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
+    sqlite3_step(dbim.stmt);
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
+
+    querySecondGeoCmdA = "SELECT point1, point2, point3 "
+	"FROM NewFact "
+	"INNER JOIN Midpoint "
+	"ON (newFact = id) "
+	"WHERE NOT (point2 = '" + point2 + "' AND point3 = '" + point3
+	+ "') AND NOT (point2 = '" + point3 + "' AND point3 = '" + point2
+	+ "')";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
+				 querySecondGeoCmdA.size(), &(dbim.stmt1),
+				 NULL);
+    sqlite3_step(dbim.stmt1);
+
+    querySecondGeoCmdB = "SELECT point1, point2, point3 "
+	"FROM Facts "
+	"INNER JOIN Midpoint "
+	"ON (oldFact = id) "
+	"WHERE NOT (point2 = '" + point2 + "' AND point3 = '" + point3
+	+ "') AND NOT (point2 = '" + point3 + "' AND point3 = '" + point2
+	+ "')";
+	
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+				 querySecondGeoCmdB.size(), &(dbim.stmt2),
+				 NULL);
+    sqlite3_step(dbim.stmt2);
+    if (sqlite3_data_count(dbim.stmt1) == 0
+	&& sqlite3_data_count(dbim.stmt2) == 0 ) {
+	correctTransaction=false;
+    } else {
+	if (sqlite3_data_count(dbim.stmt1) != 0) {
+	    newPoint1 = (char*) sqlite3_column_text(dbim.stmt1, 0);
+	    newPoint2 = (char*) sqlite3_column_text(dbim.stmt1, 1);
+	    newPoint3 = (char*) sqlite3_column_text(dbim.stmt1, 2);
+	} else {
+	    newPoint1 = (char*) sqlite3_column_text(dbim.stmt2, 0);
+	    newPoint2 = (char*) sqlite3_column_text(dbim.stmt2, 1);
+	    newPoint3 = (char*) sqlite3_column_text(dbim.stmt2, 2);
+	}
+	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	    correctTransaction = false;
+	} else {
+	    insertionPred = "INSERT INTO "
+		"EqualRatios (typeGeoCmd, point1, point2, point3, point4, "
+		"point5, point6, point7, point8, newFact) "
+		"VALUES "
+		"('eqratio', '" + point1 + "', '" + point2 + "', '" + point2
+		+ "', '" + point3 + "', '" + newPoint1 + "', '" + newPoint2
+		+ "', '" + newPoint2 + "', '" + newPoint3 + "', '" + lstInsRwId
+		+ "')";
+
+	    std::cout << "----------  " << insertionPred << std::endl;
+
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
+					 NULL);
+	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		correctTransaction = false;
+	    }
+	}
+    }
+    if (correctTransaction) {
+	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
+    } else {
+	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+    }
+    return dbim;
+}
+
+/*
  * Rule D73: eqangle(A, B, C, D, P, Q, U, V) & para(P, Q, U, V)
  *               => para(A, B, C, D)
  *
@@ -4008,6 +4101,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD63(dbim, point1, point2, point3);
 	    dbim = ruleD68(dbim, point1, point2, point3);
 	    dbim = ruleD69(dbim, point1, point2, point3);
+	    dbim = ruleD70(dbim, point1, point2, point3);
 	    break;
 	case 5:
 	    // Circle
