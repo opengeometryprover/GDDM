@@ -2714,6 +2714,183 @@ DBinMemory Prover::ruleD46(DBinMemory dbim, std::string point1,
 }
 
 /*
+ * Rule D48: circle(O, A, B, C) & perp(O, A, A, X)
+ *               => eqangle(A, X, A, B, C, A, C, B)
+ *
+ * Function's argument is circle(O, A, B, C) and searches for perp(O, A, A, X).
+ */
+DBinMemory Prover::ruleD48circle(DBinMemory dbim, std::string point1,
+				 std::string point2, std::string point3,
+				 std::string point4) {
+    bool correctTransaction;
+    std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
+    std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::string newPoint;
+
+    insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('eqangle')";
+    lastInsertedRowId = "SELECT last_insert_rowid()";
+
+    sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg));
+    correctTransaction = true;
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(),
+				 insertNewFact.size(), &(dbim.stmt), NULL);
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	correctTransaction = false;
+    }
+    dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
+				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
+    sqlite3_step(dbim.stmt);
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
+
+    querySecondGeoCmdA = "SELECT point4 "
+	"FROM NewFact "
+	"INNER JOIN Perpendicular "
+	"ON (newFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	+ "' AND point3 = '" + point2 + "'";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
+				 querySecondGeoCmdA.size(), &(dbim.stmt1),
+				 NULL);
+    sqlite3_step(dbim.stmt1);
+
+    querySecondGeoCmdB = "SELECT point4 "
+	"FROM Facts "
+	"INNER JOIN Perpendicular "
+	"ON (oldFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	+ "' AND point3 = '" + point2 + "'";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+				 querySecondGeoCmdB.size(), &(dbim.stmt2),
+				 NULL);
+    sqlite3_step(dbim.stmt2);
+    if (sqlite3_data_count(dbim.stmt1) == 0
+	&& sqlite3_data_count(dbim.stmt2) == 0 ) {
+	correctTransaction=false;
+    } else {
+	if (sqlite3_data_count(dbim.stmt1) != 0) {
+	    newPoint = (char*) sqlite3_column_text(dbim.stmt1, 0);
+	} else {
+	    newPoint = (char*) sqlite3_column_text(dbim.stmt2, 0);
+	}
+	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	    correctTransaction = false;
+	} else {
+	    insertionPred = "INSERT INTO "
+		"EqualAngles (typeGeoCmd, point1, point2, point3, point4, "
+		"point5, point6, point7, point8, newFact) "
+		"VALUES "
+		"('eqangle', '" + point2 + "', '" + newPoint + "', '" + point2
+		+ "', '" + point3 + "', '" + point4 + "', '" + point2 + "', '"
+		+ point4 + "', '" + point3 + "', '" + lstInsRwId + "')";
+
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
+					 NULL);
+	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		correctTransaction = false;
+	    }
+	}
+    }
+    if (correctTransaction) {
+	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
+    } else {
+	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+    }
+    return dbim;
+}
+
+/*
+ * Rule D48: circle(O, A, B, C) & perp(O, A, A, X)
+ *               => eqangle(A, X, A, B, C, A, C, B)
+ *
+ * Function's argument is perp(O, A, A, X) and searches for circle(O, A, B, C).
+ */
+DBinMemory Prover::ruleD48perp(DBinMemory dbim, std::string point1,
+				 std::string point2, std::string point3,
+				 std::string point4) {
+    bool correctTransaction;
+    std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
+    std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::string newPoint1, newPoint2;
+
+    insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('eqangle')";
+    lastInsertedRowId = "SELECT last_insert_rowid()";
+
+    sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg));
+    correctTransaction = true;
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(),
+				 insertNewFact.size(), &(dbim.stmt), NULL);
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	correctTransaction = false;
+    }
+    dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
+				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
+    sqlite3_step(dbim.stmt);
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
+
+    querySecondGeoCmdA = "SELECT point3, point4 "
+	"FROM NewFact "
+	"INNER JOIN Circle "
+	"ON (newFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2 + "'";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
+				 querySecondGeoCmdA.size(), &(dbim.stmt1),
+				 NULL);
+    sqlite3_step(dbim.stmt1);
+
+    querySecondGeoCmdB = "SELECT point3, point4 "
+	"FROM Facts "
+	"INNER JOIN Circle "
+	"ON (oldFact = id) "
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2 + "'";
+
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+				 querySecondGeoCmdB.size(), &(dbim.stmt2),
+				 NULL);
+    sqlite3_step(dbim.stmt2);
+    if (sqlite3_data_count(dbim.stmt1) == 0
+	&& sqlite3_data_count(dbim.stmt2) == 0 ) {
+	correctTransaction=false;
+    } else {
+	if (sqlite3_data_count(dbim.stmt1) != 0) {
+	    newPoint1 = (char*) sqlite3_column_text(dbim.stmt1, 0);
+	    newPoint2 = (char*) sqlite3_column_text(dbim.stmt1, 1);
+	} else {
+	    newPoint1 = (char*) sqlite3_column_text(dbim.stmt2, 0);
+	    newPoint2 = (char*) sqlite3_column_text(dbim.stmt2, 1);
+	}
+	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	    correctTransaction = false;
+	} else {
+	    insertionPred = "INSERT INTO "
+		"EqualAngles (typeGeoCmd, point1, point2, point3, point4, "
+		"point5, point6, point7, point8, newFact) "
+		"VALUES "
+		"('eqangle', '" + point2 + "', '" + point4 + "', '" + point2
+		+ "', '" + newPoint1 + "', '" + newPoint2 + "', '" + point2
+		+ "', '" + newPoint2 + "', '" + newPoint1 + "', '" + lstInsRwId
+		+ "')";
+
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
+					 NULL);
+	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		correctTransaction = false;
+	    }
+	}
+    }
+    if (correctTransaction) {
+	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
+    } else {
+	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+    }
+    return dbim;
+}
+
+/*
  * Rule D54: cyclic(A, B, C, D) & para(A, B, C, D)
  *               => eqangle(A, D, C, D, C, D, C, B)
  *
@@ -4638,6 +4815,8 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD08(dbim, point1, point2, point3, point4);
 	    dbim = ruleD09(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10perp(dbim, point1, point2, point3, point4);
+	    if (point2 == point3)
+		dbim = ruleD48perp(dbim, point1, point2, point3, point4);
 	    dbim = ruleD74perp(dbim, point1, point2, point3, point4);
 	    break;
 	case 4:
@@ -4651,6 +4830,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    break;
 	case 5:
 	    // Circle
+	    //dbim = ruleD48circle(dbim, point1, point2, point3, point4);
 	    break;
 	case 6:
 	    // Congruent Segments
