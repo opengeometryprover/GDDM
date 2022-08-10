@@ -4635,8 +4635,10 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 			   point5, point6, point7, point8);
 	    dbim = ruleD30(dbim, point1, point2, point3, point4,
 			   point5, point6, point7, point8);
-	    dbim = ruleD75eqratio(dbim, point1, point2, point3, point4,
-				  point5, point6, point7, point8);
+	    if (!(point1 == point3 && point2 == point4)
+		&& !(point1 == point4 && point2 == point3))
+		dbim = ruleD75eqratio(dbim, point1, point2, point3, point4,
+				      point5, point6, point7, point8);
 	    break;
 	case 11:
 	    // Similar Triangles
