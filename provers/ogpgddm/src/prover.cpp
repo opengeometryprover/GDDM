@@ -4614,7 +4614,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    nrColl++;
 
 	    // Save the geometric command for the derivation of new facts
-	    toDeriveGeoCmd = "SELECT point1, point2, point3 FROM Collinear WHERE newFact = " + newFactId;
+	    toDeriveGeoCmd = "SELECT point1, point2, point3 "
+		"FROM Collinear "
+		"WHERE newFact = " + newFactId;
 
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, toDeriveGeoCmd.c_str(),
 					 toDeriveGeoCmd.size(), &(dbim.stmt),
@@ -4659,7 +4661,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    nrPara++;
 
 	    // Save the geometric command for the derivation of new facts
-	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4 FROM Parallel WHERE newFact = " + newFactId;
+	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4 "
+		"FROM Parallel "
+		"WHERE newFact = " + newFactId;
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, toDeriveGeoCmd.c_str(),
 					 toDeriveGeoCmd.size(), &(dbim.stmt),
 					 NULL);
@@ -4705,7 +4709,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    nrPerp++;
 
             // Save the geometric command for the derivation of new facts
-	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4 FROM Perpendicular WHERE newFact = " + newFactId;
+	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4 "
+		"FROM Perpendicular "
+		"WHERE newFact = " + newFactId;
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, toDeriveGeoCmd.c_str(),
 					 toDeriveGeoCmd.size(), &(dbim.stmt),
 					 NULL);
@@ -4751,7 +4757,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    nrMidp ++;
 
 	    // Save the geometric command for the derivation of new facts
-	    toDeriveGeoCmd = "SELECT point1, point2, point3 FROM Midpoint WHERE newFact = " + newFactId;
+	    toDeriveGeoCmd = "SELECT point1, point2, point3 "
+		"FROM Midpoint "
+		"WHERE newFact = " + newFactId;
 
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, toDeriveGeoCmd.c_str(),
 					 toDeriveGeoCmd.size(), &(dbim.stmt),
@@ -4796,7 +4804,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    nrCircle++;
 
             // Save the geometric command for the derivation of new facts
-	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4 FROM Circle WHERE newFact = " + newFactId;
+	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4 "
+		"FROM Circle "
+		"WHERE newFact = " + newFactId;
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, toDeriveGeoCmd.c_str(),
 					 toDeriveGeoCmd.size(), &(dbim.stmt),
 					 NULL);
@@ -4842,7 +4852,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    nrCong++;
 
 	    // Save the geometric command for the derivation of new facts
-	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4 FROM CongruentSegments WHERE newFact = " + newFactId;
+	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4 "
+		"FROM CongruentSegments "
+		"WHERE newFact = " + newFactId;
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, toDeriveGeoCmd.c_str(),
 					 toDeriveGeoCmd.size(), &(dbim.stmt),
 					 NULL);
@@ -4888,7 +4900,10 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    nrContri++;
 
 	    // Save the geometric command for the derivation of new facts
-	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4, point5, point6 FROM CongruentTriangles WHERE newFact = " + newFactId;
+	    toDeriveGeoCmd = "SELECT point1, point2, point3, "
+		"point4, point5, point6 "
+		"FROM CongruentTriangles "
+		"WHERE newFact = " + newFactId;
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, toDeriveGeoCmd.c_str(),
 					 toDeriveGeoCmd.size(), &(dbim.stmt),
 					 NULL);
@@ -4938,7 +4953,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    nrCyclic++;
 
 	    // Save the geometric command for the derivation of new facts
-	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4 FROM Cyclic WHERE newFact = " + newFactId;
+	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4 "
+		"FROM Cyclic "
+		"WHERE newFact = " + newFactId;
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, toDeriveGeoCmd.c_str(),
 					 toDeriveGeoCmd.size(), &(dbim.stmt),
 					 NULL);
@@ -4984,7 +5001,10 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    nrEqangle++;
 
 	    // Save the geometric command for the derivation of new facts
-	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4, point5, point6, point7, point8 FROM EqualAngles WHERE newFact = " + newFactId;
+	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4, "
+		"point5, point6, point7, point8 "
+		"FROM EqualAngles "
+		"WHERE newFact = " + newFactId;
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, toDeriveGeoCmd.c_str(),
 					 toDeriveGeoCmd.size(), &(dbim.stmt),
 					 NULL);
@@ -5038,7 +5058,10 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    nrEqratio++;
 
 	    // Save the geometric command for the derivation of new facts
-	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4, point5, point6, point7, point8 FROM EqualRatios WHERE newFact = " + newFactId;
+	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4, "
+		"point5, point6, point7, point8 "
+		"FROM EqualRatios "
+		"WHERE newFact = " + newFactId;
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, toDeriveGeoCmd.c_str(),
 					 toDeriveGeoCmd.size(), &(dbim.stmt),
 					 NULL);
@@ -5092,7 +5115,10 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    nrSimtri++;
 
 	    // Save the geometric command for the derivation of new facts
-	    toDeriveGeoCmd = "SELECT point1, point2, point3, point4, point5, point6 FROM SimilarTriangles WHERE newFact = " + newFactId;
+	    toDeriveGeoCmd = "SELECT point1, point2, point3, "
+		"point4, point5, point6 "
+		"FROM SimilarTriangles "
+		"WHERE newFact = " + newFactId;
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, toDeriveGeoCmd.c_str(),
 					 toDeriveGeoCmd.size(), &(dbim.stmt),
 					 NULL);
