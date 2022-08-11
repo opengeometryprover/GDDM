@@ -140,7 +140,7 @@ public:
 		       std::string, std::string, std::string,std::string,
 		       std::string);
     DBinMemory ruleD43cyclic(DBinMemory, std::string, std::string, std::string,
-			     std::string, std::string, std::string);
+			     std::string);
     DBinMemory ruleD43eqangle(DBinMemory, std::string, std::string, std::string,
 			      std::string, std::string, std::string,
 			      std::string, std::string);
