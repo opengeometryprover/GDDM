@@ -1,5 +1,5 @@
-fof(ruleD08, conjecture, ( ! [ A, B, C, D ] : (
+fof(ruleD08, conjecture, ! [ A, B, C, D ] : (
     ( perp(A, B, C, D) )
     =>
-    ( perp(C, D, A, B) )
-))).
+    perp(C, D, A, B)
+)).

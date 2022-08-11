@@ -1,5 +1,5 @@
-fof(ruleD39, conjecture, ( ! [ A, B, C, D, P, Q ] : (
+fof(ruleD39, conjecture, ! [ A, B, C, D, P, Q ] : (
     ( eqangle(A, B, P, Q, C, D, P, Q) )
     =>
-    ( para(A, B, C, D) )
-))).
+    para(A, B, C, D)
+)).

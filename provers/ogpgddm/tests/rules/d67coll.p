@@ -1,6 +1,6 @@
-fof(ruleD67coll, conjecture, ( ! [ A, B, C ] : (
+fof(ruleD67coll, conjecture, ! [ A, B, C ] : (
     ( coll(A, B, C)
       & cong(A, B, A, C) )
     =>
-    ( midp(A, B, C) )
-))).
+    midp(A, B, C)
+)).

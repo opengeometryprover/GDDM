@@ -1,5 +1,5 @@
-fof(ruleD01, conjecture, ( ! [ A, B, C ] : (
+fof(ruleD01, conjecture, ! [ A, B, C ] : (
     ( coll(A, B, C) )
     =>
-    ( coll(A, C, B) )
-))).
+    coll(A, C, B)
+)).

@@ -1,5 +1,5 @@
-fof(ruleD23, conjecture, ( ! [ A, B, C, D ] : (
+fof(ruleD23, conjecture, ! [ A, B, C, D ] : (
     ( cong(A, B, C, D) )
     =>
-    ( cong(A, B, D, C) )
-))).
+    cong(A, B, D, C)
+)).

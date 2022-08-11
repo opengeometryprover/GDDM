@@ -1,6 +1,6 @@
-fof(ruleD54cyclic, conjecture, ( ! [ A, B, C, D ] : (
+fof(ruleD54cyclic, conjecture, ! [ A, B, C, D ] : (
     ( cyclic(A, B, C, D)
       & para(A, B, C, D) )
     =>
-    ( eqangle(A, D, C, D, C, D, C, B) )
-))).
+    eqangle(A, D, C, D, C, D, C, B)
+)).
