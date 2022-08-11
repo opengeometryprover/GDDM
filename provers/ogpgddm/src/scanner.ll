@@ -102,7 +102,6 @@ id      [a-zA-Z][a-zA-Z_0-9]*
 int     [0-9]+
 blank   [ \t\r]
 
-
 %{
     // Code run each time a pattern is matched.
 # define YY_USER_ACTION  loc.columns(yyleng);
@@ -117,7 +116,8 @@ blank   [ \t\r]
     loc.step();
 %}
 
-
+%.*        loc.step();
+include.*  loc.step();
 {blank}+   loc.step();
 \n+        loc.lines(yyleng); loc.step();
 

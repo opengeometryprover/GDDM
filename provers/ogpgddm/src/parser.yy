@@ -75,7 +75,7 @@
 unit: fof {};
 
 fof:
-    "fof" "(" "identifier" "," "conjecture" "," "("  forall ":" "(" "(" antecedents ")" "=>" "(" consequent ")" ")" ")" ")" "."
+    "fof" "(" "identifier" "," "conjecture" "," forall ":" "(" "(" antecedents ")" "=>" consequent ")" ")" "."
     {};
 
 forall:
