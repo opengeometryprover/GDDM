@@ -12,7 +12,6 @@
 *.time
 
 # OGP GDDM prover
-ogpgddm
 parser.cpp
 parser.hpp
 scanner.cpp
