@@ -4,7 +4,6 @@
 
 
 GDDM=../src/ogpgddm
-DIRJGEX=jgex
 DIRRULES=rules
 DIRTHEOREMS=theorems
 DIRTPTP=tptp
@@ -18,7 +17,6 @@ synopsis () {
     echo
     echo "Options"
     echo
-    echo "  --jgex  Use a JGEX examples."
     echo "  --rule  Use an implemented rules."
     echo "  --theorem  Use a known theorem."
     echo "  --tptp  Use a TPTP problem."
@@ -26,7 +24,6 @@ synopsis () {
     echo
     echo "Examples"
     echo
-    echo "  testing --jgex 01"
     echo "  testing --rule 10"
     echo "  testing --theorem pappus"
     echo "  testing --tptp 547+1"
@@ -60,11 +57,7 @@ case $# in
     1)
 	if [ "$1" = "--list" ]
 	then
-	    echo "Available conjectures"
-	    echo
-	    echo "  JGEX (identify by number):"
-	    echo
-	    ls "$DIRJGEX"
+	    echo "  Available conjectures"
 	    echo
 	    echo "  Rules (identify by number and string up to '.'):"
 	    echo
@@ -78,34 +71,19 @@ case $# in
 	    echo
 	    ls "$DIRTPTP"
 	    echo
-	    echo "Examples"
+	    echo "  Usages examples"
 	    echo
-	    echo "  testing --jgex 01"
-	    echo "  testing --rule 10"
-	    echo "  testing --theorem pappus"
-	    echo "  testing --tptp 547+1"
-	    echo "  testing --list"
+	    echo "testing --jgex 01"
+	    echo "testing --rule 10"
+	    echo "testing --theorem pappus"
+	    echo "testing --tptp 547+1"
+	    echo "testing --list"
 	else
 	    error 2
 	fi      
 	;;
     2)
 	case $1 in
-	    --jgex)
-		if [ -e "$DIRJGEX"/"$2".p ]
-		then
-		    echo
-		    echo "-----  JGEX example $2.p  -----"
-		    echo
-		    cat "$DIRJGEX"/"$2".p
-		    echo
-		    echo "-----  Theorem prover output  -----"
-		    echo
-		    $GDDM "$DIRJGEX"/"$2".p
-		else
-		    error 3
-		fi
-		;;
 	    --rule)
 		if [ -e "$DIRRULES"/d"$2".p ]
 		then
