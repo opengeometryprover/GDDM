@@ -6687,21 +6687,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
     int nrColl, nrPara, nrPerp, nrMidp, nrCircle, nrCong;
     int nrContri, nrCyclic, nrEqangle, nrEqratio, nrSimtri;
     bool correctTransaction;
-    std::string newFact;
-    std::string typeGeoCmd;
-    std::string newFactId;
-    std::string deleteNewFact;
-    std::string insertFact;
-    std::string updateGeoCmd;
-    std::string toDeriveGeoCmd;
-    std::string insertNewFact;
-    std::string querySecondGeoCmdA;
-    std::string querySecondGeoCmdB;
+    std::string deleteNewFact, insertFact, newFact, newFactId;
+    std::string toDeriveGeoCmd, typeGeoCmd, updateGeoCmd;
     std::string point1, point2, point3, point4, point5, point6, point7, point8;
-    std::string newPoint3;
-    std::string lastInsertedRowId;
-    std::string lstInsRwId;
-    std::string insertionNewFact;
     FOFtoDB fdb;
 
     // DEBUG
@@ -7450,7 +7438,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
     }
 
     // DEBUG
-    // fdb.showDB(dbim);
+    fdb.showDB(dbim);
     std::cout << "fixedPoint() : Leaving..." << std::endl << std::endl;
 
     return dbim;
