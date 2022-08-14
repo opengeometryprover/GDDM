@@ -3035,7 +3035,7 @@ DBinMemory Prover::ruleD47(DBinMemory dbim, std::string point1,
 	    correctTransaction = false;
 	} else {
 	    insertionPred = "INSERT INTO "
-		"COngruentSegments (typeGeoCmd, point1, point2, point3, point4,"
+		"CongruentSegments (typeGeoCmd, point1, point2, point3, point4,"
 		"newFact) "
 		"VALUES "
 		"('para', '" + point1 + "', '" + point2 + "', '" + point1
