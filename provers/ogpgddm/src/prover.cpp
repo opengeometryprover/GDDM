@@ -4291,7 +4291,7 @@ DBinMemory Prover::ruleD55midp(DBinMemory dbim, std::string point1,
 /*
  * Rule D55: midp(M, A, B) & perp(O, M, A, B) -> cong(O, A, O, B)
  *
- * Function's argument is perp(O, MA, B) and searches for midp(M, A, C).
+ * Function's argument is perp(O, M, A, B) and searches for midp(M, A, C).
  */
 DBinMemory Prover::ruleD55perp(DBinMemory dbim, std::string point1,
 				 std::string point2, std::string point3,
