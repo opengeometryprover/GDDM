@@ -19,7 +19,7 @@
 #include <map>
 
 /*
- * Rule D1: coll(A, B, C) => coll(A, C, B)
+ * Rule D1: coll(A, B, C) -> coll(A, C, B)
  */
 DBinMemory Prover::ruleD01(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3) {
@@ -55,7 +55,7 @@ DBinMemory Prover::ruleD01(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D2: coll(A, B, C) => coll(B, A, C)
+ * Rule D2: coll(A, B, C) -> coll(B, A, C)
  */
 DBinMemory Prover::ruleD02(DBinMemory dbim, std::string point1,
 			   std::string point2,std::string point3) {
@@ -91,7 +91,7 @@ DBinMemory Prover::ruleD02(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D3: coll(A, B, C) & coll(A, B, D) => coll(C, D, A)
+ * Rule D3: coll(A, B, C) & coll(A, B, D) -> coll(C, D, A)
  */
 DBinMemory Prover::ruleD03(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3) {
@@ -163,7 +163,7 @@ DBinMemory Prover::ruleD03(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D4: para(A, B, C, D) => para(A, B, D, C)
+ * Rule D4: para(A, B, C, D) -> para(A, B, D, C)
  */
 DBinMemory Prover::ruleD04(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -200,7 +200,7 @@ DBinMemory Prover::ruleD04(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D5: para(A, B, C, D) => para(C, D, A, B)
+ * Rule D5: para(A, B, C, D) -> para(C, D, A, B)
  */
 DBinMemory Prover::ruleD05(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -237,7 +237,7 @@ DBinMemory Prover::ruleD05(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D6: para(A, B, C, D) & para(C, D, E, F) => para(A, B, E, F)
+ * Rule D6: para(A, B, C, D) & para(C, D, E, F) -> para(A, B, E, F)
  */
 DBinMemory Prover::ruleD06(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -318,7 +318,7 @@ DBinMemory Prover::ruleD06(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D7: perp(A, B, C, D) => perp(A, B, D, C)
+ * Rule D7: perp(A, B, C, D) -> perp(A, B, D, C)
  */
 DBinMemory Prover::ruleD07(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -355,7 +355,7 @@ DBinMemory Prover::ruleD07(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D8: perp(A, B, C, D) => perp(C, D, A, B)
+ * Rule D8: perp(A, B, C, D) -> perp(C, D, A, B)
  */
 DBinMemory Prover::ruleD08(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -392,7 +392,7 @@ DBinMemory Prover::ruleD08(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D9: perp(A, B, C, D) & perp(C, D, E, F) => para(A, B, E, F)
+ * Rule D9: perp(A, B, C, D) & perp(C, D, E, F) -> para(A, B, E, F)
  */
 DBinMemory Prover::ruleD09(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -473,7 +473,7 @@ DBinMemory Prover::ruleD09(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D10: para(A, B, C, D) & perp(C, D, E, F) => perp(A, B, E, F)
+ * Rule D10: para(A, B, C, D) & perp(C, D, E, F) -> perp(A, B, E, F)
  *
  * Function's argument is para(A, B, C, D) and searches for perp(C, D, E, F).
  */
@@ -550,7 +550,7 @@ DBinMemory Prover::ruleD10para(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D10: para(A, B, C, D) & perp(C, D, E, F) => perp(A, B, E, F)
+ * Rule D10: para(A, B, C, D) & perp(C, D, E, F) -> perp(A, B, E, F)
  *
  * Function's argument is perp(C, D, E, F) and searches for para(A, B, C, D).
  */
@@ -627,7 +627,7 @@ DBinMemory Prover::ruleD10perp(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D11 : midp(M, B, A) => midp(M, A, B)
+ * Rule D11 : midp(M, B, A) -> midp(M, A, B)
  */
 DBinMemory Prover::ruleD11(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3){
@@ -662,7 +662,7 @@ DBinMemory Prover::ruleD11(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D12: cong(O, A, O, B) & perp(O, A, O, C) => circle(O, A, B, C)
+ * Rule D12: cong(O, A, O, B) & perp(O, A, O, C) -> circle(O, A, B, C)
  */
 DBinMemory Prover::ruleD12(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -738,7 +738,7 @@ DBinMemory Prover::ruleD12(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D13: cong(O, A, O, B) & cong(O, A, O, C) & cong(O, A, O, D)
- *               => cyclic(A, B, C, D)
+ *               -> cyclic(A, B, C, D)
  */
 DBinMemory Prover::ruleD13(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -846,7 +846,7 @@ DBinMemory Prover::ruleD13(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D14: cyclic(A, B, C, D) => cyclic(A, B, D, C)
+ * Rule D14: cyclic(A, B, C, D) -> cyclic(A, B, D, C)
  */
 DBinMemory Prover::ruleD14(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -883,7 +883,7 @@ DBinMemory Prover::ruleD14(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D15: cyclic(A, B, C, D) => cyclic(A, C, B, D)
+ * Rule D15: cyclic(A, B, C, D) -> cyclic(A, C, B, D)
  */
 DBinMemory Prover::ruleD15(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -921,7 +921,7 @@ DBinMemory Prover::ruleD15(DBinMemory dbim, std::string point1,
 
 
 /*
- * Rule D16: cyclic(A, B, C, D) => cyclic(B, A, C, D)
+ * Rule D16: cyclic(A, B, C, D) -> cyclic(B, A, C, D)
  */
 DBinMemory Prover::ruleD16(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -958,7 +958,7 @@ DBinMemory Prover::ruleD16(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D17: cyclic(A, B, C, D) & cyclic(A, B, C, E) => cyclic(B, C, D, E)
+ * Rule D17: cyclic(A, B, C, D) & cyclic(A, B, C, E) -> cyclic(B, C, D, E)
  */
 DBinMemory Prover::ruleD17(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1033,7 +1033,7 @@ DBinMemory Prover::ruleD17(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D18: eqangle(A, B, C, D, P, Q, U, V) => eqangle(B, A, C, D, P, Q, U, V)
+ * Rule D18: eqangle(A, B, C, D, P, Q, U, V) -> eqangle(B, A, C, D, P, Q, U, V)
  */
 DBinMemory Prover::ruleD18(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1074,7 +1074,7 @@ DBinMemory Prover::ruleD18(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D19: eqangle(A, B, C, D, P, Q, U, V) => eqangle(C, D, A, B, U, V, P, Q)
+ * Rule D19: eqangle(A, B, C, D, P, Q, U, V) -> eqangle(C, D, A, B, U, V, P, Q)
  */
 DBinMemory Prover::ruleD19(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1115,7 +1115,7 @@ DBinMemory Prover::ruleD19(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D20: eqangle(A, B, C, D, P, Q, U, V) => eqangle(P, Q, U, V, A, B, C, D)
+ * Rule D20: eqangle(A, B, C, D, P, Q, U, V) -> eqangle(P, Q, U, V, A, B, C, D)
  */
 DBinMemory Prover::ruleD20(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1156,7 +1156,7 @@ DBinMemory Prover::ruleD20(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D21: eqangle(A, B, C, D, P, Q, U, V) => eqangle(A, B, P, Q, C, D, U, V)
+ * Rule D21: eqangle(A, B, C, D, P, Q, U, V) -> eqangle(A, B, P, Q, C, D, U, V)
  */
 DBinMemory Prover::ruleD21(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1198,7 +1198,7 @@ DBinMemory Prover::ruleD21(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D22: eqangle(A, B, C, D, P, Q, U, V) & eqangle(P, Q, U, V, E, F, G, H)
-                 => eqangle(A, B, C, D, E, F, G, H)
+                 -> eqangle(A, B, C, D, E, F, G, H)
  */
 DBinMemory Prover::ruleD22(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1315,7 +1315,7 @@ DBinMemory Prover::ruleD22(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D23: cong(A, B, C, D) => cong(A, B, D, C)
+ * Rule D23: cong(A, B, C, D) -> cong(A, B, D, C)
  */
 DBinMemory Prover::ruleD23(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1353,7 +1353,7 @@ DBinMemory Prover::ruleD23(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D24: cong(A, B, C, D) => cong(C, D, A, B)
+ * Rule D24: cong(A, B, C, D) -> cong(C, D, A, B)
  */
 DBinMemory Prover::ruleD24(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1391,7 +1391,7 @@ DBinMemory Prover::ruleD24(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D25: cong(A, B, C, D) & cong(C, D, E, F) => cong(A, B, E, F)
+ * Rule D25: cong(A, B, C, D) & cong(C, D, E, F) -> cong(A, B, E, F)
  */
 DBinMemory Prover::ruleD25(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1472,7 +1472,7 @@ DBinMemory Prover::ruleD25(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D26: eqratio(A, B, C, D, P, Q, U, V) => eqratio(B, A, C, D, P, Q, U, V)
+ * Rule D26: eqratio(A, B, C, D, P, Q, U, V) -> eqratio(B, A, C, D, P, Q, U, V)
  */
 DBinMemory Prover::ruleD26(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1513,7 +1513,7 @@ DBinMemory Prover::ruleD26(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D27: eqratio(A, B, C, D, P, Q, U, V) => eqratio(C, D, A, B, U, V, P, Q)
+ * Rule D27: eqratio(A, B, C, D, P, Q, U, V) -> eqratio(C, D, A, B, U, V, P, Q)
  */
 DBinMemory Prover::ruleD27(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1554,7 +1554,7 @@ DBinMemory Prover::ruleD27(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D28: eqratio(A, B, C, D, P, Q, U, V) => eqratio(P, Q, U, V, A, B, C, D)
+ * Rule D28: eqratio(A, B, C, D, P, Q, U, V) -> eqratio(P, Q, U, V, A, B, C, D)
  */
 DBinMemory Prover::ruleD28(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1595,7 +1595,7 @@ DBinMemory Prover::ruleD28(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D29: eqratio(A, B, C, D, P, Q, U, V) => eqratio(A, B, P, Q, C, D, U, V)
+ * Rule D29: eqratio(A, B, C, D, P, Q, U, V) -> eqratio(A, B, P, Q, C, D, U, V)
  */
 DBinMemory Prover::ruleD29(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1637,7 +1637,7 @@ DBinMemory Prover::ruleD29(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D30: eqratio(A, B, C, D, P, Q, U, V) & eqratio(P, Q, U, V, E, F, G, H)
- *               => eqratio(A, B, C, D, E, F, G, H)
+ *               -> eqratio(A, B, C, D, E, F, G, H)
  */
 DBinMemory Prover::ruleD30(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1754,7 +1754,7 @@ DBinMemory Prover::ruleD30(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D31: simtri(A, C, B, P, R, Q) => simtri(A, B, C, P, Q, R)
+ * Rule D31: simtri(A, C, B, P, R, Q) -> simtri(A, B, C, P, Q, R)
  */
 DBinMemory Prover::ruleD31(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1794,7 +1794,7 @@ DBinMemory Prover::ruleD31(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D32: simtri(B, A, C, Q, P, R) => simtri(A, B, C, P, Q, R)
+ * Rule D32: simtri(B, A, C, Q, P, R) -> simtri(A, B, C, P, Q, R)
  */
 DBinMemory Prover::ruleD32(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1834,7 +1834,7 @@ DBinMemory Prover::ruleD32(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D33: simtri(P, Q, R, A, B, C) => simtri(A, B, C, P, Q, R)
+ * Rule D33: simtri(P, Q, R, A, B, C) -> simtri(A, B, C, P, Q, R)
  */
 DBinMemory Prover::ruleD33(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1875,7 +1875,7 @@ DBinMemory Prover::ruleD33(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D34: simtri(A, B, C, E, F, G) & simtri(E, F, G, P, Q, R)
- *               => simtri(A, B, C, P, Q, R)
+ *               -> simtri(A, B, C, P, Q, R)
  */
 DBinMemory Prover::ruleD34(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -1980,7 +1980,7 @@ DBinMemory Prover::ruleD34(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D35: contri(A, C, B, P, R, Q) => contri(A, B, C, P, Q, R)
+ * Rule D35: contri(A, C, B, P, R, Q) -> contri(A, B, C, P, Q, R)
  */
 DBinMemory Prover::ruleD35(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -2020,7 +2020,7 @@ DBinMemory Prover::ruleD35(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D36: contri(B, A, C, Q, P, R) => contri(A, B, C, P, Q, R)
+ * Rule D36: contri(B, A, C, Q, P, R) -> contri(A, B, C, P, Q, R)
  */
 DBinMemory Prover::ruleD36(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -2060,7 +2060,7 @@ DBinMemory Prover::ruleD36(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D37: contri(P, Q, R, A, B, C) => contri(A, B, C, P, Q, R)
+ * Rule D37: contri(P, Q, R, A, B, C) -> contri(A, B, C, P, Q, R)
  */
 DBinMemory Prover::ruleD37(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -2101,7 +2101,7 @@ DBinMemory Prover::ruleD37(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D38: contri(A, B, C, E, F, G) & contri(E, F, G, P, Q, R)
- *               => contri(A, B, C, P, Q, R)
+ *               -> contri(A, B, C, P, Q, R)
  */
 DBinMemory Prover::ruleD38(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -2206,7 +2206,7 @@ DBinMemory Prover::ruleD38(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D39: eqangle(A, B, P, Q, C, D, P, Q) => para(A, B, C, D)
+ * Rule D39: eqangle(A, B, P, Q, C, D, P, Q) -> para(A, B, C, D)
  */
 DBinMemory Prover::ruleD39(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -2245,7 +2245,7 @@ DBinMemory Prover::ruleD39(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D41: cyclic(A, B, P, Q) => eqangle(P, A, P, B, Q, A, Q, B)
+ * Rule D41: cyclic(A, B, P, Q) -> eqangle(P, A, P, B, Q, A, Q, B)
  */
 DBinMemory Prover::ruleD41(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -2285,7 +2285,7 @@ DBinMemory Prover::ruleD41(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D43: cyclic(A, B, C, P, Q, R) & eqangle(C, A, C, B, R, P, R, Q)
- *               => cong(A, B, P, Q)
+ *               -> cong(A, B, P, Q)
  *
  * Function's argument is cyclic(A, B, C, P, Q, R) and searches for 
  * eqangle(C, A, C, B, R, P, R, Q).
@@ -2428,7 +2428,7 @@ DBinMemory Prover::ruleD43cyclic(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D43: cyclic(A, B, C, P, Q, R) & eqangle(C, A, C, B, R, P, R, Q)
- *               => cong(A, B, P, Q)
+ *               -> cong(A, B, P, Q)
  *
  * Function's argument is eqangle(C, A, C, B, R, P, R, Q) and searches for 
  * cyclic(A, B, C, P, Q, R).
@@ -2556,7 +2556,7 @@ DBinMemory Prover::ruleD43eqangle(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D44: midp(E, A, B) & midp(F, A, C) => para(E, F, B, C)
+ * Rule D44: midp(E, A, B) & midp(F, A, C) -> para(E, F, B, C)
  */
 DBinMemory Prover::ruleD44(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3) {
@@ -2636,7 +2636,7 @@ DBinMemory Prover::ruleD44(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D45: midp(E, A, B) & para(E, F, B, C) & coll(F, A, C) => midp(F, A, C)
+ * Rule D45: midp(E, A, B) & para(E, F, B, C) & coll(F, A, C) -> midp(F, A, C)
  *
  * Function's argument is coll(F, A, C) and searches for midp(E, A, B) and
  * para(E, F, B, C).
@@ -2739,7 +2739,7 @@ DBinMemory Prover::ruleD45coll(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D45: midp(E, A, B) & para(E, F, B, C) & coll(F, A, C) => midp(F, A, C)
+ * Rule D45: midp(E, A, B) & para(E, F, B, C) & coll(F, A, C) -> midp(F, A, C)
  *
  * Function's argument is midp(E, A, B) and searches for coll(F, A, C) and
  * para(E, F, B, C).
@@ -2842,7 +2842,7 @@ DBinMemory Prover::ruleD45midp(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D45: midp(E, A, B) & para(E, F, B, C) & coll(F, A, C) => midp(F, A, C)
+ * Rule D45: midp(E, A, B) & para(E, F, B, C) & coll(F, A, C) -> midp(F, A, C)
  *
  * Function's argument is para(E, F, B, C) and searches for coll(F, A, C) and
  * midp(E, A, B).
@@ -2941,7 +2941,7 @@ DBinMemory Prover::ruleD45para(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D46: cong(O, A, O, B) => eqangle(O, A, A, B, A, B, O, B)
+ * Rule D46: cong(O, A, O, B) -> eqangle(O, A, A, B, A, B, O, B)
  */
 DBinMemory Prover::ruleD46(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -2981,7 +2981,7 @@ DBinMemory Prover::ruleD46(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D48: circle(O, A, B, C) & perp(O, A, A, X)
- *               => eqangle(A, X, A, B, C, A, C, B)
+ *               -> eqangle(A, X, A, B, C, A, C, B)
  *
  * Function's argument is circle(O, A, B, C) and searches for perp(O, A, A, X).
  */
@@ -3059,7 +3059,7 @@ DBinMemory Prover::ruleD48circle(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D48: circle(O, A, B, C) & perp(O, A, A, X)
- *               => eqangle(A, X, A, B, C, A, C, B)
+ *               -> eqangle(A, X, A, B, C, A, C, B)
  *
  * Function's argument is perp(O, A, A, X) and searches for circle(O, A, B, C).
  */
@@ -3139,7 +3139,7 @@ DBinMemory Prover::ruleD48perp(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D49: circle(O, A, B, C) & eqangle(A, X, A, B, C, A, C, B)
- *               => perp(O, A, A, X)
+ *               -> perp(O, A, A, X)
  *
  * Function's argument is circle(O, A, B, C) and searches for
  * eqangle(A, X, A, B, C, A, C, B).
@@ -3221,7 +3221,7 @@ DBinMemory Prover::ruleD49circle(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D49: circle(O, A, B, C) & eqangle(A, X, A, B, C, A, C, B)
- *               => perp(O, A, A, X)
+ *               -> perp(O, A, A, X)
  *
  * Function's argument is eqangle(A, X, A, B, C, A, C, B) and searches for
  * circle(O, A, B, C).
@@ -3301,7 +3301,7 @@ DBinMemory Prover::ruleD49eqangle(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D50: circle(O, A, B, C) & midp(M, B, C)
- *               => eqangle(A, B, A, C, O, B, O, M)
+ *               -> eqangle(A, B, A, C, O, B, O, M)
  *
  * Function's argument is circle(O, A, B, C) and searches for midp(M, B, C).
  */
@@ -3377,7 +3377,7 @@ DBinMemory Prover::ruleD50circle(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D50: circle(O, A, B, C) & midp(M, B, C)
- *               => eqangle(A, B, A, C, O, B, O, M)
+ *               -> eqangle(A, B, A, C, O, B, O, M)
  *
  * Function's argument is midp(M, B, C) and searches for circle(O, A, B, C).
  */
@@ -3456,7 +3456,7 @@ DBinMemory Prover::ruleD50midp(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D52: perp(A, B, B, C) & midp(M, A, C)
- *               => cong(A, M, B, M)
+ *               -> cong(A, M, B, M)
  *
  * Function's argument is midp(M, A, C) and searches for perp(A, B, B, C).
  */
@@ -3532,7 +3532,7 @@ DBinMemory Prover::ruleD52midp(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D52: perp(A, B, B, C) & midp(M, A, C)
- *               => cong(A, M, B, M)
+ *               -> cong(A, M, B, M)
  *
  * Function's argument is perp(A, B, B, C) and searches for midp(M, A, C).
  */
@@ -3606,7 +3606,7 @@ DBinMemory Prover::ruleD52perp(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D53: circle(O, A, B, C) & coll(O, A, C) => perp(A, B, B, A)
+ * Rule D53: circle(O, A, B, C) & coll(O, A, C) -> perp(A, B, B, A)
  *
  * Function's argument is circle(O, A, B, C) and searches for coll(O, A, C).
  */
@@ -3677,7 +3677,7 @@ DBinMemory Prover::ruleD53circle(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D53: circle(O, A, B, C) & coll(O, A, C) => perp(A, B, B, A)
+ * Rule D53: circle(O, A, B, C) & coll(O, A, C) -> perp(A, B, B, A)
  *
  * Function's argument is coll(O, A, C) and searches for circle(O, A, B, C).
  */
@@ -3753,7 +3753,7 @@ DBinMemory Prover::ruleD53coll(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D54: cyclic(A, B, C, D) & para(A, B, C, D)
- *               => eqangle(A, D, C, D, C, D, C, B)
+ *               -> eqangle(A, D, C, D, C, D, C, B)
  *
  * Function's argument is cyclic(A, B, C, D) and searches for para(A, B, C, D).
  */
@@ -3827,7 +3827,7 @@ DBinMemory Prover::ruleD54cyclic(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D54: cyclic(A, B, C, D) & para(A, B, C, D)
- *               => eqangle(A, D, C, D, C, D, C, B)
+ *               -> eqangle(A, D, C, D, C, D, C, B)
  *
  * Function's argument is para(A, B, C, D) and searches for cyclic(A, B, C, D).
  */
@@ -3899,7 +3899,7 @@ DBinMemory Prover::ruleD54para(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D55: midp(M, A, B) & perp(O, M, A, B) => cong(O, A, O, B)
+ * Rule D55: midp(M, A, B) & perp(O, M, A, B) -> cong(O, A, O, B)
  *
  * Function's argument is midp(M, A, B) and searches for perp(O, M, A, B).
  */
@@ -3974,7 +3974,7 @@ DBinMemory Prover::ruleD55midp(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D55: midp(M, A, B) & perp(O, M, A, B) => cong(O, A, O, B)
+ * Rule D55: midp(M, A, B) & perp(O, M, A, B) -> cong(O, A, O, B)
  *
  * Function's argument is perp(O, MA, B) and searches for midp(M, A, C).
  */
@@ -4045,7 +4045,7 @@ DBinMemory Prover::ruleD55perp(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D56: cong(A, P, B, P) & cong(A, Q, B, Q) => perp(A, B, P, Q)
+ * Rule D56: cong(A, P, B, P) & cong(A, Q, B, Q) -> perp(A, B, P, Q)
  */
 DBinMemory Prover::ruleD56(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -4120,7 +4120,7 @@ DBinMemory Prover::ruleD56(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D57: cong(A, P, B, P) & cong(A, Q, B, Q) & cyclic(A, B, P, Q)
- *               => perp(P, A, A, Q)
+ *               -> perp(P, A, A, Q)
  *
  * Function's argument is cong(A, P, B, P) and searches for cong(A, Q, B, Q)
  * and cyclic(A, B, P, Q).
@@ -4225,7 +4225,7 @@ DBinMemory Prover::ruleD57cong(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D57: cong(A, P, B, P) & cong(A, Q, B, Q) & cyclic(A, B, P, Q)
- *               => perp(P, A, A, Q)
+ *               -> perp(P, A, A, Q)
  *
  * Function's argument is cyclic(A, B, P, Q) and searches for cong(A, P, B, P)
  * and cong(A, Q, B, Q).
@@ -4322,7 +4322,7 @@ DBinMemory Prover::ruleD57cyclic(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D59: simtri(A, B, C, P, Q; R) => eqratio(A, B, A, C, P, Q, P, R)
+ * Rule D59: simtri(A, B, C, P, Q; R) -> eqratio(A, B, A, C, P, Q, P, R)
  */
 DBinMemory Prover::ruleD59(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -4362,7 +4362,7 @@ DBinMemory Prover::ruleD59(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D60: simtri(A, B, C, P, Q; R) => eqangle(A, B, B, C, P, Q, Q, R)
+ * Rule D60: simtri(A, B, C, P, Q; R) -> eqangle(A, B, B, C, P, Q, Q, R)
  */
 DBinMemory Prover::ruleD60(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -4402,7 +4402,7 @@ DBinMemory Prover::ruleD60(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D62: contri(A, B, C, P, Q, R) => cong(A, B, P, Q)
+ * Rule D62: contri(A, B, C, P, Q, R) -> cong(A, B, P, Q)
  */
 DBinMemory Prover::ruleD62(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -4441,7 +4441,7 @@ DBinMemory Prover::ruleD62(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D63: midp(M, A, B) & midp(M, C, D) => para(A, C, B, D)
+ * Rule D63: midp(M, A, B) & midp(M, C, D) -> para(A, C, B, D)
  */
 DBinMemory Prover::ruleD63(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3) {
@@ -4522,7 +4522,7 @@ DBinMemory Prover::ruleD63(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D64: midp(M, A, B) & para(A, C, B, D) & para(A, D, B, C)
- *               => midp(M, C, D)
+ *               -> midp(M, C, D)
  *
  * Function's argument is midp(M, A, B) and searches for para(A, C, B, D) and
  * para(A, D, B, C).
@@ -4630,7 +4630,7 @@ DBinMemory Prover::ruleD64midp(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D64: midp(M, A, B) & para(A, C, B, D) & para(A, D, B, C)
- *               => midp(M, C, D)
+ *               -> midp(M, C, D)
  *
  * Function's argument is para(A, C, B, D) and searches for para(A, D, B, C)
  * and midp(M, A, B).
@@ -4734,7 +4734,7 @@ DBinMemory Prover::ruleD64para(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D65: para(A, B, C, D) & coll(O, A, C) & coll(O, B, D)
- *               => eqratio(O, A, A, C, O, B, B, D)
+ *               -> eqratio(O, A, A, C, O, B, B, D)
  *
  * Function's argument is coll(O, A, C) and searches for coll(O, B, D) and
  * para(A, B, C, D).
@@ -4850,7 +4850,7 @@ DBinMemory Prover::ruleD65coll(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D65: para(A, B, C, D) & coll(O, A, C) & coll(O, B, D)
- *               => eqratio(O, A, A, C, O, B, B, D)
+ *               -> eqratio(O, A, A, C, O, B, B, D)
  *
  * Function's argument is para(A, B, C, D) and searches for coll(O, A, C) and
  * coll(O, B, D).
@@ -4956,7 +4956,7 @@ DBinMemory Prover::ruleD65para(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D66: para(A, B, A, C) => coll(A, B, C)
+ * Rule D66: para(A, B, A, C) -> coll(A, B, C)
  */
 DBinMemory Prover::ruleD66(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3,
@@ -4993,7 +4993,7 @@ DBinMemory Prover::ruleD66(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D67: cong(A, B, A, C) & coll(A, B, C) => midp(A, B, C)
+ * Rule D67: cong(A, B, A, C) & coll(A, B, C) -> midp(A, B, C)
  *
  * Function's argument is coll(A, B, C) and searches for cong(A, B, A, C).
  */
@@ -5062,7 +5062,7 @@ DBinMemory Prover::ruleD67coll(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D67: cong(A, B, A, C) & coll(A, B, C) => midp(A, B, C)
+ * Rule D67: cong(A, B, A, C) & coll(A, B, C) -> midp(A, B, C)
  *
  * Function's argument is cong(A, B, A, C) and searches for coll(A, B, C).
  */
@@ -5133,7 +5133,7 @@ DBinMemory Prover::ruleD67cong(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D68: midp(A, B, C) => cong(A, B, A, C)
+ * Rule D68: midp(A, B, C) -> cong(A, B, A, C)
  */
 DBinMemory Prover::ruleD68(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3) {
@@ -5170,7 +5170,7 @@ DBinMemory Prover::ruleD68(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D69: midp(A, B, C) => coll(A, B, C)
+ * Rule D69: midp(A, B, C) -> coll(A, B, C)
  */
 DBinMemory Prover::ruleD69(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3) {
@@ -5206,7 +5206,7 @@ DBinMemory Prover::ruleD69(DBinMemory dbim, std::string point1,
 }
 
 /*
- * Rule D70: midp(M, A, B) & midp(N, C, D) => eqratio(M, A, A, B, N, C, C, D)
+ * Rule D70: midp(M, A, B) & midp(N, C, D) -> eqratio(M, A, A, B, N, C, C, D)
  */
 DBinMemory Prover::ruleD70(DBinMemory dbim, std::string point1,
 			   std::string point2, std::string point3) {
@@ -5291,7 +5291,7 @@ DBinMemory Prover::ruleD70(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D73: eqangle(A, B, C, D, P, Q, U, V) & para(P, Q, U, V)
- *               => para(A, B, C, D)
+ *               -> para(A, B, C, D)
  *
  * Function's argument is eqangle(A, B, C, D, P, Q, U, V) and searches for
  * para(P, Q, U, V).
@@ -5366,7 +5366,7 @@ DBinMemory Prover::ruleD73eqangle(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D73: eqangle(A, B, C, D, P, Q, U, V) & para(P, Q, U, V)
- *               => para(A, B, C, D)
+ *               -> para(A, B, C, D)
  *
  * Function's argument is para(P, Q, U, V) and searches for
  * eqangle(A, B, C, D, P, Q, U, V).
@@ -5456,7 +5456,7 @@ DBinMemory Prover::ruleD73para(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D74: eqangle(A, B, C, D, P, Q, U, V) & perp(P, Q, U, V)
- *               => perp(A, B, C, D)
+ *               -> perp(A, B, C, D)
  *
  * Function's argument is eqangle(A, B, C, D, P, Q, U, V) and searches for
  * perp(P, Q, U, V).
@@ -5531,7 +5531,7 @@ DBinMemory Prover::ruleD74eqangle(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D74: eqangle(A, B, C, D, P, Q, U, V) & perp(P, Q, U, V)
- *               => perp(A, B, C, D)
+ *               -> perp(A, B, C, D)
  *
  * Function's argument is perp(P, Q, U, V) and searches for
  * eqangle(A, B, C, D, P, Q, U, V).
@@ -5617,7 +5617,7 @@ DBinMemory Prover::ruleD74perp(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D75: eqratio(A, B, C, D, P, Q, U, V) & cong(P, Q, U, V)
- *               => cong(A, B, C, D)
+ *               -> cong(A, B, C, D)
  *
  * Function's argument is eqratio(A, B, C, D, P, Q, U, V) and searches for
  * cong(P, Q, U, V).
@@ -5692,7 +5692,7 @@ DBinMemory Prover::ruleD75eqratio(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D75: eqratio(A, B, C, D, P, Q, U, V) & cong(P, Q, U, V)
- *               => cong(A, B, C, D)
+ *               -> cong(A, B, C, D)
  *
  * Function's argument is cong(P, Q, U, V) and searches for
  * eqratio(A, B, C, D, P, Q, U, V).
