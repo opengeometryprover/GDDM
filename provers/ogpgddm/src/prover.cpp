@@ -6692,9 +6692,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
     std::string point1, point2, point3, point4, point5, point6, point7, point8;
     FOFtoDB fdb;
 
-    // DEBUG
+    // DEBUG START
     std::cout << std::endl << "fixedPoint() : Entering.." << std::endl;
-
+    // DEBUG STOP
     nrColl = 0;
     nrPara = 0;
     nrPerp = 0;
@@ -6706,7 +6706,6 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
     nrEqangle = 0;
     nrEqratio = 0;
     nrSimtri = 0;
-    
     // Set foreign keys ON
     sqlite3_prepare_v2(dbim.db, "PRAGMA foreign_keys = ON", -1, &(dbim.stmt),
 		       NULL);
@@ -6753,13 +6752,13 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 deleteNewFact.size(), &(dbim.stmt),
 					 NULL);
 	    sqlite3_step(dbim.stmt);
-
-	    // DEBUG
+	    // DEBUG START
 	    std::cout << "  Collinear : " << nrColl << " / ";
 	    std::cout << "coll(";
 	    std::cout << point1 << ", ";
 	    std::cout << point2 << ", ";
 	    std::cout << point3 << ")" << std::endl;
+	    // DEBUG STOP
 	    break;
 	case 2:
             // Parallel
@@ -6795,14 +6794,14 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 deleteNewFact.size(), &(dbim.stmt),
 					 NULL);
 	    sqlite3_step(dbim.stmt);
-
-	    // DEBUG
+	    // DEBUG START
 	    std::cout << "  Parallel : " << nrPara << " / ";
 	    std::cout << "para(";
 	    std::cout << point1 << ", ";
 	    std::cout << point2 << ", ";
 	    std::cout << point3 << ", ";
 	    std::cout << point4 << ")" << std::endl;
+	    // DEBUG STOP
 	    break;
 	case 3:
             // Perpendicular
@@ -6838,14 +6837,14 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 deleteNewFact.size(), &(dbim.stmt),
 					 NULL);
 	    sqlite3_step(dbim.stmt);
-
-	    // DEBUG
+	    // DEBUG START
 	    std::cout << "  Perpendicular : " << nrPerp << " / ";
 	    std::cout << "perp(";
 	    std::cout << point1 << ", ";
 	    std::cout << point2 << ", ";
 	    std::cout << point3 << ", ";
 	    std::cout << point4 << ")" << std::endl;
+	    // DEBUG STOP
 	    break;
 	case 4:
             // Midpoint
@@ -6880,13 +6879,13 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 deleteNewFact.size(), &(dbim.stmt),
 					 NULL);
 	    sqlite3_step(dbim.stmt);
-
-	    // DEBUG
+	    // DEBUG START
 	    std::cout << "  Midpoint : " << nrMidp << " / ";
 	    std::cout << "midp(";
 	    std::cout << point1 << ", ";
 	    std::cout << point2 << ", ";
 	    std::cout << point3 << ")" << std::endl;
+	    // DEBUG STOP
 	    break;
 	case 5:
 	    // Circle
@@ -6922,14 +6921,14 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 deleteNewFact.size(), &(dbim.stmt),
 					 NULL);
 	    sqlite3_step(dbim.stmt);
-
-	    // DEBUG
+	    // DEBUG START
 	    std::cout << "  Circle : " << nrCircle << " / ";
 	    std::cout << "circle(";
 	    std::cout << point1 << ", ";
 	    std::cout << point2 << ", ";
 	    std::cout << point3 << ", ";
 	    std::cout << point4 << ")" << std::endl;
+	    // DEBUG STOP
 	    break;
 	case 6:
 	    // Congruent Segments
@@ -6965,14 +6964,14 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 deleteNewFact.size(), &(dbim.stmt),
 					 NULL);
 	    sqlite3_step(dbim.stmt);
-
-	    // DEBUG
+	    // DEBUG START
 	    std::cout << "  Congruent Segments : " << nrCong << " / ";
 	    std::cout << "cong(";
 	    std::cout << point1 << ", ";
 	    std::cout << point2 << ", ";
 	    std::cout << point3 << ", ";
 	    std::cout << point4 << ")" << std::endl;
+	    // DEBUG STOP
 	    break;
 	case 7:
 	    // Congruent Triangles
@@ -7011,8 +7010,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 deleteNewFact.size(), &(dbim.stmt),
 					 NULL);
 	    sqlite3_step(dbim.stmt);
-
-	    // DEBUG
+	    // DEBUG START
 	    std::cout << "  Congruent Triangles : " << nrContri << " / ";
 	    std::cout << "contri(";
 	    std::cout << point1 << ", ";
@@ -7021,6 +7019,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    std::cout << point4 << ", ";
 	    std::cout << point5 << ", ";
 	    std::cout << point6 << ")" << std::endl;
+	    // DEBUG STOP
 	    break;
 	case 8:
 	    // Cyclic
@@ -7056,14 +7055,14 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 deleteNewFact.size(), &(dbim.stmt),
 					 NULL);
 	    sqlite3_step(dbim.stmt);
-
-	    // DEBUG
+	    // DEBUG START
 	    std::cout << "  Cyclic : " << nrCyclic << " / ";
 	    std::cout << "cyclic(";
 	    std::cout << point1 << ", ";
 	    std::cout << point2 << ", ";
 	    std::cout << point3 << ", ";
 	    std::cout << point4 << ")" << std::endl;
+	    // DEBUG STOP
 	    break;
 	case 9:
 	    // Equal Angles
@@ -7104,8 +7103,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 deleteNewFact.size(), &(dbim.stmt),
 					 NULL);
 	    sqlite3_step(dbim.stmt);
-
-	    // DEBUG
+	    // DEBUG START
 	    std::cout << "  Equal Angles : " << nrEqangle << " / ";
 	    std::cout << "eqangle(";
 	    std::cout << point1 << ", ";
@@ -7116,6 +7114,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    std::cout << point6 << ", ";
 	    std::cout << point7 << ", ";
 	    std::cout << point8 << ")" << std::endl;
+	    // DEBUG STOP
 	    break;
 	case 10:
 	    // Equal Ratios
@@ -7156,8 +7155,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 deleteNewFact.size(), &(dbim.stmt),
 					 NULL);
 	    sqlite3_step(dbim.stmt);
-
-	    // DEBUG
+	    // DEBUG START
 	    std::cout << "  Equal Ratios : " << nrEqratio << " / ";
 	    std::cout << "eqratio(";
 	    std::cout << point1 << ", ";
@@ -7168,6 +7166,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    std::cout << point6 << ", ";
 	    std::cout << point7 << ", ";
 	    std::cout << point8 << ")" << std::endl;
+	    // DEBUG STOP
 	    break;
 	case 11:
 	    // Similar Triangles
@@ -7206,8 +7205,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 deleteNewFact.size(), &(dbim.stmt),
 					 NULL);
 	    sqlite3_step(dbim.stmt);
-
-	    // DEBUG
+	    // DEBUG START
 	    std::cout << "  Similar Triangles : " << nrSimtri << " / ";
 	    std::cout << "simtri(";
 	    std::cout << point1 << ", ";
@@ -7216,6 +7214,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    std::cout << point4 << ", ";
 	    std::cout << point5 << ", ";
 	    std::cout << point6 << ")" << std::endl;
+	    // DEBUG STOP
 	    break;
 	default:
 	    // ERROR : Necessary?  I don't _think_ so...
@@ -7436,11 +7435,10 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	dbim.rc = sqlite3_prepare_v2(dbim.db, newFact.c_str(), newFact.size(),
 				     &(dbim.stmt), NULL);
     }
-
-    // DEBUG
+    // DEBUG START
     fdb.showDB(dbim);
     std::cout << "fixedPoint() : Leaving..." << std::endl << std::endl;
-
+    // DEBUG STOP
     return dbim;
 }
 
