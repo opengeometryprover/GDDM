@@ -3179,8 +3179,10 @@ DBinMemory Prover::ruleD47(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Collinear "
 	"ON (newFact = id) "
-	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point4 + "'";
+	"WHERE point1 IN ('" + point1 + "', '" + point2 + "', '" + point4
+	+ "') AND point2 IN ('" + point1 + "', '" + point2 + "', '" + point4
+	+ "') AND point2 <> point1 AND point3 IN ('" + point1 + "', '" + point2
+	+ "', '" + point4 + "') AND point3 NOT IN (point1, point2)";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -3189,8 +3191,10 @@ DBinMemory Prover::ruleD47(DBinMemory dbim, std::string point1,
 	"FROM Facts "
 	"INNER JOIN Collinear "
 	"ON (oldFact = id) "
-	"WHERE point1 = '" + point5 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point4 + "'";
+	"WHERE point1 IN ('" + point1 + "', '" + point2 + "', '" + point4
+	+ "') AND point2 IN ('" + point1 + "', '" + point2 + "', '" + point4
+	+ "') AND point2 <> point1 AND point3 IN ('" + point1 + "', '" + point2
+	+ "', '" + point4 + "') AND point3 NOT IN (point1, point2)";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -3206,7 +3210,7 @@ DBinMemory Prover::ruleD47(DBinMemory dbim, std::string point1,
 		"CongruentSegments (typeGeoCmd, point1, point2, point3, point4,"
 		"newFact) "
 		"VALUES "
-		"('para', '" + point1 + "', '" + point2 + "', '" + point1
+		"('cong', '" + point1 + "', '" + point2 + "', '" + point1
 		+ "', '" + point4 + "', '" + lstInsRwId + "')";
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
 					 insertionPred.size(), &(dbim.stmt),
@@ -7429,12 +7433,10 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 		&& !(point2 == point8 && point4 == point6))
 		dbim = ruleD43eqangle(dbim, point1, point2, point3, point4,
 				      point5, point6, point7, point8);
-	    // if (point1 == point3 && point1 == point6 && point4 == point8
-	    // 	&& point5 == point7)
-	    // if (point1 == point7 && point2 == point3 && point2 == point5
-	    // 	&& point4 == point6 && point4 == point8)
-	    // 	dbim = ruleD22(dbim, point1, point2, point3, point4,
-	    // 		       point5, point6, point7, point8);
+	    if (point1 == point7 && point2 == point3 && point2 == point5
+		&& point4 == point6 && point4 == point8)
+		dbim = ruleD47(dbim, point1, point2, point3, point4,
+			       point5, point6, point7, point8);
 	    // 	dbim = ruleD49eqangle(dbim, point1, point2, point3, point4,
 	    // 			      point5, point6, point7, point8);
 	    // if (point1 == point3 && point5 == point7)
