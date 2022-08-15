@@ -7298,7 +7298,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD01(dbim, point1, point2, point3);
 	    dbim = ruleD02(dbim, point1, point2, point3);
 	    dbim = ruleD03(dbim, point1, point2, point3);
-	    // dbim = ruleD45coll(dbim, point1, point2, point3);
+	    dbim = ruleD45coll(dbim, point1, point2, point3);
 	    // dbim = ruleD51coll(dbim, point1, point2, point3);
 	    // dbim = ruleD53coll(dbim, point1, point2, point3);
 	    // dbim = ruleD65coll(dbim, point1, point2, point3);
@@ -7311,8 +7311,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD06(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10para(dbim, point1, point2, point3, point4);
 	    dbim = ruleD40(dbim, point1, point2, point3, point4);
-	    // if (point1 != point3)
-	    // 	dbim = ruleD45para(dbim, point1, point2, point3, point4);
+	    dbim = ruleD45para(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD54para(dbim, point1, point2, point3, point4);
 	    // if (point3 != point4)
 	    // 	dbim = ruleD64para(dbim, point1, point2, point3, point4);
@@ -7340,7 +7339,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
             // Midpoint
 	    dbim = ruleD11(dbim, point1, point2, point3);
 	    dbim = ruleD44(dbim, point1, point2, point3);
-	    // dbim = ruleD45midp(dbim, point1, point2, point3);
+	    dbim = ruleD45midp(dbim, point1, point2, point3);
 	    // dbim = ruleD50midp(dbim, point1, point2, point3);
 	    // dbim = ruleD52midp(dbim, point1, point2, point3);
 	    // dbim = ruleD55midp(dbim, point1, point2, point3);
