@@ -3576,7 +3576,8 @@ DBinMemory Prover::ruleD50circle(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Midpoint "
 	"ON (newFact = id) "
-	"WHERE point2 = '" + point3 + "' AND point3 = '" + point4 + "'";
+	"WHERE point2 = '" + point3 + "' AND point3 = '" + point4
+	+ "' AND point1 <> '" + point1 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -3585,7 +3586,8 @@ DBinMemory Prover::ruleD50circle(DBinMemory dbim, std::string point1,
 	"FROM Facts "
 	"INNER JOIN Midpoint "
 	"ON (oldFact = id) "
-	"WHERE point2 = '" + point3 + "' AND point3 = '" + point4 + "'";
+	"WHERE point2 = '" + point3 + "' AND point3 = '" + point4
+	+ "' AND point1 <> '" + point1 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -3651,7 +3653,8 @@ DBinMemory Prover::ruleD50midp(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Circle "
 	"ON (newFact = id) "
-	"WHERE point3 = '" + point2 + "' AND point4 = '" + point3 + "'";
+	"WHERE point3 = '" + point2 + "' AND point4 = '" + point3
+	+ "' AND point1 <> '" + point1 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -3660,7 +3663,8 @@ DBinMemory Prover::ruleD50midp(DBinMemory dbim, std::string point1,
 	"FROM Facts "
 	"INNER JOIN Circle "
 	"ON (oldFact = id) "
-	"WHERE point3 = '" + point2 + "' AND point4 = '" + point3 + "'";
+	"WHERE point3 = '" + point2 + "' AND point4 = '" + point3
+	+ "' AND point1 <> '" + point1 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -7344,7 +7348,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD11(dbim, point1, point2, point3);
 	    dbim = ruleD44(dbim, point1, point2, point3);
 	    dbim = ruleD45midp(dbim, point1, point2, point3);
-	    // dbim = ruleD50midp(dbim, point1, point2, point3);
+	    dbim = ruleD50midp(dbim, point1, point2, point3);
 	    // dbim = ruleD52midp(dbim, point1, point2, point3);
 	    // dbim = ruleD55midp(dbim, point1, point2, point3);
 	    // dbim = ruleD63(dbim, point1, point2, point3);
@@ -7357,7 +7361,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    // Circle
 	    dbim = ruleD48circle(dbim, point1, point2, point3, point4);
 	    dbim = ruleD49circle(dbim, point1, point2, point3, point4);
-	    // dbim = ruleD50circle(dbim, point1, point2, point3, point4);
+	    dbim = ruleD50circle(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD51circle(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD53circle(dbim, point1, point2, point3, point4);
 	    break;
