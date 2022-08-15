@@ -2710,7 +2710,7 @@ DBinMemory Prover::ruleD43eqangle(DBinMemory dbim, std::string point1,
 			"CongruentSegments (typeGeoCmd, point1, point2, "
 			"point3, point4, newFact) "
 			"VALUES "
-			"('cong', '" + point1 + "', '" + point4 + "', '"
+			"('cong', '" + point2 + "', '" + point4 + "', '"
 			+ point6 + "', '" + point8 + "', '" + lstInsRwId
 			+ "')";
 		    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
@@ -7404,7 +7404,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD16(dbim, point1, point2, point3, point4);
 	    dbim = ruleD17(dbim, point1, point2, point3, point4);
 	    dbim = ruleD41(dbim, point1, point2, point3, point4);
-	    // dbim = ruleD43cyclic(dbim, point1, point2, point3, point4);
+	    dbim = ruleD43cyclic(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD54cyclic(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD57cyclic(dbim, point1, point2, point3, point4);
 	    break;
@@ -7430,9 +7430,12 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 		&& point1 != point5 && point2 != point4)
 		dbim = ruleD42(dbim, point1, point2, point3, point4,
 			       point5, point6, point7, point8);
-	    // if (point1 == point3 && point5 == point7)
-	    // 	dbim = ruleD43eqangle(dbim, point1, point2, point3, point4,
-	    // 			      point5, point6, point7, point8);
+	    if (point1 == point3 && point5 == point7
+		&& point2 != point4 && point6 != point8
+		&& !(point2 == point6 && point4 == point8)
+		&& !(point2 == point8 && point4 == point6))
+		dbim = ruleD43eqangle(dbim, point1, point2, point3, point4,
+				      point5, point6, point7, point8);
 	    // if (point1 == point3 && point1 == point6 && point4 == point8
 	    // 	&& point5 == point7)
 	    // if (point1 == point7 && point2 == point3 && point2 == point5
