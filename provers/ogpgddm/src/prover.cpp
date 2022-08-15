@@ -7411,11 +7411,11 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 			   point5, point6, point7, point8);
 	    dbim = ruleD22(dbim, point1, point2, point3, point4,
 			   point5, point6, point7, point8);
-	    // if (point3 == point7 && point4 == point8
-	    // 	&& !(point1 == point5 && point2 == point6)
-	    // 	&& !(point1 == point6 && point2 == point5))
-	    // 	dbim = ruleD39(dbim, point1, point2, point3, point4,
-	    // 		       point5, point6, point7, point8);
+	    if (point3 == point7 && point4 == point8
+		&& !(point1 == point5 && point2 == point6)
+		&& !(point1 == point6 && point2 == point5))
+		dbim = ruleD39(dbim, point1, point2, point3, point4,
+			       point5, point6, point7, point8);
 	    // if (point1 == point3 && point2 == point5 && point4 == point8
 	    // 	&& point5 == point7 && point2 != point4)
 	    // 	dbim = ruleD42(dbim, point1, point2, point3, point4,
