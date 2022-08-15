@@ -3765,7 +3765,7 @@ DBinMemory Prover::ruleD51circle(DBinMemory dbim, std::string point1,
 	    "INNER JOIN EqualAngles "
 	    "ON (newFact = id) "
 	    "WHERE point1 = '" + point2 + "' AND point2 = '" + point3
-	    + "' AND point3 = '" + point2 + "' AND point4 = '" + point1
+	    + "' AND point3 = '" + point2 + "' AND point4 = '" + point4
 	    + "' AND point5 = '" + point1 + "' AND point6 = '" + point3
 	    + "' AND point7 = '" + point1 + "' AND point8 = '" + newPoint + "'";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
@@ -3777,7 +3777,7 @@ DBinMemory Prover::ruleD51circle(DBinMemory dbim, std::string point1,
 	    "INNER JOIN EqualAngles "
 	    "ON (oldFact = id) "
 	    "WHERE point1 = '" + point2 + "' AND point2 = '" + point3
-	    + "' AND point3 = '" + point2 + "' AND point4 = '" + point1
+	    + "' AND point3 = '" + point2 + "' AND point4 = '" + point4
 	    + "' AND point5 = '" + point1 + "' AND point6 = '" + point3
 	    + "' AND point7 = '" + point1 + "' AND point8 = '" + newPoint + "'";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
@@ -7307,7 +7307,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD02(dbim, point1, point2, point3);
 	    dbim = ruleD03(dbim, point1, point2, point3);
 	    dbim = ruleD45coll(dbim, point1, point2, point3);
-	    // dbim = ruleD51coll(dbim, point1, point2, point3);
+	    dbim = ruleD51coll(dbim, point1, point2, point3);
 	    // dbim = ruleD53coll(dbim, point1, point2, point3);
 	    // dbim = ruleD65coll(dbim, point1, point2, point3);
 	    // dbim = ruleD67coll(dbim, point1, point2, point3);
@@ -7362,7 +7362,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD48circle(dbim, point1, point2, point3, point4);
 	    dbim = ruleD49circle(dbim, point1, point2, point3, point4);
 	    dbim = ruleD50circle(dbim, point1, point2, point3, point4);
-	    // dbim = ruleD51circle(dbim, point1, point2, point3, point4);
+	    dbim = ruleD51circle(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD53circle(dbim, point1, point2, point3, point4);
 	    break;
 	case 6:
@@ -7445,9 +7445,10 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 		&& point5 == point7)
 		dbim = ruleD49eqangle(dbim, point1, point2, point3, point4,
 				      point5, point6, point7, point8);
-	    // if (point1 == point3 && point5 == point7)
-	    // 	dbim = ruleD51eqangle(dbim, point1, point2, point3, point4,
-	    // 			      point5, point6, point7, point8);
+	    if (point1 == point3 && point2 == point6 && point5 == point7
+		&& point2 != point4 && point2 != point8)
+		dbim = ruleD51eqangle(dbim, point1, point2, point3, point4,
+				      point5, point6, point7, point8);
 	    // if (point2 == point3 && point6 == point7)
 	    // 	dbim = ruleD58(dbim, point1, point2, point3, point4,
 	    // 		       point5, point6, point7, point8);
