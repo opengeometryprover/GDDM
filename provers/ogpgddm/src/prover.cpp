@@ -4638,7 +4638,7 @@ DBinMemory Prover::ruleD56(DBinMemory dbim, std::string point1,
 	"INNER JOIN CongruentSegments "
 	"ON (newFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point3 = '" + point3
-	+ "' AND point2 = point4";
+	+ "' AND point2 <> '" + point2 + "' AND point2 = point4";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -4648,7 +4648,7 @@ DBinMemory Prover::ruleD56(DBinMemory dbim, std::string point1,
 	"INNER JOIN CongruentSegments "
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point3 = '" + point3
-	+ "' AND point2 = point4";
+	+ "' AND point2 <> '" + point2 + "' AND point2 = point4";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -7376,8 +7376,8 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD25(dbim, point1, point2, point3, point4);
 	    if (point1 == point3)
 		dbim = ruleD46(dbim, point1, point2, point3, point4);
-	    // if (point2 == point4)
-	    //  dbim = ruleD56(dbim, point1, point2, point3, point4);
+	    if (point2 == point4)
+		dbim = ruleD56(dbim, point1, point2, point3, point4);
 	    // if (point2 == point4)
 	    //  dbim = ruleD57(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD61cong(dbim, point1, point2, point3, point4);
