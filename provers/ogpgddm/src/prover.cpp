@@ -7307,7 +7307,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD05(dbim, point1, point2, point3, point4);
 	    dbim = ruleD06(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10para(dbim, point1, point2, point3, point4);
-	    dbim = ruleD40(dbim, point1, point2, point3, point4); 
+	    dbim = ruleD40(dbim, point1, point2, point3, point4);
 	    // if (point1 != point3)
 	    // 	dbim = ruleD45para(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD54para(dbim, point1, point2, point3, point4);
@@ -7394,7 +7394,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD15(dbim, point1, point2, point3, point4);
 	    dbim = ruleD16(dbim, point1, point2, point3, point4);
 	    dbim = ruleD17(dbim, point1, point2, point3, point4);
-	    // dbim = ruleD41(dbim, point1, point2, point3, point4);
+	    dbim = ruleD41(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD43cyclic(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD54cyclic(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD57cyclic(dbim, point1, point2, point3, point4);
