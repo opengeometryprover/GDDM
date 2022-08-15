@@ -1,4 +1,4 @@
-fof(simson, conjecture, ( ! [ A, B, C, D, E, F, G, AUX1, AUX2 ] : (
+fof(simson, conjecture, ! [ A, B, C, D, E, F, G, AUX1, AUX2 ] : (
     ( circle(AUX1, A, B, C)
       & circle(AUX1, A, D, AUX2)
       & perp(A, B, D, E)
@@ -8,5 +8,5 @@ fof(simson, conjecture, ( ! [ A, B, C, D, E, F, G, AUX1, AUX2 ] : (
       & perp(B, C, D, G)
       & coll(B, C, G) )
     =>
-    ( coll(E, F, G) )
-))).
+    coll(E, F, G)
+)).

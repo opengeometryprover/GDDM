@@ -1,4 +1,4 @@
-fof(pappus, conjecture, ( ! [ A, B, C, D, E, F, P, Q, R ] : (
+fof(pappus, conjecture, ! [ A, B, C, D, E, F, P, Q, R ] : (
     ( coll(A, B, C)
       & coll(D, E, F)
       & coll(A, P, E)
@@ -8,5 +8,5 @@ fof(pappus, conjecture, ( ! [ A, B, C, D, E, F, P, Q, R ] : (
       & coll(C, Q, D)
       & coll(C, R, E) )
     =>
-    ( coll(P, Q, R) )
-))).
+    coll(P, Q, R)
+)).
