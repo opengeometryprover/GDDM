@@ -7356,7 +7356,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	case 5:
 	    // Circle
 	    dbim = ruleD48circle(dbim, point1, point2, point3, point4);
-	    // dbim = ruleD49circle(dbim, point1, point2, point3, point4);
+	    dbim = ruleD49circle(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD50circle(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD51circle(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD53circle(dbim, point1, point2, point3, point4);
@@ -7437,8 +7437,10 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 		&& point4 == point6 && point4 == point8)
 		dbim = ruleD47(dbim, point1, point2, point3, point4,
 			       point5, point6, point7, point8);
-	    // 	dbim = ruleD49eqangle(dbim, point1, point2, point3, point4,
-	    // 			      point5, point6, point7, point8);
+	    if (point1 == point3 && point1 == point6 && point4 == point8
+		&& point5 == point7)
+		dbim = ruleD49eqangle(dbim, point1, point2, point3, point4,
+				      point5, point6, point7, point8);
 	    // if (point1 == point3 && point5 == point7)
 	    // 	dbim = ruleD51eqangle(dbim, point1, point2, point3, point4,
 	    // 			      point5, point6, point7, point8);
