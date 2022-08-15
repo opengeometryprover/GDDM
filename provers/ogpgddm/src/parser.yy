@@ -30,7 +30,10 @@
 %define parse.lac full
 
 %code {
-# include "foftodb.hpp"
+#include "foftodb.hpp"
+#include "points.hpp"
+
+extern struct pointList *points;
 }
 
 %define api.token.prefix {TOK_}
@@ -95,7 +98,7 @@ antecedent:
     };
 
 consequent:
-    geocmd
+    geocmdConsequent
     {
 	drv.antconcedent[drv.numGeoCmd] = 1;
 	drv.numGeoCmd++;
@@ -122,6 +125,10 @@ circle:
 	drv.point2[drv.numGeoCmd]=$5;
 	drv.point3[drv.numGeoCmd]=$7;
 	drv.point4[drv.numGeoCmd]=$9;
+	points = addPoint($3, points);
+	points = addPoint($5, points);
+	points = addPoint($7, points);
+	points = addPoint($9, points);
     }
 
 coll:
@@ -131,6 +138,9 @@ coll:
 	drv.point1[drv.numGeoCmd] = $3;
 	drv.point2[drv.numGeoCmd] = $5;
 	drv.point3[drv.numGeoCmd] = $7;
+	points = addPoint($3, points);
+	points = addPoint($5, points);
+	points = addPoint($7, points);
     };
 
 cong:
@@ -141,6 +151,10 @@ cong:
 	drv.point2[drv.numGeoCmd]=$5;
 	drv.point3[drv.numGeoCmd]=$7;
 	drv.point4[drv.numGeoCmd]=$9;
+	points = addPoint($3, points);
+	points = addPoint($5, points);
+	points = addPoint($7, points);
+	points = addPoint($9, points);
     }
 
 contri:
@@ -153,6 +167,12 @@ contri:
 	drv.point4[drv.numGeoCmd]=$9;
 	drv.point5[drv.numGeoCmd]=$11;
 	drv.point6[drv.numGeoCmd]=$13;
+	points = addPoint($3, points);
+	points = addPoint($5, points);
+	points = addPoint($7, points);
+	points = addPoint($9, points);
+	points = addPoint($11, points);
+	points = addPoint($13, points);
     }
 
 cyclic:
@@ -163,6 +183,10 @@ cyclic:
 	drv.point2[drv.numGeoCmd]=$5;
 	drv.point3[drv.numGeoCmd]=$7;
 	drv.point4[drv.numGeoCmd]=$9;
+	points = addPoint($3, points);
+	points = addPoint($5, points);
+	points = addPoint($7, points);
+	points = addPoint($9, points);
     }
 
 eqangle:
@@ -177,6 +201,14 @@ eqangle:
 	drv.point6[drv.numGeoCmd]=$13;
 	drv.point7[drv.numGeoCmd]=$15;
 	drv.point8[drv.numGeoCmd]=$17;
+	points = addPoint($3, points);
+	points = addPoint($5, points);
+	points = addPoint($7, points);
+	points = addPoint($9, points);
+	points = addPoint($11, points);
+	points = addPoint($13, points);
+	points = addPoint($15, points);
+	points = addPoint($17, points);
     }
 
 eqratio:
@@ -191,6 +223,14 @@ eqratio:
 	drv.point6[drv.numGeoCmd]=$13;
 	drv.point7[drv.numGeoCmd]=$15;
 	drv.point8[drv.numGeoCmd]=$17;
+	points = addPoint($3, points);
+	points = addPoint($5, points);
+	points = addPoint($7, points);
+	points = addPoint($9, points);
+	points = addPoint($11, points);
+	points = addPoint($13, points);
+	points = addPoint($15, points);
+	points = addPoint($17, points);
     }
 
 para:
@@ -201,6 +241,10 @@ para:
 	drv.point2[drv.numGeoCmd]=$5;
 	drv.point3[drv.numGeoCmd]=$7;
 	drv.point4[drv.numGeoCmd]=$9;
+	points = addPoint($3, points);
+	points = addPoint($5, points);
+	points = addPoint($7, points);
+	points = addPoint($9, points);
     };
 
 perp:
@@ -211,6 +255,10 @@ perp:
 	drv.point2[drv.numGeoCmd]=$5;
 	drv.point3[drv.numGeoCmd]=$7;
 	drv.point4[drv.numGeoCmd]=$9;
+	points = addPoint($3, points);
+	points = addPoint($5, points);
+	points = addPoint($7, points);
+	points = addPoint($9, points);
     };
 
 midp:
@@ -220,9 +268,151 @@ midp:
 	drv.point1[drv.numGeoCmd] = $3;
 	drv.point2[drv.numGeoCmd] = $5;
 	drv.point3[drv.numGeoCmd] = $7;
+	points = addPoint($3, points);
+	points = addPoint($5, points);
+	points = addPoint($7, points);
     };
 
 simtri:
+    "simtri" "(" "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" ")"
+    {
+	drv.typeGeoCmd[drv.numGeoCmd] = "simtri";
+	drv.point1[drv.numGeoCmd]=$3;
+	drv.point2[drv.numGeoCmd]=$5;
+	drv.point3[drv.numGeoCmd]=$7;
+	drv.point4[drv.numGeoCmd]=$9;
+	drv.point5[drv.numGeoCmd]=$11;
+	drv.point6[drv.numGeoCmd]=$13;
+	points = addPoint($3, points);
+	points = addPoint($5, points);
+	points = addPoint($7, points);
+	points = addPoint($9, points);
+	points = addPoint($11, points);
+	points = addPoint($13, points);
+    }
+
+geocmdConsequent:
+    circleConsequent {};
+    | collConsequent {};
+    | congConsequent {};
+    | contriConsequent {};
+    | cyclicConsequent {};
+    | eqangleConsequent {};
+    | eqratioConsequent {};
+    | paraConsequent {};
+    | perpConsequent {};
+    | midpConsequent {};
+    | simtriConsequent {};
+
+circleConsequent:
+    "circle" "(" "identifier" "," "identifier" "," "identifier" "," "identifier" ")"
+    {
+	drv.typeGeoCmd[drv.numGeoCmd] = "circle";
+	drv.point1[drv.numGeoCmd]=$3;
+	drv.point2[drv.numGeoCmd]=$5;
+	drv.point3[drv.numGeoCmd]=$7;
+	drv.point4[drv.numGeoCmd]=$9;
+    }
+
+collConsequent:
+    "coll" "(" "identifier" "," "identifier" "," "identifier" ")"
+    {
+	drv.typeGeoCmd[drv.numGeoCmd] = "coll";
+	drv.point1[drv.numGeoCmd] = $3;
+	drv.point2[drv.numGeoCmd] = $5;
+	drv.point3[drv.numGeoCmd] = $7;
+    };
+
+congConsequent:
+    "cong" "(" "identifier" "," "identifier" "," "identifier" "," "identifier" ")"
+    {
+	drv.typeGeoCmd[drv.numGeoCmd] = "cong";
+	drv.point1[drv.numGeoCmd]=$3;
+	drv.point2[drv.numGeoCmd]=$5;
+	drv.point3[drv.numGeoCmd]=$7;
+	drv.point4[drv.numGeoCmd]=$9;
+    }
+
+contriConsequent:
+    "contri" "(" "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" ")"
+    {
+	drv.typeGeoCmd[drv.numGeoCmd] = "contri";
+	drv.point1[drv.numGeoCmd]=$3;
+	drv.point2[drv.numGeoCmd]=$5;
+	drv.point3[drv.numGeoCmd]=$7;
+	drv.point4[drv.numGeoCmd]=$9;
+	drv.point5[drv.numGeoCmd]=$11;
+	drv.point6[drv.numGeoCmd]=$13;
+    }
+
+cyclicConsequent:
+    "cyclic" "(" "identifier" "," "identifier" "," "identifier" "," "identifier" ")"
+    {
+	drv.typeGeoCmd[drv.numGeoCmd] = "cyclic";
+	drv.point1[drv.numGeoCmd]=$3;
+	drv.point2[drv.numGeoCmd]=$5;
+	drv.point3[drv.numGeoCmd]=$7;
+	drv.point4[drv.numGeoCmd]=$9;
+    }
+
+eqangleConsequent:
+    "eqangle" "(" "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" ")"
+    {
+	drv.typeGeoCmd[drv.numGeoCmd] = "eqangle";
+	drv.point1[drv.numGeoCmd]=$3;
+	drv.point2[drv.numGeoCmd]=$5;
+	drv.point3[drv.numGeoCmd]=$7;
+	drv.point4[drv.numGeoCmd]=$9;
+	drv.point5[drv.numGeoCmd]=$11;
+	drv.point6[drv.numGeoCmd]=$13;
+	drv.point7[drv.numGeoCmd]=$15;
+	drv.point8[drv.numGeoCmd]=$17;
+    }
+
+eqratioConsequent:
+    "eqratio" "(" "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" ")"
+    {
+	drv.typeGeoCmd[drv.numGeoCmd] = "eqratio";
+	drv.point1[drv.numGeoCmd]=$3;
+	drv.point2[drv.numGeoCmd]=$5;
+	drv.point3[drv.numGeoCmd]=$7;
+	drv.point4[drv.numGeoCmd]=$9;
+	drv.point5[drv.numGeoCmd]=$11;
+	drv.point6[drv.numGeoCmd]=$13;
+	drv.point7[drv.numGeoCmd]=$15;
+	drv.point8[drv.numGeoCmd]=$17;
+    }
+
+paraConsequent:
+    "para" "(" "identifier" "," "identifier" "," "identifier" "," "identifier" ")"
+    {
+	drv.typeGeoCmd[drv.numGeoCmd] = "para";
+	drv.point1[drv.numGeoCmd]=$3;
+	drv.point2[drv.numGeoCmd]=$5;
+	drv.point3[drv.numGeoCmd]=$7;
+	drv.point4[drv.numGeoCmd]=$9;
+    };
+
+perpConsequent:
+    "perp" "(" "identifier" "," "identifier" "," "identifier" "," "identifier"  ")"
+    {
+	drv.typeGeoCmd[drv.numGeoCmd] = "perp";
+	drv.point1[drv.numGeoCmd]=$3;
+	drv.point2[drv.numGeoCmd]=$5;
+	drv.point3[drv.numGeoCmd]=$7;
+	drv.point4[drv.numGeoCmd]=$9;
+    };
+
+midpConsequent:
+    "midp" "(" "identifier" "," "identifier" "," "identifier" ")"
+    {
+	drv.typeGeoCmd[drv.numGeoCmd] = "midp";
+	drv.point1[drv.numGeoCmd] = $3;
+	drv.point2[drv.numGeoCmd] = $5;
+	drv.point3[drv.numGeoCmd] = $7;
+    };
+
+simtriConsequent:
     "simtri" "(" "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" "," "identifier" ")"
     {
 	drv.typeGeoCmd[drv.numGeoCmd] = "simtri";

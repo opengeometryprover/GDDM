@@ -4,7 +4,7 @@
  * GDDM's core: deduction rules and point fixed construction.
  *
  * This file is part of the OGP GDDM prover, which, in turn, is part of
- * the Open Geometry prover Community Project (OGPCP)
+ * the Open Geometry Prover Community Project (OGPCP)
  * <https://github.com/opengeometryprover>.
  *
  * Copyright (C) 2022 Nuno Baeta, Pedro Quaresma

@@ -12,11 +12,13 @@
  */
 
 
-#include "prover.hpp"
-#include "foftodb.hpp" // Show the BD
-
 #include <iostream>
 #include <map>
+
+#include "prover.hpp"
+#include "points.hpp"
+
+#include "foftodb.hpp" // To show the BD.
 
 /*
  * Rule D1: coll(A, B, C) -> coll(A, C, B)
@@ -2241,6 +2243,68 @@ DBinMemory Prover::ruleD39(DBinMemory dbim, std::string point1,
 	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
     else
 	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+    return dbim;
+}
+
+/*
+ * Rule D40: para(A, B, C, D) -> eqangle(A, B, P, Q, C, D, P, Q)
+ */
+DBinMemory Prover::ruleD40(DBinMemory dbim, std::string point1,
+			   std::string point2, std::string point3,
+			   std::string point4) {
+    bool correctTransaction;
+    std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
+    struct pointList *ptP, *ptQ;
+    extern struct pointList *points;
+
+    ptP = points;
+    while (ptP != NULL) {
+	if (ptP->pt != point1 && ptP->pt != point2 && ptP->pt != point3
+	    && ptP->pt != point4) {
+	    ptQ = ptP->next;
+	    while (ptQ != NULL) {
+		if (ptQ->pt != point1 && ptQ->pt != point2 && ptQ->pt != point3
+		    && ptQ->pt != point4) {
+		    insertNewFact = "INSERT INTO NewFact (typeGeoCmd) "
+			"VALUES ('eqangle')";
+		    lastInsertedRowId = "SELECT last_insert_rowid()";
+		    sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg));
+		    correctTransaction = true;
+		    dbim.rc = sqlite3_prepare_v2(dbim.db,
+						 insertNewFact.c_str() ,
+						 insertNewFact.size(),
+						 &(dbim.stmt), NULL);
+		    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
+			correctTransaction = false;
+		    dbim.rc = sqlite3_prepare_v2(dbim.db,
+						 lastInsertedRowId.c_str(),
+						 lastInsertedRowId.size(),
+						 &(dbim.stmt), NULL);
+		    sqlite3_step(dbim.stmt);
+		    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
+		    insertionPred = "INSERT INTO "
+			"EqualAngles (typeGeoCmd, point1, point2, point3, "
+			"point4, point5, point6, point7, point8, newFact) "
+			"VALUES "
+			"('eqangle', '" + point1 + "', '" + point2 + "', '"
+			+ ptP->pt + "', '" + ptQ->pt + "', '" + point3 + "', '"
+			+ point4 + "', '" + ptP->pt + "', '" + ptQ->pt + "', '"
+			+ lstInsRwId + "')";
+		    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+						 insertionPred.size(),
+						 &(dbim.stmt), NULL);
+		    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
+			correctTransaction = false;
+		    if (correctTransaction)
+			sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
+		    else
+			sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+		}
+		ptQ = ptQ->next;
+	    }
+	}
+	ptP = ptP->next;
+    }
     return dbim;
 }
 
@@ -7243,6 +7307,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD05(dbim, point1, point2, point3, point4);
 	    dbim = ruleD06(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10para(dbim, point1, point2, point3, point4);
+	    dbim = ruleD40(dbim, point1, point2, point3, point4);
 	    // if (point1 != point3)
 	    // 	dbim = ruleD45para(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD54para(dbim, point1, point2, point3, point4);
@@ -7346,15 +7411,15 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 			   point5, point6, point7, point8);
 	    dbim = ruleD22(dbim, point1, point2, point3, point4,
 			   point5, point6, point7, point8);
-	    if (point3 == point7 && point4 == point8
-		&& !(point1 == point5 && point2 == point6)
-		&& !(point1 == point6 && point2 == point5))
-		dbim = ruleD39(dbim, point1, point2, point3, point4,
-			       point5, point6, point7, point8);
-	    if (point1 == point3 && point2 == point5 && point4 == point8
-		&& point5 == point7 && point2 != point4)
-		dbim = ruleD42(dbim, point1, point2, point3, point4,
-			       point5, point6, point7, point8);
+	    // if (point3 == point7 && point4 == point8
+	    // 	&& !(point1 == point5 && point2 == point6)
+	    // 	&& !(point1 == point6 && point2 == point5))
+	    // 	dbim = ruleD39(dbim, point1, point2, point3, point4,
+	    // 		       point5, point6, point7, point8);
+	    // if (point1 == point3 && point2 == point5 && point4 == point8
+	    // 	&& point5 == point7 && point2 != point4)
+	    // 	dbim = ruleD42(dbim, point1, point2, point3, point4,
+	    // 		       point5, point6, point7, point8);
 	    // if (point1 == point3 && point5 == point7)
 	    // 	dbim = ruleD43eqangle(dbim, point1, point2, point3, point4,
 	    // 			      point5, point6, point7, point8);
@@ -7436,7 +7501,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 				     &(dbim.stmt), NULL);
     }
     // DEBUG START
-    fdb.showDB(dbim);
+    // fdb.showDB(dbim);
     std::cout << "fixedPoint() : Leaving..." << std::endl << std::endl;
     // DEBUG STOP
     return dbim;
