@@ -2379,8 +2379,8 @@ DBinMemory Prover::ruleD42(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Collinear "
 	"ON (newFact = id) "
-	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point3 + "'";
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point5
+	+ "' AND point3 = '" + point2 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -2389,8 +2389,8 @@ DBinMemory Prover::ruleD42(DBinMemory dbim, std::string point1,
 	"FROM Facts "
 	"INNER JOIN Collinear "
 	"ON (oldFact = id) "
-	"WHERE point1 = '" + point5 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point3 + "'";
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point5
+	+ "' AND point3 = '" + point2 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -2399,12 +2399,11 @@ DBinMemory Prover::ruleD42(DBinMemory dbim, std::string point1,
 	|| sqlite3_data_count(dbim.stmt2) != 0 ) {
 	correctTransaction = false;
     } else {
-	lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
 	querySecondGeoCmdA = "SELECT * "
 	    "FROM NewFact "
 	    "INNER JOIN Collinear "
 	    "ON (newFact = id) "
-	    "WHERE point1 = '" + point1 + "' AND point2 = '" + point2
+	    "WHERE point1 = '" + point1 + "' AND point2 = '" + point5
 	    + "' AND point3 = '" + point4 + "'";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				     querySecondGeoCmdA.size(), &(dbim.stmt1),
@@ -2414,7 +2413,7 @@ DBinMemory Prover::ruleD42(DBinMemory dbim, std::string point1,
 	    "FROM Facts "
 	    "INNER JOIN Collinear "
 	    "ON (oldFact = id) "
-	    "WHERE point1 = '" + point5 + "' AND point2 = '" + point2
+	    "WHERE point1 = '" + point1 + "' AND point2 = '" + point5
 	    + "' AND point3 = '" + point4 + "'";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				     querySecondGeoCmdB.size(), &(dbim.stmt2),
@@ -7416,10 +7415,11 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 		&& !(point1 == point6 && point2 == point5))
 		dbim = ruleD39(dbim, point1, point2, point3, point4,
 			       point5, point6, point7, point8);
-	    // if (point1 == point3 && point2 == point5 && point4 == point8
-	    // 	&& point5 == point7 && point2 != point4)
-	    // 	dbim = ruleD42(dbim, point1, point2, point3, point4,
-	    // 		       point5, point6, point7, point8);
+	    if (point1 == point3 && point2 == point6 && point4 == point8
+		&& point5 == point7
+		&& point1 != point5 && point2 != point4)
+		dbim = ruleD42(dbim, point1, point2, point3, point4,
+			       point5, point6, point7, point8);
 	    // if (point1 == point3 && point5 == point7)
 	    // 	dbim = ruleD43eqangle(dbim, point1, point2, point3, point4,
 	    // 			      point5, point6, point7, point8);
