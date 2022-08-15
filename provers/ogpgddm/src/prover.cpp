@@ -2755,10 +2755,7 @@ DBinMemory Prover::ruleD44(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Midpoint "
 	"ON (newFact = id) "
-	"WHERE point2 = '" + point2
-	+ "' AND NOT (point1 = '" + point1 + "' AND point3 = '" + point3
-	+ "') AND NOT (point1 = '" + point3 + "' AND point3 = '" + point1
-	+ "')";
+	"WHERE point2 = '" + point2 + "' AND point1 <> '" + point1 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -2767,10 +2764,7 @@ DBinMemory Prover::ruleD44(DBinMemory dbim, std::string point1,
 	"FROM Facts "
 	"INNER JOIN Midpoint "
 	"ON (oldFact = id) "
-	"WHERE point2 = '" + point2
-	+ "' AND NOT (point1 = '" + point1 + "' AND point3 = '" + point3
-	+ "') AND NOT (point1 = '" + point3 + "' AND point3 = '" + point1
-	+ "')";
+	"WHERE point2 = '" + point2 + "' AND point1 <> '" + point1 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -7345,7 +7339,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	case 4:
             // Midpoint
 	    dbim = ruleD11(dbim, point1, point2, point3);
-	    // dbim = ruleD44(dbim, point1, point2, point3);
+	    dbim = ruleD44(dbim, point1, point2, point3);
 	    // dbim = ruleD45midp(dbim, point1, point2, point3);
 	    // dbim = ruleD50midp(dbim, point1, point2, point3);
 	    // dbim = ruleD52midp(dbim, point1, point2, point3);
