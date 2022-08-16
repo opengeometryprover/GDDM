@@ -5380,7 +5380,8 @@ DBinMemory Prover::ruleD64midp(DBinMemory dbim, std::string point1,
 	"INNER JOIN Parallel "
 	"ON (newFact = id) "
 	"WHERE point1 = '" + point2 + "' AND point3 = '" + point3
-	+ "' AND point2 <> '" + point1 + "' AND point4 <> '" + point1 + "'";
+	+ "' AND point2 <> '" + point1 + "' AND point4 <> '" + point1
+	+ "'AND point2 <> point4";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -5390,7 +5391,8 @@ DBinMemory Prover::ruleD64midp(DBinMemory dbim, std::string point1,
 	"INNER JOIN Parallel "
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point2 + "' AND point3 = '" + point3
-	+ "' AND point2 <> '" + point1 + "' AND point4 <> '" + point1 + "'";
+	+ "' AND point2 <> '" + point1 + "' AND point4 <> '" + point1
+	+ "' AND point2 <> point4";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
