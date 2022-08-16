@@ -6139,8 +6139,10 @@ DBinMemory Prover::ruleD71(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Parallel "
 	"ON (newFact = id) "
-	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point3 + "' AND point4 = '" + point4 + "'";
+	"WHERE point1 IN ('" + point1 + "', '" + point2 + "') AND point2 IN ('"
+	+ point1 + "', '" + point2 + "') AND point2 <> point1 AND point3 IN ('"
+	+ point3 + "', '" + point4 + "') AND point4 IN '(" + point3 + "', '"
+	+ point4 + "') AND point4 <> point3";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -6149,8 +6151,10 @@ DBinMemory Prover::ruleD71(DBinMemory dbim, std::string point1,
 	"FROM Facts "
 	"INNER JOIN Parallel "
 	"ON (oldFact = id) "
-	"WHERE point1 = '" + point5 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point3 + "' AND point4 = '" + point4 + "'";
+	"WHERE point1 IN ('" + point1 + "', '" + point2 + "') AND point2 IN ('"
+	+ point1 + "', '" + point2 + "') AND point2 <> point1 AND point3 IN ('"
+	+ point3 + "', '" + point4 + "') AND point4 IN '(" + point3 + "', '"
+	+ point4 + "') AND point4 <> point3";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -7439,10 +7443,12 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    // if (point2 == point3 && point6 == point7)
 	    // 	dbim = ruleD58(dbim, point1, point2, point3, point4,
 	    // 		       point5, point6, point7, point8);
-	    // if (point1 == point7 && point2 == point8 && point3 == point5
-	    // 	&& point4 == point6)
-	    // 	dbim = ruleD71(dbim, point1, point2, point3, point4,
-	    // 		       point5, point6, point7, point8);
+	    if (point1 == point7 && point2 == point8 && point3 == point5
+		&& point4 == point6
+		&& !(point1 == point3 && point2 == point4)
+		&& !(point1 == point4 && point2 == point3))
+		dbim = ruleD71(dbim, point1, point2, point3, point4,
+			       point5, point6, point7, point8);
 	    // if (point1 == point7 && point2 == point8 && point3 == point5
 	    // 	&& point4 == point6)
 	    // 	dbim = ruleD72(dbim, point1, point2, point3, point4,
