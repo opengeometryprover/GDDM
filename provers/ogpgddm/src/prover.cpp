@@ -7299,7 +7299,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD51coll(dbim, point1, point2, point3);
 	    dbim = ruleD53coll(dbim, point1, point2, point3);
 	    dbim = ruleD65coll(dbim, point1, point2, point3);
-	    // dbim = ruleD67coll(dbim, point1, point2, point3);
+	    dbim = ruleD67coll(dbim, point1, point2, point3);
 	    break;
 	case 2:
             // Parallel
@@ -7368,8 +7368,8 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    if (point2 == point4)
 		dbim = ruleD57cong(dbim, point1, point2, point3, point4);
 	    dbim = ruleD61cong(dbim, point1, point2, point3, point4);
-	    // if (point1 == point3)
-	    //  dbim = ruleD67cong(dbim, point1, point2, point3, point4);
+	    if (point1 == point3 && point2 != point4)
+		dbim = ruleD67cong(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD75cong(dbim, point1, point2, point3, point4);
 	    break;
 	case 7:
