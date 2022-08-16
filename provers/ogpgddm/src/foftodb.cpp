@@ -46,64 +46,47 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
     int i;
     int numGeoCmd;
     bool correctTransaction;
-    std::string insertionColl;
-    std::string insertionPara;
-    std::string insertionPerp;
-    std::string insertionMidp;
-    std::string insertionCircle;
-    std::string insertionCong;
-    std::string insertionContri;
-    std::string insertionCyclic;
-    std::string insertionEqangle;
-    std::string insertionEqratio;
-    std::string insertionSimtri;
-    std::string insertionNewConsequent;
-    std::string insertionNewFact;
-    std::string lastInsertedRowId;
-    std::string lstInsRwId;
+    std::string insertionColl, insertionPara, insertionPerp, insertionMidp;
+    std::string insertionCircle, insertionCong, insertionContri;
+    std::string insertionCyclic, insertionEqangle, insertionEqratio;
+    std::string insertionSimtri, insertionNewConsequent, insertionNewFact;
+    std::string lastInsertedRowId, lstInsRwId;
 
-    // DEBUG
-    std::cout << std::endl << "readFileLoadDB() : Entering..." << std::endl;
-    
+    // DEBUG START
+    // std::cout << std::endl << "readFileLoadDB() : Entering..." << std::endl;
+    // DEBUG STOP
     // File parsed, now populate the database with the antecedents and
     // consequentes
     numGeoCmd = drv.numGeoCmd;
-
-    // DEBUG
-    std::cout << "    Nr. geometric commands : " << numGeoCmd << std::endl;
-    
+    // DEBUG START
+    // std::cout << "    Nr. geometric commands : " << numGeoCmd << std::endl;
+    // DEBUG STOP
     for (i = 0; i < numGeoCmd; i++) {
 	if (drv.antconcedent[i] == 0) {
 	    // Antecendents...
-
-	    // DEBUG
-	    std::cout << "    Antecedent : " << i + 1 << " / ";
-	    
+	    // DEBUG START
+	    // std::cout << "    Antecedent : " << i + 1 << " / ";
+	    // DEBUG STOP
 	    // The SQL command
 	    insertionNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('"
 		+ drv.typeGeoCmd[i] + "')";
 	    // Obtain value 'NewFact row id' through consultation
 	    lastInsertedRowId = "SELECT last_insert_rowid()";
-
 	    // Open transaction
 	    sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg)); 
 	    correctTransaction = true; // What's the point?
-
 	    // Insert the new fact into 'NewFacts'
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionNewFact.c_str(),
 					 insertionNewFact.size(), &(dbim.stmt),
 					 NULL);
-	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		correctTransaction = false;
-	    }
-	    
 	    // Get the last inserted row id
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
 					 lastInsertedRowId.size(),
 					 &(dbim.stmt), NULL);
 	    // Execute the statement
 	    sqlite3_step(dbim.stmt);
-	    
 	    lstInsRwId = (char*)sqlite3_column_text(dbim.stmt, 0);
 	    switch (dbim.geoCmds[drv.typeGeoCmd[i]]) {
 	    case 1:
@@ -117,19 +100,17 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point2[i] + "', '"
 		    + drv.point3[i] + "', '"
 		    + lstInsRwId + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionColl.c_str(),
 					     insertionColl.size(),
 					     &(dbim.stmt), NULL);
-		if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		}
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 2:
                 // Parallel
@@ -142,20 +123,18 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point3[i] + "', '"
 		    + drv.point4[i] + "', '"
 		    + lstInsRwId + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPara.c_str(),
 					     insertionPara.size(),
 					     &(dbim.stmt), NULL);
-		if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		}
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 3:
                 // Perpendicular
@@ -168,20 +147,18 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point3[i] + "', '"
 		    + drv.point4[i] + "', '"
 		    + lstInsRwId + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPerp.c_str(),
 					     insertionPerp.size(),
 					     &(dbim.stmt), NULL);
-		if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		}
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG STARP
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 4:
                 // Midpoint
@@ -193,19 +170,17 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point2[i] + "', '"
 		    + drv.point3[i] + "', '"
 		    + lstInsRwId + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionMidp.c_str(),
 					     insertionMidp.size(),
 					     &(dbim.stmt), NULL);
-		if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		}
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 5:
                 // Circle
@@ -218,20 +193,18 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point3[i] + "', '"
 		    + drv.point4[i] + "', '"
 		    + lstInsRwId + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionCircle.c_str(),
 					     insertionCircle.size(),
 					     &(dbim.stmt), NULL);
-		if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		}
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 6:
 		// CongruentSegments
@@ -244,20 +217,18 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point3[i] + "', '"
 		    + drv.point4[i] + "', '"
 		    + lstInsRwId + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionCong.c_str(),
 					     insertionCong.size(),
 					     &(dbim.stmt), NULL);
-		if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		}
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 7:
 		// CongruentTriangles
@@ -272,22 +243,20 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point5[i] + "', '"
 		    + drv.point6[i] + "', '"
 		    + lstInsRwId + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionContri.c_str(),
 					     insertionContri.size(),
 					     &(dbim.stmt), NULL);
-		if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		}
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ", ";
-		std::cout << drv.point5[i] + ", ";
-		std::cout << drv.point6[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ", ";
+		// std::cout << drv.point5[i] + ", ";
+		// std::cout << drv.point6[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 8:
 		// Cyclic
@@ -300,20 +269,18 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point3[i] + "', '"
 		    + drv.point4[i] + "', '"
 		    + lstInsRwId + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionCyclic.c_str(),
 					     insertionCyclic.size(),
 					     &(dbim.stmt), NULL);
-		if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		}
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 9:
 		// EqualAngles
@@ -331,24 +298,22 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point7[i] + "', '"
 		    + drv.point8[i] + "', '"
 		    + lstInsRwId + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqangle.c_str(),
 					     insertionEqangle.size(),
 					     &(dbim.stmt), NULL);
-		if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		}
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ", ";
-		std::cout << drv.point5[i] + ", ";
-		std::cout << drv.point6[i] + ", ";
-		std::cout << drv.point7[i] + ", ";
-		std::cout << drv.point8[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ", ";
+		// std::cout << drv.point5[i] + ", ";
+		// std::cout << drv.point6[i] + ", ";
+		// std::cout << drv.point7[i] + ", ";
+		// std::cout << drv.point8[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 10:
 		// EqualRatios
@@ -366,24 +331,22 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point7[i] + "', '"
 		    + drv.point8[i] + "', '"
 		    + lstInsRwId + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionEqratio.c_str(),
 					     insertionEqratio.size(),
 					     &(dbim.stmt), NULL);
-		if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		}
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ", ";
-		std::cout << drv.point5[i] + ", ";
-		std::cout << drv.point6[i] + ", ";
-		std::cout << drv.point7[i] + ", ";
-		std::cout << drv.point8[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ", ";
+		// std::cout << drv.point5[i] + ", ";
+		// std::cout << drv.point6[i] + ", ";
+		// std::cout << drv.point7[i] + ", ";
+		// std::cout << drv.point8[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 11:
 		// SimilarTriangles
@@ -398,22 +361,20 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point5[i] + "', '"
 		    + drv.point6[i] + "', '"
 		    + lstInsRwId + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionSimtri.c_str(),
 					     insertionSimtri.size(),
 					     &(dbim.stmt), NULL);
-		if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		}
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ", ";
-		std::cout << drv.point5[i] + ", ";
-		std::cout << drv.point6[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ", ";
+		// std::cout << drv.point5[i] + ", ";
+		// std::cout << drv.point6[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    default:
                 // ERROR : Necessary?  I don't _think_ so...
@@ -421,17 +382,15 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		exit(1);
 	    }
 	    // close the transaction: commit or rollback
-	    if (correctTransaction) {
+	    if (correctTransaction)
 		sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
-	    } else {
+	    else
 		sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
-	    }
 	} else {
             // Consequent
-
-	    // DEBUG
-	    std::cout << "    Consequent : " << i + 1 << " / ";
-	    
+	    // DEBUG START
+	    // std::cout << "    Consequent : " << i + 1 << " / ";
+	    // DEBUG STOP
 	    switch (dbim.geoCmds[drv.typeGeoCmd[i]]) {
 	    case 1:
                 // Collinear
@@ -442,18 +401,17 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "','"
 		    + drv.point3[i] + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db,
 					     insertionNewConsequent.c_str(),
 					     insertionNewConsequent.size(),
 					     &(dbim.stmt), NULL);
 		sqlite3_step(dbim.stmt);
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 2:
 		// Parallel
@@ -465,19 +423,18 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point2[i] + "', '"
 		    + drv.point3[i] + "', '"
 		    + drv.point4[i] + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db,
 					     insertionNewConsequent.c_str(),
 					     insertionNewConsequent.size(),
 					     &(dbim.stmt), NULL);
 		sqlite3_step(dbim.stmt);
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 3:
                 // Perpendicular
@@ -489,19 +446,18 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point2[i] + "', '"
 		    + drv.point3[i] + "', '"
 		    + drv.point4[i] + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db,
 					     insertionNewConsequent.c_str(),
 					     insertionNewConsequent.size(),
 					     &(dbim.stmt), NULL);
 		sqlite3_step(dbim.stmt);
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 4:
 		// Midpoint
@@ -512,18 +468,17 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point1[i] + "', '"
 		    + drv.point2[i] + "', '"
 		    + drv.point3[i] + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db,
 					     insertionNewConsequent.c_str(),
 					     insertionNewConsequent.size(),
 					     &(dbim.stmt), NULL);
 		sqlite3_step(dbim.stmt);
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 5:
 		// Circle
@@ -535,19 +490,18 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point2[i] + "', '"
 		    + drv.point3[i] + "', '"
 		    + drv.point4[i] + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db,
 					     insertionNewConsequent.c_str(),
 					     insertionNewConsequent.size(),
 					     &(dbim.stmt), NULL);
 		sqlite3_step(dbim.stmt);
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 6:
 		// CongruentSegments
@@ -559,19 +513,18 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point2[i] + "', '"
 		    + drv.point3[i] + "', '"
 		    + drv.point4[i] + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db,
 					     insertionNewConsequent.c_str(),
 					     insertionNewConsequent.size(),
 					     &(dbim.stmt), NULL);
 		sqlite3_step(dbim.stmt);
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 7:
 		// CongruentTriangles
@@ -585,21 +538,20 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point4[i] + "', '"
 		    + drv.point5[i] + "', '"
 		    + drv.point6[i] + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db,
 					     insertionNewConsequent.c_str(),
 					     insertionNewConsequent.size(),
 					     &(dbim.stmt), NULL);
 		sqlite3_step(dbim.stmt);
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ", ";
-		std::cout << drv.point5[i] + ", ";
-		std::cout << drv.point6[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ", ";
+		// std::cout << drv.point5[i] + ", ";
+		// std::cout << drv.point6[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 8:
 		// Cyclic
@@ -611,19 +563,18 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point2[i] + "', '"
 		    + drv.point3[i] + "', '"
 		    + drv.point4[i] + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db,
 					     insertionNewConsequent.c_str(),
 					     insertionNewConsequent.size(),
 					     &(dbim.stmt), NULL);
 		sqlite3_step(dbim.stmt);
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 9:
 		// EqualAngles
@@ -640,23 +591,22 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point6[i] + "', '"
 		    + drv.point7[i] + "', '"
 		    + drv.point8[i] + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db,
 					     insertionNewConsequent.c_str(),
 					     insertionNewConsequent.size(),
 					     &(dbim.stmt), NULL);
 		sqlite3_step(dbim.stmt);
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ", ";
-		std::cout << drv.point5[i] + ", ";
-		std::cout << drv.point6[i] + ", ";
-		std::cout << drv.point7[i] + ", ";
-		std::cout << drv.point8[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ", ";
+		// std::cout << drv.point5[i] + ", ";
+		// std::cout << drv.point6[i] + ", ";
+		// std::cout << drv.point7[i] + ", ";
+		// std::cout << drv.point8[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 10:
 		// EqualRatios
@@ -673,23 +623,22 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point6[i] + "', '"
 		    + drv.point7[i] + "', '"
 		    + drv.point8[i] + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db,
 					     insertionNewConsequent.c_str(),
 					     insertionNewConsequent.size(),
 					     &(dbim.stmt), NULL);
 		sqlite3_step(dbim.stmt);
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ", ";
-		std::cout << drv.point5[i] + ", ";
-		std::cout << drv.point6[i] + ", ";
-		std::cout << drv.point7[i] + ", ";
-		std::cout << drv.point8[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ", ";
+		// std::cout << drv.point5[i] + ", ";
+		// std::cout << drv.point6[i] + ", ";
+		// std::cout << drv.point7[i] + ", ";
+		// std::cout << drv.point8[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    case 11:
 		// SimilarTriangles
@@ -703,29 +652,27 @@ DBinMemory FOFtoDB::readFileLoadDB(Driver drv, DBinMemory dbim) {
 		    + drv.point4[i] + "', '"
 		    + drv.point5[i] + "', '"
 		    + drv.point6[i] + "')";
-
 		dbim.rc = sqlite3_prepare_v2(dbim.db,
 					     insertionNewConsequent.c_str(),
 					     insertionNewConsequent.size(),
 					     &(dbim.stmt), NULL);
 		sqlite3_step(dbim.stmt);
-
-		// DEBUG
-		std::cout << drv.typeGeoCmd[i] + "(";
-		std::cout << drv.point1[i] + ", ";
-		std::cout << drv.point2[i] + ", ";
-		std::cout << drv.point3[i] + ", ";
-		std::cout << drv.point4[i] + ", ";
-		std::cout << drv.point5[i] + ", ";
-		std::cout << drv.point6[i] + ")" << std::endl;
+		// DEBUG START
+		// std::cout << drv.typeGeoCmd[i] + "(";
+		// std::cout << drv.point1[i] + ", ";
+		// std::cout << drv.point2[i] + ", ";
+		// std::cout << drv.point3[i] + ", ";
+		// std::cout << drv.point4[i] + ", ";
+		// std::cout << drv.point5[i] + ", ";
+		// std::cout << drv.point6[i] + ")" << std::endl;
+		// DEBUG STOP
 		break;
 	    }
 	}
     }
-
-    // DEBUG
-    std::cout << "readFileLoadDB() : Leaving..." << std::endl;
-
+    // DEBUG START
+    // std::cout << "readFileLoadDB() : Leaving..." << std::endl;
+    // DEBUG STOP
     return(dbim);
 }
 
@@ -739,7 +686,6 @@ void FOFtoDB::showDB(DBinMemory dbim) {
     std::cout << "----------------------------" << std::endl;
     std::cout << "  In memory facts database  " << std::endl;
     std::cout << "----------------------------" << std::endl;
-
     // Collinear facts
     std::cout << std::endl;
     std::cout << "Collinear facts" << std::endl;
@@ -756,7 +702,6 @@ void FOFtoDB::showDB(DBinMemory dbim) {
 		  << sqlite3_column_text(dbim.stmt, 3) << ")"
 		  << std::endl;
     }
-
     // Parallel facts
     std::cout << std::endl;
     std::cout << "Parallel facts" << std::endl;
@@ -774,7 +719,6 @@ void FOFtoDB::showDB(DBinMemory dbim) {
 		  << sqlite3_column_text(dbim.stmt, 4) << ")"
 		  << std::endl;
     }
-
     // Perpendicular facts
     std::cout << std::endl;
     std::cout << "Perpendicular facts" << std::endl;
@@ -792,7 +736,6 @@ void FOFtoDB::showDB(DBinMemory dbim) {
 		  << sqlite3_column_text(dbim.stmt, 4) << ")"
 		  << std::endl;
     }
-
     // Midpoint facts
     std::cout << std::endl;
     std::cout << "Midpoint facts" << std::endl;
@@ -809,7 +752,6 @@ void FOFtoDB::showDB(DBinMemory dbim) {
 		  << sqlite3_column_text(dbim.stmt, 3) << ")"
 		  << std::endl;
     }
-
     // Circle facts
     std::cout << std::endl;
     std::cout << "Circle facts" << std::endl;
@@ -827,7 +769,6 @@ void FOFtoDB::showDB(DBinMemory dbim) {
 		  << sqlite3_column_text(dbim.stmt, 4) << ")"
 		  << std::endl;
     }
-
     // Congruent Segments facts
     std::cout << std::endl;
     std::cout << "Congruent Segments facts" << std::endl;
@@ -845,7 +786,6 @@ void FOFtoDB::showDB(DBinMemory dbim) {
 		  << sqlite3_column_text(dbim.stmt, 4) << ")"
 		  << std::endl;
     }
-
     // Congruent Triangles facts
     std::cout << std::endl;
     std::cout << "Congruent Triangles facts" << std::endl;
@@ -866,7 +806,6 @@ void FOFtoDB::showDB(DBinMemory dbim) {
 		  << sqlite3_column_text(dbim.stmt, 6) << ")"
 		  << std::endl;
     }
-
     // Cyclic facts
     std::cout << std::endl;
     std::cout << "Cyclic facts" << std::endl;
@@ -884,7 +823,6 @@ void FOFtoDB::showDB(DBinMemory dbim) {
 		  << sqlite3_column_text(dbim.stmt, 4) << ")"
 		  << std::endl;
     }
-
     // Equal Angles facts
     std::cout << std::endl;
     std::cout << "Equal Angles facts" << std::endl;
@@ -907,7 +845,6 @@ void FOFtoDB::showDB(DBinMemory dbim) {
 		  << sqlite3_column_text(dbim.stmt, 8) << ")"
 		  << std::endl;
     }
-
     // Equal Ratios facts
     std::cout << std::endl;
     std::cout << "Equal Ratios facts" << std::endl;
@@ -930,7 +867,6 @@ void FOFtoDB::showDB(DBinMemory dbim) {
 		  << sqlite3_column_text(dbim.stmt, 8) << ")"
 		  << std::endl;
     }
-
     // Similar Triangles facts
     std::cout << std::endl;
     std::cout << "Similar Triangles facts" << std::endl;
@@ -951,7 +887,6 @@ void FOFtoDB::showDB(DBinMemory dbim) {
 		  << sqlite3_column_text(dbim.stmt, 6) << ")"
 		  << std::endl;
     }
-
     std::cout << std::endl;
     std::cout << "----------------------------" << std::endl;
 }
