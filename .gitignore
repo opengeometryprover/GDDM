@@ -12,6 +12,8 @@
 *.time
 
 # OGP GDDM prover
+provers/ogpgddm/src/ogpgddm
 parser.cpp
 parser.hpp
 scanner.cpp
+provers/ogpgddm/tests/local/
