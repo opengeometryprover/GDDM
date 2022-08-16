@@ -5590,8 +5590,7 @@ DBinMemory Prover::ruleD65coll(DBinMemory dbim, std::string point1,
 	"WHERE point1 = '" + point1
 	+ "' AND NOT (point2 = '" + point2 + "' AND point3 = '" + point3
 	+ "') AND NOT (point2 = '" + point3 + "' AND point3 = '" + point2
-	+ "')"
-	+ " AND point2 <> point3";
+	+ "')";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -5603,9 +5602,7 @@ DBinMemory Prover::ruleD65coll(DBinMemory dbim, std::string point1,
 	"WHERE point1 = '" + point1
 	+ "' AND NOT (point2 = '" + point2 + "' AND point3 = '" + point3
 	+ "') AND NOT (point2 = '" + point3 + "' AND point3 = '" + point2
-	+ "')"
-	+ " AND point2 <> point3";
-
+	+ "')";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -5704,9 +5701,7 @@ DBinMemory Prover::ruleD65para(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Collinear "
 	"ON (newFact = id) "
-	"WHERE point2 = '" + point1 + "' AND point3 = '" + point3
-	+ "' AND point1 NOT IN ('" + point1 + "', '" + point2 + "', '"
-	+ point3 + "', '" + point4 + "')";
+	"WHERE point2 = '" + point1 + "' AND point3 = '" + point3 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -5715,9 +5710,7 @@ DBinMemory Prover::ruleD65para(DBinMemory dbim, std::string point1,
 	"FROM Facts "
 	"INNER JOIN Collinear "
 	"ON (oldFact = id) "
-	"WHERE point2 = '" + point1 + "' AND point3 = '" + point3
-	+ "' AND point1 NOT IN ('" + point1 + "', '" + point2 + "', '"
-	+ point3 + "', '" + point4 + "')";
+	"WHERE point2 = '" + point1 + "' AND point3 = '" + point3 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -7305,7 +7298,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD45coll(dbim, point1, point2, point3);
 	    dbim = ruleD51coll(dbim, point1, point2, point3);
 	    dbim = ruleD53coll(dbim, point1, point2, point3);
-	    // dbim = ruleD65coll(dbim, point1, point2, point3);
+	    dbim = ruleD65coll(dbim, point1, point2, point3);
 	    // dbim = ruleD67coll(dbim, point1, point2, point3);
 	    break;
 	case 2:
@@ -7319,11 +7312,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD54para(dbim, point1, point2, point3, point4);
 	    if (point2 != point4)
 	     	dbim = ruleD64para(dbim, point1, point2, point3, point4);
-	    // dbim = ruleD65para(dbim, point1, point2, point3, point4);
-	    // // if (point1 != point3 && point2 != point4)
-	    // // 	dbim = ruleD65para(dbim, point1, point2, point3, point4);
-	    // if (point1 == point3)
-	    // 	dbim = ruleD66(dbim, point1, point2, point3, point4);
+	    dbim = ruleD65para(dbim, point1, point2, point3, point4);
+	    if (point1 == point3 && point2 != point4)
+		dbim = ruleD66(dbim, point1, point2, point3, point4);
 	    // dbim = ruleD73para(dbim, point1, point2, point3, point4);
 	    break;
 	case 3:
