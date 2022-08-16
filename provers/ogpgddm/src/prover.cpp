@@ -4892,14 +4892,14 @@ DBinMemory Prover::ruleD57cyclic(DBinMemory dbim, std::string point1,
  *               & ~ coll(A, B, C) -> simtri(A, B, C, P, Q, R)
  *
  * Function's argument is eqangle(A, B, B, C, P, Q, Q, R), verifies if
- * ~ perp(A, B, C, D) and, eventually, seraches for
+ * ~ coll(A, B, C) and, eventually, searches for
  * eqangle(A, C, B, C, P, R, Q, R).
  */
-DBinMemory Prover::ruleD58(DBinMemory dbim, std::string point1,
-			   std::string point2, std::string point3,
-			   std::string point4, std::string point5,
-			   std::string point6, std::string point7,
-			   std::string point8) {
+DBinMemory Prover::ruleD58a(DBinMemory dbim, std::string point1,
+			    std::string point2, std::string point3,
+			    std::string point4, std::string point5,
+			    std::string point6, std::string point7,
+			    std::string point8) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
@@ -4920,8 +4920,10 @@ DBinMemory Prover::ruleD58(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Collinear "
 	"ON (newFact = id) "
-	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point4 + "'";
+	"WHERE point1 IN ('" + point1 + "', '" + point2 + "', '" + point4
+	+ "') AND point2 IN ('" + point1 + "', '" + point2 + "', '" + point4
+	+ "') AND point2 <> point1 AND point3 IN ('" + point1 + "', '" + point2
+	+ "', '" + point4 + "') AND point3 NOT IN (point1, point2)";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -4930,8 +4932,10 @@ DBinMemory Prover::ruleD58(DBinMemory dbim, std::string point1,
 	"FROM Facts "
 	"INNER JOIN Collinear "
 	"ON (oldFact = id) "
-	"WHERE point1 = '" + point5 + "' AND point2 = '" + point2
-	+ "' AND point3 = '" + point4 + "'";
+	"WHERE point1 IN ('" + point1 + "', '" + point2 + "', '" + point4
+	+ "') AND point2 IN ('" + point1 + "', '" + point2 + "', '" + point4
+	+ "') AND point2 <> point1 AND point3 IN ('" + point1 + "', '" + point2
+	+ "', '" + point4 + "') AND point3 NOT IN (point1, point2)";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -4979,6 +4983,118 @@ DBinMemory Prover::ruleD58(DBinMemory dbim, std::string point1,
 		    "VALUES "
 		    "('simtri', '" + point1 + "', '" + point2 + "', '" + point4
 		    + "', '" + point5 + "', '" + point6 + "', '" + point8
+		    + "', '" + lstInsRwId + "')";
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
+					 NULL);
+	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
+		correctTransaction = false;
+	    }
+	}
+    }
+    if (correctTransaction)
+	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
+    else
+	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+    return dbim;
+}
+
+/*
+ * Rule D58: eqangle(A, B, B, C, P, Q, Q, R) & eqangle(A, C, B, C, P, R, Q, R)
+ *               & ~ coll(A, B, C) -> simtri(A, B, C, P, Q, R)
+ *
+ * Function's argument is eqangle(A, C, B, C, P, R, Q, R), verifies if
+ * ~ coll(A, B, C) and, eventually, searches for
+ * eqangle(A, B, B, C, P, Q, Q, R).
+ */
+DBinMemory Prover::ruleD58b(DBinMemory dbim, std::string point1,
+			   std::string point2, std::string point3,
+			   std::string point4, std::string point5,
+			   std::string point6, std::string point7,
+			   std::string point8) {
+    bool correctTransaction;
+    std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
+    std::string querySecondGeoCmdA, querySecondGeoCmdB;
+
+    insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('simtri')";
+    lastInsertedRowId = "SELECT last_insert_rowid()";
+    sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg));
+    correctTransaction = true;
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(),
+				 insertNewFact.size(), &(dbim.stmt), NULL);
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
+	correctTransaction = false;
+    dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
+				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
+    sqlite3_step(dbim.stmt);
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
+    querySecondGeoCmdA = "SELECT * "
+	"FROM NewFact "
+	"INNER JOIN Collinear "
+	"ON (newFact = id) "
+	"WHERE point1 IN ('" + point1 + "', '" + point3 + "', '" + point2
+	+ "') AND point2 IN ('" + point1 + "', '" + point3 + "', '" + point2
+	+ "') AND point2 <> point1 AND point3 IN ('" + point1 + "', '" + point3
+	+ "', '" + point2 + "') AND point3 NOT IN (point1, point2)";
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
+				 querySecondGeoCmdA.size(), &(dbim.stmt1),
+				 NULL);
+    sqlite3_step(dbim.stmt1);
+    querySecondGeoCmdB = "SELECT * "
+	"FROM Facts "
+	"INNER JOIN Collinear "
+	"ON (oldFact = id) "
+	"WHERE point1 IN ('" + point1 + "', '" + point3 + "', '" + point2
+	+ "') AND point2 IN ('" + point1 + "', '" + point3 + "', '" + point2
+	+ "') AND point2 <> point1 AND point3 IN ('" + point1 + "', '" + point3
+	+ "', '" + point2 + "') AND point3 NOT IN (point1, point2)";
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+				 querySecondGeoCmdB.size(), &(dbim.stmt2),
+				 NULL);
+    sqlite3_step(dbim.stmt2);
+    if (sqlite3_data_count(dbim.stmt1) != 0
+	|| sqlite3_data_count(dbim.stmt2) != 0 ) {
+	correctTransaction = false;
+    } else {
+	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	    correctTransaction = false;
+	} else {
+	    querySecondGeoCmdA = "SELECT * "
+		"FROM NewFact "
+		"INNER JOIN EqualAngles "
+		"ON (newFact = id) "
+		"WHERE point1 = '" + point1 + "' AND point2 = '" + point3
+		+ "' AND point3 = '" + point3 + "' AND point4 = '" + point2
+		+ "' AND point5 = '" + point5 + "' AND point6 = '" + point7
+		+ "' AND point7 = '" + point7 + "' AND point8 = '" + point6
+		+ "'";
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
+					 querySecondGeoCmdA.size(),
+					 &(dbim.stmt1), NULL);
+	    sqlite3_step(dbim.stmt1);
+	    querySecondGeoCmdB = "SELECT * "
+		"FROM Facts "
+		"INNER JOIN EqualAngles "
+		"ON (oldFact = id) "
+		"WHERE point1 = '" + point1 + "' AND point2 = '" + point3
+		+ "' AND point3 = '" + point3 + "' AND point4 = '" + point2
+		+ "' AND point5 = '" + point5 + "' AND point6 = '" + point7
+		+ "' AND point7 = '" + point7 + "' AND point8 = '" + point6
+		+ "'";
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+					 querySecondGeoCmdB.size(),
+					 &(dbim.stmt2), NULL);
+	    sqlite3_step(dbim.stmt2);
+	    if (sqlite3_data_count(dbim.stmt1) == 0
+		&& sqlite3_data_count(dbim.stmt2) == 0) {
+		correctTransaction = false;
+	    } else {
+		insertionPred = "INSERT INTO "
+		    "SimilarTriangles (typeGeoCmd, point1, point2, point3, "
+		    "point4, point5, point6, newFact) "
+		    "VALUES "
+		    "('simtri', '" + point1 + "', '" + point3 + "', '" + point2
+		    + "', '" + point5 + "', '" + point7 + "', '" + point6
 		    + "', '" + lstInsRwId + "')";
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
 					 insertionPred.size(), &(dbim.stmt),
@@ -7444,9 +7560,22 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 		&& point2 != point4 && point2 != point8)
 		dbim = ruleD51eqangle(dbim, point1, point2, point3, point4,
 				      point5, point6, point7, point8);
-	    // if (point2 == point3 && point6 == point7)
-	    // 	dbim = ruleD58(dbim, point1, point2, point3, point4,
-	    // 		       point5, point6, point7, point8);
+	    if (point2 == point3 && point6 == point7
+		&& point1 != point2 && point1 != point4 && point1 != point5
+		&& point1 != point6 && point1 != point8 && point2 != point4
+		&& point2 != point5 && point2 != point6 && point2 != point8
+		&& point4 != point5 && point4 != point6 && point4 != point8
+		&& point5 != point6 && point5 != point8 && point6 != point8)
+		dbim = ruleD58a(dbim, point1, point2, point3, point4,
+				point5, point6, point7, point8);
+	    if (point2 == point4 && point6 == point8
+		&& point1 != point2 && point1 != point3 && point1 != point5
+		&& point1 != point6 && point1 != point7 && point2 != point3
+		&& point2 != point5 && point2 != point6 && point2 != point7
+		&& point3 != point5 && point3 != point6 && point3 != point7
+		&& point5 != point6 && point5 != point7 && point6 != point7)
+		dbim = ruleD58a(dbim, point1, point2, point3, point4,
+				point5, point6, point7, point8);
 	    if (point1 == point7 && point2 == point8 && point3 == point5
 		&& point4 == point6
 		&& !(point1 == point3 && point2 == point4)

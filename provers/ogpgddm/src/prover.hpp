@@ -191,9 +191,12 @@ public:
 			   std::string);
     DBinMemory ruleD57cyclic(DBinMemory, std::string, std::string, std::string,
 			     std::string);
-    DBinMemory ruleD58(DBinMemory, std::string, std::string, std::string,
-		       std::string, std::string, std::string, std::string,
-		       std::string);
+    DBinMemory ruleD58a(DBinMemory, std::string, std::string, std::string,
+			std::string, std::string, std::string, std::string,
+			std::string);
+    DBinMemory ruleD58b(DBinMemory, std::string, std::string, std::string,
+			std::string, std::string, std::string, std::string,
+			std::string);
     DBinMemory ruleD59(DBinMemory, std::string, std::string, std::string,
 		       std::string, std::string, std::string);
     DBinMemory ruleD60(DBinMemory, std::string, std::string, std::string,
