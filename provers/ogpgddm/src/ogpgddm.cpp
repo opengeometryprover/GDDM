@@ -26,6 +26,8 @@
 #include "points.hpp"
 #include "prover.hpp"
 
+#define VERSION 0.5
+
 struct pointList *points = NULL;
 
 void errorMsg(int error) {
@@ -48,7 +50,7 @@ int main(int argc, char *argv[]) {
     FOFtoDB fdb;
     Prover ogpgddm;
 
-    std::cout << "OGP GDDM xxx" << std::endl;
+    std::cout << "OGP GDDM " << VERSION << std::endl;
     std::cout << "Copyright (C) 2022 Nuno Baeta, Pedro Quaresma" << std::endl;
     std::cout << "Distributed under GNU GPL 3.0 or later" << std::endl;
 
