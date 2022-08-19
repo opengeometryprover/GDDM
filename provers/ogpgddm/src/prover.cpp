@@ -12,8 +12,10 @@
  */
 
 
+#include <algorithm>
 #include <iostream>
 #include <map>
+#include <vector>
 
 #include "prover.hpp"
 #include "strs.hpp"
@@ -2365,6 +2367,7 @@ DBinMemory Prover::ruleD42(DBinMemory dbim, std::string point1,
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::vector<std::string> aux;
 
     insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('cyclic')";
     lastInsertedRowId = "SELECT last_insert_rowid()";
@@ -2451,10 +2454,14 @@ DBinMemory Prover::ruleD42(DBinMemory dbim, std::string point1,
 		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
 		else {
-		    ndg = addStr("coll(" + point1 + ", " + point5 + ", "
-				 + point2 + ")", ndg);
-		    ndg = addStr("coll(" + point1 + ", " + point5 + ", "
-				 + point4 + ")", ndg);
+		    aux = {point1, point5, point2};
+		    std::sort(aux.begin(), aux.end());
+		    ndg = addStr("coll(" + aux[0] + ", " + aux[1] + ", "
+				 + aux[2] + ")", ndg);
+		    aux = {point1, point5, point4};
+		    std::sort(aux.begin(), aux.end());
+		    ndg = addStr("coll(" + aux[0] + ", " + aux[1] + ", "
+				 + aux[2] + ")", ndg);
 		}
 	    }
 	}
@@ -3171,6 +3178,7 @@ DBinMemory Prover::ruleD47(DBinMemory dbim, std::string point1,
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::vector<std::string> aux;
 
     insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('cong')";
     lastInsertedRowId = "SELECT last_insert_rowid()";
@@ -3226,9 +3234,12 @@ DBinMemory Prover::ruleD47(DBinMemory dbim, std::string point1,
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		correctTransaction = false;
-	    else
-		ndg = addStr("coll(" + point1 + ", " + point2 + ", " + point4
+	    else {
+		aux = {point1, point2, point4};
+		std::sort(aux.begin(), aux.end());
+		ndg = addStr("coll(" + aux[0] + ", " + aux[1] + ", " + aux[2]
 			     + ")", ndg);
+	    }
 	}
     }
     if (correctTransaction)
@@ -4915,6 +4926,7 @@ DBinMemory Prover::ruleD58a(DBinMemory dbim, std::string point1,
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::vector<std::string> aux;
 
     insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('simtri')";
     lastInsertedRowId = "SELECT last_insert_rowid()";
@@ -5001,9 +5013,12 @@ DBinMemory Prover::ruleD58a(DBinMemory dbim, std::string point1,
 					     NULL);
 		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		else
-		    ndg = addStr("coll(" + point1 + ", " + point2 + ", "
-				 + point4 + ")", ndg);
+		else {
+		    aux = {point1, point2, point4};
+		    std::sort(aux.begin(), aux.end());
+		    ndg = addStr("coll(" + aux[0] + ", " + aux[1] + ", "
+				 + aux[2] + ")", ndg);
+		}
 	    }
 	}
     }
@@ -5030,6 +5045,7 @@ DBinMemory Prover::ruleD58b(DBinMemory dbim, std::string point1,
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::vector<std::string> aux;
 
     insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('simtri')";
     lastInsertedRowId = "SELECT last_insert_rowid()";
@@ -5116,9 +5132,12 @@ DBinMemory Prover::ruleD58b(DBinMemory dbim, std::string point1,
 					     NULL);
 		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
-		else
-		    ndg = addStr("coll(" + point1 + ", " + point3 + ", "
-				 + point2 + ")", ndg);
+		else {
+		    aux = {point1, point3, point2};
+		    std::sort(aux.begin(), aux.end());
+		    ndg = addStr("coll(" + aux[0] + ", " + aux[1] + ", "
+				 + aux[2] + ")", ndg);
+		}
 	    }
 	}
     }
