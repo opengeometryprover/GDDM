@@ -20,7 +20,7 @@ struct strsList {
     struct strsList *next;
 };
 
-struct strsList *addString(std::string, struct strsList *);
-void showStrings(struct strsList *);
+struct strsList *addStr(std::string, struct strsList *);
+void showStrs(struct strsList *);
 
 #endif

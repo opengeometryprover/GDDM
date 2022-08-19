@@ -23,12 +23,12 @@
 #include "dbRAM.hpp"
 #include "foftodb.hpp"
 #include "parser.hpp"
-#include "points.hpp"
 #include "prover.hpp"
+#include "strs.hpp"
 
 #define VERSION 0.5
 
-struct pointList *points = NULL;
+struct strsList *points = NULL;
 
 void errorMsg(int error) {
     std::cerr << "[OGPGDDM ERROR " << error << "] ";

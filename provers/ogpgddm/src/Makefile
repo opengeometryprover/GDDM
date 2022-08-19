@@ -23,11 +23,11 @@ all: $(BASE)
 	$(CPP) $(CPPFLAGS) -c -o $@ $<
 
 
-$(BASE): $(BASE).o scanner.o parser.o dbRAM.o foftodb.o prover.o points.o
-	$(CPP) -o $@ ogpgddm.cpp foftodb.o parser.o scanner.o prover.o dbRAM.o points.o -lsqlite3
+$(BASE): $(BASE).o scanner.o parser.o dbRAM.o foftodb.o prover.o strs.o
+	$(CPP) -o $@ ogpgddm.cpp foftodb.o parser.o scanner.o prover.o dbRAM.o strs.o -lsqlite3
 
 $(BASE).o: parser.hpp
-parser.o: parser.hpp
+parser.o: parser.hpp strs.hpp strs.cpp
 scanner.o: parser.hpp
 
 CLEANFILES = $(BASE) *.o parser.hpp parser.cpp location.hh scanner.cpp

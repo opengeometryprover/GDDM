@@ -31,9 +31,9 @@
 
 %code {
 #include "foftodb.hpp"
-#include "points.hpp"
+#include "strs.hpp"
 
-extern struct pointList *points;
+extern struct strsList *points;
 }
 
 %define api.token.prefix {TOK_}
@@ -125,10 +125,10 @@ circle:
 	drv.point2[drv.numGeoCmd]=$5;
 	drv.point3[drv.numGeoCmd]=$7;
 	drv.point4[drv.numGeoCmd]=$9;
-	points = addPoint($3, points);
-	points = addPoint($5, points);
-	points = addPoint($7, points);
-	points = addPoint($9, points);
+	points = addStr($3, points);
+	points = addStr($5, points);
+	points = addStr($7, points);
+	points = addStr($9, points);
     }
 
 coll:
@@ -138,9 +138,9 @@ coll:
 	drv.point1[drv.numGeoCmd] = $3;
 	drv.point2[drv.numGeoCmd] = $5;
 	drv.point3[drv.numGeoCmd] = $7;
-	points = addPoint($3, points);
-	points = addPoint($5, points);
-	points = addPoint($7, points);
+	points = addStr($3, points);
+	points = addStr($5, points);
+	points = addStr($7, points);
     };
 
 cong:
@@ -151,10 +151,10 @@ cong:
 	drv.point2[drv.numGeoCmd]=$5;
 	drv.point3[drv.numGeoCmd]=$7;
 	drv.point4[drv.numGeoCmd]=$9;
-	points = addPoint($3, points);
-	points = addPoint($5, points);
-	points = addPoint($7, points);
-	points = addPoint($9, points);
+	points = addStr($3, points);
+	points = addStr($5, points);
+	points = addStr($7, points);
+	points = addStr($9, points);
     }
 
 contri:
@@ -167,12 +167,12 @@ contri:
 	drv.point4[drv.numGeoCmd]=$9;
 	drv.point5[drv.numGeoCmd]=$11;
 	drv.point6[drv.numGeoCmd]=$13;
-	points = addPoint($3, points);
-	points = addPoint($5, points);
-	points = addPoint($7, points);
-	points = addPoint($9, points);
-	points = addPoint($11, points);
-	points = addPoint($13, points);
+	points = addStr($3, points);
+	points = addStr($5, points);
+	points = addStr($7, points);
+	points = addStr($9, points);
+	points = addStr($11, points);
+	points = addStr($13, points);
     }
 
 cyclic:
@@ -183,10 +183,10 @@ cyclic:
 	drv.point2[drv.numGeoCmd]=$5;
 	drv.point3[drv.numGeoCmd]=$7;
 	drv.point4[drv.numGeoCmd]=$9;
-	points = addPoint($3, points);
-	points = addPoint($5, points);
-	points = addPoint($7, points);
-	points = addPoint($9, points);
+	points = addStr($3, points);
+	points = addStr($5, points);
+	points = addStr($7, points);
+	points = addStr($9, points);
     }
 
 eqangle:
@@ -201,14 +201,14 @@ eqangle:
 	drv.point6[drv.numGeoCmd]=$13;
 	drv.point7[drv.numGeoCmd]=$15;
 	drv.point8[drv.numGeoCmd]=$17;
-	points = addPoint($3, points);
-	points = addPoint($5, points);
-	points = addPoint($7, points);
-	points = addPoint($9, points);
-	points = addPoint($11, points);
-	points = addPoint($13, points);
-	points = addPoint($15, points);
-	points = addPoint($17, points);
+	points = addStr($3, points);
+	points = addStr($5, points);
+	points = addStr($7, points);
+	points = addStr($9, points);
+	points = addStr($11, points);
+	points = addStr($13, points);
+	points = addStr($15, points);
+	points = addStr($17, points);
     }
 
 eqratio:
@@ -223,14 +223,14 @@ eqratio:
 	drv.point6[drv.numGeoCmd]=$13;
 	drv.point7[drv.numGeoCmd]=$15;
 	drv.point8[drv.numGeoCmd]=$17;
-	points = addPoint($3, points);
-	points = addPoint($5, points);
-	points = addPoint($7, points);
-	points = addPoint($9, points);
-	points = addPoint($11, points);
-	points = addPoint($13, points);
-	points = addPoint($15, points);
-	points = addPoint($17, points);
+	points = addStr($3, points);
+	points = addStr($5, points);
+	points = addStr($7, points);
+	points = addStr($9, points);
+	points = addStr($11, points);
+	points = addStr($13, points);
+	points = addStr($15, points);
+	points = addStr($17, points);
     }
 
 para:
@@ -241,10 +241,10 @@ para:
 	drv.point2[drv.numGeoCmd]=$5;
 	drv.point3[drv.numGeoCmd]=$7;
 	drv.point4[drv.numGeoCmd]=$9;
-	points = addPoint($3, points);
-	points = addPoint($5, points);
-	points = addPoint($7, points);
-	points = addPoint($9, points);
+	points = addStr($3, points);
+	points = addStr($5, points);
+	points = addStr($7, points);
+	points = addStr($9, points);
     };
 
 perp:
@@ -255,10 +255,10 @@ perp:
 	drv.point2[drv.numGeoCmd]=$5;
 	drv.point3[drv.numGeoCmd]=$7;
 	drv.point4[drv.numGeoCmd]=$9;
-	points = addPoint($3, points);
-	points = addPoint($5, points);
-	points = addPoint($7, points);
-	points = addPoint($9, points);
+	points = addStr($3, points);
+	points = addStr($5, points);
+	points = addStr($7, points);
+	points = addStr($9, points);
     };
 
 midp:
@@ -268,9 +268,9 @@ midp:
 	drv.point1[drv.numGeoCmd] = $3;
 	drv.point2[drv.numGeoCmd] = $5;
 	drv.point3[drv.numGeoCmd] = $7;
-	points = addPoint($3, points);
-	points = addPoint($5, points);
-	points = addPoint($7, points);
+	points = addStr($3, points);
+	points = addStr($5, points);
+	points = addStr($7, points);
     };
 
 simtri:
@@ -283,12 +283,12 @@ simtri:
 	drv.point4[drv.numGeoCmd]=$9;
 	drv.point5[drv.numGeoCmd]=$11;
 	drv.point6[drv.numGeoCmd]=$13;
-	points = addPoint($3, points);
-	points = addPoint($5, points);
-	points = addPoint($7, points);
-	points = addPoint($9, points);
-	points = addPoint($11, points);
-	points = addPoint($13, points);
+	points = addStr($3, points);
+	points = addStr($5, points);
+	points = addStr($7, points);
+	points = addStr($9, points);
+	points = addStr($11, points);
+	points = addStr($13, points);
     }
 
 geocmdConsequent:

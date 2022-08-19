@@ -1,7 +1,7 @@
 /*
  * points.hpp
  *
- * Conjecture's list of points.
+ * Conjecture's lists of strings
  *
  * This file is part of the OGP GDDM prover, which, in turn, is part of
  * the Open Geometry Prover Community Project (OGPCP)
@@ -15,7 +15,7 @@
 #include <iostream>
 #include <string>
 
-#include "points.hpp"
+#include "strs.hpp"
 
 /*
  * Adds a point to the list, if it does not belong to the list.

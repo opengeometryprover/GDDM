@@ -16,7 +16,7 @@
 #include <map>
 
 #include "prover.hpp"
-#include "points.hpp"
+#include "strs.hpp"
 
 #include "foftodb.hpp" // To show the BD.
 
@@ -2254,17 +2254,17 @@ DBinMemory Prover::ruleD40(DBinMemory dbim, std::string point1,
 			   std::string point4) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
-    struct pointList *ptP, *ptQ;
-    extern struct pointList *points;
+    struct strsList *ptP, *ptQ;
+    extern struct strsList *points;
 
     ptP = points;
     while (ptP != NULL) {
-	if (ptP->pt != point1 && ptP->pt != point2 && ptP->pt != point3
-	    && ptP->pt != point4) {
+	if (ptP->str != point1 && ptP->str != point2 && ptP->str != point3
+	    && ptP->str != point4) {
 	    ptQ = ptP->next;
 	    while (ptQ != NULL) {
-		if (ptQ->pt != point1 && ptQ->pt != point2 && ptQ->pt != point3
-		    && ptQ->pt != point4) {
+		if (ptQ->str != point1 && ptQ->str != point2
+		    && ptQ->str != point3 && ptQ->str != point4) {
 		    insertNewFact = "INSERT INTO NewFact (typeGeoCmd) "
 			"VALUES ('eqangle')";
 		    lastInsertedRowId = "SELECT last_insert_rowid()";
@@ -2287,9 +2287,9 @@ DBinMemory Prover::ruleD40(DBinMemory dbim, std::string point1,
 			"point4, point5, point6, point7, point8, newFact) "
 			"VALUES "
 			"('eqangle', '" + point1 + "', '" + point2 + "', '"
-			+ ptP->pt + "', '" + ptQ->pt + "', '" + point3 + "', '"
-			+ point4 + "', '" + ptP->pt + "', '" + ptQ->pt + "', '"
-			+ lstInsRwId + "')";
+			+ ptP->str + "', '" + ptQ->str + "', '" + point3
+			+ "', '" + point4 + "', '" + ptP->str + "', '"
+			+ ptQ->str + "', '" + lstInsRwId + "')";
 		    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
 						 insertionPred.size(),
 						 &(dbim.stmt), NULL);
