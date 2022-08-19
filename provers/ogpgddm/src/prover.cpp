@@ -3226,6 +3226,9 @@ DBinMemory Prover::ruleD47(DBinMemory dbim, std::string point1,
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		correctTransaction = false;
+	    else
+		ndg = addStr("coll(" + point1 + ", " + point2 + ", " + point4
+			     + ")", ndg);
 	}
     }
     if (correctTransaction)
@@ -4993,11 +4996,14 @@ DBinMemory Prover::ruleD58a(DBinMemory dbim, std::string point1,
 		    "('simtri', '" + point1 + "', '" + point2 + "', '" + point4
 		    + "', '" + point5 + "', '" + point6 + "', '" + point8
 		    + "', '" + lstInsRwId + "')";
-	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
-					 insertionPred.size(), &(dbim.stmt),
-					 NULL);
-	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
-		correctTransaction = false;
+		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					     insertionPred.size(), &(dbim.stmt),
+					     NULL);
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
+		    correctTransaction = false;
+		else
+		    ndg = addStr("coll(" + point1 + ", " + point2 + ", "
+				 + point4 + ")", ndg);
 	    }
 	}
     }
@@ -5105,11 +5111,14 @@ DBinMemory Prover::ruleD58b(DBinMemory dbim, std::string point1,
 		    "('simtri', '" + point1 + "', '" + point3 + "', '" + point2
 		    + "', '" + point5 + "', '" + point7 + "', '" + point6
 		    + "', '" + lstInsRwId + "')";
-	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
-					 insertionPred.size(), &(dbim.stmt),
-					 NULL);
-	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
-		correctTransaction = false;
+		dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					     insertionPred.size(), &(dbim.stmt),
+					     NULL);
+		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
+		    correctTransaction = false;
+		else
+		    ndg = addStr("coll(" + point1 + ", " + point3 + ", "
+				 + point2 + ")", ndg);
 	    }
 	}
     }
@@ -6302,6 +6311,9 @@ DBinMemory Prover::ruleD71(DBinMemory dbim, std::string point1,
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		correctTransaction = false;
+	    else
+		ndg = addStr("para(" + point1 + ", " + point2 + ", " + point3
+			     + ", " + point4 + ")", ndg);
 	}
     }
     if (correctTransaction)
@@ -6381,6 +6393,9 @@ DBinMemory Prover::ruleD72(DBinMemory dbim, std::string point1,
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		correctTransaction = false;
+	    else
+		ndg = addStr("perp(" + point1 + ", " + point2 + ", " + point3
+			     + ", " + point4 + ")", ndg);
 	}
     }
     if (correctTransaction)
@@ -8207,7 +8222,7 @@ void Prover::showFixedPoint(DBinMemory dbim) {
     }
     std::cout << std::endl;
     if (ndg != NULL) {
-	std::cout << "Nondegenerate Condition" << std::endl;
+	std::cout << "Nondegenerate Conditions" << std::endl;
 	std::cout << std::endl;
 	showStrs(ndg);
 	std::cout << std::endl;
