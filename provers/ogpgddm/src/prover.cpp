@@ -6274,7 +6274,7 @@ DBinMemory Prover::ruleD71(DBinMemory dbim, std::string point1,
 			   std::string point8) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
-    std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::string querySecondGeoCmdA, querySecondGeoCmdB, aux;
 
     insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('perp')";
     lastInsertedRowId = "SELECT last_insert_rowid()";
@@ -6330,9 +6330,24 @@ DBinMemory Prover::ruleD71(DBinMemory dbim, std::string point1,
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		correctTransaction = false;
-	    else
-		ndg = addStr("para(" + point1 + ", " + point2 + ", " + point3
-			     + ", " + point4 + ")", ndg);
+	    else {
+		if (point2 < point1) {
+		    aux = point2;
+		    point2 = point1;
+		    point1 = aux;
+		}
+		if (point4 < point3) {
+		    aux = point4;
+		    point4 = point3;
+		    point3 = aux;
+		}
+		if ((point1 > point3) || (point1 == point3 && point2 > point4))
+		    ndg = addStr("para(" + point3 + ", " + point4 + ", "
+				 + point1 + ", " + point2 + ")", ndg);
+		else
+		    ndg = addStr("para(" + point1 + ", " + point2 + ", "
+				 + point3 + ", " + point4 + ")", ndg);
+	    }
 	}
     }
     if (correctTransaction)
@@ -6356,7 +6371,7 @@ DBinMemory Prover::ruleD72(DBinMemory dbim, std::string point1,
 			   std::string point8) {
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
-    std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::string querySecondGeoCmdA, querySecondGeoCmdB, aux;
 
     insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('para')";
     lastInsertedRowId = "SELECT last_insert_rowid()";
@@ -6412,9 +6427,24 @@ DBinMemory Prover::ruleD72(DBinMemory dbim, std::string point1,
 					 NULL);
 	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		correctTransaction = false;
-	    else
-		ndg = addStr("perp(" + point1 + ", " + point2 + ", " + point3
-			     + ", " + point4 + ")", ndg);
+	    else {
+		if (point2 < point1) {
+		    aux = point2;
+		    point2 = point1;
+		    point1 = aux;
+		}
+		if (point4 < point3) {
+		    aux = point4;
+		    point4 = point3;
+		    point3 = aux;
+		}
+		if ((point1 > point3) || (point1 == point3 && point2 > point4))
+		    ndg = addStr("perp(" + point3 + ", " + point4 + ", "
+				 + point1 + ", " + point2 + ")", ndg);
+		else
+		    ndg = addStr("perp(" + point1 + ", " + point2 + ", "
+				 + point3 + ", " + point4 + ")", ndg);
+	    }
 	}
     }
     if (correctTransaction)
