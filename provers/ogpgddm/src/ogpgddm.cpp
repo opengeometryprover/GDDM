@@ -29,6 +29,7 @@
 #define VERSION 0.5
 
 struct strsList *points = NULL;
+struct strsList *ndg = NULL;
 
 void errorMsg(int error) {
     std::cerr << "[OGPGDDM ERROR " << error << "] ";

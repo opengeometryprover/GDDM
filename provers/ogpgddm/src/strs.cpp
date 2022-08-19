@@ -40,17 +40,14 @@ struct strsList *addStr(std::string theStr, struct strsList *strs) {
 }
 
 /*
- * For debugging purposes only.
+ * Shows the list of strings.
  */
 void showStrs(struct strsList *strs) {
     struct strsList *current;
 
-    std::cout << "List of Stringss" << std::endl;
-    std::cout << std::endl;
     current = strs;
     while (current != NULL) {
 	std::cout << "  " << current->str << std::endl;
 	current = current->next;
     }
-    std::cout << std::endl;
 }

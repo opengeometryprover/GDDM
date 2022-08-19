@@ -20,6 +20,9 @@
 
 #include "foftodb.hpp" // To show the BD.
 
+extern struct strsList *points;
+extern struct strsList *ndg;
+
 /*
  * Rule D1: coll(A, B, C) -> coll(A, C, B)
  */
@@ -2255,7 +2258,7 @@ DBinMemory Prover::ruleD40(DBinMemory dbim, std::string point1,
     bool correctTransaction;
     std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
     struct strsList *ptP, *ptQ;
-    extern struct strsList *points;
+    
 
     ptP = points;
     while (ptP != NULL) {
@@ -2447,6 +2450,12 @@ DBinMemory Prover::ruleD42(DBinMemory dbim, std::string point1,
 					     NULL);
 		if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 		    correctTransaction = false;
+		else {
+		    ndg = addStr("coll(" + point1 + ", " + point5 + ", "
+				 + point2 + ")", ndg);
+		    ndg = addStr("coll(" + point1 + ", " + point5 + ", "
+				 + point4 + ")", ndg);
+		}
 	    }
 	}
     }
@@ -8197,4 +8206,11 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	}
     }
     std::cout << std::endl;
+    if (ndg != NULL) {
+	std::cout << "Nondegenerate Condition" << std::endl;
+	std::cout << std::endl;
+	showStrs(ndg);
+	std::cout << std::endl;
+	
+    }
 }
