@@ -6562,9 +6562,7 @@ DBinMemory Prover::ruleD73para(DBinMemory dbim, std::string point1,
 	"INNER JOIN EqualAngles "
 	"ON (newFact = id) "
 	"WHERE point5 = '" + point1 + "' AND point6 = '" + point2
-	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4
-	+ "' AND NOT (point1 = point3 AND point2 = point4) "
-	+ " AND NOT (point1 = point4 AND point2 = point3)";
+	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4;
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -6574,9 +6572,7 @@ DBinMemory Prover::ruleD73para(DBinMemory dbim, std::string point1,
 	"INNER JOIN EqualAngles "
 	"ON (oldFact = id) "
 	"WHERE point5 = '" + point1 + "' AND point6 = '" + point2
-	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4
-	+ "' AND NOT (point1 = point3 AND point2 = point4) "
-	+ " AND NOT (point1 = point4 AND point2 = point3)";
+	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4;
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -7500,22 +7496,19 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    break;
 	case 2:
             // Parallel
-	    if (point1 != point2 && point1 != point3 && point1 != point4
-		&& point2 != point3 && point2 != point4 && point3 != point4) {
-		dbim = ruleD04(dbim, point1, point2, point3, point4);
-		dbim = ruleD05(dbim, point1, point2, point3, point4);
-		dbim = ruleD06(dbim, point1, point2, point3, point4);
-		dbim = ruleD10para(dbim, point1, point2, point3, point4);
-		dbim = ruleD40(dbim, point1, point2, point3, point4);
-		dbim = ruleD45para(dbim, point1, point2, point3, point4);
-		dbim = ruleD54para(dbim, point1, point2, point3, point4);
+	    dbim = ruleD04(dbim, point1, point2, point3, point4);
+	    dbim = ruleD05(dbim, point1, point2, point3, point4);
+	    dbim = ruleD06(dbim, point1, point2, point3, point4);
+	    dbim = ruleD10para(dbim, point1, point2, point3, point4);
+	    dbim = ruleD40(dbim, point1, point2, point3, point4);
+	    dbim = ruleD45para(dbim, point1, point2, point3, point4);
+	    dbim = ruleD54para(dbim, point1, point2, point3, point4);
+	    if (point2 != point4)
 		dbim = ruleD64para(dbim, point1, point2, point3, point4);
-		dbim = ruleD65para(dbim, point1, point2, point3, point4);
-		dbim = ruleD73para(dbim, point1, point2, point3, point4);
-	    }
-	    if (point1 == point3
-		&& point1 != point2 && point1 != point4 && point2 != point4)
+	    dbim = ruleD65para(dbim, point1, point2, point3, point4);
+	    if (point1 == point3 && point2 != point4)
 		dbim = ruleD66(dbim, point1, point2, point3, point4);
+	    dbim = ruleD73para(dbim, point1, point2, point3, point4);
 	    break;
 	case 3:
             // Perpendicular
