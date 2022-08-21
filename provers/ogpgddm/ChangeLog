@@ -1,3 +1,21 @@
+2022-08-19  Nuno Miguel dos Santos Baeta  <nmsbaeta@gmail.com>
+
+	Creation of list of nondegenerate (ndg) conditions.
+
+	* src/strs.cpp: Previously known as src/points.cpp.  Changes made
+	to acoommodate not just lists of points, that are identified as
+	strings, but lists of strings.
+	* src/strs.hpp: Previously known as src/points.hpp.  Changes made
+	to acoommodate not just lists of points, that are identified as
+	strings, but lists of strings.
+	* src/ogpgddm.cpp (ndg): List of ndg conditions.
+	* src/prover.cpp (ruleD42, ruleD47, rule58a, rule58b, ruleD71)
+	(ruleD72): The rules generate ndg conditions.
+	* src/prover.cpp (showFixedPoint): Shows not only the but fixed
+	point but also the list of ndg conditions.
+
+	* Version 0.5.1.
+
 2022-08-17  Nuno Miguel dos Santos Baeta  <nmsbaeta@gmail.com>
 
 	* Version 0.5 released.
