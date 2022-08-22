@@ -2502,7 +2502,7 @@ DBinMemory Prover::ruleD43cyclic(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Cyclic "
 	"ON (newFact = id) "
-	"WHERE point1 = '" + point1 + "' AND point2 = '" + point1
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
 	+ "' AND point3 = '" + point3
 	+ "' AND point4 <> '" + point4 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
@@ -2513,7 +2513,7 @@ DBinMemory Prover::ruleD43cyclic(DBinMemory dbim, std::string point1,
 	"FROM Facts "
 	"INNER JOIN Cyclic "
 	"ON (oldFact = id) "
-	"WHERE point1 = '" + point1 + "' AND point2 = '" + point1
+	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
 	+ "' AND point3 = '" + point3
 	+ "' AND point4 <> '" + point4 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
@@ -2532,7 +2532,7 @@ DBinMemory Prover::ruleD43cyclic(DBinMemory dbim, std::string point1,
 	    "FROM NewFact "
 	    "INNER JOIN Cyclic "
 	    "ON (newFact = id) "
-	    "WHERE point1 = '" + point1 + "' AND point2 = '" + point1
+	    "WHERE point1 = '" + point1 + "' AND point2 = '" + point2
 	    + "' AND point3 = '" + point3
 	    + "' AND point4 NOT IN ('" + point4 + "', '" + newPoint1 + "')";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
@@ -2543,7 +2543,7 @@ DBinMemory Prover::ruleD43cyclic(DBinMemory dbim, std::string point1,
 	    "FROM Facts "
 	    "INNER JOIN Cyclic "
 	    "ON (oldFact = id) "
-	    "WHERE point1 = '" + point1 + "' AND point2 = '" + point1
+	    "WHERE point1 = '" + point1 + "' AND point2 = '" + point2
 	    + "' AND point3 = '" + point3
 	    + "' AND point4 NOT IN ('" + point4 + "', '" + newPoint1 + "')";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
