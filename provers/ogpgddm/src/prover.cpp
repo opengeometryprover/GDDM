@@ -1,7 +1,7 @@
 /*
  * prover.cpp
  *
- * GDDM's core: deduction rules and point fixed construction.
+ * GDDM's core: deduction rules and fixed point construction.
  *
  * This file is part of the OGP GDDM prover, which, in turn, is part of
  * the Open Geometry Prover Community Project (OGPCP)
