@@ -5365,7 +5365,7 @@ DBinMemory Prover::ruleD61simtri(DBinMemory dbim, std::string point1,
 		"point4, point5, point6, newFact) "
 		"VALUES "
 		"('contri', '" + point1 + "', '" + point2 + "', '" + point3
-		+ "', '" + point4 + "', '" + point4 + "', '" + point6 + "', '"
+		+ "', '" + point4 + "', '" + point5 + "', '" + point6 + "', '"
 		+ lstInsRwId + "')";
 	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
 					 insertionPred.size(), &(dbim.stmt),
