@@ -6558,7 +6558,7 @@ DBinMemory Prover::ruleD73para(DBinMemory dbim, std::string point1,
 	"INNER JOIN EqualAngles "
 	"ON (newFact = id) "
 	"WHERE point5 = '" + point1 + "' AND point6 = '" + point2
-	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4;
+	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -6568,7 +6568,7 @@ DBinMemory Prover::ruleD73para(DBinMemory dbim, std::string point1,
 	"INNER JOIN EqualAngles "
 	"ON (oldFact = id) "
 	"WHERE point5 = '" + point1 + "' AND point6 = '" + point2
-	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4;
+	+ "' AND point7 = '" + point3 + "' AND point8 = '" + point4 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -6815,7 +6815,7 @@ DBinMemory Prover::ruleD75eqratio(DBinMemory dbim, std::string point1,
 	"INNER JOIN CongruentSegments "
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point5 + "' AND point2 = '" + point6
-	+ "' AND point3 = '" + point7 + "' AND point4 = '" + point8 +"'";
+	+ "' AND point3 = '" + point7 + "' AND point4 = '" + point8 + "'";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
