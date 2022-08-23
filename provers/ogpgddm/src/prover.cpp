@@ -772,7 +772,7 @@ DBinMemory Prover::ruleD13(DBinMemory dbim, std::string point1,
 	"ON (newFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
 	+ "' AND point3 = '" + point3
-	+ "' AND point4 <> '" + point4 + "'";
+	+ "' AND point4 NOT IN ('" + point2 + "', '" + point4 + "')";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -783,7 +783,7 @@ DBinMemory Prover::ruleD13(DBinMemory dbim, std::string point1,
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point1 + "' AND point2 = '" + point2
         + "' AND point3 = '" + point3
-	+ "' AND point4 <> '" + point4 + "'";
+	+ "' AND point4 NOT IN ('" + point2 + "', '" + point4 + "')";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -802,7 +802,8 @@ DBinMemory Prover::ruleD13(DBinMemory dbim, std::string point1,
 	    "ON (newFact = id) "
 	    "WHERE point1 = '" + point1 + "' AND point2 = '" + point2
 	    + "' AND point3 = '" + point3
-	    + "' AND point4 NOT IN ('" + point4 + "', '" + newPoint1 + "')";
+	    + "' AND point4 NOT IN ('" + point2 + "', '" +point4 + "', '"
+	    + newPoint1 + "')";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				     querySecondGeoCmdA.size(),
 				     &(dbim.stmt1), NULL);
@@ -813,7 +814,8 @@ DBinMemory Prover::ruleD13(DBinMemory dbim, std::string point1,
 	    "ON (oldFact = id) "
 	    "WHERE point1 = '" + point1 + "' AND point2 = '" + point2
 	    + "' AND point3 = '" + point3
-	    + "' AND point4 NOT IN ('" + point4 + "', '" + newPoint1 + "')";
+	    + "' AND point4 NOT IN ('" + point2 + "', '" + point4 + "', '"
+	    + newPoint1 + "')";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				     querySecondGeoCmdB.size(),
 					 &(dbim.stmt2), NULL);
@@ -7548,9 +7550,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    break;
 	case 6:
 	    // Congruent Segments
-	    if (point1 == point3)
+	    if (point1 == point3 && point2 != point4)
 		dbim = ruleD12(dbim, point1, point2, point3, point4);
-	    if (point1 == point3)
+	    if (point1 == point3 && point2 != point4)
 		dbim = ruleD13(dbim, point1, point2, point3, point4);
 	    dbim = ruleD23(dbim, point1, point2, point3, point4);
 	    dbim = ruleD24(dbim, point1, point2, point3, point4);
