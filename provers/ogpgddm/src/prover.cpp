@@ -722,7 +722,7 @@ DBinMemory Prover::ruleD12(DBinMemory dbim, std::string point1,
 	    newPoint1 = (char*) sqlite3_column_text(dbim.stmt1, 0);
 	else
 	    newPoint1 = (char*) sqlite3_column_text(dbim.stmt2, 0);
-2	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
 	    correctTransaction = false;
 	} else {
 	    insertionPred = "INSERT INTO "
