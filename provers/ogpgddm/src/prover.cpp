@@ -7490,12 +7490,13 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD01(dbim, point1, point2, point3);
 	    dbim = ruleD02(dbim, point1, point2, point3);
 	    dbim = ruleD03(dbim, point1, point2, point3);
-
-	    dbim = ruleD45coll(dbim, point1, point2, point3);
-	    dbim = ruleD51coll(dbim, point1, point2, point3);
-	    dbim = ruleD53coll(dbim, point1, point2, point3);
-	    dbim = ruleD65coll(dbim, point1, point2, point3);
-	    dbim = ruleD67coll(dbim, point1, point2, point3);
+	    if (point1 != point2 && point1 != point3 && point2 != point3) {
+		dbim = ruleD45coll(dbim, point1, point2, point3);
+		dbim = ruleD51coll(dbim, point1, point2, point3);
+		dbim = ruleD53coll(dbim, point1, point2, point3);
+		dbim = ruleD65coll(dbim, point1, point2, point3);
+		dbim = ruleD67coll(dbim, point1, point2, point3);
+	    }
 	    break;
 	case 2:
             // Parallel
@@ -7503,16 +7504,18 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD05(dbim, point1, point2, point3, point4);
 	    dbim = ruleD06(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10para(dbim, point1, point2, point3, point4);
-	    dbim = ruleD40(dbim, point1, point2, point3, point4);
-
-	    dbim = ruleD45para(dbim, point1, point2, point3, point4);
-	    dbim = ruleD54para(dbim, point1, point2, point3, point4);
-	    if (point2 != point4)
+	    if (point1 != point2 && point1 != point3 && point1 != point4
+		&& point2 != point3 && point2 != point4 && point3 != point4) {
+		dbim = ruleD40(dbim, point1, point2, point3, point4);
+		dbim = ruleD45para(dbim, point1, point2, point3, point4);
+		dbim = ruleD54para(dbim, point1, point2, point3, point4);
 		dbim = ruleD64para(dbim, point1, point2, point3, point4);
-	    dbim = ruleD65para(dbim, point1, point2, point3, point4);
-	    if (point1 == point3 && point2 != point4)
+		dbim = ruleD65para(dbim, point1, point2, point3, point4);
+		dbim = ruleD73para(dbim, point1, point2, point3, point4);
+	    }
+	    if (point1 == point3
+		&& point1 != point2 && point1 != point4 && point2 != point4)
 		dbim = ruleD66(dbim, point1, point2, point3, point4);
-	    dbim = ruleD73para(dbim, point1, point2, point3, point4);
 	    break;
 	case 3:
             // Perpendicular
@@ -7520,9 +7523,11 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD08(dbim, point1, point2, point3, point4);
 	    dbim = ruleD09(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10perp(dbim, point1, point2, point3, point4);
-
-	    dbim = ruleD55perp(dbim, point1, point2, point3, point4);
-	    dbim = ruleD74perp(dbim, point1, point2, point3, point4);
+	    if (point1 != point2 && point1 != point3 && point1 != point4
+		&& point2 != point3 && point2 != point4 && point3 != point4) {
+		dbim = ruleD55perp(dbim, point1, point2, point3, point4);
+		dbim = ruleD74perp(dbim, point1, point2, point3, point4);
+	    }
 	    if (point2 == point3
 		&& point1 != point2 && point1 != point4 && point2 != point4) {
 		dbim = ruleD48perp(dbim, point1, point2, point3, point4);
@@ -7532,44 +7537,50 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	case 4:
             // Midpoint
 	    dbim = ruleD11(dbim, point1, point2, point3);
-
-	    dbim = ruleD44(dbim, point1, point2, point3);
-	    dbim = ruleD45midp(dbim, point1, point2, point3);
-	    dbim = ruleD50midp(dbim, point1, point2, point3);
-	    dbim = ruleD52midp(dbim, point1, point2, point3);
-	    dbim = ruleD55midp(dbim, point1, point2, point3);
-	    dbim = ruleD63(dbim, point1, point2, point3);
-	    dbim = ruleD64midp(dbim, point1, point2, point3);
-	    dbim = ruleD68(dbim, point1, point2, point3);
-	    dbim = ruleD69(dbim, point1, point2, point3);
-	    dbim = ruleD70(dbim, point1, point2, point3);
+	    if (point1 != point2 && point1 != point3 && point2 != point3) {
+		dbim = ruleD44(dbim, point1, point2, point3);
+		dbim = ruleD45midp(dbim, point1, point2, point3);
+		dbim = ruleD50midp(dbim, point1, point2, point3);
+		dbim = ruleD52midp(dbim, point1, point2, point3);
+		dbim = ruleD55midp(dbim, point1, point2, point3);
+		dbim = ruleD63(dbim, point1, point2, point3);
+		dbim = ruleD64midp(dbim, point1, point2, point3);
+		dbim = ruleD68(dbim, point1, point2, point3);
+		dbim = ruleD69(dbim, point1, point2, point3);
+		dbim = ruleD70(dbim, point1, point2, point3);
+	    }
 	    break;
 	case 5:
 	    // Circle
-	    dbim = ruleD48circle(dbim, point1, point2, point3, point4);
-	    dbim = ruleD49circle(dbim, point1, point2, point3, point4);
-	    dbim = ruleD50circle(dbim, point1, point2, point3, point4);
-	    dbim = ruleD51circle(dbim, point1, point2, point3, point4);
-	    dbim = ruleD53circle(dbim, point1, point2, point3, point4);
+	    if (point1 != point2 && point1 != point3 && point1 != point4
+		&& point2 != point3 && point2 != point4 && point3 != point4) {
+		dbim = ruleD48circle(dbim, point1, point2, point3, point4);
+		dbim = ruleD49circle(dbim, point1, point2, point3, point4);
+		dbim = ruleD50circle(dbim, point1, point2, point3, point4);
+		dbim = ruleD51circle(dbim, point1, point2, point3, point4);
+		dbim = ruleD53circle(dbim, point1, point2, point3, point4);
+	    }
 	    break;
 	case 6:
 	    // Congruent Segments
-	    if (point1 == point3 && point1 != point2 && point1 != point4
-		&& point2 != point4) {
+	    if (point1 == point3
+		&& point1 != point2 && point1 != point4 && point2 != point4) {
 		dbim = ruleD12(dbim, point1, point2, point3, point4);
 		dbim = ruleD13(dbim, point1, point2, point3, point4);
 	    }
 	    dbim = ruleD23(dbim, point1, point2, point3, point4);
 	    dbim = ruleD24(dbim, point1, point2, point3, point4);
 	    dbim = ruleD25(dbim, point1, point2, point3, point4);
-
 	    if (point1 != point2 && point1 != point3 && point1 != point4
 		&& point2 != point3 && point2 != point4 && point3 != point4) {
 		dbim = ruleD61cong(dbim, point1, point2, point3, point4);
 		dbim = ruleD75cong(dbim, point1, point2, point3, point4);
 	    }
-	    dbim = ruleD46(dbim, point1, point2, point3, point4);
-	    dbim = ruleD67cong(dbim, point1, point2, point3, point4);
+	    if (point1 == point3
+		&& point1 != point2 && point1 != point4 && point2 != point4) {
+		dbim = ruleD46(dbim, point1, point2, point3, point4);
+		dbim = ruleD67cong(dbim, point1, point2, point3, point4);
+	    }
 	    if (point2 == point4
 		&& point1 != point2 && point1 != point3 && point2 != point3) {
 		dbim = ruleD56(dbim, point1, point2, point3, point4);
@@ -7586,9 +7597,13 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 			   point4, point5, point6);
 	    dbim = ruleD38(dbim, point1, point2, point3,
 			   point4, point5, point6);
-
-	    dbim = ruleD62(dbim, point1, point2, point3,
-			   point4, point5, point6);
+	    if (point1 != point2 && point1 != point3 && point1 != point4
+		&& point1 != point5 && point1 != point6 && point2 != point3
+		&& point2 != point4 && point2 != point5 && point2 != point6
+		&& point3 != point4 && point3 != point5 && point3 != point6
+		&& point4 != point5 && point4 != point6 && point5 != point6)
+		dbim = ruleD62(dbim, point1, point2, point3,
+			       point4, point5, point6);
 	    break;
 	case 8:
 	    // Cyclic
@@ -7596,11 +7611,13 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD15(dbim, point1, point2, point3, point4);
 	    dbim = ruleD16(dbim, point1, point2, point3, point4);
 	    dbim = ruleD17(dbim, point1, point2, point3, point4);
-	    dbim = ruleD41(dbim, point1, point2, point3, point4);
-
-	    dbim = ruleD43cyclic(dbim, point1, point2, point3, point4);
-	    dbim = ruleD54cyclic(dbim, point1, point2, point3, point4);
-	    dbim = ruleD57cyclic(dbim, point1, point2, point3, point4);
+	    if (point1 != point2 && point1 != point3 && point1 != point4
+		&& point2 != point3 && point2 != point4 && point3 != point4) {
+		dbim = ruleD41(dbim, point1, point2, point3, point4);
+		dbim = ruleD43cyclic(dbim, point1, point2, point3, point4);
+		dbim = ruleD54cyclic(dbim, point1, point2, point3, point4);
+		dbim = ruleD57cyclic(dbim, point1, point2, point3, point4);
+	    }
 	    break;
 	case 9:
 	    // Equal Angles
@@ -7614,12 +7631,6 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 			   point5, point6, point7, point8);
 	    dbim = ruleD22(dbim, point1, point2, point3, point4,
 			       point5, point6, point7, point8);
-	    if (point3 == point7 && point4 == point8
-		&& !(point1 == point5 && point2 == point6)
-		&& !(point1 == point6 && point2 == point5))
-		dbim = ruleD39(dbim, point1, point2, point3, point4,
-			       point5, point6, point7, point8);
-
 	    if (point1 != point2 && point1 != point3 && point1 != point4
 		&& point1 != point5 && point1 != point6 && point1 != point7
 		&& point1 != point8 && point2 != point3 && point2 != point4
@@ -7635,7 +7646,15 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 		dbim = ruleD74eqangle(dbim, point1, point2, point3, point4,
 				      point5, point6, point7, point8);
 	    }
-	    	    if (point1 == point3 && point2 == point6 && point4 == point8
+	    if (point3 == point7 && point4 == point8
+		&& point1 != point2 && point1 != point3 && point1 != point4
+		&& point1 != point5 && point1 != point6 && point2 != point3
+		&& point2 != point4 && point2 != point5 && point2 != point6
+		&& point3 != point4 && point3 != point5 && point3 != point6
+		&& point4 != point5 && point4 != point6 && point5 != point6)
+		dbim = ruleD39(dbim, point1, point2, point3, point4,
+			       point5, point6, point7, point8);
+	    if (point1 == point3 && point2 == point6 && point4 == point8
 		&& point5 == point7
 		&& point1 != point2 && point1 != point4 && point1 != point5
 		&& point2 != point4 && point2 != point5 && point4 != point5)
@@ -7681,7 +7700,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 		&& point2 != point5 && point2 != point6 && point2 != point7
 		&& point3 != point5 && point3 != point6 && point3 != point7
 		&& point5 != point6 && point5 != point7 && point6 != point7)
-		dbim = ruleD58a(dbim, point1, point2, point3, point4,
+		dbim = ruleD58b(dbim, point1, point2, point3, point4,
 				point5, point6, point7, point8);
 	    if (point1 == point7 && point2 == point8 && point3 == point5
 		&& point4 == point6
@@ -7705,27 +7724,41 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 			   point5, point6, point7, point8);
 	    dbim = ruleD30(dbim, point1, point2, point3, point4,
 			   point5, point6, point7, point8);
-
-	    dbim = ruleD75eqratio(dbim, point1, point2, point3, point4,
-				  point5, point6, point7, point8);
+	    if (point1 != point2 && point1 != point3 && point1 != point4
+		&& point1 != point5 && point1 != point6 && point1 != point7
+		&& point1 != point8 && point2 != point3 && point2 != point4
+		&& point2 != point5 && point2 != point6 && point2 != point7
+		&& point2 != point8 && point3 != point4 && point3 != point5
+		&& point3 != point6 && point3 != point7 && point3 != point8
+		&& point4 != point5 && point4 != point6 && point4 != point7
+		&& point4 != point8 && point5 != point6 && point5 != point7
+		&& point5 != point8 && point6 != point7 && point6 != point8
+		&& point7 != point8)
+		dbim = ruleD75eqratio(dbim, point1, point2, point3, point4,
+				      point5, point6, point7, point8);
 	    break;
 	case 11:
 	    // Similar Triangles
-	    dbim = ruleD31(dbim, point1, point2, point3,
-			   point4, point5, point6);
-	    dbim = ruleD32(dbim, point1, point2, point3,
-			   point4, point5, point6);
-	    dbim = ruleD33(dbim, point1, point2, point3,
-			   point4, point5, point6);
-	    dbim = ruleD34(dbim, point1, point2, point3,
-			   point4, point5, point6);
-
-	    dbim = ruleD59(dbim, point1, point2, point3,
-			   point4, point5, point6);
-	    dbim = ruleD60(dbim, point1, point2, point3,
-			   point4, point5, point6);
-	    dbim = ruleD61simtri(dbim, point1, point2, point3,
-				 point4, point5, point6);
+	    if (point1 != point2 && point1 != point3 && point1 != point4
+		&& point1 != point5 && point1 != point6 && point2 != point3
+		&& point2 != point4 && point2 != point5 && point2 != point6
+		&& point3 != point4 && point3 != point5 && point3 != point6
+		&& point4 != point5 && point4 != point6 && point5 != point6) {
+		dbim = ruleD31(dbim, point1, point2, point3,
+			       point4, point5, point6);
+		dbim = ruleD32(dbim, point1, point2, point3,
+			       point4, point5, point6);
+		dbim = ruleD33(dbim, point1, point2, point3,
+			       point4, point5, point6);
+		dbim = ruleD34(dbim, point1, point2, point3,
+			       point4, point5, point6);
+		dbim = ruleD59(dbim, point1, point2, point3,
+			       point4, point5, point6);
+		dbim = ruleD60(dbim, point1, point2, point3,
+			       point4, point5, point6);
+		dbim = ruleD61simtri(dbim, point1, point2, point3,
+				     point4, point5, point6);
+	    }
 	    break;
 	default:
             // ERROR : Necessary?  I don't _thin_ so...
