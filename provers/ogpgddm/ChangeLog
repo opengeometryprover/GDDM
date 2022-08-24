@@ -16,6 +16,12 @@
 
 	* Version 0.5.1.
 
+2022-08-24  Nuno Miguel dos Santos Baeta  <nmsbaeta@gmail.com>
+
+	* src/prover.cpp: Rules and its usage bugfix.
+
+	* Version 0.5.2 released.
+
 2022-08-17  Nuno Miguel dos Santos Baeta  <nmsbaeta@gmail.com>
 
 	* Version 0.5 released.
