@@ -1076,8 +1076,25 @@ DBinMemory Prover::ruleD18(DBinMemory dbim, std::string point1,
 	+ point8 + "', '" + lstInsRwId + "')";
     dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
 				 insertionPred.size(), &(dbim.stmt), NULL);
-    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
+    // DEBUG START
+    // std::cout << "R18 : ";
+    // std::cout << point1 << ", " << point2 << ", ";
+    // std::cout << point3 << ", " << point4 << ", ";
+    // std::cout << point5 << ", " << point6 << ", ";
+    // std::cout << point7 << ", " << point8;
+    // DEBUG STOP
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) // {
 	correctTransaction = false;
+	// DEBUG START
+    // 	std::cout << " : FALHA" << std::endl;
+    // } else {
+    // 	std::cout << " > " << point2 << ", " << point1 + ", ";
+    // 	std::cout << point3 << ", " << point4 + ", ";
+    // 	std::cout << point5 << ", " << point6 + ", ";
+    // 	std::cout << point7 << ", " << point8;
+    // 	std::cout << " : SUCESSO" << std::endl;
+    // }
+    // DEBUG STOP
     if (correctTransaction)
 	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
     else
@@ -1117,8 +1134,25 @@ DBinMemory Prover::ruleD19(DBinMemory dbim, std::string point1,
 	+ point6 + "', '" + lstInsRwId + "')";
     dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
 				 insertionPred.size(), &(dbim.stmt), NULL);
-    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
+    // DEBUG START
+    // std::cout << "R19 : ";
+    // std::cout << point1 << ", " << point2 << ", ";
+    // std::cout << point3 << ", " << point4 << ", ";
+    // std::cout << point5 << ", " << point6 << ", ";
+    // std::cout << point7 << ", " << point8;
+    // DEBUG STOP
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) // {
 	correctTransaction = false;
+	// DEBUG START
+    // 	std::cout << " : FALHA" << std::endl;
+    // } else {
+    // 	std::cout << " > " << point3 << ", " << point4 + ", ";
+    // 	std::cout << point1 << ", '" << point2 + ", ";
+    // 	std::cout << point7 << ", " << point8 + ", ";
+    // 	std::cout << point5 << ", " << point6;
+    // 	std::cout << " : SUCESSO" << std::endl;
+    // }
+    // DEBUG STOP
     if (correctTransaction)
 	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
     else
@@ -1158,8 +1192,25 @@ DBinMemory Prover::ruleD20(DBinMemory dbim, std::string point1,
 	+ point4 + "', '" + lstInsRwId + "')";
     dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
 				 insertionPred.size(), &(dbim.stmt), NULL);
-    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
+    // DEBUG START
+    // std::cout << "R20 : ";
+    // std::cout << point1 << ", " << point2 << ", ";
+    // std::cout << point3 << ", " << point4 << ", ";
+    // std::cout << point5 << ", " << point6 << ", ";
+    // std::cout << point7 << ", " << point8;
+    // DEBUG STOP
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) // {
 	correctTransaction = false;
+	// DEBUG START
+    // 	std::cout << " : FALHA" << std::endl;
+    // } else {
+    // 	std::cout << " > " << point5 << ", " << point6 + ", ";
+    // 	std::cout << point7 << ", " << point8 + ", ";
+    // 	std::cout << point1 << ", " << point2 + ", ";
+    // 	std::cout << point3 << ", " << point4;
+    // 	std::cout << " : SUCESSO" << std::endl;
+    // }
+    // DEBUG STOP
     if (correctTransaction)
 	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
     else
@@ -7627,8 +7678,8 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 			   point5, point6, point7, point8);
 	    dbim = ruleD20(dbim, point1, point2, point3, point4,
 			   point5, point6, point7, point8);
-	    dbim = ruleD21(dbim, point1, point2, point3, point4,
-			   point5, point6, point7, point8);
+	    // dbim = ruleD21(dbim, point1, point2, point3, point4,
+	    // 		   point5, point6, point7, point8);
 	    dbim = ruleD22(dbim, point1, point2, point3, point4,
 			       point5, point6, point7, point8);
 	    if (point1 != point2 && point1 != point3 && point1 != point4
