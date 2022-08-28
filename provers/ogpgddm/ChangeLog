@@ -1,3 +1,18 @@
+2022-08-28  Nuno Miguel dos Santos Baeta  <nmsbaeta@gmail.com>
+
+	Fixed point written to file.
+
+	* src/ogpgddm.cpp: Changed showFixedPoint() function call.
+	* src/prover.cpp (showFixedPoint): Accepts a new argument, the
+	name of the conjecture file.  Based on this file name, creates the
+	fixed poin file name with the extension 'fp', always written in
+	the directory where the prover is being executed.
+	* src/prover.cpp (showFixedPoint): Change to prototype function.
+	* src/strs.dpp (showStrs): Changed the ways the strings are
+	displayed.
+
+	* Version 0.5.3 released.
+
 2022-08-24  Nuno Miguel dos Santos Baeta  <nmsbaeta@gmail.com>
 
 	* src/prover.cpp: Rules and its usage bugfix.
@@ -9,10 +24,10 @@
 	Creation of list of nondegenerate (ndg) conditions.
 
 	* src/strs.cpp: Previously known as src/points.cpp.  Changes made
-	to acoommodate not just lists of points, that are identified as
+	to accommodate not just lists of points, that are identified as
 	strings, but lists of strings.
 	* src/strs.hpp: Previously known as src/points.hpp.  Changes made
-	to acoommodate not just lists of points, that are identified as
+	to accommodate not just lists of points, that are identified as
 	strings, but lists of strings.
 	* src/ogpgddm.cpp (ndg): List of ndg conditions.
 	* src/prover.cpp (ruleD42, ruleD47, rule58a, rule58b, ruleD71)

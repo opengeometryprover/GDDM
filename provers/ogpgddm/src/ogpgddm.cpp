@@ -26,7 +26,7 @@
 #include "prover.hpp"
 #include "strs.hpp"
 
-#define VERSION "0.5.2"
+#define VERSION "0.5.3"
 
 struct strsList *points = NULL;
 struct strsList *ndg = NULL;
