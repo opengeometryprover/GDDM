@@ -46,6 +46,7 @@ int main(int argc, char *argv[]) {
     double time_spent;
     bool proved;
     clock_t start_t, end_t;
+    std::string argone;
     DBinMemory dbim;
     Driver drv;
     FOFtoDB fdb;
@@ -110,9 +111,9 @@ int main(int argc, char *argv[]) {
     std::cout << "Time spent (s): ";
     std::cout << ((double)(end_t - start_t))/CLOCKS_PER_SEC << std::endl;
     if (proved) {
-	ogpgddm.showFixedPoint(dbim);
+	argone.assign(argv[1]);
+	ogpgddm.showFixedPoint(dbim, argone);
     }
-
     // Close the database
     dbim.closeDB();
 

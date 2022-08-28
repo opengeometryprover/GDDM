@@ -28,7 +28,7 @@ private:
   
 public:
     // Show Fixed Point - displays 'Facts' table after findind a fixed-point.
-    void showFixedPoint(DBinMemory);
+    void showFixedPoint(DBinMemory, std::string);
   
     /*
      * Find the fixed point of the antecedents

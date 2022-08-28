@@ -13,6 +13,7 @@
 
 
 #include <algorithm>
+#include <fstream>
 #include <iostream>
 #include <map>
 #include <vector>
@@ -8063,15 +8064,24 @@ bool Prover::proved(DBinMemory dbim) {
 /*
  * Show fixed point - displays 'Facts' table after findind the fixed point.
  */
-void Prover::showFixedPoint(DBinMemory dbim) {
-    std::string sqlFacts, fixedPointFact;
-    std::string idFact, typeGeoCmd;
+void Prover::showFixedPoint(DBinMemory dbim, std::string outFile) {
+    std::string sqlFacts, fixedPointFact, idFact, typeGeoCmd;
     std::string point1, point2, point3, point4, point5, point6, point7, point8;
+    std::size_t pos;
+    std::ofstream fout;
     sqlite3_stmt *stmt1; 
 
-    std::cout << std::endl;
-    std::cout << "Fixed Point" << std::endl;
-    std::cout << std::endl;
+    pos = outFile.find_last_of("/");
+    if (pos != std::string::npos)
+	outFile = outFile.substr(pos + 1);
+    pos = outFile.find_last_of(".");
+    if (pos != std::string::npos)
+	outFile.replace(outFile.begin() + pos + 1, outFile.end(), "fp");
+    else
+	outFile.append(".fp");
+    fout.open(outFile);
+    fout << "Fixed Point" << std::endl;
+    fout << std::endl;
     sqlFacts = "SELECT id, typeGeoCmd FROM Facts";
     dbim.rc = sqlite3_prepare_v2(dbim.db, sqlFacts.c_str(), sqlFacts.size(),
 				 &(dbim.stmt), NULL);
@@ -8092,10 +8102,10 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    point1 = (char*) sqlite3_column_text(dbim.stmt1, 0);
 	    point2 = (char*) sqlite3_column_text(dbim.stmt1, 1);
 	    point3 = (char*) sqlite3_column_text(dbim.stmt1, 2);
-	    std::cout << "  coll(";
-	    std::cout << point1 << ", ";
-	    std::cout << point2 << ", ";
-	    std::cout << point3 << ")" << std::endl;
+	    fout << "    coll(";
+	    fout << point1 << ", ";
+	    fout << point2 << ", ";
+	    fout << point3 << ")" << std::endl;
 	    break;
 	case 2:
             // Parallel
@@ -8110,11 +8120,11 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    point2 = (char*) sqlite3_column_text(dbim.stmt1, 1);
 	    point3 = (char*) sqlite3_column_text(dbim.stmt1, 2);
 	    point4 = (char*) sqlite3_column_text(dbim.stmt1, 3);
-	    std::cout << "  para(";
-	    std::cout << point1 << ", ";
-	    std::cout << point2 << ", ";
-	    std::cout << point3 << ", ";
-	    std::cout << point4 << ")" << std::endl;
+	    fout << "    para(";
+	    fout << point1 << ", ";
+	    fout << point2 << ", ";
+	    fout << point3 << ", ";
+	    fout << point4 << ")" << std::endl;
 	    break;
 	case 3:
             // Perpendicular
@@ -8129,11 +8139,11 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    point2 = (char*) sqlite3_column_text(dbim.stmt1, 1);
 	    point3 = (char*) sqlite3_column_text(dbim.stmt1, 2);
 	    point4 = (char*) sqlite3_column_text(dbim.stmt1, 3);
-	    std::cout << "  perp(";
-	    std::cout << point1 << ", ";
-	    std::cout << point2 << ", ";
-	    std::cout << point3 << ", ";
-	    std::cout << point4 << ")" << std::endl;
+	    fout << "    perp(";
+	    fout << point1 << ", ";
+	    fout << point2 << ", ";
+	    fout << point3 << ", ";
+	    fout << point4 << ")" << std::endl;
 	    break;
 	case 4:
             // Midpoint
@@ -8147,10 +8157,10 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    point1 = (char*) sqlite3_column_text(dbim.stmt1, 0);
 	    point2 = (char*) sqlite3_column_text(dbim.stmt1, 1);
 	    point3 = (char*) sqlite3_column_text(dbim.stmt1, 2);
-	    std::cout << "  midp(";
-	    std::cout << point1 << ", ";
-	    std::cout << point2 << ", ";
-	    std::cout << point3 << ")" << std::endl;
+	    fout << "    midp(";
+	    fout << point1 << ", ";
+	    fout << point2 << ", ";
+	    fout << point3 << ")" << std::endl;
 	    break;
 	case 5:
 	    // Circle
@@ -8165,11 +8175,11 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    point2 = (char*) sqlite3_column_text(dbim.stmt1, 1);
 	    point3 = (char*) sqlite3_column_text(dbim.stmt1, 2);
 	    point4 = (char*) sqlite3_column_text(dbim.stmt1, 3);
-	    std::cout << "  circle(";
-	    std::cout << point1 << ", ";
-	    std::cout << point2 << ", ";
-	    std::cout << point3 << ", ";
-	    std::cout << point4 << ")" << std::endl;
+	    fout << "    circle(";
+	    fout << point1 << ", ";
+	    fout << point2 << ", ";
+	    fout << point3 << ", ";
+	    fout << point4 << ")" << std::endl;
 	    break;
 	case 6:
 	    // Congruent Segments
@@ -8184,11 +8194,11 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    point2 = (char*) sqlite3_column_text(dbim.stmt1, 1);
 	    point3 = (char*) sqlite3_column_text(dbim.stmt1, 2);
 	    point4 = (char*) sqlite3_column_text(dbim.stmt1, 3);
-	    std::cout << "  cong(";
-	    std::cout << point1 << ", ";
-	    std::cout << point2 << ", ";
-	    std::cout << point3 << ", ";
-	    std::cout << point4 << ")" << std::endl;
+	    fout << "    cong(";
+	    fout << point1 << ", ";
+	    fout << point2 << ", ";
+	    fout << point3 << ", ";
+	    fout << point4 << ")" << std::endl;
 	    break;
 	case 7:
 	    // Congruent Triangles
@@ -8206,13 +8216,13 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    point4 = (char*) sqlite3_column_text(dbim.stmt1, 3);
 	    point5 = (char*) sqlite3_column_text(dbim.stmt1, 4);
 	    point6 = (char*) sqlite3_column_text(dbim.stmt1, 5);
-	    std::cout << "  contri(";
-	    std::cout << point1 << ", ";
-	    std::cout << point2 << ", ";
-	    std::cout << point3 << ", ";
-	    std::cout << point4 << ", ";
-	    std::cout << point5 << ", ";
-	    std::cout << point6 << ")" << std::endl;
+	    fout << "    contri(";
+	    fout << point1 << ", ";
+	    fout << point2 << ", ";
+	    fout << point3 << ", ";
+	    fout << point4 << ", ";
+	    fout << point5 << ", ";
+	    fout << point6 << ")" << std::endl;
 	    break;
 	case 8:
 	    // Cyclic
@@ -8227,11 +8237,11 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    point2 = (char*) sqlite3_column_text(dbim.stmt1, 1);
 	    point3 = (char*) sqlite3_column_text(dbim.stmt1, 2);
 	    point4 = (char*) sqlite3_column_text(dbim.stmt1, 3);
-	    std::cout << "  cyclic(";
-	    std::cout << point1 << ", ";
-	    std::cout << point2 << ", ";
-	    std::cout << point3 << ", ";
-	    std::cout << point4 << ")" << std::endl;
+	    fout << "    cyclic(";
+	    fout << point1 << ", ";
+	    fout << point2 << ", ";
+	    fout << point3 << ", ";
+	    fout << point4 << ")" << std::endl;
 	    break;
 	case 9:
 	    // Equal Angles
@@ -8251,15 +8261,15 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    point6 = (char*) sqlite3_column_text(dbim.stmt1, 5);
 	    point7 = (char*) sqlite3_column_text(dbim.stmt1, 6);
 	    point8 = (char*) sqlite3_column_text(dbim.stmt1, 7);
-	    std::cout << "  eqangle(";
-	    std::cout << point1 << ", ";
-	    std::cout << point2 << ", ";
-	    std::cout << point3 << ", ";
-	    std::cout << point4 << ", ";
-	    std::cout << point5 << ", ";
-	    std::cout << point6 << ", ";
-	    std::cout << point7 << ", ";
-	    std::cout << point8 << ")" << std::endl;
+	    fout << "    eqangle(";
+	    fout << point1 << ", ";
+	    fout << point2 << ", ";
+	    fout << point3 << ", ";
+	    fout << point4 << ", ";
+	    fout << point5 << ", ";
+	    fout << point6 << ", ";
+	    fout << point7 << ", ";
+	    fout << point8 << ")" << std::endl;
 	    break;
 	case 10:
 	    // Equal Ratios
@@ -8279,15 +8289,15 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    point6 = (char*) sqlite3_column_text(dbim.stmt1, 5);
 	    point7 = (char*) sqlite3_column_text(dbim.stmt1, 6);
 	    point8 = (char*) sqlite3_column_text(dbim.stmt1, 7);
-	    std::cout << "  eqratio(";
-	    std::cout << point1 << ", ";
-	    std::cout << point2 << ", ";
-	    std::cout << point3 << ", ";
-	    std::cout << point4 << ", ";
-	    std::cout << point5 << ", ";
-	    std::cout << point6 << ", ";
-	    std::cout << point7 << ", ";
-	    std::cout << point8 << ")" << std::endl;
+	    fout << "    eqratio(";
+	    fout << point1 << ", ";
+	    fout << point2 << ", ";
+	    fout << point3 << ", ";
+	    fout << point4 << ", ";
+	    fout << point5 << ", ";
+	    fout << point6 << ", ";
+	    fout << point7 << ", ";
+	    fout << point8 << ")" << std::endl;
 	    break;
 	case 11:
 	    // Similar Triangles
@@ -8305,13 +8315,13 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    point4 = (char*) sqlite3_column_text(dbim.stmt1, 3);
 	    point5 = (char*) sqlite3_column_text(dbim.stmt1, 4);
 	    point6 = (char*) sqlite3_column_text(dbim.stmt1, 5);
-	    std::cout << "  simtri(";
-	    std::cout << point1 << ", ";
-	    std::cout << point2 << ", ";
-	    std::cout << point3 << ", ";
-	    std::cout << point4 << ", ";
-	    std::cout << point5 << ", ";
-	    std::cout << point6 << ")" << std::endl;
+	    fout << "    simtri(";
+	    fout << point1 << ", ";
+	    fout << point2 << ", ";
+	    fout << point3 << ", ";
+	    fout << point4 << ", ";
+	    fout << point5 << ", ";
+	    fout << point6 << ")" << std::endl;
 	    break;
 	default:
             // ERROR : Necessary? I don't _think_ so...
@@ -8319,12 +8329,14 @@ void Prover::showFixedPoint(DBinMemory dbim) {
 	    exit(1);
 	}
     }
-    std::cout << std::endl;
     if (ndg != NULL) {
-	std::cout << "Nondegenerate Conditions" << std::endl;
-	std::cout << std::endl;
+	fout << std::endl;
+	fout << "Nondegenerate Conditions" << std::endl;
+	fout << std::endl;
 	showStrs(ndg);
-	std::cout << std::endl;
+	fout << std::endl;
 	
     }
+    fout.close();
+    std::cout << "Fixed point in file '" << outFile << "'." << std::endl;;
 }

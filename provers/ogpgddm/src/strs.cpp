@@ -47,7 +47,7 @@ void showStrs(struct strsList *strs) {
 
     current = strs;
     while (current != NULL) {
-	std::cout << "  " << current->str << std::endl;
+	std::cout << "    " << current->str << std::endl;
 	current = current->next;
     }
 }
