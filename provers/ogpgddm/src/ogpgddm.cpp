@@ -110,10 +110,8 @@ int main(int argc, char *argv[]) {
     std::cout << std::endl;
     std::cout << "Time spent (s): ";
     std::cout << ((double)(end_t - start_t))/CLOCKS_PER_SEC << std::endl;
-    if (proved) {
-	argone.assign(argv[1]);
-	ogpgddm.showFixedPoint(dbim, argone);
-    }
+    argone.assign(argv[1]);
+    ogpgddm.saveFixedPoint(dbim, argone);
     // Close the database
     dbim.closeDB();
 

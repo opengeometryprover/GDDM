@@ -27,8 +27,8 @@ private:
     void deriveNewColl(std::string,std::string,std::string);
   
 public:
-    // Show Fixed Point - displays 'Facts' table after findind a fixed-point.
-    void showFixedPoint(DBinMemory, std::string);
+    // Save fixed point, the 'Facts' table to a file.
+    void saveFixedPoint(DBinMemory, std::string);
   
     /*
      * Find the fixed point of the antecedents

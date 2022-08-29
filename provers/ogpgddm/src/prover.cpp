@@ -8064,7 +8064,7 @@ bool Prover::proved(DBinMemory dbim) {
 /*
  * Show fixed point - displays 'Facts' table after findind the fixed point.
  */
-void Prover::showFixedPoint(DBinMemory dbim, std::string outFile) {
+void Prover::saveFixedPoint(DBinMemory dbim, std::string outFile) {
     std::string sqlFacts, fixedPointFact, idFact, typeGeoCmd;
     std::string point1, point2, point3, point4, point5, point6, point7, point8;
     std::size_t pos;
@@ -8338,5 +8338,5 @@ void Prover::showFixedPoint(DBinMemory dbim, std::string outFile) {
 	
     }
     fout.close();
-    std::cout << "Fixed point in file '" << outFile << "'." << std::endl;;
+    std::cout << "Fixed point saved to file '" << outFile << "'." << std::endl;
 }
