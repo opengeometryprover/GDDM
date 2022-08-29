@@ -1,3 +1,14 @@
+2022-08-29  Nuno Miguel dos Santos Baeta  <nmsbaeta@gmail.com>
+
+	* src/ogpgddm.cpp: Saves fixed point to file whether the
+	conjecture is proved or not.
+	* src/prover.cpp (saveFixedPoint): Previously known as
+	showFixedPoint.
+	* src/prover.hpp (saveFixedPoint): Previously known as
+	showFixedPoint.
+
+	* Version 0.5.4 released.
+
 2022-08-28  Nuno Miguel dos Santos Baeta  <nmsbaeta@gmail.com>
 
 	Fixed point written to file.
