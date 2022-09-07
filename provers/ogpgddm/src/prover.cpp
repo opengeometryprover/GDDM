@@ -2830,7 +2830,9 @@ DBinMemory Prover::ruleD45coll(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Midpoint "
 	"ON (newFact = id) "
-	"WHERE point2 = '" + point2 + "'";
+	"WHERE point2 = '" + point2
+	+ "' AND NOT (point1 = '" + point1 +"' AND point3 = '" + point3
+	+ "') AND NOT (point1 = '" + point3 +"' AND point3 = '" + point1 + "')";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -2839,7 +2841,9 @@ DBinMemory Prover::ruleD45coll(DBinMemory dbim, std::string point1,
 	"FROM Facts "
 	"INNER JOIN Midpoint "
 	"ON (oldFact = id) "
-	"WHERE point2 = '" + point2 + "'";
+	"WHERE point2 = '" + point2
+	+ "' AND NOT (point1 = '" + point1 +"' AND point3 = '" + point3
+	+ "') AND NOT (point1 = '" + point3 +"' AND point3 = '" + point1 + "')";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -2933,7 +2937,9 @@ DBinMemory Prover::ruleD45midp(DBinMemory dbim, std::string point1,
 	"FROM NewFact "
 	"INNER JOIN Collinear "
 	"ON (newFact = id) "
-	"WHERE point2 = '" + point2 + "'";
+	"WHERE point2 = '" + point2
+	+ "' AND NOT (point1 = '" + point1 +"' AND point3 = '" + point3
+	+ "') AND NOT (point1 = '" + point3 +"' AND point3 = '" + point1 + "')";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -2942,7 +2948,9 @@ DBinMemory Prover::ruleD45midp(DBinMemory dbim, std::string point1,
 	"FROM Facts "
 	"INNER JOIN Collinear "
 	"ON (oldFact = id) "
-	"WHERE point2 = '" + point2 + "'";
+	"WHERE point2 = '" + point2
+	+ "' AND NOT (point1 = '" + point1 +"' AND point3 = '" + point3
+	+ "') AND NOT (point1 = '" + point3 +"' AND point3 = '" + point1 + "')";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
