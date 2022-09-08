@@ -5523,8 +5523,8 @@ DBinMemory Prover::ruleD64midp(DBinMemory dbim, std::string point1,
 	"INNER JOIN Parallel "
 	"ON (newFact = id) "
 	"WHERE point1 = '" + point2 + "' AND point3 = '" + point3
-	+ "' AND point2 <> '" + point1 + "' AND point4 <> '" + point1
-	+ "'AND point2 <> point4";
+	+ "' AND NOT (point2 = '" + point1 + "' OR point4 = '" + point1
+	+ "') AND point2 <> point4";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				 querySecondGeoCmdA.size(), &(dbim.stmt1),
 				 NULL);
@@ -5534,8 +5534,8 @@ DBinMemory Prover::ruleD64midp(DBinMemory dbim, std::string point1,
 	"INNER JOIN Parallel "
 	"ON (oldFact = id) "
 	"WHERE point1 = '" + point2 + "' AND point3 = '" + point3
-	+ "' AND point2 <> '" + point1 + "' AND point4 <> '" + point1
-	+ "' AND point2 <> point4";
+	+ "' AND NOT (point2 = '" + point1 + "' OR point4 = '" + point1
+	+ "') AND point2 <> point4";
     dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				 querySecondGeoCmdB.size(), &(dbim.stmt2),
 				 NULL);
@@ -5655,7 +5655,8 @@ DBinMemory Prover::ruleD64para(DBinMemory dbim, std::string point1,
 	    "FROM NewFact "
 	    "INNER JOIN Midpoint "
 	    "ON (newFact = id) "
-	    "WHERE point2 = '" + point1 + "' AND point3 = '" + point3 + "'";
+	    "WHERE point2 = '" + point1 + "' AND point3 = '" + point3
+	    + "' AND point1 NOT IN ('" + point2 + "', '" + point4 + "')";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
 				     querySecondGeoCmdA.size(), &(dbim.stmt1),
 				     NULL);
@@ -5664,7 +5665,8 @@ DBinMemory Prover::ruleD64para(DBinMemory dbim, std::string point1,
 	    "FROM Facts "
 	    "INNER JOIN Midpoint "
 	    "ON (oldFact = id) "
-	    "WHERE point2 = '" + point1 + "' AND point3 = '" + point3 + "'";
+	    "WHERE point2 = '" + point1 + "' AND point3 = '" + point3
+	    + "' AND point1 NOT IN ('" + point2 + "', '" + point4 + "')";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
 				     querySecondGeoCmdB.size(), &(dbim.stmt2),
 				     NULL);
@@ -5765,7 +5767,7 @@ DBinMemory Prover::ruleD65coll(DBinMemory dbim, std::string point1,
 	    "FROM NewFact "
 	    "INNER JOIN Parallel "
 	    "ON (newFact = id) "
-	    "WHERE point1 = '" + point1 + "' AND point2 = '" + newPoint1
+	    "WHERE point1 = '" + point2 + "' AND point2 = '" + newPoint1
 	    + "' AND point3 = '" + point3 + "' AND point4 = '" + newPoint2
 	    + "'";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
@@ -5774,9 +5776,9 @@ DBinMemory Prover::ruleD65coll(DBinMemory dbim, std::string point1,
 	sqlite3_step(dbim.stmt1);
 	querySecondGeoCmdB = "SELECT * "
 	    "FROM Facts "
-	    "INNER JOIN Collinear "
+	    "INNER JOIN Parallel "
 	    "ON (oldFact = id) "
-	    "WHERE point1 = '" + point1 + "' AND point2 = '" + newPoint1
+	    "WHERE point1 = '" + point2 + "' AND point2 = '" + newPoint1
 	    + "' AND point3 = '" + point3 + "' AND point4 = '" + newPoint2
 	    + "'";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
