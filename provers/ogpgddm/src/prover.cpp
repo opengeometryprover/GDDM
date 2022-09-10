@@ -7700,26 +7700,20 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    break;
 	case 11:
 	    // Similar Triangles
-	    if (point1 != point2 && point1 != point3 && point1 != point4
-		&& point1 != point5 && point1 != point6 && point2 != point3
-		&& point2 != point4 && point2 != point5 && point2 != point6
-		&& point3 != point4 && point3 != point5 && point3 != point6
-		&& point4 != point5 && point4 != point6 && point5 != point6) {
-		dbim = ruleD31(dbim, point1, point2, point3,
-			       point4, point5, point6);
-		dbim = ruleD32(dbim, point1, point2, point3,
-			       point4, point5, point6);
-		dbim = ruleD33(dbim, point1, point2, point3,
-			       point4, point5, point6);
-		dbim = ruleD34(dbim, point1, point2, point3,
-			       point4, point5, point6);
-		dbim = ruleD59(dbim, point1, point2, point3,
-			       point4, point5, point6);
-		dbim = ruleD60(dbim, point1, point2, point3,
-			       point4, point5, point6);
-		dbim = ruleD61simtri(dbim, point1, point2, point3,
-				     point4, point5, point6);
-	    }
+	    dbim = ruleD31(dbim, point1, point2, point3,
+			   point4, point5, point6);
+	    dbim = ruleD32(dbim, point1, point2, point3,
+			   point4, point5, point6);
+	    dbim = ruleD33(dbim, point1, point2, point3,
+			   point4, point5, point6);
+	    dbim = ruleD34(dbim, point1, point2, point3,
+			   point4, point5, point6);
+	    dbim = ruleD59(dbim, point1, point2, point3,
+			   point4, point5, point6);
+	    dbim = ruleD60(dbim, point1, point2, point3,
+			   point4, point5, point6);
+	    dbim = ruleD61simtri(dbim, point1, point2, point3,
+				 point4, point5, point6);
 	    break;
 	default:
             // ERROR : Necessary?  I don't _thin_ so...
