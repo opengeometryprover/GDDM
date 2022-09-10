@@ -7517,18 +7517,16 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	case 4:
             // Midpoint
 	    dbim = ruleD11(dbim, point1, point2, point3);
-	    if (point1 != point2 && point1 != point3 && point2 != point3) {
-		dbim = ruleD44(dbim, point1, point2, point3);
-		dbim = ruleD45midp(dbim, point1, point2, point3);
-		dbim = ruleD50midp(dbim, point1, point2, point3);
-		dbim = ruleD52midp(dbim, point1, point2, point3);
-		dbim = ruleD55midp(dbim, point1, point2, point3);
-		dbim = ruleD63(dbim, point1, point2, point3);
-		dbim = ruleD64midp(dbim, point1, point2, point3);
-		dbim = ruleD68(dbim, point1, point2, point3);
-		dbim = ruleD69(dbim, point1, point2, point3);
-		dbim = ruleD70(dbim, point1, point2, point3);
-	    }
+	    dbim = ruleD44(dbim, point1, point2, point3);
+	    dbim = ruleD45midp(dbim, point1, point2, point3);
+	    dbim = ruleD50midp(dbim, point1, point2, point3);
+	    dbim = ruleD52midp(dbim, point1, point2, point3);
+	    dbim = ruleD55midp(dbim, point1, point2, point3);
+	    dbim = ruleD63(dbim, point1, point2, point3);
+	    dbim = ruleD64midp(dbim, point1, point2, point3);
+	    dbim = ruleD68(dbim, point1, point2, point3);
+	    dbim = ruleD69(dbim, point1, point2, point3);
+	    dbim = ruleD70(dbim, point1, point2, point3);
 	    break;
 	case 5:
 	    // Circle
