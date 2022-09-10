@@ -7566,13 +7566,8 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 			   point4, point5, point6);
 	    dbim = ruleD38(dbim, point1, point2, point3,
 			   point4, point5, point6);
-	    if (point1 != point2 && point1 != point3 && point1 != point4
-		&& point1 != point5 && point1 != point6 && point2 != point3
-		&& point2 != point4 && point2 != point5 && point2 != point6
-		&& point3 != point4 && point3 != point5 && point3 != point6
-		&& point4 != point5 && point4 != point6 && point5 != point6)
-		dbim = ruleD62(dbim, point1, point2, point3,
-			       point4, point5, point6);
+	    dbim = ruleD62(dbim, point1, point2, point3,
+			   point4, point5, point6);
 	    break;
 	case 8:
 	    // Cyclic
