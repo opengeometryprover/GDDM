@@ -7507,16 +7507,12 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD08(dbim, point1, point2, point3, point4);
 	    dbim = ruleD09(dbim, point1, point2, point3, point4);
 	    dbim = ruleD10perp(dbim, point1, point2, point3, point4);
-	    if (point1 != point2 && point1 != point3 && point1 != point4
-		&& point2 != point3 && point2 != point4 && point3 != point4) {
-		dbim = ruleD55perp(dbim, point1, point2, point3, point4);
-		dbim = ruleD74perp(dbim, point1, point2, point3, point4);
-	    }
-	    if (point2 == point3
-		&& point1 != point2 && point1 != point4 && point2 != point4) {
+	    if (point2 == point3)
 		dbim = ruleD48perp(dbim, point1, point2, point3, point4);
+	    if (point2 == point3)
 		dbim = ruleD52perp(dbim, point1, point2, point3, point4);
-	    }
+	    dbim = ruleD55perp(dbim, point1, point2, point3, point4);
+	    dbim = ruleD74perp(dbim, point1, point2, point3, point4);
 	    break;
 	case 4:
             // Midpoint
