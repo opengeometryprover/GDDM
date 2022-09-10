@@ -7530,14 +7530,11 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    break;
 	case 5:
 	    // Circle
-	    if (point1 != point2 && point1 != point3 && point1 != point4
-		&& point2 != point3 && point2 != point4 && point3 != point4) {
-		dbim = ruleD48circle(dbim, point1, point2, point3, point4);
-		dbim = ruleD49circle(dbim, point1, point2, point3, point4);
-		dbim = ruleD50circle(dbim, point1, point2, point3, point4);
-		dbim = ruleD51circle(dbim, point1, point2, point3, point4);
-		dbim = ruleD53circle(dbim, point1, point2, point3, point4);
-	    }
+	    dbim = ruleD48circle(dbim, point1, point2, point3, point4);
+	    dbim = ruleD49circle(dbim, point1, point2, point3, point4);
+	    dbim = ruleD50circle(dbim, point1, point2, point3, point4);
+	    dbim = ruleD51circle(dbim, point1, point2, point3, point4);
+	    dbim = ruleD53circle(dbim, point1, point2, point3, point4);
 	    break;
 	case 6:
 	    // Congruent Segments
