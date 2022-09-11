@@ -6999,11 +6999,11 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 NULL);
 	    sqlite3_step(dbim.stmt);
 	    // DEBUG START
-	    // std::cout << "  Collinear : " << nrColl << " / ";
-	    // std::cout << "coll(";
-	    // std::cout << point1 << ", ";
-	    // std::cout << point2 << ", ";
-	    // std::cout << point3 << ")" << std::endl;
+	    std::cout << "  Collinear : " << nrColl << " / ";
+	    std::cout << "coll(";
+	    std::cout << point1 << ", ";
+	    std::cout << point2 << ", ";
+	    std::cout << point3 << ")" << std::endl;
 	    // DEBUG STOP
 	    break;
 	case 2:
@@ -7041,12 +7041,12 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 NULL);
 	    sqlite3_step(dbim.stmt);
 	    // DEBUG START
-	    // std::cout << "  Parallel : " << nrPara << " / ";
-	    // std::cout << "para(";
-	    // std::cout << point1 << ", ";
-	    // std::cout << point2 << ", ";
-	    // std::cout << point3 << ", ";
-	    // std::cout << point4 << ")" << std::endl;
+	    std::cout << "  Parallel : " << nrPara << " / ";
+	    std::cout << "para(";
+	    std::cout << point1 << ", ";
+	    std::cout << point2 << ", ";
+	    std::cout << point3 << ", ";
+	    std::cout << point4 << ")" << std::endl;
 	    // DEBUG STOP
 	    break;
 	case 3:
@@ -7084,12 +7084,12 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 NULL);
 	    sqlite3_step(dbim.stmt);
 	    // DEBUG START
-	    // std::cout << "  Perpendicular : " << nrPerp << " / ";
-	    // std::cout << "perp(";
-	    // std::cout << point1 << ", ";
-	    // std::cout << point2 << ", ";
-	    // std::cout << point3 << ", ";
-	    // std::cout << point4 << ")" << std::endl;
+	    std::cout << "  Perpendicular : " << nrPerp << " / ";
+	    std::cout << "perp(";
+	    std::cout << point1 << ", ";
+	    std::cout << point2 << ", ";
+	    std::cout << point3 << ", ";
+	    std::cout << point4 << ")" << std::endl;
 	    // DEBUG STOP
 	    break;
 	case 4:
@@ -7126,11 +7126,11 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 NULL);
 	    sqlite3_step(dbim.stmt);
 	    // DEBUG START
-	    // std::cout << "  Midpoint : " << nrMidp << " / ";
-	    // std::cout << "midp(";
-	    // std::cout << point1 << ", ";
-	    // std::cout << point2 << ", ";
-	    // std::cout << point3 << ")" << std::endl;
+	    std::cout << "  Midpoint : " << nrMidp << " / ";
+	    std::cout << "midp(";
+	    std::cout << point1 << ", ";
+	    std::cout << point2 << ", ";
+	    std::cout << point3 << ")" << std::endl;
 	    // DEBUG STOP
 	    break;
 	case 5:
@@ -7168,12 +7168,12 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 NULL);
 	    sqlite3_step(dbim.stmt);
 	    // DEBUG START
-	    // std::cout << "  Circle : " << nrCircle << " / ";
-	    // std::cout << "circle(";
-	    // std::cout << point1 << ", ";
-	    // std::cout << point2 << ", ";
-	    // std::cout << point3 << ", ";
-	    // std::cout << point4 << ")" << std::endl;
+	    std::cout << "  Circle : " << nrCircle << " / ";
+	    std::cout << "circle(";
+	    std::cout << point1 << ", ";
+	    std::cout << point2 << ", ";
+	    std::cout << point3 << ", ";
+	    std::cout << point4 << ")" << std::endl;
 	    // DEBUG STOP
 	    break;
 	case 6:
@@ -7211,12 +7211,12 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 NULL);
 	    sqlite3_step(dbim.stmt);
 	    // DEBUG START
-	    // std::cout << "  Congruent Segments : " << nrCong << " / ";
-	    // std::cout << "cong(";
-	    // std::cout << point1 << ", ";
-	    // std::cout << point2 << ", ";
-	    // std::cout << point3 << ", ";
-	    // std::cout << point4 << ")" << std::endl;
+	    std::cout << "  Congruent Segments : " << nrCong << " / ";
+	    std::cout << "cong(";
+	    std::cout << point1 << ", ";
+	    std::cout << point2 << ", ";
+	    std::cout << point3 << ", ";
+	    std::cout << point4 << ")" << std::endl;
 	    // DEBUG STOP
 	    break;
 	case 7:
@@ -7257,14 +7257,14 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 NULL);
 	    sqlite3_step(dbim.stmt);
 	    // DEBUG START
-	    // std::cout << "  Congruent Triangles : " << nrContri << " / ";
-	    // std::cout << "contri(";
-	    // std::cout << point1 << ", ";
-	    // std::cout << point2 << ", ";
-	    // std::cout << point3 << ", ";
-	    // std::cout << point4 << ", ";
-	    // std::cout << point5 << ", ";
-	    // std::cout << point6 << ")" << std::endl;
+	    std::cout << "  Congruent Triangles : " << nrContri << " / ";
+	    std::cout << "contri(";
+	    std::cout << point1 << ", ";
+	    std::cout << point2 << ", ";
+	    std::cout << point3 << ", ";
+	    std::cout << point4 << ", ";
+	    std::cout << point5 << ", ";
+	    std::cout << point6 << ")" << std::endl;
 	    // DEBUG STOP
 	    break;
 	case 8:
@@ -7302,12 +7302,12 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 NULL);
 	    sqlite3_step(dbim.stmt);
 	    // DEBUG START
-	    // std::cout << "  Cyclic : " << nrCyclic << " / ";
-	    // std::cout << "cyclic(";
-	    // std::cout << point1 << ", ";
-	    // std::cout << point2 << ", ";
-	    // std::cout << point3 << ", ";
-	    // std::cout << point4 << ")" << std::endl;
+	    std::cout << "  Cyclic : " << nrCyclic << " / ";
+	    std::cout << "cyclic(";
+	    std::cout << point1 << ", ";
+	    std::cout << point2 << ", ";
+	    std::cout << point3 << ", ";
+	    std::cout << point4 << ")" << std::endl;
 	    // DEBUG STOP
 	    break;
 	case 9:
@@ -7350,16 +7350,16 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 NULL);
 	    sqlite3_step(dbim.stmt);
 	    // DEBUG START
-	    // std::cout << "  Equal Angles : " << nrEqangle << " / ";
-	    // std::cout << "eqangle(";
-	    // std::cout << point1 << ", ";
-	    // std::cout << point2 << ", ";
-	    // std::cout << point3 << ", ";
-	    // std::cout << point4 << ", ";
-	    // std::cout << point5 << ", ";
-	    // std::cout << point6 << ", ";
-	    // std::cout << point7 << ", ";
-	    // std::cout << point8 << ")" << std::endl;
+	    std::cout << "  Equal Angles : " << nrEqangle << " / ";
+	    std::cout << "eqangle(";
+	    std::cout << point1 << ", ";
+	    std::cout << point2 << ", ";
+	    std::cout << point3 << ", ";
+	    std::cout << point4 << ", ";
+	    std::cout << point5 << ", ";
+	    std::cout << point6 << ", ";
+	    std::cout << point7 << ", ";
+	    std::cout << point8 << ")" << std::endl;
 	    // DEBUG STOP
 	    break;
 	case 10:
@@ -7402,16 +7402,16 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 NULL);
 	    sqlite3_step(dbim.stmt);
 	    // DEBUG START
-	    // std::cout << "  Equal Ratios : " << nrEqratio << " / ";
-	    // std::cout << "eqratio(";
-	    // std::cout << point1 << ", ";
-	    // std::cout << point2 << ", ";
-	    // std::cout << point3 << ", ";
-	    // std::cout << point4 << ", ";
-	    // std::cout << point5 << ", ";
-	    // std::cout << point6 << ", ";
-	    // std::cout << point7 << ", ";
-	    // std::cout << point8 << ")" << std::endl;
+	    std::cout << "  Equal Ratios : " << nrEqratio << " / ";
+	    std::cout << "eqratio(";
+	    std::cout << point1 << ", ";
+	    std::cout << point2 << ", ";
+	    std::cout << point3 << ", ";
+	    std::cout << point4 << ", ";
+	    std::cout << point5 << ", ";
+	    std::cout << point6 << ", ";
+	    std::cout << point7 << ", ";
+	    std::cout << point8 << ")" << std::endl;
 	    // DEBUG STOP
 	    break;
 	case 11:
@@ -7452,14 +7452,14 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 					 NULL);
 	    sqlite3_step(dbim.stmt);
 	    // DEBUG START
-	    // std::cout << "  Similar Triangles : " << nrSimtri << " / ";
-	    // std::cout << "simtri(";
-	    // std::cout << point1 << ", ";
-	    // std::cout << point2 << ", ";
-	    // std::cout << point3 << ", ";
-	    // std::cout << point4 << ", ";
-	    // std::cout << point5 << ", ";
-	    // std::cout << point6 << ")" << std::endl;
+	    std::cout << "  Similar Triangles : " << nrSimtri << " / ";
+	    std::cout << "simtri(";
+	    std::cout << point1 << ", ";
+	    std::cout << point2 << ", ";
+	    std::cout << point3 << ", ";
+	    std::cout << point4 << ", ";
+	    std::cout << point5 << ", ";
+	    std::cout << point6 << ")" << std::endl;
 	    // DEBUG STOP
 	    break;
 	default:
@@ -7492,12 +7492,19 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    dbim = ruleD40(dbim, point1, point2, point3, point4);
 	    if (point1 != point3 && point2 != point4)
 		dbim = ruleD45para(dbim, point1, point2, point3, point4);
-	    dbim = ruleD54para(dbim, point1, point2, point3, point4);
-	    if (point1 != point3 && point2 != point4)
+	    // dbim = ruleD54para(dbim, point1, point2, point3, point4);
+	    if (point1 != point4 && point2 != point3)
+		dbim = ruleD54para(dbim, point1, point2, point3, point4);
+	    // if (point1 != point3 && point2 != point4)
+	    // 	dbim = ruleD64para(dbim, point1, point2, point3, point4);
+	    if (point1 != point3 && point1 != point4 && point2 != point3
+		&& point2 != point4)
 		dbim = ruleD64para(dbim, point1, point2, point3, point4);
 	    if (point1 != point3 && point2 != point4)
 		dbim = ruleD65para(dbim, point1, point2, point3, point4);
-	    if (point1 == point3)
+	    // if (point1 == point3)
+	    // 	dbim = ruleD66(dbim, point1, point2, point3, point4);
+	    if (point1 == point3 && point2 != point4)
 		dbim = ruleD66(dbim, point1, point2, point3, point4);
 	    dbim = ruleD73para(dbim, point1, point2, point3, point4);
 	    break;
