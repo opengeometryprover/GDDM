@@ -1,3 +1,11 @@
+2022-09-22  Nuno Miguel dos Santos Baeta  <nmsbaeta@gmail.com>
+
+	* src/prover.cpp (fixedPoint): Rules bug fix.  Derivation of new
+	facts bug fix.
+	* src/prover.cpp (saveFixedPoint): NDG saving bug fixed.
+
+	* Version 0.5.5 released.
+
 2022-08-29  Nuno Miguel dos Santos Baeta  <nmsbaeta@gmail.com>
 
 	* src/ogpgddm.cpp: Saves fixed point to file whether the
