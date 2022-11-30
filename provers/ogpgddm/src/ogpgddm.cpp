@@ -106,7 +106,7 @@ int main(int argc, char *argv[]) {
       std::cout << ((double)(proved_t - start_t))/CLOCKS_PER_SEC << "s" << std::endl;
     }
     else {
-	std::cout << "Conjecture is: NOT PROVED";
+	std::cout << "Conjecture is: NOT PROVED" << std::endl;;
     }
     std::cout << "Fix-point found, in: ";
     std::cout << ((double)(end_t - start_t))/CLOCKS_PER_SEC << "s" << std::endl;

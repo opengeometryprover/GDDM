@@ -15,9 +15,10 @@
 #ifndef OGPGDDMVERSION
 #define OGPGDDMVERSION
 
-#define VERSION "0.6.0"
+#define VERSION "0.6.1"
 
 /*
+ * Version 0.6.1 - 2022/11/30, adicionar a regra B1
  * Version 0.6.0 - 2022/11/30, to show the time to prove the
  * conjecture alongside with the overall time to finish the prover
  * (finding the fix-point)

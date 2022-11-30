@@ -244,6 +244,10 @@ public:
     DBinMemory ruleD75eqratio(DBinMemory, std::string, std::string, std::string,
 			      std::string, std::string, std::string,
 			      std::string, std::string);
+  DBinMemory ruleB1midp(DBinMemory, std::string, std::string, std::string);
+    DBinMemory ruleB1cong(DBinMemory, std::string, std::string, std::string,
+			      std::string);
+
 
     void testDBim(DBinMemory);
 };

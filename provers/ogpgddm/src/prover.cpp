@@ -6607,7 +6607,7 @@ DBinMemory Prover::ruleD72(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D73: eqangle(A, B, C, D, P, Q, U, V) & para(P, Q, U, V)
- *               -> para(A, B, C, D)
+ *               --> para(A, B, C, D)
  *
  * Function's argument is eqangle(A, B, C, D, P, Q, U, V) and searches for
  * para(P, Q, U, V).
@@ -6682,7 +6682,7 @@ DBinMemory Prover::ruleD73eqangle(DBinMemory dbim, std::string point1,
 
 /*
  * Rule D73: eqangle(A, B, C, D, P, Q, U, V) & para(P, Q, U, V)
- *               -> para(A, B, C, D)
+ *               --> para(A, B, C, D)
  *
  * Function's argument is para(P, Q, U, V) and searches for
  * eqangle(A, B, C, D, P, Q, U, V).
@@ -7089,6 +7089,167 @@ DBinMemory Prover::ruleD75cong(DBinMemory dbim, std::string point1,
 }
 
 /*
+ * Rule B1: cong(D, A, D, B) & midp(C, A, B)
+ *               --> perp(A, B, C, D)
+ *
+ * Function's argument is cong(D,A,D,B) and searches for
+ * midp(C, A,B).
+ * 
+ */
+DBinMemory Prover::ruleB1cong(DBinMemory dbim, std::string point1,
+			       std::string point2, std::string point3,
+			       std::string point4) {
+    bool correctTransaction;
+    std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
+    std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::string newPoint1, newPoint2, newPoint3, newPoint4;
+
+    insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('cong')";
+    lastInsertedRowId = "SELECT last_insert_rowid()";
+    sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg));
+    correctTransaction = true;
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(),
+				 insertNewFact.size(), &(dbim.stmt), NULL);
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	correctTransaction = false;
+    }
+    dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
+				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
+    sqlite3_step(dbim.stmt);
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
+    querySecondGeoCmdA = "SELECT point1, point2, point3 "
+	"FROM NewFact "
+	"INNER JOIN Midpoint "
+	"ON (newFact = id) "
+	"WHERE point2 = '" + point1 + "' AND point3 = '" + point2 + "'";
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
+				 querySecondGeoCmdA.size(), &(dbim.stmt1),
+				 NULL);
+    sqlite3_step(dbim.stmt1);
+    querySecondGeoCmdB = "SELECT point1, point2, point3 "
+	"FROM Facts "
+	"INNER JOIN Midpoint "
+	"ON (oldFact = id) "
+	"WHERE point2 = '" + point1 + "' AND point3 = '" + point2 + "'";
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+				 querySecondGeoCmdB.size(), &(dbim.stmt2),
+				 NULL);
+    sqlite3_step(dbim.stmt2);
+    if (sqlite3_data_count(dbim.stmt1) == 0
+	&& sqlite3_data_count(dbim.stmt2) == 0 ) {
+	correctTransaction = false;
+    } else {
+	if (sqlite3_data_count(dbim.stmt1) != 0) {
+	    newPoint1 = (char*) sqlite3_column_text(dbim.stmt1, 0);
+	} else {
+	    newPoint1 = (char*) sqlite3_column_text(dbim.stmt2, 0);
+	}
+	if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	    correctTransaction = false;
+	} else {
+	    insertionPred = "INSERT INTO "
+		"Perpendicular (typeGeoCmd, point1, point2, point3,  point4, newFact) "
+		"VALUES "
+		"('perp', '" + point2 + "', '" + point3 + "', '"
+		+ newPoint1 + "', '" + point1 + "', '" + lstInsRwId + "')";
+	    dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+					 insertionPred.size(), &(dbim.stmt),
+					 NULL);
+	    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
+		correctTransaction = false;
+	}
+    }
+    if (correctTransaction) {
+	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
+    }
+    else {
+	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+    }
+    return dbim;
+}
+
+/*
+ * Rule B1:  cong(D, A, D, B) & midp(C, A, B)
+ *               --> perp(A, B, C, D)
+ *
+ * Function's argument is midp(C, A, B) and searches for cong(D, A, D, B).
+ */
+DBinMemory Prover::ruleB1midp(DBinMemory dbim, std::string point1,
+			       std::string point2, std::string point3) {
+    bool correctTransaction;
+    std::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;
+    std::string querySecondGeoCmdA, querySecondGeoCmdB;
+    std::string newPoint1, newPoint2;
+
+    insertNewFact = "INSERT INTO NewFact (typeGeoCmd) VALUES ('midp')";
+    lastInsertedRowId = "SELECT last_insert_rowid()";
+    sqlite3_exec(dbim.db, "begin;", 0, 0, &(dbim.zErrMsg));
+    correctTransaction = true;
+    dbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(),
+				 insertNewFact.size(), &(dbim.stmt), NULL);
+    if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
+      correctTransaction = false;
+    dbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(),
+				 lastInsertedRowId.size(), &(dbim.stmt), NULL);
+    sqlite3_step(dbim.stmt);
+    lstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);
+    querySecondGeoCmdA = "SELECT point1, point2, point3, point4 "
+      "FROM NewFact "
+      "INNER JOIN CongruentSegments "
+      "ON (newFact = id) "
+      "WHERE point2 = '" + point2 + "' AND point3 = '" + point3 + "'";
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(),
+				 querySecondGeoCmdA.size(), &(dbim.stmt1),
+				 NULL);
+    sqlite3_step(dbim.stmt1);
+    querySecondGeoCmdB = "SELECT point1, point2,point3 "
+      "FROM Facts "
+      "INNER JOIN CongruentSegments "
+      "ON (oldFact = id) "
+      "WHERE point2 = '" + point2 + "' AND point3 = '" + point3 + "'";
+    dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+				 querySecondGeoCmdB.size(), &(dbim.stmt2),
+				 NULL);
+    sqlite3_step(dbim.stmt2);
+    if (sqlite3_data_count(dbim.stmt1) == 0
+	&& sqlite3_data_count(dbim.stmt2) == 0 ) {
+      correctTransaction = false;
+    } else {
+      if (sqlite3_data_count(dbim.stmt1) != 0) {
+	newPoint1 = (char*) sqlite3_column_text(dbim.stmt1, 0);
+      } else {
+	newPoint1 = (char*) sqlite3_column_text(dbim.stmt2, 0);
+      }
+      dbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdB.c_str(),
+				   querySecondGeoCmdB.size(), &(dbim.stmt2),
+				   NULL);
+      if (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	correctTransaction = false;
+      } else {
+	insertionPred = "INSERT INTO "
+	  "Perpendicular (typeGeoCmd, point1, point2, point3,  point4, newFact) "
+	  "VALUES "
+	  "('perp', '" + point2 + "', '" + point3 + "', '"
+	  + point1 + "', '" + newPoint1 + "', '"  + lstInsRwId + "')";
+	dbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(),
+				     insertionPred.size(), &(dbim.stmt),
+				     NULL);
+	if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
+	  correctTransaction = false;
+      }
+    }
+    if (correctTransaction) {
+	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
+    }
+    else {
+	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+    }
+    return dbim;
+}
+
+
+
+/*
  * Calcute de fixed point.
  */
 DBinMemory Prover::fixedPoint(DBinMemory dbim, clock_t *proved_t) {
@@ -7101,7 +7262,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim, clock_t *proved_t) {
     FOFtoDB fdb;
 
     // to keep the value of proved() and avoid calling the function
-    // again and again, begun with value 1 (not proved), change to 0
+    // again and again, begin with value 1 (not proved), change to 0
     // (proved) as soon as the proved() function return true
     int notproved; 
 
@@ -7718,6 +7879,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim, clock_t *proved_t) {
 		dbim = ruleD68(dbim, point1, point2, point3);
 		dbim = ruleD69(dbim, point1, point2, point3);
 		dbim = ruleD70(dbim, point1, point2, point3);
+		dbim = ruleB1midp(dbim, point1, point2, point3);
 	    }
 	    break;
 	case 5:
@@ -7754,6 +7916,7 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim, clock_t *proved_t) {
 		if (point1 == point3)
 		    dbim = ruleD67cong(dbim, point1, point2, point3, point4);
 		dbim = ruleD75cong(dbim, point1, point2, point3, point4);
+		dbim = ruleB1cong(dbim, point1, point2, point3, point4);
 	    }
 	    break;
 	case 7:
@@ -7943,13 +8106,10 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim, clock_t *proved_t) {
 	}
 	// new query to restart the cycle
 
-	// «Patada» para ver o tempo até encontrar a prova
+	// to fix the time were the proof was attained
 	if (notproved && proved(dbim)) { // uses lasy evaluation to avoid calling the function
 	  (*proved_t) = clock();
-	  //	  std::cout << "Conjecture is PROVED, in: ";
-	  //	  std::cout << ((double)(end_t - start_t))/CLOCKS_PER_SEC << "s" << std::endl<< std::flush;
 	  notproved = 0;
-	  //exit(0);
 	}    
 	
 	newFact = "SELECT id, typeGeoCmd FROM NewFact LIMIT 1";
