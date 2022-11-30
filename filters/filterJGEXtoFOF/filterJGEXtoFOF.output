@@ -1,0 +1,2308 @@
+Terminais não usados na gramática
+
+    TRATIO
+
+
+Estado 123 conflitos: 1 troca/redução
+Estado 172 conflitos: 1 troca/redução
+Estado 270 conflitos: 1 troca/redução
+
+
+Gramática
+
+    0 $accept: linha $end
+
+    1 linha: '\n'
+    2      | comando
+    3      | linha comando
+    4      | error '\n'
+
+    5 comando: POINT variaveis SEPARADOR
+    6        | MIDPOINT VARIABLE VARIABLE VARIABLE
+    7        | FOOT VARIABLE VARIABLE VARIABLE VARIABLE
+    8        | PERPENDICULAR VARIABLE VARIABLE VARIABLE VARIABLE
+    9        | ONLINE VARIABLE VARIABLE VARIABLE
+   10        | ONRCIRCLE VARIABLE VARIABLE VARIABLE VARIABLE
+   11        | CYCLIC VARIABLE VARIABLE VARIABLE VARIABLE
+   12        | ONCIRCLE VARIABLE VARIABLE VARIABLE
+   13        | ONTLINE VARIABLE VARIABLE VARIABLE VARIABLE
+   14        | ONPLINE VARIABLE VARIABLE VARIABLE VARIABLE
+   15        | ONBLINE VARIABLE VARIABLE VARIABLE
+   16        | ONALINE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   17        | circle
+   18        | COLLINEAR VARIABLE VARIABLE VARIABLE
+   19        | SHOW
+   20        | NOSHOW
+   21        | TRIANGLE VARIABLE VARIABLE VARIABLE
+   22        | QUADRANGLE VARIABLE VARIABLE VARIABLE VARIABLE
+   23        | PARALLELOGRAM VARIABLE VARIABLE VARIABLE VARIABLE
+   24        | SQUARE VARIABLE VARIABLE VARIABLE VARIABLE
+   25        | PSQUARE VARIABLE VARIABLE VARIABLE
+   26        | NSQUARE VARIABLE VARIABLE VARIABLE
+   27        | PENTAGON VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   28        | RTRIANGLE VARIABLE VARIABLE VARIABLE
+   29        | PETRIANGLE VARIABLE VARIABLE VARIABLE
+   30        | ISOTRIANGLE VARIABLE VARIABLE VARIABLE
+   31        | REFLECTION VARIABLE VARIABLE VARIABLE
+   32        | ORTHOCENTER VARIABLE VARIABLE VARIABLE VARIABLE
+   33        | CIRCUMCENTER VARIABLE VARIABLE VARIABLE VARIABLE
+   34        | INCENTER VARIABLE VARIABLE VARIABLE VARIABLE
+   35        | SANGLE VARIABLE VARIABLE VARIABLE NUMERO
+   36        | EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   37        | EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   38        | RTRAPEZOID VARIABLE VARIABLE VARIABLE VARIABLE
+   39        | TRAPEZOID VARIABLE VARIABLE VARIABLE VARIABLE
+   40        | RECTANGLE VARIABLE VARIABLE VARIABLE VARIABLE
+   41        | ANGLEBISECTOR VARIABLE VARIABLE VARIABLE VARIABLE
+   42        | INTERSECTIONLL VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   43        | INTERSECTIONLT VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   44        | INTERSECTIONLC VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   45        | INTERSECTIONCC VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   46        | INTERSECTIONPP VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   47        | PARALLEL VARIABLE VARIABLE VARIABLE VARIABLE
+   48        | SIMTRIANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   49        | EQTRIANGLE VARIABLE VARIABLE VARIABLE
+   50        | CONTRIANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   51        | EQDISTANCE VARIABLE VARIABLE VARIABLE VARIABLE
+   52        | LCTANGENT VARIABLE VARIABLE VARIABLE
+   53        | LINE VARIABLE VARIABLE
+   54        | LRATIO VARIABLE VARIABLE VARIABLE VARIABLE NUMERO NUMERO
+   55        | PRATIO VARIABLE VARIABLE VARIABLE VARIABLE NUMERO NUMERO
+   56        | RATIO VARIABLE VARIABLE VARIABLE VARIABLE NUMERO NUMERO
+   57        | FINALIZA
+   58        | VARIABLE
+   59        | NUMERO
+   60        | SEPARADOR
+
+   61 circle: CIRCLE VARIABLE VARIABLE
+   62       | CIRCLE VARIABLE VARIABLE VARIABLE
+   63       | CIRCLE VARIABLE VARIABLE VARIABLE VARIABLE
+   64       | SYM VARIABLE VARIABLE VARIABLE
+
+   65 variaveis: VARIABLE
+
+   66 $@1: ε
+
+   67 variaveis: VARIABLE $@1 variaveis
+
+
+Terminais, com regras onde aparecem
+
+    $end (0) 0
+    '\n' (10) 1 4
+    error (256) 4
+    POINT (258) 5
+    MIDPOINT (259) 6
+    FOOT (260) 7
+    PERPENDICULAR (261) 8
+    ONLINE (262) 9
+    LINE (263) 53
+    CIRCLE (264) 61 62 63
+    ONCIRCLE (265) 12
+    ONRCIRCLE (266) 10
+    CYCLIC (267) 11
+    RECTANGLE (268) 40
+    REFLECTION (269) 31
+    ORTHOCENTER (270) 32
+    CIRCUMCENTER (271) 33
+    ONTLINE (272) 13
+    PARALLELOGRAM (273) 23
+    QUADRANGLE (274) 22
+    COLLINEAR (275) 18
+    PARALLEL (276) 47
+    LCTANGENT (277) 52
+    CONTRIANGLE (278) 50
+    TRIANGLE (279) 21
+    RTRIANGLE (280) 28
+    PETRIANGLE (281) 29
+    SIMTRIANGLE (282) 48
+    ISOTRIANGLE (283) 30
+    EQTRIANGLE (284) 49
+    SQUARE (285) 24
+    NSQUARE (286) 26
+    PSQUARE (287) 25
+    EQDISTANCE (288) 51
+    ONBLINE (289) 15
+    ONPLINE (290) 14
+    ONALINE (291) 16
+    ANGLEBISECTOR (292) 41
+    INCENTER (293) 34
+    LRATIO (294) 54
+    PRATIO (295) 55
+    TRATIO (296)
+    RATIO (297) 56
+    PENTAGON (298) 27
+    INTERSECTIONCC (299) 45
+    INTERSECTIONLC (300) 44
+    INTERSECTIONLL (301) 42
+    INTERSECTIONLT (302) 43
+    INTERSECTIONPP (303) 46
+    SANGLE (304) 35
+    EQANGLE (305) 36 37
+    RTRAPEZOID (306) 38
+    TRAPEZOID (307) 39
+    SYM (308) 64
+    SEPARADOR (309) 5 60
+    SHOW (310) 19
+    NOSHOW (311) 20
+    FINALIZA (312) 57
+    VARIABLE <string> (313) 6 7 8 9 10 11 12 13 14 15 16 18 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 58 61 62 63 64 65 67
+    NUMERO <number> (314) 35 54 55 56 59
+
+
+Não terminais, com regras onde aparecem
+
+    $accept (61)
+        à esquerda: 0
+    linha (62)
+        à esquerda: 1 2 3 4
+        à direita: 0 3
+    comando (63)
+        à esquerda: 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60
+        à direita: 2 3
+    circle (64)
+        à esquerda: 61 62 63 64
+        à direita: 17
+    variaveis (65)
+        à esquerda: 65 67
+        à direita: 5 67
+    $@1 (66)
+        à esquerda: 66
+        à direita: 67
+
+
+Estado 0
+
+    0 $accept: • linha $end
+
+    error           troca e vai para estado 1
+    POINT           troca e vai para estado 2
+    MIDPOINT        troca e vai para estado 3
+    FOOT            troca e vai para estado 4
+    PERPENDICULAR   troca e vai para estado 5
+    ONLINE          troca e vai para estado 6
+    LINE            troca e vai para estado 7
+    CIRCLE          troca e vai para estado 8
+    ONCIRCLE        troca e vai para estado 9
+    ONRCIRCLE       troca e vai para estado 10
+    CYCLIC          troca e vai para estado 11
+    RECTANGLE       troca e vai para estado 12
+    REFLECTION      troca e vai para estado 13
+    ORTHOCENTER     troca e vai para estado 14
+    CIRCUMCENTER    troca e vai para estado 15
+    ONTLINE         troca e vai para estado 16
+    PARALLELOGRAM   troca e vai para estado 17
+    QUADRANGLE      troca e vai para estado 18
+    COLLINEAR       troca e vai para estado 19
+    PARALLEL        troca e vai para estado 20
+    LCTANGENT       troca e vai para estado 21
+    CONTRIANGLE     troca e vai para estado 22
+    TRIANGLE        troca e vai para estado 23
+    RTRIANGLE       troca e vai para estado 24
+    PETRIANGLE      troca e vai para estado 25
+    SIMTRIANGLE     troca e vai para estado 26
+    ISOTRIANGLE     troca e vai para estado 27
+    EQTRIANGLE      troca e vai para estado 28
+    SQUARE          troca e vai para estado 29
+    NSQUARE         troca e vai para estado 30
+    PSQUARE         troca e vai para estado 31
+    EQDISTANCE      troca e vai para estado 32
+    ONBLINE         troca e vai para estado 33
+    ONPLINE         troca e vai para estado 34
+    ONALINE         troca e vai para estado 35
+    ANGLEBISECTOR   troca e vai para estado 36
+    INCENTER        troca e vai para estado 37
+    LRATIO          troca e vai para estado 38
+    PRATIO          troca e vai para estado 39
+    RATIO           troca e vai para estado 40
+    PENTAGON        troca e vai para estado 41
+    INTERSECTIONCC  troca e vai para estado 42
+    INTERSECTIONLC  troca e vai para estado 43
+    INTERSECTIONLL  troca e vai para estado 44
+    INTERSECTIONLT  troca e vai para estado 45
+    INTERSECTIONPP  troca e vai para estado 46
+    SANGLE          troca e vai para estado 47
+    EQANGLE         troca e vai para estado 48
+    RTRAPEZOID      troca e vai para estado 49
+    TRAPEZOID       troca e vai para estado 50
+    SYM             troca e vai para estado 51
+    SEPARADOR       troca e vai para estado 52
+    SHOW            troca e vai para estado 53
+    NOSHOW          troca e vai para estado 54
+    FINALIZA        troca e vai para estado 55
+    VARIABLE        troca e vai para estado 56
+    NUMERO          troca e vai para estado 57
+    '\n'            troca e vai para estado 58
+
+    linha    vai para estado 59
+    comando  vai para estado 60
+    circle   vai para estado 61
+
+
+Estado 1
+
+    4 linha: error • '\n'
+
+    '\n'  troca e vai para estado 62
+
+
+Estado 2
+
+    5 comando: POINT • variaveis SEPARADOR
+
+    VARIABLE  troca e vai para estado 63
+
+    variaveis  vai para estado 64
+
+
+Estado 3
+
+    6 comando: MIDPOINT • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 65
+
+
+Estado 4
+
+    7 comando: FOOT • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 66
+
+
+Estado 5
+
+    8 comando: PERPENDICULAR • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 67
+
+
+Estado 6
+
+    9 comando: ONLINE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 68
+
+
+Estado 7
+
+   53 comando: LINE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 69
+
+
+Estado 8
+
+   61 circle: CIRCLE • VARIABLE VARIABLE
+   62       | CIRCLE • VARIABLE VARIABLE VARIABLE
+   63       | CIRCLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 70
+
+
+Estado 9
+
+   12 comando: ONCIRCLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 71
+
+
+Estado 10
+
+   10 comando: ONRCIRCLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 72
+
+
+Estado 11
+
+   11 comando: CYCLIC • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 73
+
+
+Estado 12
+
+   40 comando: RECTANGLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 74
+
+
+Estado 13
+
+   31 comando: REFLECTION • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 75
+
+
+Estado 14
+
+   32 comando: ORTHOCENTER • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 76
+
+
+Estado 15
+
+   33 comando: CIRCUMCENTER • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 77
+
+
+Estado 16
+
+   13 comando: ONTLINE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 78
+
+
+Estado 17
+
+   23 comando: PARALLELOGRAM • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 79
+
+
+Estado 18
+
+   22 comando: QUADRANGLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 80
+
+
+Estado 19
+
+   18 comando: COLLINEAR • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 81
+
+
+Estado 20
+
+   47 comando: PARALLEL • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 82
+
+
+Estado 21
+
+   52 comando: LCTANGENT • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 83
+
+
+Estado 22
+
+   50 comando: CONTRIANGLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 84
+
+
+Estado 23
+
+   21 comando: TRIANGLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 85
+
+
+Estado 24
+
+   28 comando: RTRIANGLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 86
+
+
+Estado 25
+
+   29 comando: PETRIANGLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 87
+
+
+Estado 26
+
+   48 comando: SIMTRIANGLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 88
+
+
+Estado 27
+
+   30 comando: ISOTRIANGLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 89
+
+
+Estado 28
+
+   49 comando: EQTRIANGLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 90
+
+
+Estado 29
+
+   24 comando: SQUARE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 91
+
+
+Estado 30
+
+   26 comando: NSQUARE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 92
+
+
+Estado 31
+
+   25 comando: PSQUARE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 93
+
+
+Estado 32
+
+   51 comando: EQDISTANCE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 94
+
+
+Estado 33
+
+   15 comando: ONBLINE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 95
+
+
+Estado 34
+
+   14 comando: ONPLINE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 96
+
+
+Estado 35
+
+   16 comando: ONALINE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 97
+
+
+Estado 36
+
+   41 comando: ANGLEBISECTOR • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 98
+
+
+Estado 37
+
+   34 comando: INCENTER • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 99
+
+
+Estado 38
+
+   54 comando: LRATIO • VARIABLE VARIABLE VARIABLE VARIABLE NUMERO NUMERO
+
+    VARIABLE  troca e vai para estado 100
+
+
+Estado 39
+
+   55 comando: PRATIO • VARIABLE VARIABLE VARIABLE VARIABLE NUMERO NUMERO
+
+    VARIABLE  troca e vai para estado 101
+
+
+Estado 40
+
+   56 comando: RATIO • VARIABLE VARIABLE VARIABLE VARIABLE NUMERO NUMERO
+
+    VARIABLE  troca e vai para estado 102
+
+
+Estado 41
+
+   27 comando: PENTAGON • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 103
+
+
+Estado 42
+
+   45 comando: INTERSECTIONCC • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 104
+
+
+Estado 43
+
+   44 comando: INTERSECTIONLC • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 105
+
+
+Estado 44
+
+   42 comando: INTERSECTIONLL • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 106
+
+
+Estado 45
+
+   43 comando: INTERSECTIONLT • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 107
+
+
+Estado 46
+
+   46 comando: INTERSECTIONPP • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 108
+
+
+Estado 47
+
+   35 comando: SANGLE • VARIABLE VARIABLE VARIABLE NUMERO
+
+    VARIABLE  troca e vai para estado 109
+
+
+Estado 48
+
+   36 comando: EQANGLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   37        | EQANGLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 110
+
+
+Estado 49
+
+   38 comando: RTRAPEZOID • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 111
+
+
+Estado 50
+
+   39 comando: TRAPEZOID • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 112
+
+
+Estado 51
+
+   64 circle: SYM • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 113
+
+
+Estado 52
+
+   60 comando: SEPARADOR •
+
+    $default  redução com regra 60 (comando)
+
+
+Estado 53
+
+   19 comando: SHOW •
+
+    $default  redução com regra 19 (comando)
+
+
+Estado 54
+
+   20 comando: NOSHOW •
+
+    $default  redução com regra 20 (comando)
+
+
+Estado 55
+
+   57 comando: FINALIZA •
+
+    $default  redução com regra 57 (comando)
+
+
+Estado 56
+
+   58 comando: VARIABLE •
+
+    $default  redução com regra 58 (comando)
+
+
+Estado 57
+
+   59 comando: NUMERO •
+
+    $default  redução com regra 59 (comando)
+
+
+Estado 58
+
+    1 linha: '\n' •
+
+    $default  redução com regra 1 (linha)
+
+
+Estado 59
+
+    0 $accept: linha • $end
+    3 linha: linha • comando
+
+    $end            troca e vai para estado 114
+    POINT           troca e vai para estado 2
+    MIDPOINT        troca e vai para estado 3
+    FOOT            troca e vai para estado 4
+    PERPENDICULAR   troca e vai para estado 5
+    ONLINE          troca e vai para estado 6
+    LINE            troca e vai para estado 7
+    CIRCLE          troca e vai para estado 8
+    ONCIRCLE        troca e vai para estado 9
+    ONRCIRCLE       troca e vai para estado 10
+    CYCLIC          troca e vai para estado 11
+    RECTANGLE       troca e vai para estado 12
+    REFLECTION      troca e vai para estado 13
+    ORTHOCENTER     troca e vai para estado 14
+    CIRCUMCENTER    troca e vai para estado 15
+    ONTLINE         troca e vai para estado 16
+    PARALLELOGRAM   troca e vai para estado 17
+    QUADRANGLE      troca e vai para estado 18
+    COLLINEAR       troca e vai para estado 19
+    PARALLEL        troca e vai para estado 20
+    LCTANGENT       troca e vai para estado 21
+    CONTRIANGLE     troca e vai para estado 22
+    TRIANGLE        troca e vai para estado 23
+    RTRIANGLE       troca e vai para estado 24
+    PETRIANGLE      troca e vai para estado 25
+    SIMTRIANGLE     troca e vai para estado 26
+    ISOTRIANGLE     troca e vai para estado 27
+    EQTRIANGLE      troca e vai para estado 28
+    SQUARE          troca e vai para estado 29
+    NSQUARE         troca e vai para estado 30
+    PSQUARE         troca e vai para estado 31
+    EQDISTANCE      troca e vai para estado 32
+    ONBLINE         troca e vai para estado 33
+    ONPLINE         troca e vai para estado 34
+    ONALINE         troca e vai para estado 35
+    ANGLEBISECTOR   troca e vai para estado 36
+    INCENTER        troca e vai para estado 37
+    LRATIO          troca e vai para estado 38
+    PRATIO          troca e vai para estado 39
+    RATIO           troca e vai para estado 40
+    PENTAGON        troca e vai para estado 41
+    INTERSECTIONCC  troca e vai para estado 42
+    INTERSECTIONLC  troca e vai para estado 43
+    INTERSECTIONLL  troca e vai para estado 44
+    INTERSECTIONLT  troca e vai para estado 45
+    INTERSECTIONPP  troca e vai para estado 46
+    SANGLE          troca e vai para estado 47
+    EQANGLE         troca e vai para estado 48
+    RTRAPEZOID      troca e vai para estado 49
+    TRAPEZOID       troca e vai para estado 50
+    SYM             troca e vai para estado 51
+    SEPARADOR       troca e vai para estado 52
+    SHOW            troca e vai para estado 53
+    NOSHOW          troca e vai para estado 54
+    FINALIZA        troca e vai para estado 55
+    VARIABLE        troca e vai para estado 56
+    NUMERO          troca e vai para estado 57
+
+    comando  vai para estado 115
+    circle   vai para estado 61
+
+
+Estado 60
+
+    2 linha: comando •
+
+    $default  redução com regra 2 (linha)
+
+
+Estado 61
+
+   17 comando: circle •
+
+    $default  redução com regra 17 (comando)
+
+
+Estado 62
+
+    4 linha: error '\n' •
+
+    $default  redução com regra 4 (linha)
+
+
+Estado 63
+
+   65 variaveis: VARIABLE •
+   67          | VARIABLE • $@1 variaveis
+
+    VARIABLE  redução com regra 66 ($@1)
+    $default  redução com regra 65 (variaveis)
+
+    $@1  vai para estado 116
+
+
+Estado 64
+
+    5 comando: POINT variaveis • SEPARADOR
+
+    SEPARADOR  troca e vai para estado 117
+
+
+Estado 65
+
+    6 comando: MIDPOINT VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 118
+
+
+Estado 66
+
+    7 comando: FOOT VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 119
+
+
+Estado 67
+
+    8 comando: PERPENDICULAR VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 120
+
+
+Estado 68
+
+    9 comando: ONLINE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 121
+
+
+Estado 69
+
+   53 comando: LINE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 122
+
+
+Estado 70
+
+   61 circle: CIRCLE VARIABLE • VARIABLE
+   62       | CIRCLE VARIABLE • VARIABLE VARIABLE
+   63       | CIRCLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 123
+
+
+Estado 71
+
+   12 comando: ONCIRCLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 124
+
+
+Estado 72
+
+   10 comando: ONRCIRCLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 125
+
+
+Estado 73
+
+   11 comando: CYCLIC VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 126
+
+
+Estado 74
+
+   40 comando: RECTANGLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 127
+
+
+Estado 75
+
+   31 comando: REFLECTION VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 128
+
+
+Estado 76
+
+   32 comando: ORTHOCENTER VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 129
+
+
+Estado 77
+
+   33 comando: CIRCUMCENTER VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 130
+
+
+Estado 78
+
+   13 comando: ONTLINE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 131
+
+
+Estado 79
+
+   23 comando: PARALLELOGRAM VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 132
+
+
+Estado 80
+
+   22 comando: QUADRANGLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 133
+
+
+Estado 81
+
+   18 comando: COLLINEAR VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 134
+
+
+Estado 82
+
+   47 comando: PARALLEL VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 135
+
+
+Estado 83
+
+   52 comando: LCTANGENT VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 136
+
+
+Estado 84
+
+   50 comando: CONTRIANGLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 137
+
+
+Estado 85
+
+   21 comando: TRIANGLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 138
+
+
+Estado 86
+
+   28 comando: RTRIANGLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 139
+
+
+Estado 87
+
+   29 comando: PETRIANGLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 140
+
+
+Estado 88
+
+   48 comando: SIMTRIANGLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 141
+
+
+Estado 89
+
+   30 comando: ISOTRIANGLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 142
+
+
+Estado 90
+
+   49 comando: EQTRIANGLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 143
+
+
+Estado 91
+
+   24 comando: SQUARE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 144
+
+
+Estado 92
+
+   26 comando: NSQUARE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 145
+
+
+Estado 93
+
+   25 comando: PSQUARE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 146
+
+
+Estado 94
+
+   51 comando: EQDISTANCE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 147
+
+
+Estado 95
+
+   15 comando: ONBLINE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 148
+
+
+Estado 96
+
+   14 comando: ONPLINE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 149
+
+
+Estado 97
+
+   16 comando: ONALINE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 150
+
+
+Estado 98
+
+   41 comando: ANGLEBISECTOR VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 151
+
+
+Estado 99
+
+   34 comando: INCENTER VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 152
+
+
+Estado 100
+
+   54 comando: LRATIO VARIABLE • VARIABLE VARIABLE VARIABLE NUMERO NUMERO
+
+    VARIABLE  troca e vai para estado 153
+
+
+Estado 101
+
+   55 comando: PRATIO VARIABLE • VARIABLE VARIABLE VARIABLE NUMERO NUMERO
+
+    VARIABLE  troca e vai para estado 154
+
+
+Estado 102
+
+   56 comando: RATIO VARIABLE • VARIABLE VARIABLE VARIABLE NUMERO NUMERO
+
+    VARIABLE  troca e vai para estado 155
+
+
+Estado 103
+
+   27 comando: PENTAGON VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 156
+
+
+Estado 104
+
+   45 comando: INTERSECTIONCC VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 157
+
+
+Estado 105
+
+   44 comando: INTERSECTIONLC VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 158
+
+
+Estado 106
+
+   42 comando: INTERSECTIONLL VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 159
+
+
+Estado 107
+
+   43 comando: INTERSECTIONLT VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 160
+
+
+Estado 108
+
+   46 comando: INTERSECTIONPP VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 161
+
+
+Estado 109
+
+   35 comando: SANGLE VARIABLE • VARIABLE VARIABLE NUMERO
+
+    VARIABLE  troca e vai para estado 162
+
+
+Estado 110
+
+   36 comando: EQANGLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   37        | EQANGLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 163
+
+
+Estado 111
+
+   38 comando: RTRAPEZOID VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 164
+
+
+Estado 112
+
+   39 comando: TRAPEZOID VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 165
+
+
+Estado 113
+
+   64 circle: SYM VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 166
+
+
+Estado 114
+
+    0 $accept: linha $end •
+
+    $default  aceitar
+
+
+Estado 115
+
+    3 linha: linha comando •
+
+    $default  redução com regra 3 (linha)
+
+
+Estado 116
+
+   67 variaveis: VARIABLE $@1 • variaveis
+
+    VARIABLE  troca e vai para estado 63
+
+    variaveis  vai para estado 167
+
+
+Estado 117
+
+    5 comando: POINT variaveis SEPARADOR •
+
+    $default  redução com regra 5 (comando)
+
+
+Estado 118
+
+    6 comando: MIDPOINT VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 168
+
+
+Estado 119
+
+    7 comando: FOOT VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 169
+
+
+Estado 120
+
+    8 comando: PERPENDICULAR VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 170
+
+
+Estado 121
+
+    9 comando: ONLINE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 171
+
+
+Estado 122
+
+   53 comando: LINE VARIABLE VARIABLE •
+
+    $default  redução com regra 53 (comando)
+
+
+Estado 123
+
+   61 circle: CIRCLE VARIABLE VARIABLE •
+   62       | CIRCLE VARIABLE VARIABLE • VARIABLE
+   63       | CIRCLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 172
+
+    VARIABLE  [redução com regra 61 (circle)]
+    $default  redução com regra 61 (circle)
+
+    deslocar/reduzir conflito no símbolo VARIABLE:
+       61 circle: CIRCLE VARIABLE VARIABLE •
+       62 circle: CIRCLE VARIABLE VARIABLE • VARIABLE
+      Exemplo: CIRCLE VARIABLE VARIABLE • VARIABLE
+      Deslocar derivação
+        linha
+        ↳ 2: comando
+             ↳ 17: circle
+                   ↳ 62: CIRCLE VARIABLE VARIABLE • VARIABLE
+      Reduzir derivação
+        linha
+        ↳ 3: linha                                       comando
+             ↳ 2: comando                                ↳ 58: VARIABLE
+                  ↳ 17: circle
+                        ↳ 61: CIRCLE VARIABLE VARIABLE •
+
+    deslocar/reduzir conflito no símbolo VARIABLE:
+       61 circle: CIRCLE VARIABLE VARIABLE •
+       63 circle: CIRCLE VARIABLE VARIABLE • VARIABLE VARIABLE
+      Exemplo: CIRCLE VARIABLE VARIABLE • VARIABLE VARIABLE
+      Deslocar derivação
+        linha
+        ↳ 2: comando
+             ↳ 17: circle
+                   ↳ 63: CIRCLE VARIABLE VARIABLE • VARIABLE VARIABLE
+      Reduzir derivação
+        linha
+        ↳ 3: linha                                                           comando
+             ↳ 3: linha                                       comando        ↳ 58: VARIABLE
+                  ↳ 2: comando                                ↳ 58: VARIABLE
+                       ↳ 17: circle
+                             ↳ 61: CIRCLE VARIABLE VARIABLE •
+
+
+
+Estado 124
+
+   12 comando: ONCIRCLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 173
+
+
+Estado 125
+
+   10 comando: ONRCIRCLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 174
+
+
+Estado 126
+
+   11 comando: CYCLIC VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 175
+
+
+Estado 127
+
+   40 comando: RECTANGLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 176
+
+
+Estado 128
+
+   31 comando: REFLECTION VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 177
+
+
+Estado 129
+
+   32 comando: ORTHOCENTER VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 178
+
+
+Estado 130
+
+   33 comando: CIRCUMCENTER VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 179
+
+
+Estado 131
+
+   13 comando: ONTLINE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 180
+
+
+Estado 132
+
+   23 comando: PARALLELOGRAM VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 181
+
+
+Estado 133
+
+   22 comando: QUADRANGLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 182
+
+
+Estado 134
+
+   18 comando: COLLINEAR VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 183
+
+
+Estado 135
+
+   47 comando: PARALLEL VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 184
+
+
+Estado 136
+
+   52 comando: LCTANGENT VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 185
+
+
+Estado 137
+
+   50 comando: CONTRIANGLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 186
+
+
+Estado 138
+
+   21 comando: TRIANGLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 187
+
+
+Estado 139
+
+   28 comando: RTRIANGLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 188
+
+
+Estado 140
+
+   29 comando: PETRIANGLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 189
+
+
+Estado 141
+
+   48 comando: SIMTRIANGLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 190
+
+
+Estado 142
+
+   30 comando: ISOTRIANGLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 191
+
+
+Estado 143
+
+   49 comando: EQTRIANGLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 192
+
+
+Estado 144
+
+   24 comando: SQUARE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 193
+
+
+Estado 145
+
+   26 comando: NSQUARE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 194
+
+
+Estado 146
+
+   25 comando: PSQUARE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 195
+
+
+Estado 147
+
+   51 comando: EQDISTANCE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 196
+
+
+Estado 148
+
+   15 comando: ONBLINE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 197
+
+
+Estado 149
+
+   14 comando: ONPLINE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 198
+
+
+Estado 150
+
+   16 comando: ONALINE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 199
+
+
+Estado 151
+
+   41 comando: ANGLEBISECTOR VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 200
+
+
+Estado 152
+
+   34 comando: INCENTER VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 201
+
+
+Estado 153
+
+   54 comando: LRATIO VARIABLE VARIABLE • VARIABLE VARIABLE NUMERO NUMERO
+
+    VARIABLE  troca e vai para estado 202
+
+
+Estado 154
+
+   55 comando: PRATIO VARIABLE VARIABLE • VARIABLE VARIABLE NUMERO NUMERO
+
+    VARIABLE  troca e vai para estado 203
+
+
+Estado 155
+
+   56 comando: RATIO VARIABLE VARIABLE • VARIABLE VARIABLE NUMERO NUMERO
+
+    VARIABLE  troca e vai para estado 204
+
+
+Estado 156
+
+   27 comando: PENTAGON VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 205
+
+
+Estado 157
+
+   45 comando: INTERSECTIONCC VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 206
+
+
+Estado 158
+
+   44 comando: INTERSECTIONLC VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 207
+
+
+Estado 159
+
+   42 comando: INTERSECTIONLL VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 208
+
+
+Estado 160
+
+   43 comando: INTERSECTIONLT VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 209
+
+
+Estado 161
+
+   46 comando: INTERSECTIONPP VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 210
+
+
+Estado 162
+
+   35 comando: SANGLE VARIABLE VARIABLE • VARIABLE NUMERO
+
+    VARIABLE  troca e vai para estado 211
+
+
+Estado 163
+
+   36 comando: EQANGLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   37        | EQANGLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 212
+
+
+Estado 164
+
+   38 comando: RTRAPEZOID VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 213
+
+
+Estado 165
+
+   39 comando: TRAPEZOID VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 214
+
+
+Estado 166
+
+   64 circle: SYM VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 215
+
+
+Estado 167
+
+   67 variaveis: VARIABLE $@1 variaveis •
+
+    $default  redução com regra 67 (variaveis)
+
+
+Estado 168
+
+    6 comando: MIDPOINT VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 6 (comando)
+
+
+Estado 169
+
+    7 comando: FOOT VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 216
+
+
+Estado 170
+
+    8 comando: PERPENDICULAR VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 217
+
+
+Estado 171
+
+    9 comando: ONLINE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 9 (comando)
+
+
+Estado 172
+
+   62 circle: CIRCLE VARIABLE VARIABLE VARIABLE •
+   63       | CIRCLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 218
+
+    VARIABLE  [redução com regra 62 (circle)]
+    $default  redução com regra 62 (circle)
+
+    deslocar/reduzir conflito no símbolo VARIABLE:
+       62 circle: CIRCLE VARIABLE VARIABLE VARIABLE •
+       63 circle: CIRCLE VARIABLE VARIABLE VARIABLE • VARIABLE
+      Exemplo: CIRCLE VARIABLE VARIABLE VARIABLE • VARIABLE
+      Deslocar derivação
+        linha
+        ↳ 2: comando
+             ↳ 17: circle
+                   ↳ 63: CIRCLE VARIABLE VARIABLE VARIABLE • VARIABLE
+      Reduzir derivação
+        linha
+        ↳ 3: linha                                                comando
+             ↳ 2: comando                                         ↳ 58: VARIABLE
+                  ↳ 17: circle
+                        ↳ 62: CIRCLE VARIABLE VARIABLE VARIABLE •
+
+
+
+Estado 173
+
+   12 comando: ONCIRCLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 12 (comando)
+
+
+Estado 174
+
+   10 comando: ONRCIRCLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 219
+
+
+Estado 175
+
+   11 comando: CYCLIC VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 220
+
+
+Estado 176
+
+   40 comando: RECTANGLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 221
+
+
+Estado 177
+
+   31 comando: REFLECTION VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 31 (comando)
+
+
+Estado 178
+
+   32 comando: ORTHOCENTER VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 222
+
+
+Estado 179
+
+   33 comando: CIRCUMCENTER VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 223
+
+
+Estado 180
+
+   13 comando: ONTLINE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 224
+
+
+Estado 181
+
+   23 comando: PARALLELOGRAM VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 225
+
+
+Estado 182
+
+   22 comando: QUADRANGLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 226
+
+
+Estado 183
+
+   18 comando: COLLINEAR VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 18 (comando)
+
+
+Estado 184
+
+   47 comando: PARALLEL VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 227
+
+
+Estado 185
+
+   52 comando: LCTANGENT VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 52 (comando)
+
+
+Estado 186
+
+   50 comando: CONTRIANGLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 228
+
+
+Estado 187
+
+   21 comando: TRIANGLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 21 (comando)
+
+
+Estado 188
+
+   28 comando: RTRIANGLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 28 (comando)
+
+
+Estado 189
+
+   29 comando: PETRIANGLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 29 (comando)
+
+
+Estado 190
+
+   48 comando: SIMTRIANGLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 229
+
+
+Estado 191
+
+   30 comando: ISOTRIANGLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 30 (comando)
+
+
+Estado 192
+
+   49 comando: EQTRIANGLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 49 (comando)
+
+
+Estado 193
+
+   24 comando: SQUARE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 230
+
+
+Estado 194
+
+   26 comando: NSQUARE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 26 (comando)
+
+
+Estado 195
+
+   25 comando: PSQUARE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 25 (comando)
+
+
+Estado 196
+
+   51 comando: EQDISTANCE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 231
+
+
+Estado 197
+
+   15 comando: ONBLINE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 15 (comando)
+
+
+Estado 198
+
+   14 comando: ONPLINE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 232
+
+
+Estado 199
+
+   16 comando: ONALINE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 233
+
+
+Estado 200
+
+   41 comando: ANGLEBISECTOR VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 234
+
+
+Estado 201
+
+   34 comando: INCENTER VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 235
+
+
+Estado 202
+
+   54 comando: LRATIO VARIABLE VARIABLE VARIABLE • VARIABLE NUMERO NUMERO
+
+    VARIABLE  troca e vai para estado 236
+
+
+Estado 203
+
+   55 comando: PRATIO VARIABLE VARIABLE VARIABLE • VARIABLE NUMERO NUMERO
+
+    VARIABLE  troca e vai para estado 237
+
+
+Estado 204
+
+   56 comando: RATIO VARIABLE VARIABLE VARIABLE • VARIABLE NUMERO NUMERO
+
+    VARIABLE  troca e vai para estado 238
+
+
+Estado 205
+
+   27 comando: PENTAGON VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 239
+
+
+Estado 206
+
+   45 comando: INTERSECTIONCC VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 240
+
+
+Estado 207
+
+   44 comando: INTERSECTIONLC VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 241
+
+
+Estado 208
+
+   42 comando: INTERSECTIONLL VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 242
+
+
+Estado 209
+
+   43 comando: INTERSECTIONLT VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 243
+
+
+Estado 210
+
+   46 comando: INTERSECTIONPP VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 244
+
+
+Estado 211
+
+   35 comando: SANGLE VARIABLE VARIABLE VARIABLE • NUMERO
+
+    NUMERO  troca e vai para estado 245
+
+
+Estado 212
+
+   36 comando: EQANGLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE
+   37        | EQANGLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 246
+
+
+Estado 213
+
+   38 comando: RTRAPEZOID VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 247
+
+
+Estado 214
+
+   39 comando: TRAPEZOID VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 248
+
+
+Estado 215
+
+   64 circle: SYM VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 64 (circle)
+
+
+Estado 216
+
+    7 comando: FOOT VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 7 (comando)
+
+
+Estado 217
+
+    8 comando: PERPENDICULAR VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 8 (comando)
+
+
+Estado 218
+
+   63 circle: CIRCLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 63 (circle)
+
+
+Estado 219
+
+   10 comando: ONRCIRCLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 10 (comando)
+
+
+Estado 220
+
+   11 comando: CYCLIC VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 11 (comando)
+
+
+Estado 221
+
+   40 comando: RECTANGLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 40 (comando)
+
+
+Estado 222
+
+   32 comando: ORTHOCENTER VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 32 (comando)
+
+
+Estado 223
+
+   33 comando: CIRCUMCENTER VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 33 (comando)
+
+
+Estado 224
+
+   13 comando: ONTLINE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 13 (comando)
+
+
+Estado 225
+
+   23 comando: PARALLELOGRAM VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 23 (comando)
+
+
+Estado 226
+
+   22 comando: QUADRANGLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 22 (comando)
+
+
+Estado 227
+
+   47 comando: PARALLEL VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 47 (comando)
+
+
+Estado 228
+
+   50 comando: CONTRIANGLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 249
+
+
+Estado 229
+
+   48 comando: SIMTRIANGLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 250
+
+
+Estado 230
+
+   24 comando: SQUARE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 24 (comando)
+
+
+Estado 231
+
+   51 comando: EQDISTANCE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 51 (comando)
+
+
+Estado 232
+
+   14 comando: ONPLINE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 14 (comando)
+
+
+Estado 233
+
+   16 comando: ONALINE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 251
+
+
+Estado 234
+
+   41 comando: ANGLEBISECTOR VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 41 (comando)
+
+
+Estado 235
+
+   34 comando: INCENTER VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 34 (comando)
+
+
+Estado 236
+
+   54 comando: LRATIO VARIABLE VARIABLE VARIABLE VARIABLE • NUMERO NUMERO
+
+    NUMERO  troca e vai para estado 252
+
+
+Estado 237
+
+   55 comando: PRATIO VARIABLE VARIABLE VARIABLE VARIABLE • NUMERO NUMERO
+
+    NUMERO  troca e vai para estado 253
+
+
+Estado 238
+
+   56 comando: RATIO VARIABLE VARIABLE VARIABLE VARIABLE • NUMERO NUMERO
+
+    NUMERO  troca e vai para estado 254
+
+
+Estado 239
+
+   27 comando: PENTAGON VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 255
+
+
+Estado 240
+
+   45 comando: INTERSECTIONCC VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 256
+
+
+Estado 241
+
+   44 comando: INTERSECTIONLC VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 257
+
+
+Estado 242
+
+   42 comando: INTERSECTIONLL VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 258
+
+
+Estado 243
+
+   43 comando: INTERSECTIONLT VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 259
+
+
+Estado 244
+
+   46 comando: INTERSECTIONPP VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 260
+
+
+Estado 245
+
+   35 comando: SANGLE VARIABLE VARIABLE VARIABLE NUMERO •
+
+    $default  redução com regra 35 (comando)
+
+
+Estado 246
+
+   36 comando: EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE VARIABLE
+   37        | EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 261
+
+
+Estado 247
+
+   38 comando: RTRAPEZOID VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 38 (comando)
+
+
+Estado 248
+
+   39 comando: TRAPEZOID VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 39 (comando)
+
+
+Estado 249
+
+   50 comando: CONTRIANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 262
+
+
+Estado 250
+
+   48 comando: SIMTRIANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 263
+
+
+Estado 251
+
+   16 comando: ONALINE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 264
+
+
+Estado 252
+
+   54 comando: LRATIO VARIABLE VARIABLE VARIABLE VARIABLE NUMERO • NUMERO
+
+    NUMERO  troca e vai para estado 265
+
+
+Estado 253
+
+   55 comando: PRATIO VARIABLE VARIABLE VARIABLE VARIABLE NUMERO • NUMERO
+
+    NUMERO  troca e vai para estado 266
+
+
+Estado 254
+
+   56 comando: RATIO VARIABLE VARIABLE VARIABLE VARIABLE NUMERO • NUMERO
+
+    NUMERO  troca e vai para estado 267
+
+
+Estado 255
+
+   27 comando: PENTAGON VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 27 (comando)
+
+
+Estado 256
+
+   45 comando: INTERSECTIONCC VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 45 (comando)
+
+
+Estado 257
+
+   44 comando: INTERSECTIONLC VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 44 (comando)
+
+
+Estado 258
+
+   42 comando: INTERSECTIONLL VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 42 (comando)
+
+
+Estado 259
+
+   43 comando: INTERSECTIONLT VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 268
+
+
+Estado 260
+
+   46 comando: INTERSECTIONPP VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+
+    VARIABLE  troca e vai para estado 269
+
+
+Estado 261
+
+   36 comando: EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE VARIABLE
+   37        | EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 270
+
+
+Estado 262
+
+   50 comando: CONTRIANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 50 (comando)
+
+
+Estado 263
+
+   48 comando: SIMTRIANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 48 (comando)
+
+
+Estado 264
+
+   16 comando: ONALINE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 16 (comando)
+
+
+Estado 265
+
+   54 comando: LRATIO VARIABLE VARIABLE VARIABLE VARIABLE NUMERO NUMERO •
+
+    $default  redução com regra 54 (comando)
+
+
+Estado 266
+
+   55 comando: PRATIO VARIABLE VARIABLE VARIABLE VARIABLE NUMERO NUMERO •
+
+    $default  redução com regra 55 (comando)
+
+
+Estado 267
+
+   56 comando: RATIO VARIABLE VARIABLE VARIABLE VARIABLE NUMERO NUMERO •
+
+    $default  redução com regra 56 (comando)
+
+
+Estado 268
+
+   43 comando: INTERSECTIONLT VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 43 (comando)
+
+
+Estado 269
+
+   46 comando: INTERSECTIONPP VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 271
+
+
+Estado 270
+
+   36 comando: EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+   37        | EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    VARIABLE  troca e vai para estado 272
+
+    VARIABLE  [redução com regra 37 (comando)]
+    $default  redução com regra 37 (comando)
+
+    deslocar/reduzir conflito no símbolo VARIABLE:
+       37 comando: EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+       36 comando: EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+      Exemplo: EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+      Deslocar derivação
+        linha
+        ↳ 2: comando
+             ↳ 36: EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE VARIABLE
+      Reduzir derivação
+        linha
+        ↳ 3: linha                                                                                          comando
+             ↳ 3: linha                                                                      comando        ↳ 58: VARIABLE
+                  ↳ 2: comando                                                               ↳ 58: VARIABLE
+                       ↳ 37: EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+
+
+Estado 271
+
+   46 comando: INTERSECTIONPP VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 46 (comando)
+
+
+Estado 272
+
+   36 comando: EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE • VARIABLE
+
+    VARIABLE  troca e vai para estado 273
+
+
+Estado 273
+
+   36 comando: EQANGLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE VARIABLE •
+
+    $default  redução com regra 36 (comando)
