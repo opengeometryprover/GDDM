@@ -32,8 +32,9 @@ public:
   
     /*
      * Find the fixed point of the antecedents
-     * ---> assume the database of the method, already opened and populated
-     * <--- databased modified, adding all the new facts derived from the
+     * --> assume the database of the method, already opened and populated
+     * --> proved_t : clock_t, the exact moment when the proof was found
+     * <-- databased modified, adding all the new facts derived from the
      * antecedents
      */
   DBinMemory fixedPoint(DBinMemory,clock_t *);
