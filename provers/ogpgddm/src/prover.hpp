@@ -36,7 +36,7 @@ public:
      * <--- databased modified, adding all the new facts derived from the
      * antecedents
      */
-    DBinMemory fixedPoint(DBinMemory);
+  DBinMemory fixedPoint(DBinMemory,clock_t *);
 
     /*
      * Verify if the conjecture was proved, or not

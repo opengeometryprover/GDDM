@@ -7091,7 +7091,7 @@ DBinMemory Prover::ruleD75cong(DBinMemory dbim, std::string point1,
 /*
  * Calcute de fixed point.
  */
-DBinMemory Prover::fixedPoint(DBinMemory dbim) {
+DBinMemory Prover::fixedPoint(DBinMemory dbim, clock_t *proved_t) {
     int nrColl, nrPara, nrPerp, nrMidp, nrCircle, nrCong;
     int nrContri, nrCyclic, nrEqangle, nrEqratio, nrSimtri;
     bool correctTransaction;
@@ -7099,6 +7099,11 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
     std::string toDeriveGeoCmd, typeGeoCmd, updateGeoCmd;
     std::string point1, point2, point3, point4, point5, point6, point7, point8;
     FOFtoDB fdb;
+
+    // to keep the value of proved() and avoid calling the function
+    // again and again, begun with value 1 (not proved), change to 0
+    // (proved) as soon as the proved() function return true
+    int notproved; 
 
     // DEBUG START
     // std::cout << std::endl << "fixedPoint() : Entering.." << std::endl;
@@ -7937,6 +7942,16 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim) {
 	    exit(1);
 	}
 	// new query to restart the cycle
+
+	// «Patada» para ver o tempo até encontrar a prova
+	if (notproved && proved(dbim)) { // uses lasy evaluation to avoid calling the function
+	  (*proved_t) = clock();
+	  //	  std::cout << "Conjecture is PROVED, in: ";
+	  //	  std::cout << ((double)(end_t - start_t))/CLOCKS_PER_SEC << "s" << std::endl<< std::flush;
+	  notproved = 0;
+	  //exit(0);
+	}    
+	
 	newFact = "SELECT id, typeGeoCmd FROM NewFact LIMIT 1";
 	dbim.rc = sqlite3_prepare_v2(dbim.db, newFact.c_str(), newFact.size(),
 				     &(dbim.stmt), NULL);

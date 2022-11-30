@@ -25,8 +25,8 @@
 #include "parser.hpp"
 #include "prover.hpp"
 #include "strs.hpp"
+#include "version.hpp" // defines VERSION
 
-#define VERSION "0.5.5"
 
 struct strsList *points = NULL;
 struct strsList *ndg = NULL;
@@ -45,7 +45,7 @@ void errorMsg(int error) {
 int main(int argc, char *argv[]) {
     double time_spent;
     bool proved;
-    clock_t start_t, end_t;
+    clock_t start_t, end_t,proved_t;
     std::string argone;
     DBinMemory dbim;
     Driver drv;
@@ -93,23 +93,23 @@ int main(int argc, char *argv[]) {
     dbim = fdb.readFileLoadDB(drv, dbim);
 
     // Calculate fixed point
-    dbim = ogpgddm.fixedPoint(dbim);
+    dbim = ogpgddm.fixedPoint(dbim,&proved_t );
 
     end_t = clock();
     time_spent = ((double)(end_t - start_t))/CLOCKS_PER_SEC;
 
     proved = ogpgddm.proved(dbim);
     
-    // Final report
-    std::cout << "Conjecture is ";
+    // Final report (if proved it was already wrote)
     if (proved) {
-	std::cout << "PROVED";
-    } else {
-	std::cout << "NOT PROVED";
+      std::cout << "Conjecture is PROVED, in: ";
+      std::cout << ((double)(proved_t - start_t))/CLOCKS_PER_SEC << "s" << std::endl;
     }
-    std::cout << std::endl;
-    std::cout << "Time spent (s): ";
-    std::cout << ((double)(end_t - start_t))/CLOCKS_PER_SEC << std::endl;
+    else {
+	std::cout << "Conjecture is: NOT PROVED";
+    }
+    std::cout << "Fix-point found, in: ";
+    std::cout << ((double)(end_t - start_t))/CLOCKS_PER_SEC << "s" << std::endl;
     argone.assign(argv[1]);
     ogpgddm.saveFixedPoint(dbim, argone);
     // Close the database
