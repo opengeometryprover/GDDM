@@ -44,9 +44,10 @@ protected:
                                           {"simtri", 11}};
 	
 public:
-    void openInMemoryDB();	// Open database (in memory)
-    void createDBforGDDM();	// Create database (in memory)
-    void closeDB();		// Close (in memory) database
+  void openInMemoryDB();	// Open database (in memory)
+  void createDBforGDDM();// Create database (in memory)
+  void closeDB();		// Close (in memory) database
+  int backupDb(const char *,void (*f)(int,int)); // backup DB in file 
 };
 
 #endif

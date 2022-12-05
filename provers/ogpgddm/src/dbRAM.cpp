@@ -271,3 +271,69 @@ void DBinMemory::createDBforGDDM() {
 void DBinMemory::closeDB() {
     sqlite3_close(db);
 }
+
+/*
+ * Auxiliary function to assist in the backup of the in-memory databse to file
+ * both input values are the return value of a sqlite3 function
+ * --> remaining : int, number of pages left to copy
+ * --> pagecount : int, total number of pages in the source database
+ * <-- void, writes the progress of the backup to stdout.
+ */
+void seeProgress(int remaining, int pagecount){
+  double completion;
+  completion =  (double) (pagecount - remaining) / pagecount; // 100% *
+  std:: cout << "completion: " << completion << std::endl;
+}
+
+/*
+ * Backup database to file
+ * https://www.sqlite.org/backup.html
+ * --> db : sqlite3*, implicit, it is one of the atributes of the class
+ * --> zFilename : const char*, the name of the file that will contain the backup
+ * --> seeProgress : (void) (*f)(int,int), function that will report on the progress of the backup
+ *                                                              (see a possible function, seeProgress, above
+ * <-- rc : int, result of the function
+ */
+int DBinMemory::backupDb(
+			 //  sqlite3 *pDb,               /* db Database to back up */
+  const char *zFilename,      /* Name of file to back up to */
+  void(*xProgress)(int, int)){
+
+  int rc;                     /* Function return code */
+  sqlite3 *pFile;             /* Database connection opened on zFilename */
+  sqlite3_backup *pBackup;    /* Backup handle used to copy data */
+
+  /* Open the database file identified by zFilename. */
+  rc = sqlite3_open(zFilename, &pFile);
+  if( rc==SQLITE_OK ){
+
+    /* Open the sqlite3_backup object used to accomplish the transfer */
+    pBackup = sqlite3_backup_init(pFile, "main", db, "main");
+    if( pBackup ){
+
+      /* Each iteration of this loop copies 5 database pages from database
+      ** pDb to the backup database. If the return value of backup_step()
+      ** indicates that there are still further pages to copy, sleep for
+      ** 250 ms before repeating. */
+      do {
+        rc = sqlite3_backup_step(pBackup, 5);
+        xProgress(
+            sqlite3_backup_remaining(pBackup),
+            sqlite3_backup_pagecount(pBackup)
+        );
+        if( rc==SQLITE_OK || rc==SQLITE_BUSY || rc==SQLITE_LOCKED ){
+          sqlite3_sleep(250);
+        }
+      } while( rc==SQLITE_OK || rc==SQLITE_BUSY || rc==SQLITE_LOCKED );
+
+      /* Release resources allocated by backup_init(). */
+      (void)sqlite3_backup_finish(pBackup);
+    }
+    rc = sqlite3_errcode(pFile);
+  }
+  
+  /* Close the database connection opened on database file zFilename
+  ** and return the result of this function. */
+  (void)sqlite3_close(pFile);
+  return rc;
+}

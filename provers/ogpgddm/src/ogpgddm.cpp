@@ -42,6 +42,22 @@ void errorMsg(int error) {
     exit(error);
 }
 
+
+/*
+ * Auxiliary function to assist in the backup of the in-memory databse to file
+ * both input values are the return value of a sqlite3 function
+ * --> remaining : int, number of pages left to copy
+ * --> pagecount : int, total number of pages in the source database
+ * <-- void, writes the progress (in percentage) of the backup to stdout.
+ */
+void xProgress(int remaining, int pagecount){
+  double completion;
+  completion =  (double) (pagecount - remaining) / pagecount; // 100% *
+  std:: cout << "completion: " << completion << std::endl;
+}
+
+
+
 int main(int argc, char *argv[]) {
     double time_spent;
     bool proved;
@@ -51,6 +67,7 @@ int main(int argc, char *argv[]) {
     Driver drv;
     FOFtoDB fdb;
     Prover ogpgddm;
+    const char* zFilename = "dbMemToFile.db";
 
     std::cout << "OGP GDDM " << VERSION << std::endl;
     std::cout << "Copyright (C) 2022 Nuno Baeta, Pedro Quaresma" << std::endl;
@@ -91,6 +108,13 @@ int main(int argc, char *argv[]) {
 
     // Populate the database
     dbim = fdb.readFileLoadDB(drv, dbim);
+
+    // DEBUG START
+    // Show the database (before begin)
+    dbim.backupDb(zFilename,xProgress);
+    // DEBUG STOP
+
+
 
     // Calculate fixed point
     dbim = ogpgddm.fixedPoint(dbim,&proved_t );
