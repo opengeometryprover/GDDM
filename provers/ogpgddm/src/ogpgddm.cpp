@@ -52,8 +52,8 @@ void errorMsg(int error) {
  */
 void xProgress(int remaining, int pagecount){
   double completion;
-  completion =  (double) (pagecount - remaining) / pagecount; // 100% *
-  std:: cout << "completion: " << completion << std::endl;
+  completion =  (double) (pagecount - remaining) / pagecount*100; // 100% *
+  std:: cout << "completion: " << completion << "%" << std::endl;
 }
 
 
@@ -110,11 +110,9 @@ int main(int argc, char *argv[]) {
     dbim = fdb.readFileLoadDB(drv, dbim);
 
     // DEBUG START
-    // Show the database (before begin)
-    dbim.backupDb(zFilename,xProgress);
+    // Backup the database (before begin)
+    //    dbim.backupDb(zFilename,xProgress);
     // DEBUG STOP
-
-
 
     // Calculate fixed point
     dbim = ogpgddm.fixedPoint(dbim,&proved_t );

@@ -27,8 +27,9 @@ private:
     void deriveNewColl(std::string,std::string,std::string);
   
 public:
-    // Save fixed point, the 'Facts' table to a file.
-    void saveFixedPoint(DBinMemory, std::string);
+  
+  // Save fixed point, the 'Facts' table to a file.
+  void saveFixedPoint(DBinMemory, std::string);
   
     /*
      * Find the fixed point of the antecedents
@@ -41,8 +42,8 @@ public:
 
     /*
      * Verify if the conjecture was proved, or not
-     * ---> database with all the facts in the fixed point
-     * <--- true the consequent is in the facts table, false in the othe case
+     * --> database with all the facts in the fixed point
+     * <-- true the consequent is in the facts table, false in the othe case
      */
     bool proved(DBinMemory);
 
@@ -245,11 +246,10 @@ public:
 			      std::string, std::string, std::string,
 			      std::string, std::string);
   DBinMemory ruleB1midp(DBinMemory, std::string, std::string, std::string);
-    DBinMemory ruleB1cong(DBinMemory, std::string, std::string, std::string,
-			      std::string);
+  DBinMemory ruleB1cong(DBinMemory, std::string, std::string, std::string,
+			std::string);
 
-
-    void testDBim(DBinMemory);
+  void testDBim(DBinMemory);
 };
 
 #endif
