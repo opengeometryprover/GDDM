@@ -54,10 +54,14 @@ DBinMemory Prover::ruleD01(DBinMemory dbim, std::string point1,
 				 insertionPred.size(), &(dbim.stmt), NULL);
     if (sqlite3_step(dbim.stmt) != SQLITE_DONE)
 	correctTransaction = false;
-    if (correctTransaction)
+    if (correctTransaction) {
 	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
-    else
+	// int current, highest;
+	// sqlite3_status(SQLITE_STATUS_MEMORY_USED, &current, &highest,0);
+	// printf("----- %d | %d\n", current, highest);
+    } else {
 	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
+    }
     return dbim;
 }
 
@@ -7362,6 +7366,9 @@ DBinMemory Prover::fixedPoint(DBinMemory dbim, clock_t *proved_t) {
     // While this search is successfull do...
     // rc = sqlite3_step(stmt);
     while (sqlite3_step(dbim.stmt) != SQLITE_DONE) {
+	int current, highest;
+	sqlite3_status(SQLITE_STATUS_MEMORY_USED, &current, &highest, 0);
+	printf("----- %d | %d\n", current, highest);
 	newFactId = (char*) sqlite3_column_text(dbim.stmt, 0);
 	typeGeoCmd = (char*) sqlite3_column_text(dbim.stmt, 1);
 	switch (dbim.geoCmds[typeGeoCmd]) {
