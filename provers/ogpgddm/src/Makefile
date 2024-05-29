@@ -43,7 +43,9 @@ ogpgddmStaticLib: ogpgddm.cpp  staticLib
 
 ogpgddmDynamicLib: ogpgddm.cpp  dynamicLib
 	$(CPP)  -o $@ ogpgddm.cpp   -logpgddm -L. -I. -lsqlite3
-	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
+
+### To run it is needed to install the libraries or to do
+### export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
 
 staticLib:  scanner.o parser.o dbRAM.o foftodb.o prover.o strs.o
 	ar cq libogpgddm.a  scanner.o parser.o dbRAM.o foftodb.o prover.o strs.o
