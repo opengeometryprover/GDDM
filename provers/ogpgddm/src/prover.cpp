@@ -56,9 +56,9 @@ DBinMemory Prover::ruleD01(DBinMemory dbim, std::string point1,
 	correctTransaction = false;
     if (correctTransaction) {
 	sqlite3_exec(dbim.db, "commit;", 0, 0, 0);
-	// int current, highest;
-	// sqlite3_status(SQLITE_STATUS_MEMORY_USED, &current, &highest,0);
-	// printf("----- %d | %d\n", current, highest);
+	int current, highest;
+	sqlite3_status(SQLITE_STATUS_MEMORY_USED, &current, &highest,0);
+	printf("----- %d | %d\n", current, highest);
     } else {
 	sqlite3_exec(dbim.db, "rollback;", 0, 0, 0);
     }
