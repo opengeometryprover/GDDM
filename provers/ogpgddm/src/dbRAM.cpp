@@ -22,6 +22,11 @@
  */
 void DBinMemory::openInMemoryDB() {
     rc = sqlite3_open(":memory:", &db);
+    //    connection.SetChunkSize(10000000);
+    // sqlite3_file_control(sqlite3*, const char *zDbName, int op, void*);
+    std::string seila = "teste";
+    long int nseila = 512 * 2048;
+    sqlite3_file_control(db, seila.c_str() , SQLITE_FCNTL_CHUNK_SIZE, &nseila);
     if (rc) {
 	std::cout << "Can't open database: " << sqlite3_errmsg(db) << std::endl;
 	exit(2);
