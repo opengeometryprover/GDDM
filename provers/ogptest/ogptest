@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Change OGP_HOME value to reflect the location of Open Geometry Prover
-# Java programs
-OGP_HOME=/usr/local/share/ogp
-
-java -jar $OGP_HOME/ogptest.jar $*
