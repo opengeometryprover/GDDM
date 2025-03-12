@@ -1,4 +1,4 @@
-# OGP Provers-Generator (PG) for Geometry Deductive Database Method (GDDM)
+# OGP Provers-Generator (PG) for the Geometry Deductive Database Method (GDDM)
 
 Given a set of rules/axioms, PG will generate the code of a GDDM prover, approach described in
 
