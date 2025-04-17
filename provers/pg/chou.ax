@@ -1,0 +1,175 @@
+fof(ruleD01, axiom, ! [ A, B, C ] :
+	( (coll(A, B, C) )
+	=>
+	coll(A, C, B) ) ).
+
+fof(ruleD02, axiom, ! [ A, B, C ] :
+	( (coll(A, B, C) )
+	=>
+	coll(B, A, C) ) ).
+
+fof(ruleD04, axiom, ! [ A, B, C, D ] :
+	( (para(A, B, C, D) )
+	=>
+	para(A, B, D, C) ) ).
+
+fof(ruleD05, axiom, ! [ A, B, C, D ] :
+	( (para(A, B, C, D) )
+	=>
+	para(C, D, A, B) ) ).
+
+fof(ruleD07, axiom, ! [ A, B, C, D ] :
+	( (perp(A, B, C, D) )
+	=>
+	perp(A, B, D, C) ) ).
+
+fof(ruleD08, axiom, ! [ A, B, C, D ] :
+	( (perp(A, B, C, D) )
+	=>
+	perp(C, D, A, B) ) ).
+
+fof(ruleD11, axiom, ! [ A, B, M ] :
+	( (midp(M, B, A) )
+	=>
+	midp(M, A, B) ) ).
+
+fof(ruleD14, axiom, ! [ A, B, C, D ] :
+	( (cyclic(A, B, C, D) )
+	=>
+	cyclic(A, B, D, C) ) ).
+
+fof(ruleD15, axiom, ! [ A, B, C, D ] :
+	( (cyclic(A, B, C, D) )
+	=>
+	cyclic(A, C, B, D) ) ).
+
+fof(ruleD16, axiom, ! [ A, B, C, D ] :
+	( (cyclic(A, B, C, D) )
+	=>
+	cyclic(B, A, C, D) ) ).
+
+fof(ruleD18, axiom, ! [ A, B, C, D, P, Q, U, V ] :
+	( (eqangle(A, B, C, D, P, Q, U, V) )
+	=>
+	eqangle(B, A, C, D, P, Q, U, V) ) ).
+
+fof(ruleD19, axiom, ! [ A, B, C, D, P, Q, U, V ] :
+	( (eqangle(A, B, C, D, P, Q, U, V) )
+	=>
+	eqangle(C, D, A, B, U, V, P, Q) ) ).
+
+fof(ruleD20, axiom, ! [ A, B, C, D, P, Q, U, V ] :
+	( (eqangle(A, B, C, D, P, Q, U, V) )
+	=>
+	eqangle(P, Q, U, V, A, B, C, D) ) ).
+
+fof(ruleD21, axiom, ! [ A, B, C, D, P, Q, U, V ] :
+	( (eqangle(A, B, C, D, P, Q, U, V) )
+	=>
+	eqangle(A, B, P, Q, C, D, U, V) ) ).
+
+fof(ruleD23, axiom, ! [ A, B, C, D ] :
+	( (cong(A, B, C, D) )
+	=>
+	cong(A, B, D, C) ) ).
+
+fof(ruleD24, axiom, ! [ A, B, C, D ] :
+	( (cong(A, B, C, D) )
+	=>
+	cong(C, D, A, B) ) ).
+
+fof(ruleD26, axiom, ! [ A, B, C, D, P, Q, U, V ] :
+	( (eqratio(A, B, C, D, P, Q, U, V) )
+	=>
+	eqratio(B, A, C, D, P, Q, U, V) ) ).
+
+fof(ruleD27, axiom, ! [ A, B, C, D, P, Q, U, V ] :
+	( (eqratio(A, B, C, D, P, Q, U, V) )
+	=>
+	eqratio(C, D, A, B, U, V, P, Q) ) ).
+
+fof(ruleD28, axiom, ! [ A, B, C, D, P, Q, U, V ] :
+	( (eqratio(A, B, C, D, P, Q, U, V) )
+	=>
+	eqratio(P, Q, U, V, A, B, C, D) ) ).
+
+fof(ruleD29, axiom, ! [ A, B, C, D, P, Q, U, V ] :
+	( (eqratio(A, B, C, D, P, Q, U, V) )
+	=>
+	eqratio(A, B, P, Q, C, D, U, V) ) ).
+
+fof(ruleD31, axiom, ! [ A, B, C, P, Q, R ] :
+	( (simtri(A, C, B, P, R, Q) )
+	=>
+	simtri(A, B, C, P, Q, R) ) ).
+
+fof(ruleD32, axiom, ! [ A, B, C, P, Q, R ] :
+	( (simtri(B, A, C, Q, P, R) )
+	=>
+	simtri(A, B, C, P, Q, R) ) ).
+
+fof(ruleD33, axiom, ! [ A, B, C, P, Q, R ] :
+	( (simtri(P, Q, R, A, B, C) )
+	=>
+	simtri(A, B, C, P, Q, R) ) ).
+
+fof(ruleD35, axiom, ! [ A, B, C, P, Q, R ] :
+	( (contri(A, C, B, P, R, Q) )
+	=>
+	contri(A, B, C, P, Q, R) ) ).
+
+fof(ruleD36, axiom, ! [ A, B, C, P, Q, R ] :
+	( (contri(B, A, C, Q, P, R) )
+	=>
+	contri(A, B, C, P, Q, R) ) ).
+
+fof(ruleD37, axiom, ! [ A, B, C, P, Q, R ] :
+	( (contri(P, Q, R, A, B, C) )
+	=>
+	contri(A, B, C, P, Q, R) ) ).
+
+fof(ruleD39, axiom, ! [ A, B, C, D, P, Q ] :
+	( (eqangle(A, B, P, Q, C, D, P, Q) )
+	=>
+	para(A, B, C, D) ) ).
+
+fof(ruleD41, axiom, ! [ A, B, P, Q ] :
+	( (cyclic(A, B, P, Q) )
+	=>
+	eqangle(P, A, P, B, Q, A, Q, B) ) ).
+
+fof(ruleD46, axiom, ! [ A, B, O ] :
+	( (cong(O, A, O, B) )
+	=>
+	eqangle(O, A, A, B, A, B, O, B) ) ).
+
+fof(ruleD59, axiom, ! [ A, B, C, P, Q, R ] :
+	( (simtri(A, B, C, P, Q, R) )
+	=>
+	eqratio(A, B, A, C, P, Q, P, R) ) ).
+
+fof(ruleD60, axiom, ! [ A, B, C, P, Q, R ] :
+	( (simtri(A, B, C, P, Q, R) )
+	=>
+	eqangle(A, B, B, C, P, Q, P, R) ) ).
+
+fof(ruleD62, axiom, ! [ A, B, C, P, Q, R ] :
+	( (contri(A, B, C, P, Q, R) )
+	=>
+	cong(A, B, P, Q) ) ).
+
+fof(ruleD66, axiom, ! [ A, B, C ] :
+	( (para(A, B, A, C) )
+	=>
+	coll(A, B, C) ) ).
+
+fof(ruleD68, axiom, ! [ A, B, C ] :
+	( (midp(A, B, C) )
+	=>
+	cong(A, B, A, C) ) ).
+
+fof(ruleD69, axiom, ! [ A, B, C ] :
+	( (midp(A, B, C) )
+	=>
+	coll(A, B, C) ) ).
+
