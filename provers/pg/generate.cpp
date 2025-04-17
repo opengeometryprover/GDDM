@@ -946,6 +946,103 @@ std::string generate_makefile()
     return m;
 }
 
+std::string generate_dbram_hpp()
+{
+    std::string dh;
+
+    dh = dh + "#ifndef DBINMEMORY\n";
+    dh = dh + "#define DBINMEMORY\n";
+    dh = dh + "\n";
+    dh = dh + "#include <sqlite3.h>\n";
+    dh = dh + "\n";
+    dh = dh + "#include <iostream>\n";
+    dh = dh + "#include <map>\n";
+    dh = dh + "\n";
+    dh = dh + "class DBinMemory {\n";
+    dh = dh + "\tfriend class Prover;\n";
+    dh = dh + "\tfriend class FOFtoDB;\n";
+    dh = dh + "protected:\n";
+    dh = dh + "\tint rc;\n";
+    dh = dh + "\tchar *zErrMsg = 0;\n";
+    dh = dh + "\tsqlite3 *db;\n";
+    dh = dh + "\tsqlite3_stmt *stmt, *stmt1, *stmt2;   \n";
+    dh = dh + "\n";
+    dh = dh + "\tint res = 0;\n";
+    dh = dh + "\tstd::map<std::string, int> geoCmds = {{\"coll\", 1},\n";
+    dh = dh + "\t\t\t\t\t      {\"para\", 2},\n";
+    dh = dh + "\t\t\t\t\t      {\"perp\", 3},\n";
+    dh = dh + "\t\t\t\t\t      {\"midp\", 4},\n";
+    dh = dh + "\t\t\t\t\t      {\"circle\", 5},\n";
+    dh = dh + "\t\t\t\t\t      {\"cong\", 6},\n";
+    dh = dh + "\t\t\t\t\t      {\"contri\", 7},\n";
+    dh = dh + "\t\t\t\t\t      {\"cyclic\", 8},\n";
+    dh = dh + "\t\t\t\t\t      {\"eqangle\", 9},\n";
+    dh = dh + "\t\t\t\t\t      {\"eqratio\", 10},\n";
+    dh = dh + "\t\t\t\t\t      {\"simtri\", 11}};\n";
+    dh = dh + "	\n";
+    dh = dh + "public:\n";
+    dh = dh + "\tvoid openInMemoryDB();\n";
+    dh = dh + "\tvoid createDBforGDDM();\n";
+    dh = dh + "\tvoid closeDB();\n";
+    dh = dh + "\tint backupDb(const char *,void (*f)(int,int));\n";
+    dh = dh + "};\n";
+    dh = dh + "\n";
+    dh = dh + "#endif\n";
+    dh = dh + "\n";
+    return dh;
+}
+
+std::string generate_foftodb_hpp()
+{
+    std::string fh;
+
+    fh = fh + "#ifndef FOFTODB\n";
+    fh = fh + "#define FOFTODB\n";
+    fh = fh + "\n";
+    fh = fh + "#include <map>\n";
+    fh = fh + "\n";
+    fh = fh + "#include \"parser.hpp\"\n";
+    fh = fh + "\n";
+    fh = fh + "\n";
+    fh = fh + "class DBinMemory;\n";
+    fh = fh + "\n";
+    fh = fh + "#define YY_DECL yy::parser::symbol_type yylex (Driver& drv)\n";
+    fh = fh + "YY_DECL;\n";
+    fh = fh + "\n";
+    fh = fh + "class Driver {\n";
+    fh = fh + "public:\n";
+    fh = fh + "\tDriver ();\n";
+    fh = fh + "\n";
+    fh = fh + "\tint numGeoCmd = 0;\n";
+    fh = fh + "\tint antconcedent[500];\n";
+    fh = fh + "\tstd::string typeGeoCmd[500];\n";
+    fh = fh + "\tstd::string point1[500], point2[500], point3[500], point4[500];\n";
+    fh = fh + "\tstd::string point5[500], point6[500], point7[500], point8[500];\n";
+    fh = fh + "\tstd::map<std::string, int> variables;\n";
+    fh = fh + "\tint result;\n";
+    fh = fh + "\n";
+    fh = fh + "\tint parse(const std::string& f);\n";
+    fh = fh + "\tstd::string file;\n";
+    fh = fh + "\tbool trace_parsing;\n";
+    fh = fh + "\tvoid scan_begin();\n";
+    fh = fh + "\tvoid scan_end();\n";
+    fh = fh + "\tbool trace_scanning;\n";
+    fh = fh + "\tyy::location location;\n";
+    fh = fh + "};\n";
+    fh = fh + "\n";
+    fh = fh + "class FOFtoDB {\n";
+    fh = fh + "private:\n";
+    fh = fh + "\n";
+    fh = fh + "public:\n";
+    fh = fh + "\tDBinMemory readFileLoadDB(Driver, DBinMemory);\n";
+    fh = fh + "\tvoid showDB(DBinMemory);\n";
+    fh = fh + "};\n";
+    fh = fh + "\n";
+    fh = fh + "#endif\n";
+    fh = fh + "\n";
+    return fh;
+}
+
 std::string generate_ogpgddm()
 {
     std::string o;

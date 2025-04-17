@@ -77,6 +77,18 @@ int main(int argc, char *argv[])
 	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "Makefile");
 	fprintf(outfile, "%s", gentxt.c_str());
 	fclose(outfile);
+	// Generate 'dbRAM.hpp'
+	gentxt = generate_dbram_hpp();
+	if ((outfile = fopen("dbRAM.hpp", "w")) == NULL)
+	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "dbRAM.hpp");
+	fprintf(outfile, "%s", gentxt.c_str());
+	fclose(outfile);
+	// Generate 'foftodb.hpp'
+	gentxt = generate_foftodb_hpp();
+	if ((outfile = fopen("foftodb.hpp", "w")) == NULL)
+	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "foftodb.hpp");
+	fprintf(outfile, "%s", gentxt.c_str());
+	fclose(outfile);
 	// Generate 'ogpgddm.cpp'
 	gentxt = generate_ogpgddm();
 	if ((outfile = fopen("ogpgddm.cpp", "w")) == NULL)
