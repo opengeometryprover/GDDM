@@ -77,6 +77,12 @@ int main(int argc, char *argv[])
 	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "Makefile");
 	fprintf(outfile, "%s", gentxt.c_str());
 	fclose(outfile);
+	// Generate 'parser.yy'
+	gentxt = generate_parser();
+	if ((outfile = fopen("parser.yy", "w")) == NULL)
+	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "parser.yy");
+	fprintf(outfile, "%s", gentxt.c_str());
+	fclose(outfile);
 	// Generate 'scanner.ll'
 	gentxt = generate_scanner();
 	if ((outfile = fopen("scanner.ll", "w")) == NULL)
