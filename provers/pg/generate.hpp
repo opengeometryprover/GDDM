@@ -18,6 +18,7 @@ std::string generate_prover_hpp();
 std::string generate_prover_cpp();
 
 std::string generate_makefile();
+std::string generate_scanner();
 std::string generate_strs_hpp();
 std::string generate_strs_cpp();
 std::string generate_version_hpp();
