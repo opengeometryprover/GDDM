@@ -77,6 +77,12 @@ int main(int argc, char *argv[])
 	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "Makefile");
 	fprintf(outfile, "%s", gentxt.c_str());
 	fclose(outfile);
+	// Generate 'version.hpp'
+	gentxt = generate_version_hpp();
+	if ((outfile = fopen("version.hpp", "w")) == NULL)
+	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "version.hpp");
+	fprintf(outfile, "%s", gentxt.c_str());
+	fclose(outfile);
     }
     return EXIT_SUCCESS;
 }

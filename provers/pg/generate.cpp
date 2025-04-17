@@ -945,3 +945,16 @@ std::string generate_makefile()
     m = m + "\n";
     return m;
 }
+
+std::string generate_version_hpp()
+{
+    std::string vh;
+
+    vh = "#ifndef OGPGDDMVERSION\n";
+    vh = vh + "#define OGPGDDMVERSION\n";
+    vh = vh + "\n";
+    vh = vh + "#define VERSION \"* PG Generated\"\n";
+    vh = vh + "\n";
+    vh = vh + "#endif\n";
+    return vh;
+}
