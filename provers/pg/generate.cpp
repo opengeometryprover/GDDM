@@ -946,6 +946,66 @@ std::string generate_makefile()
     return m;
 }
 
+std::string generate_strs_hpp()
+{
+    std::string sh;
+
+    sh = sh + "#ifndef STRS\n";
+    sh = sh + "#define STRS\n";
+    sh = sh + "\n";
+    sh = sh + "struct strsList {\n";
+    sh = sh + "\tstd::string str;\n";
+    sh = sh + "\tstruct strsList *next;\n";
+    sh = sh + "};\n";
+    sh = sh + "\n";
+    sh = sh + "struct strsList *addStr(std::string, struct strsList *);\n";
+    sh = sh + "void showStrs(struct strsList *);\n";
+    sh = sh + "\n";
+    sh = sh + "#endif\n";
+    return sh;
+}
+
+std::string generate_strs_cpp()
+{
+    std::string sc;
+
+    sc = sc + "#include <iostream>\n";
+    sc = sc + "#include <string>\n";
+    sc = sc + "\n";
+    sc = sc + "#include \"strs.hpp\"\n";
+    sc = sc + "\n";
+    sc = sc + "struct strsList *addStr(std::string theStr, struct strsList *strs) {\n";
+    sc = sc + "\tbool strExists;\n";
+    sc = sc + "\tstruct strsList *current, *newStr;\n";
+    sc = sc + "\n";
+    sc = sc + "\tstrExists = false;\n";
+    sc = sc + "\tcurrent = strs;\n";
+    sc = sc + "\twhile (current != NULL && !strExists) {\n";
+    sc = sc + "\t\tstrExists = current->str == theStr;\n";
+    sc = sc + "\t\tcurrent = current->next;\n";
+    sc = sc + "\t}\n";
+    sc = sc + "\tif (!strExists) {\n";
+    sc = sc + "\t\tnewStr = new strsList;\n";
+    sc = sc + "\t\tnewStr->str = theStr;\n";
+    sc = sc + "\t\tnewStr->next = strs;\n";
+    sc = sc + "\t\tstrs = newStr;\n";
+    sc = sc + "\t}\n";
+    sc = sc + "\treturn strs;\n";
+    sc = sc + "}\n";
+    sc = sc + "\n";
+    sc = sc + "void showStrs(struct strsList *strs) {\n";
+    sc = sc + "\tstruct strsList *current;\n";
+    sc = sc + "\n";
+    sc = sc + "\tcurrent = strs;\n";
+    sc = sc + "\twhile (current != NULL) {\n";
+    sc = sc + "\t\tstd::cout << \"    \" << current->str << std::endl;\n";
+    sc = sc + "\t\tcurrent = current->next;\n";
+    sc = sc + "\t}\n";
+    sc = sc + "}\n";
+    sc = sc + "\n";
+    return sc;
+}
+
 std::string generate_version_hpp()
 {
     std::string vh;

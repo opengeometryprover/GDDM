@@ -77,6 +77,18 @@ int main(int argc, char *argv[])
 	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "Makefile");
 	fprintf(outfile, "%s", gentxt.c_str());
 	fclose(outfile);
+	// Generate 'strs.hpp'
+	gentxt = generate_strs_hpp();
+	if ((outfile = fopen("strs.hpp", "w")) == NULL)
+	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "strs.hpp");
+	fprintf(outfile, "%s", gentxt.c_str());
+	fclose(outfile);
+	// Generate 'strs.cpp'
+	gentxt = generate_strs_cpp();
+	if ((outfile = fopen("strs.cpp", "w")) == NULL)
+	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "strs.cpp");
+	fprintf(outfile, "%s", gentxt.c_str());
+	fclose(outfile);
 	// Generate 'version.hpp'
 	gentxt = generate_version_hpp();
 	if ((outfile = fopen("version.hpp", "w")) == NULL)
