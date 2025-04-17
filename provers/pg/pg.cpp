@@ -71,6 +71,12 @@ int main(int argc, char *argv[])
 	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "prover.cpp");
 	fprintf(outfile, "%s", gentxt.c_str());
 	fclose(outfile);
+	// Generate 'Makefile'
+	gentxt = generate_makefile();
+	if ((outfile = fopen("Makefile", "w")) == NULL)
+	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "Makefile");
+	fprintf(outfile, "%s", gentxt.c_str());
+	fclose(outfile);
     }
     return EXIT_SUCCESS;
 }

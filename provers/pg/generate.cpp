@@ -899,3 +899,49 @@ std::string generate_prover_cpp()
     pc = pc + "}\n";
     return pc;
 }
+
+std::string generate_makefile()
+{
+    std::string m;
+
+    m = "BASE = ogpgddm\n";
+    m = m + "CPP = g++\n";
+    m = m + "CPPFLAGS = \n";
+    m = m + "CXX = g++\n";
+    m = m + "FLEX = flex\n";
+    m = m + "FLEXFLAGS =\n";
+    m = m + "BISON = bison\n";
+    m = m + "BISONFLAGS = -Wcounterexamples\n";
+    m = m + "INSTALLDIR = /usr/local/bin\n";
+    m = m + "\n";
+    m = m + ".PHONY : clean all\n";
+    m = m + "\n";
+    m = m + "all: $(BASE)\n";
+    m = m + "\n";
+    m = m + "%.cpp: %.ll\n";
+    m = m + "\t$(FLEX) $(FLEXFLAGS) -o $@ $<\n";
+    m = m + "\n";
+    m = m + "%.cpp %.hpp: %.yy\n";
+    m = m + "\t$(BISON) $(BISONFLAGS) -o $*.cpp $<\n";
+    m = m + "\n";
+    m = m + "%.o: %.cpp %.hpp\n";
+    m = m + "\t$(CPP) $(CPPFLAGS) -c -o $@ $<\n";
+    m = m + "\n";
+    m = m + "\n";
+    m = m + "$(BASE): $(BASE).o scanner.o parser.o dbRAM.o foftodb.o prover.o strs.o\n";
+    m = m + "\t$(CPP) -o $@ ogpgddm.cpp foftodb.o parser.o scanner.o prover.o dbRAM.o strs.o -lsqlite3\n";
+    m = m + "\n";
+    m = m + "$(BASE).o: parser.hpp\n";
+    m = m + "parser.o: parser.hpp strs.hpp strs.cpp\n";
+    m = m + "scanner.o: parser.hpp\n";
+    m = m + "\n";
+    m = m + "CLEANFILES = $(BASE) *.o parser.hpp parser.cpp location.hh scanner.cpp\n";
+    m = m + "\n";
+    m = m + "clean:\n";
+    m = m + "\trm -f $(CLEANFILES) $(BASE)\n";
+    m = m + "\n";
+    m = m + "install:\n";
+    m = m + "\tcp $(BASE) $(INSTALLDIR)\n";
+    m = m + "\n";
+    return m;
+}
