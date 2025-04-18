@@ -83,10 +83,22 @@ int main(int argc, char *argv[])
 	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "dbRAM.hpp");
 	fprintf(outfile, "%s", gentxt.c_str());
 	fclose(outfile);
+	// Generate 'dbRAM.cpp'
+	gentxt = generate_dbram_cpp();
+	if ((outfile = fopen("dbRAM.cpp", "w")) == NULL)
+	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "dbRAM.cpp");
+	fprintf(outfile, "%s", gentxt.c_str());
+	fclose(outfile);
 	// Generate 'foftodb.hpp'
 	gentxt = generate_foftodb_hpp();
 	if ((outfile = fopen("foftodb.hpp", "w")) == NULL)
 	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "foftodb.hpp");
+	fprintf(outfile, "%s", gentxt.c_str());
+	fclose(outfile);
+	// Generate 'foftodb.cpp'
+	gentxt = generate_foftodb_cpp();
+	if ((outfile = fopen("foftodb.cpp", "w")) == NULL)
+	    error(ERROR_UNABLE_OPEN_FILE_WRITE, "foftodb.cpp");
 	fprintf(outfile, "%s", gentxt.c_str());
 	fclose(outfile);
 	// Generate 'ogpgddm.cpp'

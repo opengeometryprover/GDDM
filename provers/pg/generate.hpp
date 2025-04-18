@@ -19,7 +19,9 @@ std::string generate_prover_cpp();
 
 std::string generate_makefile();
 std::string generate_dbram_hpp();
+std::string generate_dbram_cpp();
 std::string generate_foftodb_hpp();
+std::string generate_foftodb_cpp();
 std::string generate_ogpgddm();
 std::string generate_parser();
 std::string generate_scanner();
