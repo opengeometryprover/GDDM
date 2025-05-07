@@ -18,7 +18,7 @@
 #define AUTHORS "Nuno Baeta, Pedro Quaresma"
 #define LICENSE "GNU GPL 3.0 or later"
 
-#define PG_ID "pg " VERSION "\n"      \
+#define PG_ID "pg " VERSION "\n" \
 	"Copyright (C) " YEAR " " AUTHORS "\n" \
 	"Distributed under " LICENSE "\n"
 

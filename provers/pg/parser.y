@@ -50,7 +50,7 @@ axiom_list:
 |	axiom_list axiom
 	{
 	    ax.points = {};
-            ax.antecedents = {};
+	    ax.antecedents = {};
 	}
 ;
 

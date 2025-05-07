@@ -18,53 +18,53 @@
 
 void print_predicate(Predicate pred)
 {
-    bool comma = false;
+	bool comma = false;
 
-    std::cout << pred.name << "(";
-    for (std::string pt : pred.points) {
-	if (comma) {
-	    std::cout << ", ";
+	std::cout << pred.name << "(";
+	for (std::string pt : pred.points) {
+		if (comma) {
+			std::cout << ", ";
+		}
+		std::cout << pt;
+		comma = true;
 	}
-	std::cout << pt;
-	comma = true;
-    }
-    std::cout << ")";
+	std::cout << ")";
 }
 
 void print_axiom(Axiom ax)
 {
-    bool ca;
+	bool ca;
 
-    std::cout << "       Name: " + ax.name << std::endl;
-    ca = false;
-    std::cout << "     Points: ";
-    for (std::string pt : ax.points) {
-	if (ca) {
-	    std::cout << ", ";
+	std::cout << "       Name: " + ax.name << std::endl;
+	ca = false;
+	std::cout << "     Points: ";
+	for (std::string pt : ax.points) {
+		if (ca) {
+			std::cout << ", ";
+		}
+		std::cout << pt;
+		ca = true;
 	}
-	std::cout << pt;
-	ca = true;
-    }
-    std::cout << std::endl;
-    std::cout << "Antecedents: ";
-    ca = false;
-    for (Predicate p : ax.antecedents) {
-	if (ca) {
-	    std::cout << " & ";
+	std::cout << std::endl;
+	std::cout << "Antecedents: ";
+	ca = false;
+	for (Predicate p : ax.antecedents) {
+		if (ca) {
+			std::cout << " & ";
+		}
+		print_predicate(p);
+		ca = true;
 	}
-	print_predicate(p);
-	ca = true;
-    }
-    std::cout << std::endl;
-    std::cout << "Consequence: ";
-    print_predicate(ax.consequence);
-    std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << "Consequence: ";
+	print_predicate(ax.consequence);
+	std::cout << std::endl;
 }
 
 void print_axiom_list(Axiom_list axioms)
 {
-    for (Axiom ax : axioms) {
-	std::cout << "-----  Axiom  -----" << std::endl;
-	print_axiom(ax);
-    }
+	for (Axiom ax : axioms) {
+		std::cout << "-----  Axiom  -----" << std::endl;
+		print_axiom(ax);
+	}
 }

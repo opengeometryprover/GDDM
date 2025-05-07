@@ -19,15 +19,15 @@
 #include <set>
 
 typedef struct predicate {
-    std::string name;
-    std::list<std::string> points;
+	std::string name;
+	std::list<std::string> points;
 } Predicate;
 
 typedef struct axiom {
-    std::string name;
-    std::set<std::string> points;
-    std::list<predicate> antecedents;
-    predicate consequence;
+	std::string name;
+	std::set<std::string> points;
+	std::list<predicate> antecedents;
+	predicate consequence;
 } Axiom;
 
 typedef std::list<Axiom> Axiom_list;
