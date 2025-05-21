@@ -22,9 +22,8 @@ void print_predicate(Predicate pred)
 
 	std::cout << pred.name << "(";
 	for (std::string pt : pred.points) {
-		if (comma) {
+		if (comma)
 			std::cout << ", ";
-		}
 		std::cout << pt;
 		comma = true;
 	}
@@ -39,9 +38,8 @@ void print_axiom(Axiom ax)
 	ca = false;
 	std::cout << "     Points: ";
 	for (std::string pt : ax.points) {
-		if (ca) {
+		if (ca)
 			std::cout << ", ";
-		}
 		std::cout << pt;
 		ca = true;
 	}
@@ -49,9 +47,8 @@ void print_axiom(Axiom ax)
 	std::cout << "Antecedents: ";
 	ca = false;
 	for (Predicate p : ax.antecedents) {
-		if (ca) {
+		if (ca)
 			std::cout << " & ";
-		}
 		print_predicate(p);
 		ca = true;
 	}
