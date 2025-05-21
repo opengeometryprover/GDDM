@@ -19,3 +19,4 @@ scanner.cpp
 provers/ogpgddm/local/
 provers/ogpgddm/tests/*.fp
 provers/ogpgddm/tests/local/
+provers/pg/local/
