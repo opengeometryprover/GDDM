@@ -2,7 +2,8 @@
 
 The available native provers are:
 
-- `ogpgddm` : OGP Geometry Deductive Database Method.
+- `ogpgddm` : OGP Geometry Deductive Database Method (GDDM);
+- `pg` : OGP Provers-Generator (PG) for GDDM.
 
 The avaliable independet provers are:
 
