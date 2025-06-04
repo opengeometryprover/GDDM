@@ -21,5 +21,5 @@ where `CONJECTURE` is a file with a conjecture written in [TPTP](https://tptp.or
 
 **Authors**
 
-- Nuno Baeta ([GitHub](https://github.com/nmsbaeta));
+- Nuno Baeta ([GitHub](https://github.com/nmsbaeta) | [Homapage](https://nmsb.codeberg.page/));
 - Pedro Quaresma ([GitHub](https://github.com/GeoTiles) | [Homepage](http://www.mat.uc.pt/~pedro/)).
