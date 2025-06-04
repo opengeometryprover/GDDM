@@ -1,7 +1,6 @@
 # Files to 'gitignore' in the Open Geometry Prover (OGP) project
 
 # Compilation
-*.hh
 *.o
 
 # Created by an OGP executable
@@ -12,11 +11,19 @@
 *.time
 
 # OGP GDDM prover
+provers/ogpgddm/src/#*
+provers/ogpgddm/src/*.hh
+provers/ogpgddm/src/libogpgddm.a
+provers/ogpgddm/src/libogpgddm.so
+provers/ogpgddm/src/libogpgddm.so.1
+provers/ogpgddm/src/libogpgddm.so.1.0
+provers/ogpgddm/src/ogpgddmDynamicLib
+provers/ogpgddm/src/ogpgddmStaticLib
 provers/ogpgddm/src/ogpgddm
-parser.cpp
-parser.hpp
-scanner.cpp
+provers/ogpgddm/src/parser.cpp
+provers/ogpgddm/src/parser.hpp
+provers/ogpgddm/src/scanner.cpp
 provers/ogpgddm/local/
-provers/ogpgddm/tests/*.fp
-provers/ogpgddm/tests/local/
+
+# OGP Provers-Generator (PG) for GDDM
 provers/pg/local/
