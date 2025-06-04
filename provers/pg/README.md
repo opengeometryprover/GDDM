@@ -23,5 +23,5 @@ where `RULES`is a file with the rules/axioms each written in [TPTP](https://tptp
 
 **Authors**
 
-- Nuno Baeta ([GitHub](https://github.com/nmsbaeta));
+- Nuno Baeta ([GitHub](https://github.com/nmsbaeta) | [Homepage](https://nmsb.codeberg.page/));
 - Pedro Quaresma ([GitHub](https://github.com/GeoTiles) | [Homepage](http://www.mat.uc.pt/~pedro/)).
