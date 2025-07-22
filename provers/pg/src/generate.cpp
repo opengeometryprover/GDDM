@@ -139,7 +139,7 @@ int position_point_list(std::string pt,  std::list<std::string> points)
 	return pos;
 }
 
-std::string one2one(Axiom ax)
+std::string antecedents_one(Axiom ax)
 {
 	std::string rc;
     
@@ -194,7 +194,7 @@ std::string generate_rules_cpp()
 			ants.insert(pred.name);
 		switch (ants.size()) {
 		case 1:
-			rc = rc + one2one(ax);
+			rc = rc + antecedents_one(ax);
 			break;
 		default:
 			error(ERROR_EXCESS_PREDICATES,
