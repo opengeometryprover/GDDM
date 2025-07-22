@@ -73,6 +73,10 @@ std::string predicate_table(std::string pred)
 		return "SimilarTriangles";
 }
 
+/*
+ * Generation of the declarations of the predicate functions to be
+ * included in 'prover.hpp'.
+ */
 std::string generate_rules_hpp()
 {
 	std::string rh = "";
