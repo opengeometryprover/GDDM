@@ -194,11 +194,10 @@ std::string antecedents_one(Axiom ax)
 	rc = rc + "\tdbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(), insertionPred.size(), &(dbim.stmt), NULL);\n";
 	rc = rc + "\tif (sqlite3_step(dbim.stmt) != SQLITE_DONE)\n";
 	rc = rc + "\t\tcorrectTransaction = false;\n";
-	rc = rc + "\tif (correctTransaction) {\n";
+	rc = rc + "\tif (correctTransaction)\n";
 	rc = rc + "\t\tsqlite3_exec(dbim.db, \"commit;\", 0, 0, 0);\n";
-	rc = rc + "\t} else {\n";
+	rc = rc + "\telse\n";
 	rc = rc + "\t\tsqlite3_exec(dbim.db, \"rollback;\", 0, 0, 0);\n";
-	rc = rc + "\t}\n";
 	rc = rc + "\treturn dbim;\n";
 	rc = rc + "}\n";
 	return rc;
@@ -321,19 +320,19 @@ std::string antecedents_two(std::string pred, Axiom ax)
 			rc = rc + " + newPoint"
 				+ std::to_string(pt_pos_new.at(pt));
 		else
-			rc = rc + " + point" + std::to_string(pt_pos.at(pt));
+			rc = rc + " + pt" + std::to_string(pt_pos.at(pt));
 		rc = rc + " + \"', '\"";
 	}
 	rc = rc + " + lstInsRwId + \"')\";\n";
+	rc = rc + "\t\t\tdbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(), insertionPred.size(), &(dbim.stmt), NULL);\n";
 	rc = rc + "\t\t\tif (sqlite3_step(dbim.stmt) != SQLITE_DONE)\n";
 	rc = rc + "\t\t\t\tcorrectTransaction = false;\n";
 	rc = rc + "\t\t}\n";
 	rc = rc + "\t}\n";
 	rc = rc + "\tif (correctTransaction)\n";
 	rc = rc + "\t\tsqlite3_exec(dbim.db, \"commit;\", 0, 0, 0);\n";
-	rc = rc + "\t} else {\n";
+	rc = rc + "\telse\n";
 	rc = rc + "\t\tsqlite3_exec(dbim.db, \"rollback;\", 0, 0, 0);\n";
-	rc = rc + "\t}\n";
 	rc = rc + "\treturn dbim;\n";
 	rc = rc + "}\n";
 	return rc;
