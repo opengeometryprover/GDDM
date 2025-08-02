@@ -59,6 +59,7 @@ int main(int argc, char *argv[])
 			error(ERROR_UNABLE_OPEN_FILE_READ, argv[1]);
 		yyparse();
 		fclose(yyin);
+		// print_axiom_list(axioms);
 		// Generate 'prover.hpp'
 		gentxt = generate_prover_hpp();
 		if ((outfile = fopen("prover.hpp", "w")) == NULL)
