@@ -8,6 +8,11 @@ fof(ruleD02, axiom, ! [ A, B, C ] :
 	=>
 	coll(B, A, C) ) ).
 
+fof(ruleD03, axiom, ! [ A, B, C, D ] :
+	( (coll(A, B, C) & coll(A, B, D) )
+	=>
+	coll(C, D, A) ) ).
+
 fof(ruleD04, axiom, ! [ A, B, C, D ] :
 	( (para(A, B, C, D) )
 	=>
