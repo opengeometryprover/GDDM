@@ -2414,7 +2414,7 @@ std::string generate_version_hpp()
 	vh = "#ifndef OGPGDDMVERSION\n";
 	vh = vh + "#define OGPGDDMVERSION\n";
 	vh = vh + "\n";
-	vh = vh + "#define VERSION \"* PG Generated\"\n";
+	vh = vh + "#define VERSION \"- PG Generated\"\n";
 	vh = vh + "\n";
 	vh = vh + "#endif\n";
 	return vh;
