@@ -368,16 +368,19 @@ std::string generate_rules_cpp()
 		}
 		switch (ant_list.size()) {
 		case 1:
+			// Rules/axioms with one antecedent
 			code = code + "\n";
 			code = code + one_antecedent(ax);
 			break;
 		case 2:
+			// Rules/axioms with two antecedents
 			for (std::string pred : ant_set) {
 				code = code + "\n";
 				code = code + two_antecedents(pred, ax);
 			}
 			break;
 		case 3:
+			// Rules/axioms with three antecedents
 			for (std::string pred : ant_set) {
 				code = code + "\n";
 				code = code + three_antecedents(pred, ax);
