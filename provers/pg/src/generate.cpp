@@ -162,7 +162,7 @@ int position_point_list(std::string pt,  std::list<std::string> points)
 	return pos;
 }
 
-std::string antecedents_one(Axiom ax)
+std::string one_antecedent(Axiom ax)
 {
 	std::string rc;
 
@@ -203,7 +203,7 @@ std::string antecedents_one(Axiom ax)
 	return rc;
 }
 
-std::string antecedents_two(std::string pred, Axiom ax)
+std::string two_antecedents(std::string pred, Axiom ax)
 {
 	int pos, nr_pt;
 	bool first;
@@ -338,37 +338,57 @@ std::string antecedents_two(std::string pred, Axiom ax)
 	return rc;
 }
 
+/*
+ * Generate rules with three antecedents.
+ */
+std::string three_antecedents(std::string pred, Axiom ax)
+{
+	std::string rc;
+
+	rc = "DBinMemory Prover::" + ax.name + ax.antecedents.front().name
+		+ "(DBinMemory dbim";
+	return rc;
+}
+
+/*
+ * Generate the code for the geometric rules/axioms.
+ */
 std::string generate_rules_cpp()
 {
-	std::string rc = "";
-	std::list<std::string> ant_pred_lst;
-	std::set<std::string> ant_pred_set;
+	std::string code = "";
+	std::list<std::string> ant_list;
+	std::set<std::string> ant_set;
 	
 	for (Axiom ax : axioms) {
-		ant_pred_lst = {};
-		ant_pred_set = {};
+		ant_list = {};
+		ant_set = {};
 		for (Predicate pred : ax.antecedents) {
-			ant_pred_lst.push_back(pred.name);
-			ant_pred_set.insert(pred.name);
+			ant_list.push_back(pred.name);
+			ant_set.insert(pred.name);
 		}
-		switch (ant_pred_lst.size()) {
+		switch (ant_list.size()) {
 		case 1:
-			rc = rc + "\n";
-			rc = rc + antecedents_one(ax);
+			code = code + "\n";
+			code = code + one_antecedent(ax);
 			break;
 		case 2:
-			for (std::string pred : ant_pred_set) {
-				rc = rc + "\n";
-				rc = rc + antecedents_two(pred, ax);
+			for (std::string pred : ant_set) {
+				code = code + "\n";
+				code = code + two_antecedents(pred, ax);
 			}
 			break;
+		case 3:
+			for (std::string pred : ant_set) {
+				code = code + "\n";
+				code = code + three_antecedents(pred, ax);
+			}
 		default:
 			error(ERROR_EXCESS_PREDICATES,
-			      std::to_string(ant_pred_lst.size()));
+			      std::to_string(ant_list.size()));
 			break;
 		}
 	}
-	return rc;
+	return code;
 }
 
 std::string use_rules_for_pred(std::string pred)
