@@ -1,0 +1,96 @@
+Ge Rules for GDD method va
+
+Co fulers related to Parallel line
+
+1, IFAB [ BC, then Collinear(A8,C),
+
+2. Fortwo angle £12), 2113/4). If 11 =13 and 2 | l4, then 211.2) = 2113.4)
+
+3. iFAB | CD and is the intersection of AC and BD, then EA / EC = EB/ED.
+
+4, IFAB | CD and CD EF, then AB EF.
+
+ers related to Perpendicular line
+
+5, IFAB 1 CD, then Z{AB,CD] = [1] (or 90 degrees)
+
+6. Inrighttriangle ACB, ZC = {1}, if midpoint(E, AB), then Circumcenter (EA B C) and EA = EB= EC.
+7. IAB LCD and CD EF, then AB | EF.
+
+8. For four points &,8,C,D, ifAC BC and AD 1 BD, then Cyclic(A,B,C,D)
+
+$ Cl hulers related to Circle
+
+9, For a circle c(0,AB) and a point C on Circle c, if Collinear(A,8,0), then AC L BC and ZACB = [1]
+10. If AB is the Diameter ofa circle and point Cis on the circle, then AC. BC
+
+11. Angle of circumference equals to half of angle of center
+
+12, IFAB | CD and Cyclc(A.B,C,0), then ZABC = ZDAB
+
+13, If CyclicA,8,C,D), then ZADB = ZACB and vice verse.
+
+14, Chord tangent angle *****
+
+15, Line passing the centers of two circles is perpendicular to the common chord of two circles
+$A Rulers related to Angles
+
+16, The Addition for Full Angle
+
+17. ASPPI2,
+
+18, ASPPI3
+
+19, ASTI
+
+20. ASTTI3
+
+21. Special Angles
+
+22. Supplementary Angle
+
+lers related to Triangle
+
+23. Isoceless Triangle,
+
+24, For a isoceless triangle ABC and a point D on line BC, ifany one of following statement i true, the other two are also true
+25. Congruent Triangle
+
+26. ASA (angle-side-angle) congruence:
+
+27. SAS(side-angle-side) congruence
+
+28. 85S (side-side-side) congruence
+
+29, SAS (side-angle-side) congruence for right triangles.
+
+30. similar triangles
+
+31. AAA (angle-angle-angle) similarity
+
+32, SAS (side-angle-side) similarity
+
+33, SSS (side-side-side) similarity
+
+34, Rati by similarity
+
+35, Middle Connection Theorem for Triangles
+
+36, The hypotenuse ofa right triangle is the diameter ofthe circumscribed circle of the triangle, and the midpoint ofthe hypotenuse isthe center of the circle.
+37. Equalateral Triangles
+
+& CAother rulers
+
+38, Pythagorean Theorem h
+39, The sum of three interior angles ofa triangle is {0} (or 180 degree for traditional angle)
+
+40. Parallelogram
+
+41. Middle Connection Theorem for Trapzoid
+
+42. Ratio
+
+43, Ratio by angle bisector
+
+Rules for GDD Method | Rules for Full Angle Method
+
