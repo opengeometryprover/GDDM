@@ -8,6 +8,11 @@ fof(ruleD02, axiom, ! [ A, B, C ] :
 	=>
 	coll(B, A, C) ) ).
 
+fof(ruleD03, axiom, ! [ A, B, C, D ] :
+	( (coll(A, B, C) & coll(A, B, D) )
+	=>
+	coll(C, D, A) ) ).
+
 fof(ruleD04, axiom, ! [ A, B, C, D ] :
 	( (para(A, B, C, D) )
 	=>
@@ -27,6 +32,11 @@ fof(ruleD08, axiom, ! [ A, B, C, D ] :
 	( (perp(A, B, C, D) )
 	=>
 	perp(C, D, A, B) ) ).
+
+fof(ruleD10, axiom, ! [ A, B, C, D, E, F ] :
+	( (para(A, B, C, D) & perp(C, D, E, F) )
+	=>
+	perp(A, B, E, F) ) ).
 
 fof(ruleD11, axiom, ! [ A, B, M ] :
 	( (midp(M, B, A) )
@@ -142,6 +152,11 @@ fof(ruleD46, axiom, ! [ A, B, O ] :
 	( (cong(O, A, O, B) )
 	=>
 	eqangle(O, A, A, B, A, B, O, B) ) ).
+
+fof(ruleD54, axiom, ! [ A, B, C, D ] :
+	( (cyclic(A, B, C, D) & para(A, B, C, D) )
+	=>
+	eqangle(A, D, C, D, C, D, C, B) ) ).
 
 fof(ruleD59, axiom, ! [ A, B, C, P, Q, R ] :
 	( (simtri(A, B, C, P, Q, R) )

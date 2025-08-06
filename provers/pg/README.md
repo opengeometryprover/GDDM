@@ -8,18 +8,16 @@ Shang-Ching Chou, Xiao-Shan Gao, Jing-Zhong Zhang; *A Deductive Database Approac
 **Compilation and Running**
 
 PG is being developed in a GNU/Linux environment.  The tools used to compile it are:
-[GNU Make](https://www.gnu.org/software/make/), [GNU C++ Compiler](https://gcc.gnu.org/), [flex](https://github.com/westes/flex) and [Bison](https://www.gnu.org/software/bison/).  To compile it type
+[GNU Make](https://www.gnu.org/software/make/), [GNU C++ Compiler](https://gcc.gnu.org/), [flex](https://github.com/westes/flex) and [Bison](https://www.gnu.org/software/bison/).  To compile it type:
 
     $ make
 
-To use PG type
+To use PG, copy the executable `pg` and the axiom set, e.g. `RULES`, to a new directory - otherwise some of the source code of PG will be overwritten -, and run it:
 
     $ ./pg RULES
 
-where `RULES`is a file with the rules/axioms each written in [TPTP](https://tptp.org/) First Order Format.
+The source code of a new GATP will be produced.
 
-
-**IMPORTANT**: Do not run PG in the same directory where it was compiled.  PG creates code and some files will be overwritten.
 
 **Authors**
 

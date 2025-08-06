@@ -12,6 +12,7 @@
 
 
 #include <iostream>
+#include <map>
 #include <set>
 #include <string>
 
@@ -73,6 +74,10 @@ std::string predicate_table(std::string pred)
 		return "SimilarTriangles";
 }
 
+/*
+ * Generation of the declarations of the predicate functions to be
+ * included in 'prover.hpp'.
+ */
 std::string generate_rules_hpp()
 {
 	std::string rh = "";
@@ -123,6 +128,28 @@ std::string generate_prover_hpp()
 	return ph;
 }
 
+std::set<std::string> pt_lst2pt_set(std::list<std::string> pt_lst)
+{
+	std::set<std::string> pt_set = {};
+
+	for (std::string pt : pt_lst)
+		pt_set.insert(pt);
+	return pt_set;
+}
+
+std::map<std::string, int> point_positions(Predicate pred)
+{
+	int pos = 0;
+	std::map<std::string, int> pt_pos = {};
+
+
+	for (std::string pt : pred.points) {
+		pos++;
+		pt_pos[pt] = pos;
+	}
+	return pt_pos;
+}
+
 int position_point_list(std::string pt,  std::list<std::string> points)
 {
 	int pos = 0;
@@ -135,10 +162,10 @@ int position_point_list(std::string pt,  std::list<std::string> points)
 	return pos;
 }
 
-std::string one2one(Axiom ax)
+std::string antecedents_one(Axiom ax)
 {
 	std::string rc;
-    
+
 	rc = "DBinMemory Prover::" + ax.name + ax.antecedents.front().name + "(DBinMemory dbim";
 	for (int i = 1; i <= predicate_arity(ax.antecedents.front().name); i++)
 		rc = rc + ", std::string pt" + std::to_string(i);
@@ -167,11 +194,145 @@ std::string one2one(Axiom ax)
 	rc = rc + "\tdbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(), insertionPred.size(), &(dbim.stmt), NULL);\n";
 	rc = rc + "\tif (sqlite3_step(dbim.stmt) != SQLITE_DONE)\n";
 	rc = rc + "\t\tcorrectTransaction = false;\n";
-	rc = rc + "\tif (correctTransaction) {\n";
+	rc = rc + "\tif (correctTransaction)\n";
 	rc = rc + "\t\tsqlite3_exec(dbim.db, \"commit;\", 0, 0, 0);\n";
-	rc = rc + "\t} else {\n";
+	rc = rc + "\telse\n";
 	rc = rc + "\t\tsqlite3_exec(dbim.db, \"rollback;\", 0, 0, 0);\n";
+	rc = rc + "\treturn dbim;\n";
+	rc = rc + "}\n";
+	return rc;
+}
+
+std::string antecedents_two(std::string pred, Axiom ax)
+{
+	int pos, nr_pt;
+	bool first;
+	std::string rc, select_pt, where_cond;
+	std::set<std::string> pt_pred1;
+	std::map<std::string, int> pt_pos;
+	std::map<std::string, int> pt_pos_new = {};
+	Predicate pred1, pred2;
+
+	if (ax.antecedents.front().name == pred) {
+		pred1 = ax.antecedents.front();
+		pred2 = ax.antecedents.back();
+	} else {
+		pred1 = ax.antecedents.back();
+		pred2 = ax.antecedents.front();
+	}
+	pt_pred1 = pt_lst2pt_set(pred1.points);
+	nr_pt = 0;
+	pos = 0;
+	first = true;
+	for (std::string pt : pred2.points) {
+		pos++;
+		if (pt_pred1.count(pt) == 0) {
+			nr_pt++;
+			pt_pos_new.insert({pt, nr_pt});
+			if (first) {
+				select_pt = "point" + std::to_string(pos);
+				first = false;
+			} else
+				select_pt = select_pt + ", point"
+					+ std::to_string(pos);
+		}
+	}
+	if (nr_pt == 0)
+		select_pt = "*";
+	pt_pos = point_positions(pred1);
+	pos = 0;
+	first = true;
+	for (std::string pt : pred2.points) {
+		pos++;
+		if(pt_pred1.count(pt) > 0)
+			if (first) {
+				where_cond = "point" + std::to_string(pos)
+					+ " = '\" + pt"
+					+ std::to_string(pt_pos.at(pt));
+				first = false;
+			} else
+				where_cond = where_cond + " + \"' AND point"
+					+ std::to_string(pos) + " = '\" + pt"
+					+ std::to_string(pt_pos.at(pt));
+	}
+	where_cond = where_cond + " + \"'\"";
+	
+	rc = "DBinMemory Prover::" + ax.name + pred + "(DBinMemory dbim";
+	for (int i = 1; i <= predicate_arity(pred); i++)
+		rc = rc + ", std::string pt" + std::to_string(i);
+	rc = rc + ")\n";
+	rc = rc + "{\n";
+	rc = rc + "\tbool correctTransaction;\n";
+	rc = rc + "\tstd::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;\n";
+	rc = rc + "\tstd::string querySecondGeoCmdA, querySecondGeoCmdB;\n";
+	if (nr_pt > 0) {
+		rc = rc + "\tstd::string ";
+		for (int i = 1; i <= nr_pt; i++) {
+			if (i == 1)
+				rc = rc + "newPoint" + std::to_string(i);
+			else
+				rc = rc + ", newPoint" + std::to_string(i);
+		}
+		rc = rc + ";\n";
+	}
+	rc = rc + "\n";
+	rc = rc + "\tinsertNewFact = \"INSERT INTO NewFact (typeGeoCmd) VALUES ('" + ax.consequence.name + "')\";\n";
+	rc = rc + "\tlastInsertedRowId = \"SELECT last_insert_rowid()\";\n";
+	rc = rc + "\tsqlite3_exec(dbim.db, \"begin;\", 0, 0, &(dbim.zErrMsg));\n";
+	rc = rc + "\tcorrectTransaction = true;\n";
+	rc = rc + "\tdbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(), insertNewFact.size(), &(dbim.stmt), NULL);\n";
+	rc = rc + "\tif (sqlite3_step(dbim.stmt) != SQLITE_DONE)\n";
+	rc = rc + "\t\tcorrectTransaction = false;\n";
+	rc = rc + "\tdbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(), lastInsertedRowId.size(), &(dbim.stmt), NULL);\n";
+	rc = rc + "\tsqlite3_step(dbim.stmt);\n";
+	rc = rc + "\tlstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);\n";
+	rc = rc + "\tquerySecondGeoCmdA = \"SELECT " + select_pt + " FROM NewFact INNER JOIN " + predicate_table(pred2.name) + " ON (newFact = id) WHERE " + where_cond + ";\n";
+	rc = rc + "\tdbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(), querySecondGeoCmdA.size(), &(dbim.stmt1), NULL);\n";
+	rc = rc + "\tsqlite3_step(dbim.stmt1);\n";
+	rc = rc + "\tquerySecondGeoCmdA = \"SELECT " + select_pt + " FROM Facts INNER JOIN " + predicate_table(pred2.name) + " ON (oldFact = id) WHERE " + where_cond + ";\n";
+	rc = rc + "\tdbim.rc = sqlite3_prepare_v2(dbim.db, querySecondGeoCmdA.c_str(), querySecondGeoCmdA.size(), &(dbim.stmt2), NULL);\n";
+	rc = rc + "\tsqlite3_step(dbim.stmt2);\n";
+	rc = rc + "\tif (sqlite3_data_count(dbim.stmt1) == 0 && sqlite3_data_count(dbim.stmt2) == 0 ) {\n";
+        rc = rc + "\t\tcorrectTransaction = false;\n";
+	rc = rc + "\t} else {\n";
+	rc = rc + "\t\tif (sqlite3_data_count(dbim.stmt1) != 0) {\n";
+	for (int i = 1; i <= nr_pt; i++) {
+		rc = rc + "\t\t\tnewPoint" + std::to_string(i)
+			+ " = (char*) sqlite3_column_text(dbim.stmt1, "
+			+ std::to_string(i - 1) + ");\n";	
+	}
+	rc = rc + "\t\t} else {\n";
+	for (int i = 1; i <= nr_pt; i++) {
+		rc = rc + "\t\t\tnewPoint" + std::to_string(i)
+			+ " = (char*) sqlite3_column_text(dbim.stmt2, "
+			+ std::to_string(i - 1) + ");\n";	
+	}
+	rc = rc + "\t\t}\n";
+	rc = rc + "\t\tif (sqlite3_step(dbim.stmt) != SQLITE_DONE) {\n";
+        rc = rc + "\t\t\tcorrectTransaction = false;\n";
+	rc = rc + "\t\t} else {\n";
+	rc = rc + "\t\t\tinsertionPred = \"INSERT INTO " + predicate_table(ax.consequence.name) + " (typeGeoCmd, ";
+	for (int i = 1; i <= predicate_arity(ax.consequence.name); i++)
+		rc = rc + "point" + std::to_string(i) + ", ";
+	rc = rc + "newFact) VALUES ('" + ax.consequence.name + "', '\"";
+	for (std::string pt : ax.consequence.points) {
+		if (pt_pos.find(pt) == pt_pos.end())
+			rc = rc + " + newPoint"
+				+ std::to_string(pt_pos_new.at(pt));
+		else
+			rc = rc + " + pt" + std::to_string(pt_pos.at(pt));
+		rc = rc + " + \"', '\"";
+	}
+	rc = rc + " + lstInsRwId + \"')\";\n";
+	rc = rc + "\t\t\tdbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(), insertionPred.size(), &(dbim.stmt), NULL);\n";
+	rc = rc + "\t\t\tif (sqlite3_step(dbim.stmt) != SQLITE_DONE)\n";
+	rc = rc + "\t\t\t\tcorrectTransaction = false;\n";
+	rc = rc + "\t\t}\n";
 	rc = rc + "\t}\n";
+	rc = rc + "\tif (correctTransaction)\n";
+	rc = rc + "\t\tsqlite3_exec(dbim.db, \"commit;\", 0, 0, 0);\n";
+	rc = rc + "\telse\n";
+	rc = rc + "\t\tsqlite3_exec(dbim.db, \"rollback;\", 0, 0, 0);\n";
 	rc = rc + "\treturn dbim;\n";
 	rc = rc + "}\n";
 	return rc;
@@ -180,21 +341,30 @@ std::string one2one(Axiom ax)
 std::string generate_rules_cpp()
 {
 	std::string rc = "";
-	std::set<std::string> ants;
+	std::list<std::string> ant_pred_lst;
+	std::set<std::string> ant_pred_set;
 	
 	for (Axiom ax : axioms) {
-		rc = rc + "\n";
-		// std::cout << "Axiom: " << ax.name << std::endl;
-		ants = {};
-		for (Predicate pred : ax.antecedents)
-			ants.insert(pred.name);
-		switch (ants.size()) {
+		ant_pred_lst = {};
+		ant_pred_set = {};
+		for (Predicate pred : ax.antecedents) {
+			ant_pred_lst.push_back(pred.name);
+			ant_pred_set.insert(pred.name);
+		}
+		switch (ant_pred_lst.size()) {
 		case 1:
-			rc = rc + one2one(ax);
+			rc = rc + "\n";
+			rc = rc + antecedents_one(ax);
+			break;
+		case 2:
+			for (std::string pred : ant_pred_set) {
+				rc = rc + "\n";
+				rc = rc + antecedents_two(pred, ax);
+			}
 			break;
 		default:
 			error(ERROR_EXCESS_PREDICATES,
-			      std::to_string(ants.size()));
+			      std::to_string(ant_pred_lst.size()));
 			break;
 		}
 	}
@@ -2243,7 +2413,7 @@ std::string generate_version_hpp()
 	vh = "#ifndef OGPGDDMVERSION\n";
 	vh = vh + "#define OGPGDDMVERSION\n";
 	vh = vh + "\n";
-	vh = vh + "#define VERSION \"* PG Generated\"\n";
+	vh = vh + "#define VERSION \"- PG Generated\"\n";
 	vh = vh + "\n";
 	vh = vh + "#endif\n";
 	return vh;
