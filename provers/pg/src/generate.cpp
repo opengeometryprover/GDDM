@@ -129,7 +129,7 @@ std::string generate_prover_hpp()
 }
 
 /*
- * Converts a list of point to a set of points, thus removing duplicate points.
+ * Converts a list of point to a set of points.
  */
 std::set<std::string> points_list_to_set(std::list<std::string> pl)
 {
