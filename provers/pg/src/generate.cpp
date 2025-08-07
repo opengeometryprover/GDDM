@@ -128,13 +128,16 @@ std::string generate_prover_hpp()
 	return ph;
 }
 
-std::set<std::string> pt_lst2pt_set(std::list<std::string> pt_lst)
+/*
+ * Converts a list of point to a set of points, thus removing duplicate points.
+ */
+std::set<std::string> points_list_to_set(std::list<std::string> pl)
 {
-	std::set<std::string> pt_set = {};
+	std::set<std::string> ps = {};
 
-	for (std::string pt : pt_lst)
-		pt_set.insert(pt);
-	return pt_set;
+	for (std::string p : pl)
+		ps.insert(p);
+	return ps;
 }
 
 std::map<std::string, int> point_positions(Predicate pred)
@@ -223,7 +226,7 @@ std::string two_antecedents(std::string pn, Axiom ax)
 		pred1 = ax.antecedents.back();
 		pred2 = ax.antecedents.front();
 	}
-	pt_pred1 = pt_lst2pt_set(pred1.points);
+	pt_pred1 = points_list_to_set(pred1.points);
 	nr_pt = 0;
 	pos = 0;
 	first = true;
