@@ -370,8 +370,10 @@ std::string two_antecedents(std::string pn, Axiom ax)
  */
 std::string three_antecedents(std::string pn, Axiom ax)
 {
-	int nr_new_pt, pos;
+	// int nr_new_pt, pos;
+	// bool first;
 	std::string code;
+	// std::set<std::string> pt_pred1;
 	Predicate pred1, pred2, pred3;
 
 	pred2.name = "";
@@ -382,16 +384,27 @@ std::string three_antecedents(std::string pn, Axiom ax)
 			pred2 = p;
 		else
 			pred3 = p;
-	
+
+	// pt_pred1 = points_list_to_set(pred1.points);
+	// nr_new_pt = 0;
+	// pos = 0;
+	// first = true
 
 	code = "DBinMemory Prover::" + ax.name + pn + "(DBinMemory dbim";
+
+	// Points of predicate 'pred1', actually identified by 'pn'
 	for (int i = 1; i <= predicate_arity(pn); i++)
 		code = code + ", std::string pt" + std::to_string(i);
+
 	code = code + ")\n";
 	code = code + "{\n";
 	code = code + "\tbool correctTransaction;\n";
-	code = code + "\tstd::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;\n";
+	code = code + "\tstd::string insertionPred, insertNewFact,"
+		" lastInsertedRowId, lstInsRwId;\n";
 	code = code + "\tstd::string querySecondGeoCmdA, querySecondGeoCmdB;\n";
+
+	// Declaring variables for new points found in SQL queries
+
 	code = code + "}\n";
 	return code;
 }
