@@ -174,43 +174,57 @@ int position_point_list(std::string pt,  std::list<std::string> points)
  */
 std::string one_antecedent(Axiom ax)
 {
-	std::string rc;
+	std::string code;
 
-	rc = "DBinMemory Prover::" + ax.name + ax.antecedents.front().name + "(DBinMemory dbim";
+	code = "DBinMemory Prover::" + ax.name + ax.antecedents.front().name
+		+ "(DBinMemory dbim";
 	for (int i = 1; i <= predicate_arity(ax.antecedents.front().name); i++)
-		rc = rc + ", std::string pt" + std::to_string(i);
-	rc = rc + ")\n";
-	rc = rc + "{\n";
-	rc = rc + "\tbool correctTransaction;\n";
-	rc = rc + "\tstd::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;\n";
-	rc = rc + "\n";
-	rc = rc + "\tinsertNewFact = \"INSERT INTO NewFact (typeGeoCmd) VALUES ('" + ax.consequence.name + "')\";\n";
-	rc = rc + "\tlastInsertedRowId = \"SELECT last_insert_rowid()\";\n";
-	rc = rc + "\tsqlite3_exec(dbim.db, \"begin;\", 0, 0, &(dbim.zErrMsg));\n";
-	rc = rc + "\tcorrectTransaction = true;\n";
-	rc = rc + "\tdbim.rc = sqlite3_prepare_v2(dbim.db, insertNewFact.c_str(), insertNewFact.size(), &(dbim.stmt), NULL);\n";
-	rc = rc + "\tif (sqlite3_step(dbim.stmt) != SQLITE_DONE)\n";
-	rc = rc + "\t\tcorrectTransaction = false;\n";
-	rc = rc + "\tdbim.rc = sqlite3_prepare_v2(dbim.db, lastInsertedRowId.c_str(), lastInsertedRowId.size(), &(dbim.stmt), NULL);\n";
-	rc = rc + "\tsqlite3_step(dbim.stmt);\n";
-	rc = rc + "\tlstInsRwId = (char*) sqlite3_column_text(dbim.stmt, 0);\n";
-	rc = rc + "\tinsertionPred = \"INSERT INTO " + predicate_table(ax.consequence.name) + " (typeGeoCmd, ";
+		code = code + ", std::string pt" + std::to_string(i);
+	code = code + ")\n";
+	code = code + "{\n";
+	code = code + "\tbool correctTransaction;\n";
+	code = code + "\tstd::string insertionPred, insertNewFact,"
+		" lastInsertedRowId, lstInsRwId;\n";
+	code = code + "\n";
+	code = code + "\tinsertNewFact = \"INSERT INTO NewFact (typeGeoCmd)"
+		" VALUES ('" + ax.consequence.name + "')\";\n";
+	code = code + "\tlastInsertedRowId = \"SELECT last_insert_rowid()\";\n";
+	code = code + "\tsqlite3_exec(dbim.db, \"begin;\", 0, 0,"
+		" &(dbim.zErrMsg));\n";
+	code = code + "\tcorrectTransaction = true;\n";
+	code = code + "\tdbim.rc = sqlite3_prepare_v2(dbim.db,"
+		" insertNewFact.c_str(), insertNewFact.size(), &(dbim.stmt),"
+		" NULL);\n";
+	code = code + "\tif (sqlite3_step(dbim.stmt) != SQLITE_DONE)\n";
+	code = code + "\t\tcorrectTransaction = false;\n";
+	code = code + "\tdbim.rc = sqlite3_prepare_v2(dbim.db,"
+		" lastInsertedRowId.c_str(), lastInsertedRowId.size(),"
+		" &(dbim.stmt), NULL);\n";
+	code = code + "\tsqlite3_step(dbim.stmt);\n";
+	code = code + "\tlstInsRwId = (char*) sqlite3_column_text(dbim.stmt,"
+		" 0);\n";
+	code = code + "\tinsertionPred = \"INSERT INTO "
+		+ predicate_table(ax.consequence.name) + " (typeGeoCmd, ";
 	for (int i = 1; i <= predicate_arity(ax.consequence.name); i++)
-		rc = rc + "point" + std::to_string(i) + ", ";
-	rc = rc + "newFact) VALUES ('" + ax.consequence.name + "', '\" + ";
-	for (std::string pt : ax.consequence.points)
-		rc = rc + "pt" + std::to_string(position_point_list(pt, ax.antecedents.front().points)) + " + \"', '\" + ";
-	rc = rc + "lstInsRwId + \"')\";\n";
-	rc = rc + "\tdbim.rc = sqlite3_prepare_v2(dbim.db, insertionPred.c_str(), insertionPred.size(), &(dbim.stmt), NULL);\n";
-	rc = rc + "\tif (sqlite3_step(dbim.stmt) != SQLITE_DONE)\n";
-	rc = rc + "\t\tcorrectTransaction = false;\n";
-	rc = rc + "\tif (correctTransaction)\n";
-	rc = rc + "\t\tsqlite3_exec(dbim.db, \"commit;\", 0, 0, 0);\n";
-	rc = rc + "\telse\n";
-	rc = rc + "\t\tsqlite3_exec(dbim.db, \"rollback;\", 0, 0, 0);\n";
-	rc = rc + "\treturn dbim;\n";
-	rc = rc + "}\n";
-	return rc;
+		code = code + "point" + std::to_string(i) + ", ";
+	code = code + "newFact) VALUES ('" + ax.consequence.name + "', '\" + ";
+	for (std::string p : ax.consequence.points)
+		code = code + "pt" + std::to_string(
+			position_point_list(p, ax.antecedents.front().points))
+			+ " + \"', '\" + ";
+	code = code + "lstInsRwId + \"')\";\n";
+	code = code + "\tdbim.rc = sqlite3_prepare_v2(dbim.db,"
+		" insertionPred.c_str(), insertionPred.size(), &(dbim.stmt),"
+		" NULL);\n";
+	code = code + "\tif (sqlite3_step(dbim.stmt) != SQLITE_DONE)\n";
+	code = code + "\t\tcorrectTransaction = false;\n";
+	code = code + "\tif (correctTransaction)\n";
+	code = code + "\t\tsqlite3_exec(dbim.db, \"commit;\", 0, 0, 0);\n";
+	code = code + "\telse\n";
+	code = code + "\t\tsqlite3_exec(dbim.db, \"rollback;\", 0, 0, 0);\n";
+	code = code + "\treturn dbim;\n";
+	code = code + "}\n";
+	return code;
 }
 
 /*
