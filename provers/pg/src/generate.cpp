@@ -347,6 +347,7 @@ std::string three_antecedents(std::string pn, Axiom ax)
 	std::string code;
 	Predicate pred1, pred2, pred3;
 
+	// Set values of pred{1,2,3}.  pred1 defines the rule's name.
 	pred2.name = "";
 	for (Predicate p : ax.antecedents)
 		if (p.name == pn)
