@@ -376,7 +376,7 @@ std::string three_antecedents(std::string pn, Axiom ax)
 }
 
 /*
- * Generate the code for the geometric rules/axioms.
+ * Generates the code for geometric rules.
  */
 std::string generate_rules_cpp()
 {
@@ -387,9 +387,9 @@ std::string generate_rules_cpp()
 	for (Axiom ax : axioms) {
 		ant_list = {};
 		ant_set = {};
-		for (Predicate pred : ax.antecedents) {
-			ant_list.push_back(pred.name);
-			ant_set.insert(pred.name);
+		for (Predicate p : ax.antecedents) {
+			ant_list.push_back(p.name);
+			ant_set.insert(p.name);
 		}
 		switch (ant_list.size()) {
 		case 1:
@@ -399,16 +399,16 @@ std::string generate_rules_cpp()
 			break;
 		case 2:
 			// Rules/axioms with two antecedents
-			for (std::string pred : ant_set) {
+			for (std::string p : ant_set) {
 				code = code + "\n";
-				code = code + two_antecedents(pred, ax);
+				code = code + two_antecedents(p, ax);
 			}
 			break;
 		case 3:
 			// Rules/axioms with three antecedents
-			for (std::string pred : ant_set) {
+			for (std::string p : ant_set) {
 				code = code + "\n";
-				code = code + three_antecedents(pred, ax);
+				code = code + three_antecedents(p, ax);
 			}
 			break;
 		default:
