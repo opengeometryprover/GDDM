@@ -26,7 +26,7 @@ provers/ogpgddm/src/scanner.cpp
 provers/ogpgddm/local/
 
 # OGP Provers Generator (PG) for GDDM
-provers/pg/parser.c
-provers/pg/parser.h
-provers/pg/pg
+provers/pg/src/parser.c
+provers/pg/src/parser.h
+provers/pg/src/pg
 provers/pg/local/
