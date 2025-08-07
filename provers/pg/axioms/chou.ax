@@ -23,6 +23,11 @@ fof(ruleD05, axiom, ! [ A, B, C, D ] :
 	=>
 	para(C, D, A, B) ) ).
 
+fof(ruleD06, axiom, ! [ A, B, C, D, E, F ] :
+	( (para(A, B, C, D) & para(C, D, E, F) )
+	=>
+	para(A, B, E, F) ) ).
+
 fof(ruleD07, axiom, ! [ A, B, C, D ] :
 	( (perp(A, B, C, D) )
 	=>
@@ -33,6 +38,11 @@ fof(ruleD08, axiom, ! [ A, B, C, D ] :
 	=>
 	perp(C, D, A, B) ) ).
 
+fof(ruleD09, axiom, ! [ A, B, C, D, E, F ] :
+	( (perp(A, B, C, D) & perp(C, D, E, F) )
+	=>
+	para(A, B, E, F) ) ).
+
 fof(ruleD10, axiom, ! [ A, B, C, D, E, F ] :
 	( (para(A, B, C, D) & perp(C, D, E, F) )
 	=>
@@ -42,6 +52,16 @@ fof(ruleD11, axiom, ! [ A, B, M ] :
 	( (midp(M, B, A) )
 	=>
 	midp(M, A, B) ) ).
+
+fof(ruleD12, axiom, ! [ A, B, C, O ] :
+	( (cong(O, A, O, B) & cong(O, A, O, C) )
+	=>
+	circle(O, A, B, C) ) ).
+
+fof(ruleD13, axiom, ! [ A, B, C, D, O ] :
+	( (cong(O, A, O, B) & cong (O, A, O, C) & cong(O, A, O, D) )
+	=>
+	cyclic(A, B, C, D) ) ).
 
 fof(ruleD14, axiom, ! [ A, B, C, D ] :
 	( (cyclic(A, B, C, D) )
