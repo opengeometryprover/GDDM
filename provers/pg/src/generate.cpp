@@ -169,6 +169,9 @@ int position_point_list(std::string pt,  std::list<std::string> points)
 	return pos;
 }
 
+/*
+ * Generate rule for predicate with one antecedent.
+ */
 std::string one_antecedent(Axiom ax)
 {
 	std::string rc;
@@ -211,7 +214,7 @@ std::string one_antecedent(Axiom ax)
 }
 
 /*
- * Generate rules with two antecedents.
+ * Generate rule for predicate with two antecedents.
  */
 std::string two_antecedents(std::string pn, Axiom ax)
 {
@@ -349,7 +352,7 @@ std::string two_antecedents(std::string pn, Axiom ax)
 }
 
 /*
- * Generate rules with three antecedents.
+ * Generate rule for predicate with three antecedents.
  */
 std::string three_antecedents(std::string pn, Axiom ax)
 {
