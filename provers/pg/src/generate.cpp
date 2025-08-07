@@ -140,13 +140,17 @@ std::set<std::string> points_list_to_set(std::list<std::string> pl)
 	return ps;
 }
 
-std::map<std::string, int> point_positions(Predicate pred)
+
+/*
+ * Creates a map for the points of a predicate, indicating their position.
+ */
+std::map<std::string, int> predicate_points_position(Predicate p)
 {
 	int pos = 0;
 	std::map<std::string, int> pt_pos = {};
 
 
-	for (std::string pt : pred.points) {
+	for (std::string pt : p.points) {
 		pos++;
 		pt_pos[pt] = pos;
 	}
@@ -245,7 +249,7 @@ std::string two_antecedents(std::string pn, Axiom ax)
 	}
 	if (nr_pt == 0)
 		select_pt = "*";
-	pt_pos = point_positions(pred1);
+	pt_pos = predicate_points_position(pred1);
 	pos = 0;
 	first = true;
 	for (std::string pt : pred2.points) {
