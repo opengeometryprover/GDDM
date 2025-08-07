@@ -341,13 +341,32 @@ std::string two_antecedents(std::string pred, Axiom ax)
 /*
  * Generate rules with three antecedents.
  */
-std::string three_antecedents(std::string pred, Axiom ax)
+std::string three_antecedents(std::string pn, Axiom ax)
 {
-	std::string rc;
+	int nr_new_pt, pos;
+	std::string code;
+	Predicate pred1, pred2, pred3;
 
-	rc = "DBinMemory Prover::" + ax.name + ax.antecedents.front().name
-		+ "(DBinMemory dbim";
-	return rc;
+	pred2.name = "";
+	for (Predicate p : ax.antecedents)
+		if (p.name == pn)
+			pred1 = p;
+		else if (pred2.name.length() == 0)
+			pred2 = p;
+		else
+			pred3 = p;
+	
+
+	code = "DBinMemory Prover::" + ax.name + pn + "(DBinMemory dbim";
+	for (int i = 1; i <= predicate_arity(pn); i++)
+		code = code + ", std::string pt" + std::to_string(i);
+	code = code + ")\n";
+	code = code + "{\n";
+	code = code + "\tbool correctTransaction;\n";
+	code = code + "\tstd::string insertionPred, insertNewFact, lastInsertedRowId, lstInsRwId;\n";
+	code = code + "\tstd::string querySecondGeoCmdA, querySecondGeoCmdB;\n";
+	code = code + "}\n";
+	return code;
 }
 
 /*
@@ -358,7 +377,7 @@ std::string generate_rules_cpp()
 	std::string code = "";
 	std::list<std::string> ant_list;
 	std::set<std::string> ant_set;
-	
+
 	for (Axiom ax : axioms) {
 		ant_list = {};
 		ant_set = {};
@@ -385,6 +404,7 @@ std::string generate_rules_cpp()
 				code = code + "\n";
 				code = code + three_antecedents(pred, ax);
 			}
+			break;
 		default:
 			error(ERROR_EXCESS_PREDICATES,
 			      std::to_string(ant_list.size()));
