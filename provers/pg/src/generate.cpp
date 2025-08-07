@@ -203,7 +203,10 @@ std::string one_antecedent(Axiom ax)
 	return rc;
 }
 
-std::string two_antecedents(std::string pred, Axiom ax)
+/*
+ * Generate rules with two antecedents.
+ */
+std::string two_antecedents(std::string pn, Axiom ax)
 {
 	int pos, nr_pt;
 	bool first;
@@ -213,7 +216,7 @@ std::string two_antecedents(std::string pred, Axiom ax)
 	std::map<std::string, int> pt_pos_new = {};
 	Predicate pred1, pred2;
 
-	if (ax.antecedents.front().name == pred) {
+	if (ax.antecedents.front().name == pn) {
 		pred1 = ax.antecedents.front();
 		pred2 = ax.antecedents.back();
 	} else {
@@ -257,8 +260,8 @@ std::string two_antecedents(std::string pred, Axiom ax)
 	}
 	where_cond = where_cond + " + \"'\"";
 	
-	rc = "DBinMemory Prover::" + ax.name + pred + "(DBinMemory dbim";
-	for (int i = 1; i <= predicate_arity(pred); i++)
+	rc = "DBinMemory Prover::" + ax.name + pn + "(DBinMemory dbim";
+	for (int i = 1; i <= predicate_arity(pn); i++)
 		rc = rc + ", std::string pt" + std::to_string(i);
 	rc = rc + ")\n";
 	rc = rc + "{\n";
@@ -347,7 +350,6 @@ std::string three_antecedents(std::string pn, Axiom ax)
 	std::string code;
 	Predicate pred1, pred2, pred3;
 
-	// Set values of pred{1,2,3}.  pred1 defines the rule's name.
 	pred2.name = "";
 	for (Predicate p : ax.antecedents)
 		if (p.name == pn)
