@@ -161,29 +161,21 @@ std::map<std::string, int> predicate_points_position(Predicate p)
 	return pt_pos;
 }
 
-int position_point_list(std::string pt,  std::list<std::string> points)
-{
-	int pos = 0;
-
-	for (std::string p : points) {
-		pos++;
-		if (p == pt)
-			break;
-	}
-	return pos;
-}
-
 /*
  * Generate rule for predicate with one antecedent.
  */
 std::string one_antecedent(Axiom ax)
 {
 	std::string code;
+	std::map<std::string, int> pt_pos;
 
 	code = "DBinMemory Prover::" + ax.name + ax.antecedents.front().name
 		+ "(DBinMemory dbim";
+
+	// Point of predicate, the antecedent of the rule
 	for (int i = 1; i <= predicate_arity(ax.antecedents.front().name); i++)
 		code = code + ", std::string pt" + std::to_string(i);
+
 	code = code + ")\n";
 	code = code + "{\n";
 	code = code + "\tbool correctTransaction;\n";
@@ -209,13 +201,17 @@ std::string one_antecedent(Axiom ax)
 		" 0);\n";
 	code = code + "\tinsertionPred = \"INSERT INTO "
 		+ predicate_table(ax.consequence.name) + " (typeGeoCmd, ";
+
+	// Points of the consequent, just a list
 	for (int i = 1; i <= predicate_arity(ax.consequence.name); i++)
 		code = code + "point" + std::to_string(i) + ", ";
+	// Points of the new, derived, predicate
 	code = code + "newFact) VALUES ('" + ax.consequence.name + "', '\" + ";
+	pt_pos = predicate_points_position(ax.antecedents.front());
 	for (std::string p : ax.consequence.points)
-		code = code + "pt" + std::to_string(
-			position_point_list(p, ax.antecedents.front().points))
+		code = code + "pt" + std::to_string(pt_pos.at(p))
 			+ " + \"', '\" + ";
+
 	code = code + "lstInsRwId + \"')\";\n";
 	code = code + "\tdbim.rc = sqlite3_prepare_v2(dbim.db,"
 		" insertionPred.c_str(), insertionPred.size(), &(dbim.stmt),"
