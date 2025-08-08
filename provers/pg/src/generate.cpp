@@ -79,57 +79,53 @@ std::string predicate_table(std::string pred)
 }
 
 /*
- * Generation of the declarations of the predicate functions to be
- * included in 'prover.hpp'.
+ * Generate file 'prover.hpp'.
  */
-std::string generate_rules_hpp()
-{
-	std::string rh = "";
-	std::set<std::string> ants;
-
-	for (Axiom ax : axioms) {
-		ants = {};
-		for (Predicate pred : ax.antecedents)
-			ants.insert(pred.name);
-		for (std::string pred_name : ants) {
-			rh = rh + "\tDBinMemory " + ax.name + pred_name + "(DBinMemory";
-			for (int i = 1; i <= predicate_arity(pred_name); i++)
-				rh = rh + ", std::string";
-			rh = rh + ");\n";
-		}
-	}
-	return rh;
-}
-
 std::string generate_prover_hpp()
 {
-	std::string ph;
+	std::string code;
+	std::set<std::string> ants;
 
-	ph = "#ifndef PROVER\n";
-	ph = ph + "#define PROVER\n";
-	ph = ph + "\n";
-	ph = ph + "#include <string>\n";
-	ph = ph + "\n";
-	ph = ph + "#include \"dbRAM.hpp\"\n";
-	ph = ph + "\n";
-	ph = ph + "class DBinMemory;\n";
-	ph = ph + "\n";
-	ph = ph + "class Prover {\n";
-	ph = ph + "private:\n";
-	ph = ph + "\tvoid deriveNewColl(std::string,std::string,std::string);\n";
-	ph = ph + "\n";
-	ph = ph + "public:\n";
-	ph = ph + "\tvoid saveFixedPoint(DBinMemory, std::string);\n";
-	ph = ph + "\tDBinMemory fixedPoint(DBinMemory,clock_t *);\n";
-	ph = ph + "\tbool proved(DBinMemory);\n";
-	ph = ph + "\n";
-	ph = ph + generate_rules_hpp();
-	ph = ph + "\n";
-	ph = ph + "\tvoid testDBim(DBinMemory);\n";
-	ph = ph + "};\n";
-	ph = ph + "\n";
-	ph = ph + "#endif\n";
-	return ph;
+	code = "#ifndef PROVER\n";
+	code = code + "#define PROVER\n";
+	code = code + "\n";
+	code = code + "#include <string>\n";
+	code = code + "\n";
+	code = code + "#include \"dbRAM.hpp\"\n";
+	code = code + "\n";
+	code = code + "class DBinMemory;\n";
+	code = code + "\n";
+	code = code + "class Prover {\n";
+	code = code + "private:\n";
+	code = code + "\tvoid deriveNewColl(std::string, std::string,"
+		" std::string);\n";
+	code = code + "\n";
+	code = code + "public:\n";
+	code = code + "\tvoid saveFixedPoint(DBinMemory, std::string);\n";
+	code = code + "\tDBinMemory fixedPoint(DBinMemory,clock_t *);\n";
+	code = code + "\tbool proved(DBinMemory);\n";
+	code = code + "\n";
+
+	// Generate prototypes for the functions implementing the rules
+	for (Axiom ax : axioms) {
+		ants = {};
+		for (Predicate p : ax.antecedents)
+			ants.insert(p.name);
+		for (std::string pn : ants) {
+			code = code + "\tDBinMemory " + ax.name + pn
+				+ "(DBinMemory";
+			for (int i = 1; i <= predicate_arity(pn); i++)
+				code = code + ", std::string";
+			code = code + ");\n";
+		}
+	}
+
+	code = code + "\n";
+	code = code + "\tvoid testDBim(DBinMemory);\n";
+	code = code + "};\n";
+	code = code + "\n";
+	code = code + "#endif\n";
+	return code;
 }
 
 /*
