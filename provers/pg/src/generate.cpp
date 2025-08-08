@@ -48,6 +48,7 @@ int predicate_arity(std::string pn)
 	else if (pn == "perp")
 		return 4;
 	else
+		// pn == "simtri"
 		return 6;
 }
 
