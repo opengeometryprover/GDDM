@@ -22,27 +22,30 @@
 
 extern Axiom_list axioms;
 
-int predicate_arity(std::string pred)
+/*
+ * Arity of a geometric predicate.
+ */
+int predicate_arity(std::string pn)
 {
-	if (pred == "circle")
+	if (pn == "circle")
 		return 4;
-	else if (pred == "coll")
+	else if (pn == "coll")
 		return 3;
-	else if (pred == "cong")
+	else if (pn == "cong")
 		return 4;
-	else if (pred == "contri")
+	else if (pn == "contri")
 		return 6;
-	else if (pred == "cyclic")
+	else if (pn == "cyclic")
 		return 4;
-	else if (pred == "eqangle")
+	else if (pn == "eqangle")
 		return 8;
-	else if (pred == "eqratio")
+	else if (pn == "eqratio")
 		return 8;
-	else if (pred == "midp")
+	else if (pn == "midp")
 		return 3;
-	else if (pred == "para")
+	else if (pn == "para")
 		return 4;
-	else if (pred == "perp")
+	else if (pn == "perp")
 		return 4;
 	else
 		return 6;
