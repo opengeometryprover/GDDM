@@ -52,29 +52,33 @@ int predicate_arity(std::string pn)
 		return 6;
 }
 
-std::string predicate_table(std::string pred)
+/*
+ * SQL table associated with a geometric predicate.
+ */
+std::string predicate_table(std::string pn)
 {
-	if (pred == "circle")
+	if (pn == "circle")
 		return "Circle";
-	else if (pred == "coll")
+	else if (pn == "coll")
 		return "Collinear";
-	else if (pred == "cong")
+	else if (pn == "cong")
 		return "CongruentSegments";
-	else if (pred == "contri")
+	else if (pn == "contri")
 		return "CongruentTriangles";
-	else if (pred == "cyclic")
+	else if (pn == "cyclic")
 		return "Cyclic";
-	else if (pred == "eqangle")
+	else if (pn == "eqangle")
 		return "EqualAngles";
-	else if (pred == "eqratio")
+	else if (pn == "eqratio")
 		return "EqualRatios";
-	else if (pred == "midp")
+	else if (pn == "midp")
 		return "Midpoint";
-	else if (pred == "para")
+	else if (pn == "para")
 		return "Parallel";
-	else if (pred == "perp")
+	else if (pn == "perp")
 		return "Perpendicular";
 	else
+		// pn = "simtri"
 		return "SimilarTriangles";
 }
 
